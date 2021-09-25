@@ -533,7 +533,7 @@ usually think about how many Bytes to use rather than how many Bits.
     <ol>
         <li> Store Data Objects Contiguously in Memory </li>
         <p>
-        This is the strategy we applied with building Bits into Bytes and Bytes into Words.  We can continue using this strategy to build larger objects.  We generally distinguish between two types of contiguous objects: (i) The Array, whose components, called <i>elements</i>, are all of the same size and (ii) The Structure, whose compoments, called <i>fields</i> may be of different size.
+        This is the strategy we applied with building Bits into Bytes and Bytes into Words.  We can continue using this strategy to build larger objects.  We generally distinguish between two types of contiguous objects: (i) The Array, whose components, called <i>elements</i>, are all of the same size and (ii) The Structure, whose compoments, called <i>fields</i> may be of different sizes.
         </p>
         <ul>
             <li>
@@ -565,13 +565,27 @@ usually think about how many Bytes to use rather than how many Bits.
             </ul>
         </li>
         <li>
-            The Graph Structure: Connect objects by their Locations
+            The Graph Structure: Connect Objects by their Locations
             <ul>
                 <li> Records can have fields which contain <i>Pointers</i> to other Objects</li>
-                <li> Pointers are usually just stored Memory Locations, i.e. Addresses </li>
-                <li> Pointers can also be offsets from a known Base Address</li>
-                , i.e. the addresss of  other Objects by Address. </li>
-                <li> Most advanced Data Stuctures are various kinds of Graph Structures!</li>
+                <li>
+                    Pointers can be Memory Addressses or Offsets from a known Base Address.
+                </li>
+                <li> The <i>Nodes</i>, i.e. Components of a Graph Structure
+                    <ul>
+                        <li> Can be located anywhere in memory </li>
+                        <li> Can be shared, i.e. be part of multiple Graph Structures </li>
+                    </ul>
+                </li>
+                <li>
+                    Because their storage is not contigious, Graph Structures
+                    can <i>Grow</i> and <i>Rearrange Their Nodes</i> without
+                    awkward reallocation and expensive copying!
+                </li>
+                <li>
+                    Most advanced Data Stuctures are various kinds of Graph
+                    Structures!
+                </li>
             </ul>
     </ol>
 		<h2>How to Apply this knowledge and gain Practical Experience?</h2>
