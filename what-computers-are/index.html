@@ -537,29 +537,31 @@ usually think about how many Bytes to use rather than how many Bits.
         </p>
         <ul>
             <li>
-                The Array: To store multiple objects of the same size:
+                Arrays store multiple components of the same size
                 <ul>
                     <li> Store the <i>elements</i> contiguously, i.e. next to each other. </li>
                     <li> Save the address of the first element, the size and the number of elements. </li>
-                    <li> Select the ones you want based on their predictable locations! </li>
+                    <li> Select the <i>element</i> based on their predictable locations! </li>
+                    <li> Elements can be <i>sorted</i> to allow for fast lookup by value! </li>
                 </ul>
             </li>
             <li>
-                The Record aka The Structure: To store multiple objects of diverse sizes:
+                Structures, aka Records store multiple components of diverse sizes
                 <ul>
                     <li> Store the <i>fields</i> contiguously. </li>
-                    <li> Create an array with the offsets or locations of each field. </li>
-                    <li> Save the array information as above. </li>
-                    <li> Find the fields you want using the array information! </li>
+                    <li> Create an Array with the offsets or locations of each structure field. </li>
+                    <li> Select the fields you want using the array information! </li>
                 </ul>
             </li>
         </ul>
         <li>
-            The Dictionary or Hash: Store objects using Key Values!
+            Dictionaries aka Hash Arrays store Data Objects using Key Values!
             <ul>
                 <li> Pair each object with a Key which describes it </li>
-                <li> Compute a unique 1-word integer, the <i>Hash</i> from the Key </li>
-                <li> Create an array mapping Key Hashes to the locations of the Objects </li>
+                <li> A <i> Hash Function</i> maps the Key Value to a unique 1-word Integer </li>
+                <li> - Creating a good <i>Hash Function</i> is a bit of an art!
+                <li> Use an array to map the Hashes to the Object Locations. </li>
+                <li> The objects can be Contiguous or not as desired </li>
                 <li> Find objects via their Keys </li>
                 <li> <i>There are some complexities in doing this right, but it's not terribly hard!</i></li>
             </ul>
