@@ -1,0 +1,21 @@
+/* css for any of the tech-notes files
+
+   This would be a great place to put in
+   some color, font, etc. style goodness
+   for elements like h1, dt, etc. in the
+   tech-notes series.
+ */
+
+.table_header {
+		font-weight: bold;
+}
+
+.hide {
+    display:none;   /* hide element and children */
+}
+
+.show { }
+
+.important {
+		color: red;
+}
