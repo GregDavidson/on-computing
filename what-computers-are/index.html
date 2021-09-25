@@ -523,11 +523,97 @@ usually think about how many Bytes to use rather than how many Bits.
 				underly most computer networking and database operations.
 			</p>
 		</div>
-		<hr />
-		<address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
-		<!-- Created: Friday, 2 January 2009 -->
-		<!-- hhmts start -->
-		Last modified: Sunday 19 February 2012
-		<!-- hhmts end -->
-	</body>
+		<h2>How do we build up from here?</h2>
+    <p>
+    Data Structures are the heart of all computer systems. Arbitrarily large and
+    complex data structures can be created from Bytes and Words using only three
+    strategies, each of which builds on the earlier ones and the techniques
+    introduced above.
+    </p>
+    <ol>
+        <li> Store Data Objects Contiguously in Memory </li>
+        <p>
+        This is the strategy we applied with building Bits into Bytes and Bytes into Words.  We can continue using this strategy to build larger objects.  We generally distinguish between two types of contiguous objects: (i) The Array, whose components, called <i>elements</i>, are all of the same size and (ii) The Structure, whose compoments, called <i>fields</i> may be of different size.
+        </p>
+        <ul>
+            <li>
+                The Array: To store multiple objects of the same size:
+                <ul>
+                    <li> Store the <i>elements</i> contiguously, i.e. next to each other. </li>
+                    <li> Save the address of the first element, the size and the number of elements. </li>
+                    <li> Select the ones you want based on their predictable locations! </li>
+                </ul>
+            </li>
+            <li>
+                The Record aka The Structure: To store multiple objects of diverse sizes:
+                <ul>
+                    <li> Store the <i>fields</i> contiguously. </li>
+                    <li> Create an array with the offsets or locations of each field. </li>
+                    <li> Save the array information as above. </li>
+                    <li> Find the fields you want using the array information! </li>
+                </ul>
+            </li>
+        </ul>
+        <li>
+            The Dictionary or Hash: Store objects using Key Values!
+            <ul>
+                <li> Pair each object with a Key which describes it </li>
+                <li> Compute a unique 1-word integer, the <i>Hash</i> from the Key </li>
+                <li> Create an array mapping Key Hashes to the locations of the Objects </li>
+                <li> Find objects via their Keys </li>
+                <li> <i>There are some complexities in doing this right, but it's not terribly hard!</i></li>
+            </ul>
+        </li>
+        <li>
+            The Graph Structure: Connect objects by their Locations
+            <ul>
+                <li> Records can have fields which contain <i>Pointers</i> to other Objects</li>
+                <li> Pointers are usually just stored Memory Locations, i.e. Addresses </li>
+                <li> Pointers can also be offsets from a known Base Address</li>
+                , i.e. the addresss of  other Objects by Address. </li>
+                <li> Most advanced Data Stuctures are various kinds of Graph Structures!</li>
+            </ul>
+    </ol>
+		<h2>How to Apply this knowledge and gain Practical Experience?</h2>
+    <p>
+        If you want to do powerful and creative things with computers it is
+        important to (1) use a low-level language just long enough to understand
+        how to build powerful abstractions and then (2) graduate to using higher-level languages
+        which build-in some of those key abstractions allowing you to program more concisely with less effort.
+    </p>
+    Some Recommended Languages:
+    <dl>
+        <dt> C </dt>
+        <dd> C is the simplest language for building complex systems while understanding
+	          exactly what is going on.  Most of today's Operating Systems, such as Unix, Linux, BSD (the basis of all of Apple's Operating Systems) and
+	          Microsoft Windows are largely written in C. You don't need to build
+	          large systems out of C these days. Rather, use C to understand the
+	          abstractions of higher-level languages. If you ever have a
+	          performance problem with programs written in higher-level languages
+	          you can often write a small amount of code in C to deal with
+	          whatever the bottleneck is and link that in to your main program.
+        </dd>
+        <dt> Scheme or Racket </dt>
+        <dd> Scheme is the simplest powerful member of the great Lisp family of
+        languages. Racket is another member of the Lisp family which builds on
+        Scheme while retaining much of its elegance. You can use Racket to
+        program at an arbitrarily high level. It can imitate the tricks of most
+        other high-level languages without losing efficiency. Lisps are
+        especially good at the single most powerful programming technique:
+        Metaprogramming. Metaprogramming is the technique of writing a small
+        simple program which then writes your larger and more complex programs
+        for you!
+        </dd>
+        <dt> Learning More Programming Paradigms  </dt>
+        <dd> A Programming Paradigm is a fundamental way of approaching
+            programming. Problems which are difficult to solve using one
+            Paradigm can often be easily solved by applying a different
+            Paradigm. Programming Languages can be seen as belonging to
+            different families based on which Programming Paradigms they are
+            best at exploiting. One of the best ways of learning diverse and
+            powerful Programming Paradigms is by programming for awhile in
+            elegant languages of diverse families!
+        </dd>
+    </dl>
+  </body>
 </html>
