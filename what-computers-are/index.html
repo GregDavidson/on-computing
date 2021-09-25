@@ -1,0 +1,533 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>(jgd simple note) What Computers Are</title>
+		<!-- <link rel="stylesheet" type="text/css" href="/jgd/jgd.css"> -->
+		<link rel="stylesheet" type="text/css" href="../tech-notes.css" />
+		<link rel="stylesheet" type="text/css" href="what-computers-are.css" />
+		<script type="text/javascript" src="what-computers-are.js"> </script>
+		<!-- How can we move javaScript to end of <body> for efficiency??? -->
+	</head>
+	
+	<body>
+		<div class="Top">
+			<h1>What Computers Are</h1>
+			<h3>
+			<a href="http://ngender.net/jgd">J. Greg Davidson's</a>
+			<a href="http://ngender.net/jgd/tech-notes/">Simple Notes on Computing</a>
+			</h3>
+			<h2>Preface</h2>
+			<p>
+				As a Computer Scientist I'm relieved when people honestly
+				declare that they don't really understand computers.  This
+				relief is in contrast to my distress when I
+				discover that someone I'm interacting with has a seriously
+				distorted understanding of	computers.
+			</p>
+			<p>
+				It would be useful for most people today to have a basic
+				understanding of what computers are along with some basic ability to
+				make use of them.  A few people may find themselves interested in
+				knowing quite a bit about computers but not know where to start.
+				Most people have notions of what computers are which are not true
+				and get in the way of using them or learning about them.  This
+				<em>Simple Note</em> should provide a solid foundation.
+			</p>
+			<p>
+				I like to start with fundamentals whenever
+				I undertake a new project, especially if I intend to go deep.
+				This <em>Simple Note</em> is intended to cover the most basic
+				aspects of <em>What Computers Are</em>, especially for someone who
+				thinks they might want to go on and learn a lot about computers and
+				computing.  If you want to master something you need to take
+				the time to get clear on the fundamentals!
+			</p>
+			<p class="important">The interactive features of this <em>Simple
+			Note</em> have only been tested with recent versions of Firefox
+			and Chrome.  I apologize if they do not work with your browser
+			yet, and especially if you get popup errors!</p>
+			<h2>OK, So what Are Computers?</h2>
+			<p>
+				A computer is a collection of switches linked together to provide
+				memory functions and logic functions.  Fundamentally, that's all it
+				is.  To understand computers you need to know:
+			</p>
+			<ol>
+				<li> What is a switch?</li>
+				<li>
+					How can switches be used to represent meaningful values?
+				</li>
+				<li>
+					How can switches be combined to perform meaningful
+					operations on those values?
+				</li>
+				<li>
+					How can I organize values into information and operations
+					which reliably and conveniently address my needs and
+					desires?
+				</li>
+			</ol>
+			
+			<h2>So what is a Switch?</h2>
+			<img alt="off switch" src="../Icons/cropped-off-switch.png" />
+			<img alt="on switch" src="../Icons/cropped-on-switch.png" />
+			<p>
+				A binary switch is a two-position switch like the simple ones
+				used to turn lights on and off.  We call it a binary switch
+				because it has only two positions, ON and OFF.  You can use
+				such a switch to represent any either-or kind of
+				value.
+			</p>
+			<p>
+				Here are some possible interpretations we could give the switch positions::
+			</p>
+			<ul>
+				<li> ON = she loves me, OFF = she doesn't</li>
+				<li> ON = it's raining, OFF = it's not raining</li>
+				<li> ON = innocent, OFF = guilty</li>
+				<li> ON = black-and-white, OFF = color </li>
+			</ul>
+			<p>
+				and so on.  We can freely choose either switch position for either meaning
+				as long as we are consistent.
+			</p>
+			<p>
+				Here are fairly common interpretations:
+			</p>
+			<table border="1">
+				<thead>
+					<tr class="table_header">
+						<td> Interpretation </td>
+						<td> First Meaning </td>
+						<td> Second Meaning </td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr> <td> Switch  </td> <td> On </td> <td> Off </td> </tr>
+					<tr> <td> Answer </td> <td> Yes </td> <td> No </td> </tr>
+					<tr> <td> Truth </td> <td> True </td> <td> False </td> </tr>
+					<tr> <td> Number </td> <td> 1 </td> <td> 0 </td> </tr>
+					<tr> <td> Quantity  </td> <td> Some </td> <td> None </td> </tr>
+					<tr> <td> Value Is </td> <td> Known </td> <td> Unknown </td> </tr>
+				</tbody>
+			</table>
+			<p>
+				What you call them is just a matter of convenience or
+				convention.  What you decide to have them mean is the big deal.
+			</p>
+			<div id="width1" class="register">
+				<div id="bit1" class="sw_tree">
+					<h2>
+						One switch makes a Bit you can click
+						<span class="off show">on</span>
+						<span class="on hide">off</span>
+					</h2>
+					<p class="important">Please do click on the switch!</p>
+					<span class="sw">
+						<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+						<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+					</span>
+				<p>
+					Possible interpretations humans might give to the switch positions :
+				</p>
+				<table>
+					<tr class="table_header"> <td> Interpretation </td> <td> Meaning </td> </tr>
+					<tr > <td> Unsigned Integer </td>  <td class="register_int">0</td> </tr>
+					<tr >
+					<td> Truth Value </td>
+					<td class="off show">false</td>
+					<td class="on hide">true</td>
+					</tr>
+					<tr >
+					<td> Color Value </td>
+					<td class="off show">black</td>
+					<td class="on hide">white</td>
+					</tr>
+				</table>
+				</div>
+			</div>
+		</div> <!-- width1  -->
+		<div id="width2" class="register">
+			<h2> <span class="register_width"></span> switches makes a Lyk </h2>
+			<p class="important">You can click on these and all subsequent switches!</p>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<p>
+				These <span class="register_width"></span> switches might represent the number <span class="register_int"></span>.
+				<br /> See how high you can count with <span class="register_width"></span> switches!
+				<br /> How many combinations total is that?
+				<br /> The number of combinations should always be an even number; can you say why?
+				<br /> DId you include the initial all-off combination?
+				<br /> What non-numerical interpretations could you give to this many patterns?
+			</p>
+		</div> <!-- width2  -->
+		<div id="width3" class="register">
+			<h2> <span class="register_width"></span> switches has no special name </h2>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<p>
+				These <span class="register_width"></span> switches represent the
+				value <span class="register_int"></span>.
+				<br /> See how high you can count!
+				<br /> How many distinct combinations is that?
+				<br /> What did adding another switch do to the number of combinations?
+				<br /> What non-numerical interpretations could you give to this many patterns?
+			</p>
+		</div> <!-- width3  -->
+		<div id="width4" class="register">
+			<h2> <span class="register_width"></span> switches makes a Nybble </h2>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<p>
+				These <span class="register_width"></span> switches might represent the number <span class="register_int"></span>.
+				<br /> See how high you can count!
+				<br /> How many distinct combinations is that?
+				<br /> What does adding another switch each time to the number of combinations?
+			</p>
+		</div> <!-- width4  -->
+
+		<div id="nybble_interpretations">
+			<h2> Some interpretations of a Nybble's Patterns </h2>
+			<p>
+				Four switches gives us enough combinations to express the
+				decimal numbers 0 through 9, with six extra combinations left
+				over.  The extra combinations can be ignored or given the
+				names A through F.  Although you're free to assign
+				combinations any way you want, here's the usual way we do it:
+			</p>
+			<table border="1">
+				<tr class="table_header"> <td colspan="4"> Switch Settings </td>
+				<td>
+				Binary Base 2 Bits</td>
+				<td> Hexadecimal Base 16 Digits</td> 
+				<td> Decimal Base
+				10 Digits</td>
+				<td> Colors </td> </tr>
+				<tr>
+					<td> OFF </td>	<td> OFF </td>	<td> OFF </td>	<td> OFF </td>
+					<td>	0000 </td>	<td> 0 </td>	<td> 0 </td>
+					<td style="background-color:#000000;color:white;"> Black </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> OFF </td> <td> OFF </td> <td> ON </td>
+					<td>	0001 </td> <td> 1 </td> <td>  1 </td>
+					<td style="background-color:#000080;color:white;"> Navy </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> OFF </td> <td> ON </td> <td> OFF </td>
+					<td>	0010 </td> <td> 2 </td> <td>  2 </td>
+						<td style="background-color:#008000;color:white;"> Green </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> OFF </td> <td> ON </td> <td> ON </td>
+					<td>	0011 </td> <td> 3 </td> <td>  3 </td>
+						<td style="background-color:#008080;color:white;"> Teal </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> ON </td> <td> OFF </td> <td> OFF </td>
+					<td>	0100 </td> <td> 4 </td> <td>  4 </td>
+						<td style="background-color:#800000;color:white;"> Maroon </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> ON </td> <td> OFF </td> <td> ON </td>
+					<td>	0101 </td> <td> 5 </td> <td>  5 </td>
+						<td style="background-color:#800080;color:white;"> Purple </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> ON </td> <td> ON </td> <td> OFF </td>
+					<td>	0110 </td> <td> 6 </td> <td>  6 </td>
+						<td style="background-color:#808000;color:white;"> Olive </td>
+				</tr>
+				<tr>
+					<td> OFF </td> <td> ON </td> <td> ON </td> <td> ON </td>
+					<td> 0000 </td> <td> 7 </td> <td>  7 </td>
+					<td style="background-color:#C0C0C0"> Silver</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> OFF </td> <td> OFF </td> <td> OFF </td>
+					<td> 1000 </td> <td> 8 </td> <td>  8 </td>
+					<td style="background-color:#808080;color:white;"> Gray</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> OFF </td> <td> OFF </td> <td> ON </td>
+					<td> 1001 </td> <td> 9 </td> <td>  9 </td>
+					<td style="background-color:#0000FF;color:white;"> Blue</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> OFF </td> <td> ON </td> <td> OFF </td>
+					<td> 1010 </td> <td> a </td> <td>  10 </td>
+					<td style="background-color:#00FF00"> Lime</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> OFF </td> <td> ON </td> <td> ON </td>
+					<td> 0011 </td>	<td> b </td> <td>  11 </td>
+					<td style="background-color:#00FFFF"> Aqua</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> ON </td> <td> OFF </td> <td> OFF </td>
+					<td> 1100 </td> <td> c </td> <td>  12 </td>
+					<td style="background-color:#FF0000;color:white;"> Red</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> ON </td> <td> OFF </td> <td> ON </td>
+					<td> 1101 </td>	<td> d </td> <td>  13 </td>
+					<td style="background-color:#FF00FF;color:white;"> Fuchsia</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> ON </td> <td> ON </td> <td> OFF </td>
+					<td> 1110 </td>	<td> e </td> <td>  14 </td>
+					<td style="background-color:#FFFF00"> Yellow</td>
+				</tr>
+				<tr>
+					<td> ON </td> <td> ON </td> <td> ON </td> <td> ON </td>
+					<td> 1111 </td> <td> f </td> <td> 15 </td>
+					<td style="background-color:#FFFFFF"> White </td>
+				</tr>
+			</table>
+			<p>
+				Four Bits is sometimes called a Nybble.  The joke may not be obvious
+			yet.</p>
+			<p>
+				Using a Nybble to represent the ten decimal digits is called
+				Binary Coded Decimal or BCD.  BCD wastes six switch
+				combinations.
+</p>
+<p>
+			  When the full set of values in a Nybble is
+				expressed using the sixteen numerals 0-F it is called base-16,
+				hexadecimal or simply hex.  It's a matter of style whether we use
+				upper-case A-F or lower-case a-f letters for the hex digits.
+			</p>
+		<p>
+				The more Bits, the more combinations, the more you can express.
+				<br /> What other interesting interpretations can you give to a Nybble?
+</p>
+		</div>
+		<div id="width8" class="register">
+			<h2> <span class="register_width"></span> switches makes a  Byte </h2>
+<p> Now do you get the joke about Bytes, Nybbles and Lyks? <em> Jokes are a
+matter  taste.</em> <p>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<span class="sw sw_tree">
+				<img class="sw_ off show" alt="off switch" src="../Icons/cropped-off-switch.png" />
+				<img class="sw_ on hide" alt="on switch" src="../Icons/cropped-on-switch.png" />
+			</span>
+			<p>
+				These <span class="register_width"></span> switches might represent the number <span class="register_int"></span>.
+				</p>
+			<p>
+				EIght switches makes what we now call an Octet or a Byte of 8 Bits.
+				<br /> Try to guess the number of distinct combinations of the switches
+				in a Byte without trying the switches.
+				<br /> Now try it and see.
+				<br /> The original IBM PC and Microsoft DOS did nearly everything 8 Bits
+				(or one Byte) at a time.
+				<br /> Still today, nearly all Input/Output operations are done in Bytes.
+				<br /> That includes all traffic on the Internet.
+				<br /> We measure storage in Bytes.
+				<br /> How many Bytes of main memory does your favorite computer have?
+				<br /> How many Bytes of disk memory does it have?
+			</p>
+		</div> <!-- width8  -->
+			<div>
+				<h2>How can switches be combined to represent meaningful values? </h2>
+				<p>
+					One switch can only represent a choice of two alternatives.
+					Combining several switches lets us represent more choices:
+				</p>
+				<table border="1">
+					<tr class="table_header">
+<td> Number of switches </td>
+<td> Number of Combinations </td> </tr>
+					<tr> <td> 1 </td> <td> 2 </td> </tr>
+					<tr> <td> 2 </td> <td> 4 </td> </tr>
+					<tr> <td> 3 </td> <td> 8 </td> </tr>
+					<tr> <td> 4 </td> <td> 16 </td> </tr>
+					<tr> <td> 5 </td> <td> 32 </td> </tr>
+					<tr> <td> 6 </td> <td> 64 </td> </tr>
+					<tr> <td> 7 </td> <td> 128 </td> </tr>
+					<tr> <td> 8 </td> <td> 256 </td> </tr>
+				</table>
+				Notice that each time we add another switch, the number of
+				combinations doubles, because we can have all the previous
+				combinations with the new switch OFF plus all the previous
+				combinations with the new switch ON.
+			</p>
+<p>
+A Byte is the smallest unit of information which a modern computer can individually
+address and manipulate.  Getting at Bit(s) requires first accessing the Bytes
+which contains them and then extracting the desired Bit(s) using several
+operations slow the computer down.  Therefore when we want to represent some fancy kind of value we
+usually think about how many Bytes to use rather than how many Bits.
+</p>
+		<div>
+			<p>
+				Ganging together still more switches gives more patterns, some
+				of which have special names and uses:
+			</p>
+			<table border="1">
+				<tr class="table_header">
+					<td> Switches </td> <td> Combinations </td>
+					<td>	Name(s) </td> <td> Typical Use(s) </td>
+				</tr>
+				<tr>
+					<td> 1 </td> <td> 2 </td> <td> 1 Bit </td>
+				<td> Boolean true/false </td> </tr>
+				<tr>
+					<td> 4 </td> <td> 16 </td> <td> Nybble </td>
+				<td> BCD,	Hex Digit </td> </tr>
+				<tr>
+					<td> 7 </td> <td> 128 </td> <td> char </td>
+				<td> ASCII Character </td> </tr>
+				<tr>
+					<td> 8 </td> <td> 256 </td> <td> 1 Byte </td>
+					<td> 1 Character in a Phonemic
+					Alphabet or Syllabary, Input/Output, Word Size of early PCs </td>
+				</tr>
+				<tr>
+					<td> 10 </td> <td> 1024, 1 Ki </td> <td> K </td>
+				<td> approximate 1000 or metric kilo </td> </tr>
+				<tr>
+					<td> 16 </td> <td> 65536, 64 Ki </td> <td> 2 Byte <em>short</em>
+					word </td>
+					<td> early Unicode, very limited Arithmetic, Word Size of later PCs </td>
+				</tr>
+				<tr>
+					<td> 24 </td> <td> 16777216, 16 Mi </td> <td> 3 Bytes	</td>
+					<td>
+					RBG Red/Green/Blue Color Pixel (1 Byte per Primary Color) </td>
+				</tr>
+				<tr>
+					<td> 32 </td> <td> 4294967296, 4 Gi </td> <td> 4 Byte <em>long</em> word </td>
+					<td>
+						Unicode Character, limited Arithmetic, Memory Address, IP
+						Address, Word Size of many modern computers,
+						RGB+Alpha(transparency) Pixel
+					</td>
+				</tr>
+				<tr>
+					<td> 64 </td> <td> 18446744073709551616 </td>
+					<td> 8 Bytes <em>long	long</em> word </td>
+					<td>
+						Extended Arithmetic, Memory Address, Cons-cell, Word Size
+						of high-end computers
+					</td>
+				</tr>
+			</table>
+			<p>
+				Because a Ki (often pronounced "K") is close to 1000, it is
+				treated as being roughly 1000 or a metric "kilo".  Similary, a
+				Mi is close to a metric "mega" and a Gi is close to a metric
+				"giga".  The terms megabytes and gigabytes are usually
+				shorthands for Mi Bytes and Gi Bytes.  This discrepancy has
+				lead some tricky memory vendors to sell their customers less
+				memory than they were expecting, i.e. to sell an actual
+				megabyte or gigabyte instead of the expected Mi Byte or Gi
+				Byte.
+			</p>
+			<p>
+				Early microprocessor-based computers, such as the original IBM
+				PC were designed to work with 8 or 16 Bits at a time.  Most
+				general purpose computers and more recent PCs are designed to
+				work with 32 Bits at a time.  Scientific computers and the most
+				recent PCs are designed to work with 64 Bits at a time.  The
+				number of Bits which a computer can work with in a single
+				operation is called its <em>word size</em>.  Just as it is more
+				efficient for computers to work with Bytes rather than Bits, it
+				is maximally efficient for computers to work in units of their preferred Word Size.
+			</p>
+			<p>
+				A computer with a smaller word size can simulate a computer
+				with a larger word size by performing more operations, so for
+				some tasks it will be slower.  It is particularly inefficient
+				for a computer to work with more memory than it can address as
+				a single word - the meaning of this will be made clear in a
+				companion
+				<em>Simple	Note</em> currently in preparation.
+				<!-- <a href="http://ngender.net/jgd/tech-notes/a-model-computer"> -->
+				<!-- 	A	Model Computer -->
+				<!-- 	</a>. -->
+			</p>
+			<p>
+				Data is generally transferred among computers and between
+				computers and devices (mice, keyboards, disk drives, networks, etc.) in
+				Bytes, i.e. 8-Bits at a time.  Bytes are the universal coinage
+				of Input/Output.  Thus computers must <em>serialize</em> large
+				values and data structures into sequences of Bytes when
+				performing Output and then reassemble or <em>de-serialize</em>
+				those Byte sequences into equivalent values and structures
+				during Input operations.  Sophisticated mostly-automated
+				<em>serializing</em> and <em>de-serializing</em> schemes
+				underly most computer networking and database operations.
+			</p>
+		</div>
+		<hr />
+		<address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
+		<!-- Created: Friday, 2 January 2009 -->
+		<!-- hhmts start -->
+		Last modified: Sunday 19 February 2012
+		<!-- hhmts end -->
+	</body>
+</html>
