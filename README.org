@@ -4,8 +4,8 @@ What is Computing?
 
 You may have been exposed to Computer Programming, whether in the form of the
 current craze to learn /Coding/ or through a serious course of study or even as
-your profession. If so, you probably have a pretty good idea of what computing
-is. It's highly likely, however, that what you know is one or two of the weaker
+your profession. If so, you probably have an idea of what computing is. It's
+highly likely, however, that what you know is one or two of the weaker
 [[https://www.info.ucl.ac.be/~pvr/paradigms.html][Programming Paradigms]], and you've probably missed most of the really powerful
 ones - especially metaprogramming!
 
