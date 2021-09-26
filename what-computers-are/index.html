@@ -1,9 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
           "http://www.w3.org/TR/html4/strict.dtd">
 
-<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd"> -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>(jgd simple note) What Computers Are</title>
@@ -531,26 +528,27 @@ usually think about how many Bytes to use rather than how many Bits.
     introduced above.
     </p>
     <ol>
-        <li> Store Data Objects Contiguously in Memory </li>
+        <li> Store Data Objects Contiguously in Memory, Saving their Sizes </li>
         <p>
-        This is the strategy we applied with building Bits into Bytes and Bytes into Words.  We can continue using this strategy to build larger objects.  We generally distinguish between two types of contiguous objects: (i) The Array, whose components, called <i>elements</i>, are all of the same size and (ii) The Structure, whose compoments, called <i>fields</i> may be of different sizes.
+        This is the strategy we applied with building Bits into Bytes and Bytes into Words.  We can continue using this strategy to build larger objects.  We generally distinguish between two types of contiguous objects: (i) The Array, whose components, called <em>elements</em>, are all of the same size and (ii) The Structure, whose compoments, called <em>fields</em> may be of different sizes.
         </p>
         <ul>
             <li>
-                Arrays store multiple components of the same size
+                Arrays consist of multiple components of the same size
                 <ul>
-                    <li> Store the <i>elements</i> contiguously, i.e. next to each other. </li>
-                    <li> Save the address of the first element, the size and the number of elements. </li>
-                    <li> Select the <i>element</i> based on their predictable locations! </li>
-                    <li> Elements can be <i>sorted</i> to allow for fast lookup by value! </li>
+                    <li> We store the <em>elements</em> contiguously, i.e. next to each other. </li>
+                    <li> We need only save the address of the first element along with the size of the elements and the number of elements. </li>
+                    <li> We can then select any desired <em>element</em> based on it's predictable locations! </li>
+                    <li> We can also sort the elements by any criterion, allowing for fast lookup by that criterion. </li>
                 </ul>
             </li>
             <li>
-                Structures, aka Records store multiple components of diverse sizes
+                Structures, aka Records consist of multiple components of diverse sizes
                 <ul>
-                    <li> Store the <i>fields</i> contiguously. </li>
-                    <li> Create an Array with the offsets or locations of each structure field. </li>
-                    <li> Select the fields you want using the array information! </li>
+                    <li> We store the <em>fields</em> contiguously. </li>
+                    <li> We create an Array with the offsets or locations of each field of our Structure. </li>
+                    <li> We can then select any desired fields of the Structure by consulting the associated array element! </li>
+                    <li> Oftentimes we have many Structures with the same field sizes.  In this case, one Array can be shared by all of them. </li>
                 </ul>
             </li>
         </ul>
@@ -558,22 +556,22 @@ usually think about how many Bytes to use rather than how many Bits.
             Dictionaries aka Hash Arrays store Data Objects using Key Values!
             <ul>
                 <li> Pair each object with a Key which describes it </li>
-                <li> A <i> Hash Function</i> maps the Key Value to a unique 1-word Integer </li>
-                <li> - Creating a good <i>Hash Function</i> is a bit of an art!
+                <li> A <em> Hash Function</em> maps the Key Value to a unique 1-word Integer </li>
+                <li> <em>Creating a good Hash Function is a bit of an art!</em>
                 <li> Use an array to map the Hashes to the Object Locations. </li>
                 <li> The objects can be Contiguous or not as desired </li>
                 <li> Find objects via their Keys </li>
-                <li> <i>There are some complexities in doing this right, but it's not terribly hard!</i></li>
+                <li> <em>There are some complexities in doing this right, but it's not terribly hard!</em></li>
             </ul>
         </li>
         <li>
             The Graph Structure: Connect Objects by their Locations
             <ul>
-                <li> Records can have fields which contain <i>Pointers</i> to other Objects</li>
+                <li> Records can have fields which contain <em>Pointers</em> to other Objects</li>
                 <li>
                     Pointers can be Memory Addressses or Offsets from a known Base Address.
                 </li>
-                <li> The <i>Nodes</i>, i.e. Components of a Graph Structure
+                <li> The <em>Nodes</em>, i.e. Components of a Graph Structure
                     <ul>
                         <li> Can be located anywhere in memory </li>
                         <li> Can be shared, i.e. be part of multiple Graph Structures </li>
@@ -581,7 +579,7 @@ usually think about how many Bytes to use rather than how many Bits.
                 </li>
                 <li>
                     Because their storage is not contigious, Graph Structures
-                    can <i>Grow</i> and <i>Rearrange Their Nodes</i> without
+                    can <em>Grow</em> and <em>Rearrange Their Nodes</em> without
                     awkward reallocation and expensive copying!
                 </li>
                 <li>
@@ -590,7 +588,10 @@ usually think about how many Bytes to use rather than how many Bits.
                 </li>
             </ul>
     </ol>
-		<h2>How to Apply this knowledge and gain Practical Experience?</h2>
+    <p>
+        At this point I recommend browsing the examples at <a href="https://www.geeksforgeeks.org/data-structures/"GeeksForGeek's Data Structures</a>.
+    </p>
+    <h2>How to Apply this knowledge and gain Practical Experience?</h2>
     <p>
         If you want to do powerful and creative things with computers it is
         important to (1) use a low-level language just long enough to understand
@@ -600,7 +601,8 @@ usually think about how many Bytes to use rather than how many Bits.
     Some Recommended Languages:
     <dl>
         <dt> C </dt>
-        <dd> C is the simplest language for building complex systems while understanding
+        <dd> <p>
+            C is the simplest language for building complex systems while understanding
 	          exactly what is going on.  Most of today's Operating Systems, such as Unix, Linux, BSD (the basis of all of Apple's Operating Systems) and
 	          Microsoft Windows are largely written in C. You don't need to build
 	          large systems out of C these days. Rather, use C to understand the
@@ -608,27 +610,43 @@ usually think about how many Bytes to use rather than how many Bits.
 	          performance problem with programs written in higher-level languages
 	          you can often write a small amount of code in C to deal with
 	          whatever the bottleneck is and link that in to your main program.
+        </p>
+        <p>
+            A modest course in C is <a href=" https://github.com/GregDavidson/C-By-Example">C By Example</a>.
+        </p>
         </dd>
         <dt> Scheme or Racket </dt>
-        <dd> Scheme is the simplest powerful member of the great Lisp family of
-        languages. Racket is another member of the Lisp family which builds on
-        Scheme while retaining much of its elegance. You can use Racket to
+        <dd>
+            <p>
+                Scheme is the simplest powerful member of the great Lisp family
+        of languages. Racket is another member of the Lisp family which builds
+        on Scheme while retaining much of its elegance. You can use Racket to
         program at an arbitrarily high level. It can imitate the tricks of most
         other high-level languages without losing efficiency. Lisps are
         especially good at the single most powerful programming technique:
         Metaprogramming. Metaprogramming is the technique of writing a small
         simple program which then writes your larger and more complex programs
         for you!
+            </p>
+            <p>
+                Some materials on Lisp are at <a href="https://github.com/GregDavidson/lisp-systems">Lisp Systems</a>.
+            </p>
         </dd>
-        <dt> Learning More Programming Paradigms  </dt>
-        <dd> A Programming Paradigm is a fundamental way of approaching
-            programming. Problems which are difficult to solve using one
-            Paradigm can often be easily solved by applying a different
-            Paradigm. Programming Languages can be seen as belonging to
-            different families based on which Programming Paradigms they are
-            best at exploiting. One of the best ways of learning diverse and
-            powerful Programming Paradigms is by programming for awhile in
-            elegant languages of diverse families!
+        <dt> Learn Many Programming Paradigms! </dt>
+        <dd>
+            <p>
+            A Programming Paradigm is a fundamental way of approaching
+            programming, of thinking of computation. Problems which are
+            difficult to solve using one Paradigm can often be easily solved by
+            applying a different Paradigm. Programming Languages can be seen as
+            belonging to different families based on which Programming Paradigms
+            they are best at exploiting. One of the best ways of learning
+            diverse and powerful Programming Paradigms is by programming for
+            awhile in elegant languages of diverse families!
+            </p>
+            <p>
+                Take a look at <a href="https://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia's List of Programming Paradigms</a>, <a href="https://www.info.ucl.ac.be/~pvr/paradigms.html">the Programing Paradigms Poster</a> and read the article <a href="http://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf">Programming Paradigms for Dummies: What Every Programmer Should Know</a>.
+            </p>
         </dd>
     </dl>
   </body>
