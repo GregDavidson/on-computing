@@ -13,7 +13,7 @@ I'm creating some materials for learning Computer Basics and Computing Magic at
 /warp speed/. I invite you to study these materials for your own benefit and I
 would be delighted if you were to help make these materials better!
 
-[[https://gregdavidson.github.io/on-computing/what-computers-are/][- What Computers Are]] -- Bits to Bytes to Words to Data Structures
+- [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] -- Bits to Bytes to Words to Data Structures
 - [[https://github.com/GregDavidson/computing-magic][Computing Magic]] -- It feels like magic, when you know the secrets!
 - [[https://github.com/GregDavidson/on-lisp][On Lisp]] -- Paul Graham's Secret Weapon for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
 - [[https://github.com/GregDavidson/C-By-Example][C By Example]] -- C shows you what's going on underneath all of the abstractions!
