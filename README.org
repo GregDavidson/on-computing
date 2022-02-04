@@ -17,3 +17,8 @@ would be delighted if you were to help make these materials better!
 - [[https://github.com/GregDavidson/computing-magic][Computing Magic]] -- It feels like magic, when you know the secrets!
 - [[https://github.com/GregDavidson/on-lisp][On Lisp]] -- Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
 - [[https://github.com/GregDavidson/C-By-Example][C By Example]] -- Reach out and touch the machine!
+
+/This repository is intended to be a gateway to a lot of important materials,
+linked by the documents here. If you explore these materials, please share your
+experience, through direct communication, by posting Issues, or etc. Please
+suggest improvements!/
