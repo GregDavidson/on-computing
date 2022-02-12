@@ -15,34 +15,37 @@ There are three common strategies:
 - Index things via content
       - /Hashes/ and /Relations/
 
-** Structures and Arrays
+** Structures (aka Records) and Arrays
 
 *** Untyped Structures 
 
     Most dialects of Lisp allow you to create a new atom type 
     made up of a fixed number of components.  This is done with a macro
     which creates a set of functions to manage your new type, e.g.
-    - =(struct person (name contacts hobbies))=
+    - =(struct people (name contacts hobbies))=
     - creates five functions
-          - =person= creates a /person structure/
+          - the constructor =people= :: creates a /people structure/
                 - given a /name/, contacts /list/ and /hobbies/ list
-          - =person?= returns takes a value and returns
-                - #t (true) if the value is a /person structure/
-                - #f (false) if the value is /not/ a /person structure/
+          - the discriminator =people?= :: takes a value and returns
+                - #t (true) if the value is a /people structure/
+                - #f (false) if the value is /not/ a /people structure/
+          - the selectors =people-name=, =people-contacts=, =people-hobbies= ::
+                - each take a people value and
+                - return the value of their respective field (component)
 
 #+begin_src racket
   #lang racket
-  (struct person (name contacts hobbies))
+  (struct people (name contacts hobbies))
   (struct company (name employees services))
-  (define john (person "John From" '("General Delivery, Kansas City KS") '(travel)))
-  (define dana (person "Dana From" '("+1 (203) 123-4567") '(reading)))
+  (define john (people "John From" '("General Delivery, Kansas City KS") '(travel)))
+  (define dana (people "Dana From" '("+1 (203) 123-4567") '(reading)))
   (define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Maintenance)))
-  (person? john) ; returns #t
-  (person? nardles) ; returns #f
-  (person-name john) ; returns "John From"
-  (person-name nardles) ; error
+  (people? john) ; returns #t
+  (people? nardles) ; returns #f
+  (people-name john) ; returns "John From"
+  (people-name nardles) ; error
   (company-name nardles) ; returns "Nardles, Inc."
-  (map person-name (company-employees nardles)); returns '("John From" "Dana From")
+  (map people-name (company-employees nardles)); returns '("John From" "Dana From")
 #+end_src
 
 Because a named function is created for each structure /field/ (component), the
@@ -62,26 +65,85 @@ number of bits or bytes for each component.
 #+begin_src racket
         #lang typed/racket
         (struct contact ((type : String) (value : Any))
-        (struct person (
+        (struct people (
                         (name : String)
                         (contacts : (ListOf contact))
                         (hobbies : (ListOf Symbol)) ))
         (struct company (
                         (name : String)
-                        (employees : (ListOf person))
+                        (employees : (ListOf people))
                         (services : (ListOf Symbol)) ))
         (define john
-          (person "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
+          (people "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
         (define dana
-          (person "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
+          (people "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
         (define nardles
           (company "Nardles, Inc." (list john dana) ("Nardles Maintenance")) )
 #+end_src
 
-Systems languages like /C/ and /Rust/ are similar, in wanting details of the
-types of each element. The programmer is responsible for explicit allocation and
-deallocation of all objects (stored values) in memory. It's easy to do this
-wrong in C. Rust provides partial protection against doing it wrong.
+SQL and Object-Relational Databases
+- typed records
+- automatic storage management
+- relations are usually multi-way
+  - requiring ids where data isn't unique
+
+SQL gives the most explicit model of what data looks like in persistent storage,
+i.e. storage that doesn't go away when your program(s) terminate.
+
+#+begin_src sql
+  CREATE ENUM contact_types (mail_contact, email_contact, phone_contact);
+  CREATE TABLE people (
+    people_id bigint PRIMARY_KEY,
+    name text
+   );
+  CREATE TABLE people_contacts (
+    people_id bigint REFERENCES people,
+     contact_type contact_types NOT NULL,
+     contact_value text NOT NULL
+  );
+  CREATE TABLE people_hobbies (
+    people_id bigint REFERENCES people,
+    contact_value text NOT NULL
+  );
+  CREATE TABLE companies (
+    company_id serial PRIMARY_KEY,
+    name String
+  );
+  CREATE TABLE companies_employees (
+    company_id bigint REFERENCES companies,
+    employee_id bigint REFERENCES people
+  );
+  CREATE TABLE companies_services (
+    company_id bigint REFERENCES companies,
+    service text NOT NULL
+  );
+  INSERT INTO people VALUES
+     (1, "John From"),
+     (2, "Dana From");
+  INSERT INTO people_contacts VALUES
+     (1, mail_contact, "General Delivery, Fargo City ND"),
+     (2, phone_contact, "+1 (203) 123-4567");
+  INSERT INTO people_hobbies VALUES
+     (1, "travel"),
+     (2, "");
+  INSERT INTO companies VALUES
+     (1, "Nardles, Inc.");
+  INSERT INTO companies_employees VALUES
+     (1, 1), (1, 2);
+  INSERT INTO companies_services VALUES (1, "Nardles Maintenance");
+#+end_src
+
+Systems languages like /C/ and /Rust/ are similar
+- need details of types and sizes of each element
+- programmers responsible for managing allocation of all resources
+      - including objects (stored values) in memory
+- It's easy to do this wrong in C - especially releasing resources
+- Rust provides (partial) protection against doing it wrong!
+- Relationships are usually customized to specific use-cases
+  - 1-way relationships often provided by pointers (see below)
+
+C gives the most explicit model of what data looks like in memory and what
+algorithms cost.
 
 #+begin_src C
   typedef char *String;
@@ -111,14 +173,156 @@ wrong in C. Rust provides partial protection against doing it wrong.
   Company nardles = {"Nardles, Inc.", nardles_employees, nardles_services};
 #+end_src
 
-*** Untyped Arrays 
+*** Untyped Vector aka 1-dimensional Arrays
 
+Lisps provide contiguous vectors (called arrays in many other languages).
+Vectors are similar to Lists (which are described below with Linked structures).
+A vector can contain any number of elements which will fit in virtual memory,
+but once created their size can't be changed without possibly reallocating the
+whole vector.
 
- 
+In Scheme and many other Lisps
+- vector constructors
+      - like lists except with added =#= in front of the open parenthesis
+            - =#(elem1 elem2 ... elemN)=
+      - =vector= and =make-vector=
+            - =(vector elem1 elem2 ... elemN)=
+            - =(make-vector num-elements-desired default-value)=
+                  - all elements will be initialized to /default-value/
+- Other vector operations
+      - =vector?= :: discriminator, returns #t for vectors or #f
+      - =vector-length= :: returns number of elements
+      - =(vector-ref vec pos)= :: returns element at position pos
+            - pos goes from =0= to =(- (vector-length vec) 1)= for /reasons/
+      - =(vector-set! vec pos v)= :: sets element at position pos to v
+            - vector-set! modifies the vector
+            - scheme-family Lisps use a ! after modifying functions
+- Racket also has /immutable vectors/ which do /not/ support =vector=set!=
+
+Vectors vs. Lists
+
+| Feature           | List                            | Vector                       |
+|-------------------+---------------------------------+------------------------------|
+| Growable          | Cheap at front                  | Expensive                    |
+| Space efficiency  | bulky                           | compact                      |
+| Sequential access | next element often not in cache | next element likely in cache |
+| Random access     | slow, O(n)                      | fast, O(1)                   |
+| Mutability        | heavily discourged              | lightly discouraged          |
+
+Lisp programmers are encouraged to use /Lists/ and /Structs/ in their initial
+program design and to consider /Vectors/ as an optimization only where profiling
+analysis clearly indicates significant inefficiency in a place where /Vectors/
+might be better.
+
 *** Typed Arrays 
-   
-** Graph Structures
+
+It's common to want to have all of the elements of an array to be the same kind
+of thing, i.e. to be of the same type. Arrays of pixels, customer records,
+shapes, etc. It is actually quite unusual to have an array of elements of
+arbitrarily varying types.
+    
+Typed Racket allows the programmmer to specify the type of the elements of an
+array to a specific type, including a limited set of alternative types.
+    
+Systems programming languages like C and Rust are strongly biased towards using
+arrays whose elements are all of the same type. Also, arrays are usually easier
+to create and manage than lists because the arrays are allocated and deallocate
+as a whole whereas each element of a list is individually (de)allocated!
+
+Many /Relation Database Systems/ lack arrays.
+- /PostgreSQL/ supports both single and multidimensional arrays
+
+** Linked Structures aka Graph Structures
+
+Computers assign an /address/ to locations in memory. Modern computers use /byte
+addresses/, i.e. they assign a unique address, starting with =0=, to the
+location of every byte in memory. All of the kinds of values discussed above can
+be stored in memory as objects of one or more contiguous block of bytes. For
+efficiency, the storage allocation of independent objects is usually rounded up
+to an even number of words, e.g. on a 64-bit computer objects usually start and
+end at 8-byte (64-bit) boundaries.
+
+Low-level programmers sometimes think of the entire memory space assigned to
+their programs as one giant array and they think of the addresses of objects as
+integers, like array positions. High-level programmers prefer to think of their
+objects of varying types as stored independently unless they've been explicitly
+specified as being part of a larger entity such as a struct, vector or
+multidimensional array.
+
+This is all very convenient as it means that it's possible to create objects
+whose component parts are allocated at different times in different parts of
+memory and can even be shared as parts of multiple conceptual composite objects.
+
+In typed systems programming languages, such as C or Rust, the type of an
+address of an object of type /T/ is /Pointer-to-T/, written =*T=. Pointer values
+can be stored as fields of structures and can then be dereferenced (followed) to
+components or "associated objects" anywhere in memory.
+
+Dynamic languages like Lisps, scripting languages such as Python, etc. make
+maximum use of this facility. Variable bindings in Lisp are usually pointers.
+Lists and untyped arrays do not actually contain their elements, they merely
+point to them. Dynamic languages (and even some statically-typed languages, such
+as Java and C#) use an algorithm called /Garbage Collection/ to periodically
+reclaim memory which can no longer be referenced which is called /garbage/
+because there's no longer a pointer to it to it. Programmers write code as if
+there's an infinite amount of memory, and the garbage collector helps maintain
+this convenient fiction!
+
+What's going on in the following Lisp code? How many times does the list ='(red
+green blue)= exist in memory? How about the list ='(black red green blue)=?
+
+#+begin_src racket
+  #lang racket
+  (define primaries '(red green blue))
+  (define palette1 (cons 'white primaries))
+  (define palette2 (cons 'black primaries))
+  (define palette (cons 'white palette2))
+  palette1 ; prints '(white red green blue)
+  palette ; prints '(white black red green blue)
+#+end_src
+
+Let's look at the same program in C to find out:
+#+begin_src C
+  typedef char *StringPtr;
+  typedef struct color_list {
+    StringPtr color;
+    struct color_list *list;
+  }*ColorList;
+  ColorList *consColor(StringPtr color, ColorList tail) {
+    ColorList cons = malloc( sizeof (struct color_list) ); // sizes are in bytes
+    cons->color = color;
+    cons->tail = tail;
+    return color;
+  }
+  ColorList primaries = consColor ("red", consColor("green", consColor("blue", 0)));
+  ColorList palette1 = consColor("white", primaries);
+  ColorList palette2 = consColor("black", primaries);
+  ColorList palette = consColor("white", palette2);
+  void printColorList(ColorList cl) {
+    putchar('(');
+    while (cl) { // 0 == NULL == false in C, everything else is true
+      fputs(cl->color, stdout);
+    if (cl->tail) putchar(' ');
+    cl = cl->tail;
+    }
+    putchar(')');
+  }
+  int main() { // main is where execution begins in C
+    fputs("* palette1:", stdout);
+    printColorList(palette1); // (white red green blue)
+    fputs("* palette2:", stdout);
+    printColorList(palette2); // (black red green blue)
+    fputs("* palette3:", stdout); // (white black red green blue)
+    printColorList(palette);
+    return 0; // all is well
+  }
+#+end_src
+
+How many 2-word consColor nodes were allocated? When should the '(red green blue)
+list be deallocated?
+
 ** Hashes and Relations
+   
 ***   Hashes
 ***   Relations
 ***   Indexes
