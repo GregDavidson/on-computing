@@ -1,0 +1,124 @@
+* Custom Data Structures: Composites
+  
+Read [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] first!  Be sure and click on the Switches!
+
+Now that you understand that everything in a computer program's memory is
+*bits*, organized into *bytes*, organized into *words*, and you understand what
+those are and what they can do for you on their own, it's time to put them
+together, like Lego blocks, into larger structures to serve your larger needs.
+
+There are three common strategies:
+- Put things next to one another
+      - Usually called /structures/ or /records/
+- Connect things via their locations
+      - /Lists/, /Trees/ and other /Graph Structures/
+- Index things via content
+      - /Hashes/ and /Relations/
+
+** Structures and Arrays
+
+*** Untyped Structures 
+
+    Most dialects of Lisp allow you to create a new atom type 
+    made up of a fixed number of components.  This is done with a macro
+    which creates a set of functions to manage your new type, e.g.
+    - =(struct person (name contacts hobbies))=
+    - creates five functions
+          - =person= creates a /person structure/
+                - given a /name/, contacts /list/ and /hobbies/ list
+          - =person?= returns takes a value and returns
+                - #t (true) if the value is a /person structure/
+                - #f (false) if the value is /not/ a /person structure/
+
+#+begin_src racket
+  #lang racket
+  (struct person (name contacts hobbies))
+  (struct company (name employees services))
+  (define john (person "John From" '("General Delivery, Kansas City KS") '(travel)))
+  (define dana (person "Dana From" '("+1 (203) 123-4567") '(reading)))
+  (define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Maintenance)))
+  (person? john) ; returns #t
+  (person? nardles) ; returns #f
+  (person-name john) ; returns "John From"
+  (person-name nardles) ; error
+  (company-name nardles) ; returns "Nardles, Inc."
+  (map person-name (company-employees nardles)); returns '("John From" "Dana From")
+#+end_src
+
+Because a named function is created for each structure /field/ (component), the
+order of the elements doesn't matter. New versions of a program can add new
+fields, but the number of fields in a structure cannot change within a given run
+of a program.  Removing a field or renaming it will require corresponding changes
+to any part of the program which uses the affected functions.
+
+*** Typed Structures 
+
+Typed structures specify which kind of data can be bound to each field of the
+structure. This can be used to enforce the program designer's expectations and
+thus prevent bugs through inconsistent use. It can also be used to compile
+(translate) the program in to more efficient code by only using the minimum
+number of bits or bytes for each component.
+    
+#+begin_src racket
+        #lang typed/racket
+        (struct contact ((type : String) (value : Any))
+        (struct person (
+                        (name : String)
+                        (contacts : (ListOf contact))
+                        (hobbies : (ListOf Symbol)) ))
+        (struct company (
+                        (name : String)
+                        (employees : (ListOf person))
+                        (services : (ListOf Symbol)) ))
+        (define john
+          (person "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
+        (define dana
+          (person "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
+        (define nardles
+          (company "Nardles, Inc." (list john dana) ("Nardles Maintenance")) )
+#+end_src
+
+Systems languages like /C/ and /Rust/ are similar, in wanting details of the
+types of each element. The programmer is responsible for explicit allocation and
+deallocation of all objects (stored values) in memory. It's easy to do this
+wrong in C. Rust provides partial protection against doing it wrong.
+
+#+begin_src C
+  typedef char *String;
+  enum ContactTypes {mail, email, phone, n_ContactTypes};
+  typedef struct {
+    ContactTypes contact;
+    String value;
+  } Contacts;
+  typedef struct {
+    String name;
+    Contacts *contacts;           // NULL-terminated Array
+    String *hobbies;              // NULL-terminated Array
+  } People;
+  typedef struct {
+    String name;
+    People *employees;            // NULL-terminated Array
+    String *services;             // NULL-terminated Array
+  } Companies;
+  Contacts john_contacts[] = { {mail, "General Delivery, Fargo City ND"}, 0 };
+  Hobbies john_hobbies[] = { "travel", 0 };
+  Contacts dana_contacts[] = { {phone, "+1 (203) 123-4567"}, 0 };
+  Hobbies dana_hobbies[] = { "reading", 0 };
+  People john = {"John From" john_contacts, john_hobbies};
+  People dana = {"Dana From" dana_contacts, dana_hobbies};
+  People nardles_employees[] = {&john, &dana, 0};
+  String nardles_services[] = {"Nardles Maintenance", 0};
+  Company nardles = {"Nardles, Inc.", nardles_employees, nardles_services};
+#+end_src
+
+*** Untyped Arrays 
+
+
+ 
+*** Typed Arrays 
+   
+** Graph Structures
+** Hashes and Relations
+***   Hashes
+***   Relations
+***   Indexes
