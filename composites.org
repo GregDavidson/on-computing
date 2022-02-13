@@ -241,7 +241,7 @@ Vectors vs. Lists
 | Space efficiency  | bulky                           | compact                      |
 | Sequential access | next element often not in cache | next element likely in cache |
 | Random access     | slow, O(n)                      | fast, O(1)                   |
-| Mutability        | heavily discourged              | lightly discouraged          |
+| Mutability        | heavily discouraged             | lightly discouraged          |
 
 Lisp programmers are encouraged to use /Lists/ and /Structs/ in their initial
 program design and to consider /Vectors/ as an optimization only where profiling
@@ -255,7 +255,7 @@ of thing, i.e. to be of the same type. Arrays of pixels, customer records,
 shapes, etc. It is actually quite unusual to have an array of elements of
 arbitrarily varying types.
     
-Typed Racket allows the programmmer to specify the type of the elements of an
+Typed Racket allows the programmer to specify the type of the elements of an
 array to a specific type, including a limited set of alternative types.
     
 Systems programming languages like C and Rust are strongly biased towards using
@@ -273,7 +273,7 @@ which are other structures, some of whose fields are arrays, etc. This works
 well as long as all of the component parts are of a known size (Manifest Types
 and homogenous arrays) and as long as the whole composite object can be
 allocated at once.  When you need more flexibility, you can link multiple objects
-together using their addressses.
+together using their addresses.
    
 Every object in a running program has a unique /address/ (location) in memory.
 Modern computers use /byte addresses/, i.e. they assign a unique address,
@@ -371,5 +371,95 @@ follow the =cdr= pointers until you find the desired item.
 ** Hashes and Relations
    
 ***   Hashes
+
+A program might run slowly if it often needs to examine many elements of a large
+List or Array to find a desired item. This kind of search costs =O(n)= aka
+/Order of n/ where /n/ is the number of elements which have to be examined.
+
+A common solution is to organize the data as a sorted array or as a hierarchy
+such as a tree. This allows for faster access. An alternative is to let the data
+itself serve as a quick way to find it.  The data can be turned into a /hash/ and the
+/hash/ can be turned into an /index/.
+
+Program designers often put a lot of work into storing data in such a way that
+access and updating of the data will be very fast. This often leads to complex
+code which can hide bugs. Its actually quite difficult to predict in advance
+what will be the most efficient storage layout for data. The best practice is to
+program for clarity rather than efficiency. Once the program has all of its
+desired features, if it runs too slowly there are tools called /profilers/ that
+can help the programmer find the performance bottlenecks, i.e. the (usually very
+small) parts of the code which need to be sped up.
+
+Conventional programmers following good practice will then redesign only the
+parts of the program that are performance bottlenecks to use a more efficient
+data structure (the way storage is arranged in memory) or algorithm (the
+strategy of the program's procedures). This way the overall complexity of the
+program is minimized. But there may be a better way!
+
 ***   Relations
+
+Relational databases were designed to store data over long periods of time in
+the simplest and most general manner possible, so that the data can be used by
+many versions of many programs over time. You can think of relational data as
+being Tables of Records which are laid out in secondary (persistent) storage in
+a manner very similar to unordered arrays of structures in the volatile memory
+of a computer. While this is very simple and general, it can be expensive to
+work with when the computer has to search through large tables to find the
+desired data.
+
+Rather than complicating the Tables, Relational Database Systems allow the Database
+Administrator to /profile/ the database's operations to identify /performance bottlenecks/ and
+add /Indexes/ to speed up performance for specific /use cases/.
+    
 ***   Indexes
+
+An index is a data structure which provides fast access to the elements of an
+unordered table or array without changing the structure of the table or array.
+You can use an Index in a regular program to provide fast access to the elements
+of a vector or array. Indexes are most known in the context of databases where
+they provide fast access to desired records of tables. Index in programs are
+generally designed as part of the program, as an alternative to using a more
+compalex data structure.
+
+In the database context, indexes can be added or removed by an administrator as
+the access patterns of the database system change over time. Index have to be
+updated as records are added (or changed), so having too many indexes can itself
+slow things down.
+
+The advantage of Indexes is that they exist independent of the simple storage layout
+of the data they support.  This decreases overall complexity.
+
+So how do Indexes work?
+
+Programs generally select desired records based on the values of one or a few
+fields. These are called /search keys/.
+
+There are two basic strategies: Trees and Hashes.
+  
+If these keys can be efficiently ordered, e.g. if for any two keys /K1/ and /K2/
+we can efficiently determine whether /K1/ < /K2/, /K1/ = /K2/ or /K1/ > /K2/,
+then we can construct an /Ordered Tree Index/ which will access the desired
+records in logarithmic time.
+
+Alternatively, we can use a hash.  A hash is an integer value which can be computed
+from a key.  A good has should be
+- fast to compute
+- no larger than twice the number of elements to be stored
+- almost always unique
+
+Suppose you have around n=1,000,000 records in a table. You want a function
+=hash(k1)= (or =hash(k1, k2, ... kn)= if there are multiple keys) which returns
+an integer in the range 0 to 2*n. It needs to be rare for =hash(k1)= to have the
+same value as =hash(k2)= when =k1= is not the same as =k2=. The hash index is
+simply an array indexed by the hash values which gives the location of the
+desired record in the table. There's extra room in the table, so in the case of
+a /collision/, i.e. where two keys give the same hash value, we can simply store
+one of them in the regular place and the other in the next free available
+element of the index array. Since collisions are rare (by design of the hash
+function), having to occasionally look again will not slow things down much.
+
+Some database systems can sometimes automatically figure out when indexes should
+be used and which kind.  They can usually figure out an appropriate ordering function
+or hash function for keys.  However, they are sometimes unable to figure out the best
+kind of index or an appropriate ordering or hash function.  All of these things can
+be explicitly provided by a Database Administrator as needed.
