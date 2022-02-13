@@ -7,31 +7,44 @@ Now that you understand that everything in a computer program's memory is
 those are and what they can do for you on their own, it's time to put them
 together, like Lego blocks, into larger structures to serve your larger needs.
 
-There are three common strategies:
-- Put things next to one another
+/Objects/ are /Values/ stored in memory at specific locations. Objects occupy
+some number of bytes. (/Objects/ have nothing to do with /Object-Oriented
+Programming/ - that's something else!) Objects which are larger than a computer's
+/Word Size/ are often called /Composite Objects/.
+
+There are three common strategies for building /Composite Objects/:
+- Put things next to one another in memory
       - Usually called /structures/ or /records/
 - Connect things via their locations
       - /Lists/, /Trees/ and other /Graph Structures/
 - Index things via content
-      - /Hashes/ and /Relations/
+      - /Hashes/, /Relations/ and Indexes
 
 ** Structures (aka Records) and Arrays
 
-*** Untyped Structures 
+*** Dynamically Typed Structures aka Dynamically Typed Records
 
-    Most dialects of Lisp allow you to create a new atom type 
-    made up of a fixed number of components.  This is done with a macro
-    which creates a set of functions to manage your new type, e.g.
+    Most dialects of Lisp let you create a new atom type made up of a fixed
+    number of components. Structures of your new type can be distinguished from
+    all other Lisp Types. Structures are usually created with a macro which
+    creates a set of functions to manage your new type, e.g.
     - =(struct people (name contacts hobbies))=
     - creates five functions
           - the constructor =people= :: creates a /people structure/
                 - given a /name/, contacts /list/ and /hobbies/ list
           - the discriminator =people?= :: takes a value and returns
-                - #t (true) if the value is a /people structure/
-                - #f (false) if the value is /not/ a /people structure/
+                - #t (Boolean True) for /people structures/
+                - #f (Boolean False) for anything else
+                - /? is a conventional suffix for Boolean functions in Scheme/
           - the selectors =people-name=, =people-contacts=, =people-hobbies= ::
                 - each take a people value and
                 - return the value of their respective field (component)
+          - there can optionally be mutator functions for changing field values
+                - /functional programming/ discourages mutation
+                - mutation makes programs harder to debug
+          - =(eq? x y)= checks if =x= and =y= are the same /Object/
+                - it simply checks their location in memory
+                - location gives us the concept of /object identity/
 
 #+begin_src racket
   #lang racket
@@ -39,7 +52,7 @@ There are three common strategies:
   (struct company (name employees services))
   (define john (people "John From" '("General Delivery, Kansas City KS") '(travel)))
   (define dana (people "Dana From" '("+1 (203) 123-4567") '(reading)))
-  (define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Maintenance)))
+  (define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Disposal)))
   (people? john) ; returns #t
   (people? nardles) ; returns #f
   (people-name john) ; returns "John From"
@@ -48,44 +61,55 @@ There are three common strategies:
   (map people-name (company-employees nardles)); returns '("John From" "Dana From")
 #+end_src
 
-Because a named function is created for each structure /field/ (component), the
-order of the elements doesn't matter. New versions of a program can add new
-fields, but the number of fields in a structure cannot change within a given run
-of a program.  Removing a field or renaming it will require corresponding changes
-to any part of the program which uses the affected functions.
+Because a named function is created for each /field/ (structure component)
+- the order of the elements doesn't matter
+- new versions of a program can add new fields
+- the number and layout of fields is fixed during a program execution
+- removing or renaming a field will require corresponding changes throughout the program
 
-*** Typed Structures 
+Dynamically Typed languages, including most /Lisp/ dialects, /Python/ and
+/JavaScript/ have to store the type of each object along with its value. This
+provides for flexibility but can also increase complexity and reduce reliability
+and efficiency.
 
-Typed structures specify which kind of data can be bound to each field of the
-structure. This can be used to enforce the program designer's expectations and
-thus prevent bugs through inconsistent use. It can also be used to compile
-(translate) the program in to more efficient code by only using the minimum
-number of bits or bytes for each component.
-    
+*** (Manifestly) Typed Structures 
+
+/Manifestly Typed/ structures explicitly specify which kind of data can be bound
+to each field of the structure. This can be used to communicate as well as to
+enforce the program designer's expectations and thus prevent bugs through
+inconsistent use. It can also be used to compile (translate) the program to more
+efficient machine code.
+
+While most Lisp dialects are Dynamically Typed, Racket provides multiple
+languages, some of which are Dynamically Typed and some of which are
+(Manifestly) Typed. You can write all or part of a Racket program in /Typed
+Racket/ for clarity, efficiency and reliability.
+
 #+begin_src racket
-        #lang typed/racket
-        (struct contact ((type : String) (value : Any))
-        (struct people (
-                        (name : String)
-                        (contacts : (ListOf contact))
-                        (hobbies : (ListOf Symbol)) ))
-        (struct company (
-                        (name : String)
-                        (employees : (ListOf people))
-                        (services : (ListOf Symbol)) ))
-        (define john
-          (people "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
-        (define dana
-          (people "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
-        (define nardles
-          (company "Nardles, Inc." (list john dana) ("Nardles Maintenance")) )
+  #lang typed/racket
+  (struct contact ( (type : String) (value : Any) )
+  (struct people ( (name : String)
+                   (contacts : (ListOf contact))
+                   (hobbies : (ListOf Symbol)) ))
+  (struct company ( (name : String)
+                    (employees : (ListOf people))
+                    (services : (ListOf Symbol)) ))
+  (define john
+    (people "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
+  (define dana
+    (people "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
+  (define nardles
+    (company "Nardles, Inc." (list john dana) ("Nardles Disposal")) )
 #+end_src
 
-SQL and Object-Relational Databases
-- typed records
+/SQL/ and /Object-Relational Databases/
+- data lives in persistent memory over a long time
+- needs to support many versions of many programs over time
+- typed records and other constraints assist with data integrity
 - automatic storage management
-- relations are usually multi-way
-  - requiring ids where data isn't unique
+- relations usually multi-way for flexibility
+- unique data gives object (record) identity
+      - unique ids can be introduced where data values aren't unique
 
 SQL gives the most explicit model of what data looks like in persistent storage,
 i.e. storage that doesn't go away when your program(s) terminate.
@@ -107,7 +131,7 @@ i.e. storage that doesn't go away when your program(s) terminate.
   );
   CREATE TABLE companies (
     company_id serial PRIMARY_KEY,
-    name String
+    name text
   );
   CREATE TABLE companies_employees (
     company_id bigint REFERENCES companies,
@@ -125,22 +149,23 @@ i.e. storage that doesn't go away when your program(s) terminate.
      (2, phone_contact, "+1 (203) 123-4567");
   INSERT INTO people_hobbies VALUES
      (1, "travel"),
-     (2, "");
+     (2, "reading");
   INSERT INTO companies VALUES
      (1, "Nardles, Inc.");
   INSERT INTO companies_employees VALUES
      (1, 1), (1, 2);
-  INSERT INTO companies_services VALUES (1, "Nardles Maintenance");
+  INSERT INTO companies_services VALUES (1, "Nardles Disposal");
 #+end_src
 
 Systems languages like /C/ and /Rust/ are similar
-- need details of types and sizes of each element
-- programmers responsible for managing allocation of all resources
-      - including objects (stored values) in memory
+- they require details of types and sizes of each element
+- programmers are responsible for managing resources
+      - including (de)allocation of objects
 - It's easy to do this wrong in C - especially releasing resources
-- Rust provides (partial) protection against doing it wrong!
+- Rust provides (partial) protection against doing this wrong!
 - Relationships are usually customized to specific use-cases
-  - 1-way relationships often provided by pointers (see below)
+      - 1-way relationships often provided by pointers (see below)
+      - more efficient than SQL but more efficient
 
 C gives the most explicit model of what data looks like in memory and what
 algorithms cost.
@@ -154,13 +179,13 @@ algorithms cost.
   } Contacts;
   typedef struct {
     String name;
-    Contacts *contacts;           // NULL-terminated Array
-    String *hobbies;              // NULL-terminated Array
+    Contacts *contacts;           // points to NULL-terminated Array
+    String *hobbies;              // points to NULL-terminated Array
   } People;
   typedef struct {
     String name;
-    People *employees;            // NULL-terminated Array
-    String *services;             // NULL-terminated Array
+    People *employees;            // points to NULL-terminated Array
+    String *services;             // points to NULL-terminated Array
   } Companies;
   Contacts john_contacts[] = { {mail, "General Delivery, Fargo City ND"}, 0 };
   Hobbies john_hobbies[] = { "travel", 0 };
@@ -169,14 +194,14 @@ algorithms cost.
   People john = {"John From" john_contacts, john_hobbies};
   People dana = {"Dana From" dana_contacts, dana_hobbies};
   People nardles_employees[] = {&john, &dana, 0};
-  String nardles_services[] = {"Nardles Maintenance", 0};
+  String nardles_services[] = {"Nardles Disposal", 0};
   Company nardles = {"Nardles, Inc.", nardles_employees, nardles_services};
 #+end_src
 
-*** Untyped Vector aka 1-dimensional Arrays
+*** Dynamically Typed Vector aka 1-dimensional Arrays
 
 Lisps provide contiguous vectors (called arrays in many other languages).
-Vectors are similar to Lists (which are described below with Linked structures).
+Vectors are similar to Lists (described below with Linked Structures).
 A vector can contain any number of elements which will fit in virtual memory,
 but once created their size can't be changed without possibly reallocating the
 whole vector.
@@ -197,7 +222,16 @@ In Scheme and many other Lisps
       - =(vector-set! vec pos v)= :: sets element at position pos to v
             - vector-set! modifies the vector
             - scheme-family Lisps use a ! after modifying functions
-- Racket also has /immutable vectors/ which do /not/ support =vector=set!=
+- Racket also has /immutable vectors/ which /do not/ support =vector=set!=
+
+/Strings/ are usually implemented as a contiguous /array of bytes/. Modern
+[[https://en.wikipedia.org/wiki/Unicode][Unicode]] accommodates text in all languages by allowing a single character to
+occupy more than one byte, as needed.
+
+Some languages provide /bit vectors/, i.e. a contiguous array of bits.
+
+Most vectors consist of objects that are at least a full machine word long, e.g.
+numbers, addresses and structures.
 
 Vectors vs. Lists
 
@@ -214,7 +248,7 @@ program design and to consider /Vectors/ as an optimization only where profiling
 analysis clearly indicates significant inefficiency in a place where /Vectors/
 might be better.
 
-*** Typed Arrays 
+*** (Manifestly) Typed Arrays 
 
 It's common to want to have all of the elements of an array to be the same kind
 of thing, i.e. to be of the same type. Arrays of pixels, customer records,
@@ -234,39 +268,42 @@ Many /Relation Database Systems/ lack arrays.
 
 ** Linked Structures aka Graph Structures
 
-Computers assign an /address/ to locations in memory. Modern computers use /byte
-addresses/, i.e. they assign a unique address, starting with =0=, to the
-location of every byte in memory. All of the kinds of values discussed above can
-be stored in memory as objects of one or more contiguous block of bytes. For
-efficiency, the storage allocation of independent objects is usually rounded up
-to an even number of words, e.g. on a 64-bit computer objects usually start and
-end at 8-byte (64-bit) boundaries.
+Composite objects can be nested, e.g. you can have an array of structures within
+which are other structures, some of whose fields are arrays, etc. This works
+well as long as all of the component parts are of a known size (Manifest Types
+and homogenous arrays) and as long as the whole composite object can be
+allocated at once.  When you need more flexibility, you can link multiple objects
+together using their addressses.
+   
+Every object in a running program has a unique /address/ (location) in memory.
+Modern computers use /byte addresses/, i.e. they assign a unique address,
+starting with =0=, to the location of every byte in memory. All of the kinds of
+values discussed above can be stored in memory as objects of one or more
+contiguous blocks of bytes. (For efficiency, the storage allocation of
+independent objects is usually rounded up to an even number of words, e.g. on a
+64-bit computer objects usually start and end at 8-byte (64-bit) boundaries.)
 
-Low-level programmers sometimes think of the entire memory space assigned to
-their programs as one giant array and they think of the addresses of objects as
-integers, like array positions. High-level programmers prefer to think of their
-objects of varying types as stored independently unless they've been explicitly
-specified as being part of a larger entity such as a struct, vector or
-multidimensional array.
-
-This is all very convenient as it means that it's possible to create objects
-whose component parts are allocated at different times in different parts of
-memory and can even be shared as parts of multiple conceptual composite objects.
+It's possible to create objects whose component parts are allocated at different
+times in different parts of memory and components can even be shared as parts of
+multiple conceptual composite objects.
 
 In typed systems programming languages, such as C or Rust, the type of an
-address of an object of type /T/ is /Pointer-to-T/, written =*T=. Pointer values
-can be stored as fields of structures and can then be dereferenced (followed) to
-components or "associated objects" anywhere in memory.
+address of an object of type /T/ is /Pointer-to-T/, written =*T=. A pointer
+value can be bound to a variable, stored as a field of a structure or an element
+of an array. A pointer of type =*T= can be dereferenced (followed) to an object
+of type =T= anywhere in memory.
 
 Dynamic languages like Lisps, scripting languages such as Python, etc. make
 maximum use of this facility. Variable bindings in Lisp are usually pointers.
-Lists and untyped arrays do not actually contain their elements, they merely
-point to them. Dynamic languages (and even some statically-typed languages, such
-as Java and C#) use an algorithm called /Garbage Collection/ to periodically
-reclaim memory which can no longer be referenced which is called /garbage/
-because there's no longer a pointer to it to it. Programmers write code as if
-there's an infinite amount of memory, and the garbage collector helps maintain
-this convenient fiction!
+Lists and dynamically typed arrays do not actually contain their elements, they
+merely point to them. Dynamic languages (and even some statically-typed
+languages, such as Java and C#) use an algorithm called /Garbage Collection/ to
+periodically reclaim memory which can no longer be referenced which is called
+/garbage/ because there's no longer a pointer to it to it. Programmers write
+code as if there's an infinite amount of memory, and the garbage collector helps
+maintain this convenient fiction! Advanced Garbage Collection algorithms can
+even compact memory, moving objects and updating the pointers to them
+seemlessly, even as the program continues to run
 
 What's going on in the following Lisp code? How many times does the list ='(red
 green blue)= exist in memory? How about the list ='(black red green blue)=?
@@ -320,6 +357,16 @@ Let's look at the same program in C to find out:
 
 How many 2-word consColor nodes were allocated? When should the '(red green blue)
 list be deallocated?
+
+The Lisp function =cons= is the foundation of Lisp's Lists. It allocates a
+structure called a /Pair/ or /cons cell/ which is two words long. A /cons cell/
+contain two pointer fields, conventionally called =car= and =cdr=, aka =head=
+and =tail= aka =first= and =rest=. Each =car= points to a single element of the
+List while the =cdr= either contains a special value indicating an empty list,
+or it points to the =cons= cell containing the rest of the list. Thus for every
+n-element list, there will be 2*n worlds of memory storing the list. If you want
+an element deeply buried in a long list, you have to start at the beginning and
+follow the =cdr= pointers until you find the desired item.
 
 ** Hashes and Relations
    
