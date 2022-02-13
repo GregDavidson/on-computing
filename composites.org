@@ -215,7 +215,7 @@ In Scheme and many other Lisps
             - =(make-vector num-elements-desired default-value)=
                   - all elements will be initialized to /default-value/
 - Other vector operations
-      - =vector?= :: discriminator, returns #t for vectors or #f
+      - =vector?= :: discriminator, returns =#t= for vectors, =#f= for anything else
       - =vector-length= :: returns number of elements
       - =(vector-ref vec pos)= :: returns element at position pos
             - pos goes from =0= to =(- (vector-length vec) 1)= for /reasons/
