@@ -222,7 +222,7 @@ In Scheme and many other Lisps
       - =(vector-set! vec pos v)= :: sets element at position pos to v
             - vector-set! modifies (mutates) the vector
             - Scheme naming convention uses ! suffix for names of mutating functions
-- Racket also has /immutable vectors/ which /do not/ support =vector=set!=
+- Racket also has /immutable vectors/ which /do not/ support =vector-set!=
 
 /Strings/ are usually implemented as a contiguous /array of bytes/. Modern
 [[https://en.wikipedia.org/wiki/Unicode][Unicode]] accommodates text in all languages by allowing a single character to
