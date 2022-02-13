@@ -220,8 +220,8 @@ In Scheme and many other Lisps
       - =(vector-ref vec pos)= :: returns element at position pos
             - pos goes from =0= to =(- (vector-length vec) 1)= for /reasons/
       - =(vector-set! vec pos v)= :: sets element at position pos to v
-            - vector-set! modifies the vector
-            - scheme-family Lisps use a ! after modifying functions
+            - vector-set! modifies (mutates) the vector
+            - Scheme naming convention uses ! suffix for names of mutating functions
 - Racket also has /immutable vectors/ which /do not/ support =vector=set!=
 
 /Strings/ are usually implemented as a contiguous /array of bytes/. Modern
