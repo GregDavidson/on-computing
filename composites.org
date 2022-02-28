@@ -8,9 +8,10 @@ those are and what they can do for you on their own, it's time to put them
 together, like Lego blocks, into larger structures to serve your larger needs.
 
 /Objects/ are /Values/ stored in memory at specific locations. Objects occupy
-some number of bytes. (/Objects/ have nothing to do with /Object-Oriented
-Programming/ - that's something else!) Objects which are larger than a computer's
-/Word Size/ are often called /Composite Objects/.
+some number of bytes. Objects which are larger than a computer's /Word Size/ are
+often called /Composite Objects/. /Objects/ which have an Identity are sometimes
+part of /Object-Oriented Programming/ systems, but we're going to ignore that
+level of complexity for now.
 
 There are three common strategies for building /Composite Objects/:
 - Put things next to one another in memory
@@ -463,3 +464,26 @@ be used and which kind.  They can usually figure out an appropriate ordering fun
 or hash function for keys.  However, they are sometimes unable to figure out the best
 kind of index or an appropriate ordering or hash function.  All of these things can
 be explicitly provided by a Database Administrator as needed.
+
+** More to Come - Ignore for Now!
+   
+Strategies for building larger, more interesting objects
+- Larger objects with adjacent components
+      - arrays and structures
+- Graph structures connected by pointers
+      - Lists, Trees and much more!
+- Hash structures - much like crypto!
+      - Dictionaries, Indexes
+- Functional interfaces
+      - Dynamic computing
+      - Metaprogramming
+      - Functions are also Data!
+- Byte sequences are the interchange format
+      - Files, Streams
+      - (De)Serialization
+- Alignment and chunking
+      - Ideally invisible, sometimes leaks into APIs
+      - Pages, Sectors, Blocks, Cylinders
+      - Cache lines, Word alignment
+      - Can impact efficiency
+      - Strive for simplicity, with later optimization possible
