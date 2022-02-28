@@ -263,7 +263,7 @@ Systems programming languages like C and Rust are strongly biased towards using
 arrays whose elements are all of the same type. Arrays are usually allocated and
 deallocated as a whole whereas each element of a list needs to be individually
 (de)allocated, which is difficult in languages lacking automatic garbage
-collection.
+collection (explained below).
 
 Many /Relational Database Systems/ lack arrays.
 - /PostgreSQL/ supports both single and multidimensional arrays
