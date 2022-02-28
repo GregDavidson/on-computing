@@ -260,21 +260,22 @@ Typed Racket allows the programmer to specify the type of the elements of an
 array to a specific type, including a limited set of alternative types.
     
 Systems programming languages like C and Rust are strongly biased towards using
-arrays whose elements are all of the same type. Also, arrays are usually easier
-to create and manage than lists because the arrays are allocated and deallocate
-as a whole whereas each element of a list is individually (de)allocated!
+arrays whose elements are all of the same type. Arrays are usually allocated and
+deallocated as a whole whereas each element of a list needs to be individually
+(de)allocated, which is difficult in languages lacking automatic garbage
+collection.
 
-Many /Relation Database Systems/ lack arrays.
+Many /Relational Database Systems/ lack arrays.
 - /PostgreSQL/ supports both single and multidimensional arrays
 
 ** Linked Structures aka Graph Structures
 
 Composite objects can be nested, e.g. you can have an array of structures within
-which are other structures, some of whose fields are arrays, etc. This works
-well as long as all of the component parts are of a known size (Manifest Types
-and homogenous arrays) and as long as the whole composite object can be
-allocated at once.  When you need more flexibility, you can link multiple objects
-together using their addresses.
+which are other structures, some of whose fields are arrays, etc. nesting
+without limit. This works well as long as all of the component parts are of a
+known size (Manifest Types and homogeneous arrays) and as long as the whole
+composite object can be allocated at once. When you need more flexibility, you
+can link multiple objects together using their addresses.
    
 Every object in a running program has a unique /address/ (location) in memory.
 Modern computers use /byte addresses/, i.e. they assign a unique address,
@@ -291,20 +292,21 @@ multiple conceptual composite objects.
 In typed systems programming languages, such as C or Rust, the type of an
 address of an object of type /T/ is /Pointer-to-T/, written =*T=. A pointer
 value can be bound to a variable, stored as a field of a structure or an element
-of an array. A pointer of type =*T= can be dereferenced (followed) to an object
-of type =T= anywhere in memory.
+of an array - it's usually a 1-word value. A pointer of type =*T= can be
+dereferenced (followed) to an object of type =T= regardless of where its stored
+in that task's main memory.
 
 Dynamic languages like Lisps, scripting languages such as Python, etc. make
-maximum use of this facility. Variable bindings in Lisp are usually pointers.
-Lists and dynamically typed arrays do not actually contain their elements, they
-merely point to them. Dynamic languages (and even some statically-typed
-languages, such as Java and C#) use an algorithm called /Garbage Collection/ to
-periodically reclaim memory which can no longer be referenced which is called
-/garbage/ because there's no longer a pointer to it to it. Programmers write
-code as if there's an infinite amount of memory, and the garbage collector helps
-maintain this convenient fiction! Advanced Garbage Collection algorithms can
-even compact memory, moving objects and updating the pointers to them
-seemlessly, even as the program continues to run
+maximum use of the flexibility of linked data. Variable bindings in Lisp are
+usually pointers. Lists and dynamically typed arrays do not actually contain
+their elements, they merely point to them. Dynamic languages (and even some
+statically-typed languages, such as Java and C#) use an algorithm called
+/Garbage Collection/ to periodically reclaim memory which can no longer be
+referenced which is called /garbage/ because there's no longer a pointer to it
+to it. Programmers write code as if there's an infinite amount of memory, and
+the garbage collector helps maintain this convenient fiction! Advanced Garbage
+Collection algorithms can even compact memory, moving objects and updating the
+pointers to them seemlessly, even as the program continues to run
 
 What's going on in the following Lisp code? How many times does the list ='(red
 green blue)= exist in memory? How about the list ='(black red green blue)=?
