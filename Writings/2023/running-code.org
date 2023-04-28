@@ -1,6 +1,14 @@
 * How (Well) Does Your Code Run?
 
-** Your Code is Probably Compiled Before It's Run
+High-Level Programming Languages (HLLs) are designed for human convenience and
+productivity, not for computer efficiency. Originally programs in HLLs were
+prepared by human /Programmers/ and then given to human /Coders/ to translate
+into /Assembly Language/, a symbolic form of the /Machine Language/ directly
+understood by computer hardware. Now Coding is almost entirely automated, with
+humans only manually writing small amounts of performance critical code in
+Assembly Language.
+
+** Compilers Translate HLL Code into LLL Code
 
 A Compiler is a Software Application which can translate part or all of a
 program written in a Higher Level Language (designed for humans) into a Lower
@@ -10,7 +18,7 @@ There are generally different levels of optimization efficiency available for
 the translation. A highly optimized translation of a time-critical section of
 your code can make a big difference in your program's performance, but it will
 also take more time to perform that translation, potentially slowing down your
-development process.
+development process as in the famous [[https://xkcd.com/303][xkcd: Compiling]] comic.
 
 A common approach is to use a low level of optimization during program
 development. Later, when changes to the program are rare and profile data is
@@ -19,21 +27,26 @@ more optimized translation.
 
 ** Your Machine Language May Vary!
 
-The Lowest level Language is the Machine Language which can be directly
-Interpreted by the Electronic Hardware Circuits of your Processing Unit, e.g.
-your CPU or GPU chips.
-
+The Lowest level Language available to Programmers is the [[https://en.wikipedia.org/wiki/Machine_code][Machine Code]]
+associated with the [[https://en.wikipedia.org/wiki/Instruction_set_architecture][Architecture]] of your processor. Code written in this Machine
+Code can be read and processed by your hardware, i.e. your CPU or GPU chips.
 Different processor families, e.g. 8086, ARM, PowerPC, RISC-V, etc. have very
-different machine languages.
+different machine codes!
 
-Different models of processing units which understand the same machine language
-can have /very different efficiencies/ when processing the /same machine
-language instructions/. Every model of processing chip, even from the same
-manufacturer, has a different "microarchitecture" which is responsible for the
-actual execution of the code. In addition, different computer systems will
-typically also differ in important resources such as cache, inter-chip I/O
-bandwidth, motherboard resources, etc.. all of which can drastically effect the
-execution performance of your programs.
+But most "Hardware Processors" do not execute your "machine code" directly!
+Instead, they translate it to a still lower-level language which is then
+executed by your processor chip's [[https://en.wikipedia.org/wiki/Microarchitecture][microarchitecture]]. Different models of
+processing units which understand the same machine code can have /very different
+efficiencies/ when processing the same code!
+
+Different computers typically also differ in important resources such as cache,
+inter-chip and external I/O interfaces, and more. Many of these resources are
+now integrated into your processor "chips" which are now often multi-chip
+modules in a single package. Many of these resources are implemented by "support
+chips" on your motherboard. Some resources are external to your motherboard,
+e.g. network file systems. The performance characteristics of all of these
+resources and the efficiency with which they can be leveraged can drastically
+effect the execution performance of your programs!
 
 ** You Might Want To Use An Intermediate Language
 
@@ -98,9 +111,20 @@ These systems have become very sophisticated about profiling, detecting "hot
 spots" and performing increased optimization resources where it will do the most
 good. One of the consequences, is the "warmup" effect: When our software first
 starts running on, e.g. a JVM Server Platform, it's not highly performant. After
-that JVM has had a chance to profile and optimize your program's hot spots, it
-becomes more performant. This makes benchmarking difficult! And it's also why
+that JVM has had a chance to profile and optimize your program's hot spots,
+performance increases. This makes benchmarking difficult! And it's also why
 there are different versions of the JVM: The version which runs one-shot
 applications doesn't do as much of this expensive optimization in order to avoid
 acting slow. The version that hosts long-running programs on servers does lots
-of optimizations and therefore exhibits (at first) this warmup phenomenon.
+of optimizations and therefore exhibits this warmup phenomenon.
+
+*** References
+
+** Profiling
+
+- [[https://en.wikipedia.org/wiki/Profiling_(computer_programming)][Wikipedia: Profiling]]
+- [[https://ftp.gnu.org/old-gnu/Manuals/gprof-2.9.1/html_mono/gprof.html][gprof: The GNU Profiler]]
+-
+** Compiling (Translating Code)
+
+- [[https://en.wikipedia.org/wiki/Compiler][Wikipedia: Compiler]]

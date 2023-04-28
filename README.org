@@ -15,9 +15,9 @@ would be delighted if you were to help make these materials better!
 
 - [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] -- Bits to Bytes to Words to Simple Data Structures
 - [[file:composites.org][Composite Data Structures]] -- Complex Data Structures
-- [[https://github.com/GregDavidson/computing-magic][Computing Magic]] -- It feels like magic, when you know the secrets!
-- [[https://github.com/GregDavidson/on-lisp][On Lisp]] -- Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
-- [[https://github.com/GregDavidson/C-By-Example][C By Example]] -- Reach out and touch the machine!
+- [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] -- It feels like magic, when you know the secrets!
+- [[https://github.com/GregDavidson/on-lisp#readme][On Lisp]] -- Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
+- [[https://github.com/GregDavidson/C-By-Example#readme][C By Example]] -- Reach out and touch the machine!
 
 /This repository is intended to be a gateway to a lot of important materials,
 linked by the documents here. If you explore these materials, please share your
