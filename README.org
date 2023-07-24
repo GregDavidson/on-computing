@@ -13,6 +13,9 @@ I'm creating some materials for learning Computer Basics and Computing Magic at
 /warp speed/. I invite you to study these materials for your own benefit and I
 would be delighted if you were to help make these materials better!
 
+The big picture: [[file:what-is-computing.org][What Is Computing?]]
+
+The details:
 - [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] -- Bits to Bytes to Words to Simple Data Structures
 - [[file:composites.org][Composite Data Structures]] -- Complex Data Structures
 - [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] -- It feels like magic, when you know the secrets!
