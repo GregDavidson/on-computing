@@ -1,5 +1,7 @@
 * What Computers Are: Architecture
 
+Part of the [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] Curriculum.
+
 ** Read This First!
 
 This is an [[https://orgmode.org][OrgMode]] Document. Although OrgMode documents are just text, this
