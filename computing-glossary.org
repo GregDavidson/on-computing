@@ -97,24 +97,30 @@ for your documents!
   than Monolithic Kernels. The associated Service Programs can generally be
   restarted without a need to reboot the entire Operating System.
 
-- Heavyweight Process :: Aka =task=. A Heavyweight Process is a process which is
-  executing a =Program= within an =Execution Context= which includes a =Memory
-  Space= and =Input/Output Abstractions= along with one or more =Threads Of
-  Control= which sequence through the instructions of the =Program=. A
-  Heavyweight Process is highly restricted in what it can do: It can only
-  directly perform computations involving the contents its own private =Memory
-  Space= - none of which can have any direct effect on anything outside of its
-  =Execution Context=. Everything else, e.g. Input/Output, must be done through
-  =System Calls= which are requests of the =Kernel= to perform a desired action
-  on behalf of the Heavyweight Process.
+- Task :: aka /Heavyweight Process/ or just /Process/ despite the ambiguity. A
+  Task is a /Process/ which is executing a =Program= within an =Execution
+  Context= which includes a =Memory Space= and =Input/Output Abstractions= along
+  with one or more =Threads Of Control= which sequence through the instructions
+  of the =Program=. A Task is highly restricted in what it can do: It can only
+  directly perform computations involving the contents of its own private
+  =Memory Space=, none of which can have any direct effect on anything outside
+  of its =Execution Context=. Everything else, e.g. Input/Output, must be done
+  through =System Calls= which are requests of the =Kernel= to perform a desired
+  action on behalf of the Task.
 
-- Lightweight Process :: Aka =Thread=. A Lightweight Process is a thread of
-  control within a =Heavyweight Process= and its =Program=. At minimum, a
-  Lightweight Process provides a =program counter= which is a =register=
-  specifying the location of the =Instruction= being executed within the
-  Heavyweight Process's =Program=. Lightweight Processes may provide additional
+- Thread :: aka /Lightweight Process/. A Thread is a thread of control within a
+  =Task= and its =Program=. At minimum, a Thread provides a =program counter=
+  which is a =register= specifying the location of the next =Instruction= to be
+  executed within the Task's =Program=. Threads may provide additional
   resources, such as a =Stack=, a reserved (but not protected) subset of the
-  Heavyweight Process's =Memory Space=.
+  Task's =Memory Space=. When two or more Threads in the same Task access the
+  same resource they need to coordinate or risk corrupting the state of that
+  resource. This is often done with /Semaphores/ or /Monitors/. Managing
+  resource contention among Threads is considered to be a seriously challenging
+  programming problem. The design of /Functional Programming Languages/ and the
+  /Rust Systems Programming Language/ provide significant relief to Thread
+  contention issues.
+
 
 *** Operating Systems                                               :operating_systems:
 
@@ -132,7 +138,7 @@ for your documents!
   Systems. Warning: No modern systems strictly comply to the standard!
 
 - BSD :: The Berkeley Software Distribution. An family of Operating Systems
-  descended from from BSD Version 4.4 developed at the University of California,
+  descended from BSD Version 4.4 developed at the University of California,
   Berkeley in the early 1980s. BSD built on the ideas of the Unix Operating
   System and added many new features including modern networking. All versions
   of BSD are [[https://en.wikipedia.org/wiki/Open-source_software][Open Source]], but are not [[https://en.wikipedia.org/wiki/Free_software][Free Software]]. The BSD Family includes
@@ -142,7 +148,7 @@ for your documents!
   Jobs' return from NeXT. It is available /Open Source/ from Apple but without
   Apple's proprietary extensions.  [[https://en.wikipedia.org/wiki/Darwin_(operating_system)][Wikipedia: Darwin]]
 
-- OpenBSD :: A highly security-conscious version of BSD.  [[http://www.openbsd.org][OpenBSD Website]]
+- OpenBSD :: A version of BSD focusing on reliability and security. [[http://www.openbsd.org][OpenBSD Website]]
 
 - FreeBSD :: A version of BSD which incorporates many innovative features.
   [[https://www.freebsd.org/][FreeBSD Website]]
