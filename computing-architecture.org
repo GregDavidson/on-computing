@@ -1,0 +1,389 @@
+* What Computers Are: Architecture
+
+** Read This First!
+
+This is an [[https://orgmode.org][OrgMode]] Document. Although OrgMode documents are just text, this
+particular document makes extensive use of OrgMode support for Folding and
+Unfolding sections. Unfortunately, GitHub does not support this. We suggest that
+you copy this file (or even clone the whole repository) and then read this
+document with [[https://github.com/GregDavidson/computing-magic/blob/main/Software-Tools/Emacs/emacs-readme.org][Emacs]] Org Mode.
+
+** Introduction
+
+People who simply use applications running on computers don't need to
+know much about
+- How the applications work
+- How the operating system supporting the applications work
+- How the computer's hardware works
+- And the architecture which fits those things (and more) together.
+
+Who needs to understand Computer Architecture?
+- Programmers :: some parts!
+- System Administrators :: some other parts!
+- People who like to know how things work!
+
+The Architecture of most modern computers is similar in general with large
+amounts of differences in detail. It consists of a number of layers which
+communicate only to adjacent layers.
+
+The next part of this document is structured using nested sections imitating the
+architecture of a typical modern Computer System which includes Unix and the
+Unix-imitating Gnu/Linux and MacOS and even the but deviant (but significantly
+Unix-culture-influenced) Microsoft Windows.
+
+** A Modern Computer System
+*** User Space
+
+/User Space/ is the "space" (in the sense of an arena or facility) provided by
+an operating system supporting the resources needed to run computer programs
+reliably.
+
+It is much, much easier to write programs to run in /User Space/ than to add
+code to the /Kernel/ which runs in /Kernel Space/. See below for /Kernel Space/.
+
+Programs running in /User Space/ include
+
+**** Interactive Applications, aka Apps
+Interactive Application Programs (apps) are programs intended to interact with
+users through some kind of /User Interface/, typically /Graphical User
+Interfaces/ these days.
+**** Non-Interactive Commands
+/Power Users/ who understand /Command Shells/ can start
+simple or complex Commands to perform desired tasks without further interaction.
+
+/Power Users/ can also direct non-interactive commands to run automatically when
+appropriate situations arise.
+**** System Services, aka Daemons
+
+System Services can either be provided by code in the /Kernel/ or they can run
+as programs in /User Space/. Unless a system service requires some special
+access to hardware which is only available in /Kernel Space/, it is generally
+better for it to run as a program in /User Space/.
+
+Example System Services
+- init or /SystemD/ :: starts and controls the other system services
+- login daemons :: start a user's session when they log in
+- logging daemons :: log status and error messages for diagnostics
+- thermald :: adjust CPU frequency to prevent overheating
+- sshd :: provides secure connections to accounts on other computers
+- httpd :: provides access to locally stored or generated web pages
+- and many more!
+
+**** Compiled Programs are Translated In Advance
+
+The /Source Code/ is written in a High-Level Programming Language.
+- Ideally in terms of high-level abstractions
+- Available on any modern Operating System
+- Such a program is therefore /Portable/
+      - It should run the same on any modern computer
+
+Machines can't execute High-Level Languages
+- The /Source Code/ is translated (compiled) to Machine Language
+- The translated code is stored in a /binary code file/
+      - Either an executable program, e.g. a Microsoft =.exe= file
+            - (Posix doesn't use an extension for executable files)
+      - or a "binary library", e.g. a =.dll=, =.a= or =.so= file
+- Translation is done /in advance/, before the program is run
+
+Few programmers understand machine language, or need to
+- Different kinds of computers have different machine languages
+- None of them are designed to be easily understood by humans
+
+Users might have only the machine language, e.g. a =.exe= file.
+- They can only run a =.exe= /as is/
+- /Open Source Free Software Licenses/ require distributors to provide Source
+  Code to Users
+
+Having the Source Code makes it possible to
+- Check the program for security weaknesses or backdoors
+- Rebuild the program for another kind of computer
+- Study how the code works
+- Fix a bug
+- Improve the program for one's own needs
+- /Or hire someone else to do such things!/
+
+**** Interpreted Programs are Translated As The Application Runs
+
+- The application file is /Source Code/ in that language
+- There must be an /Interpreter/ present which understands that language
+- (The /Interpreter Program/ has been compiled to machine language already)
+- When you run your application
+      - The appropriate Interpreter is started instead
+      - The Interpreter performs (interprets) the program
+            - like an actor performing a scripted role
+            - thus these programs are often called /Scripts/
+      - Interpreted Code usually runs much slower than Compiled Code
+            - E.g. Interpreted Python is around 50 times slower than
+              compiled C or Rust
+      - A few interpreted languages have partially overcome this
+            - E.g. Java is often 1/3 as fast as C or better
+                  - though often using 3 times as much memory
+            - E.g. Javascript is often 1/5 as fast as C or better
+                  - though often using 5 times as much memory
+      - The techniques to achieve this are quite challenging!
+            - E.g. [[https://en.wikipedia.org/wiki/Just-in-time_compilation][Just-in-time compilation]]
+
+Sometimes interpreted programs are /obfuscated/ before being distributed
+- translated into a program incomprehensible to humans
+- to prevent the usual empowerment of access to source code
+
+***** Leveraging a variety of Libraries and Services
+
+These may be provided any or all of
+- Language-specific support or extension features
+- Third-Party extensions
+- /Operating System/ core or added features
+
+These constitute /dependencies/ which are required to be present on your system
+in order for your application to run.
+
+There are a variety of tools and techniques designed to be sure that an
+applications are supplied with the right version of the needed dependencies when
+the application is installed or updated.
+
+**** Libraries
+
+Libraries consist of parts of programs, most often procedures or classes which
+provide functionality often needed by programs.
+
+Providing such functionality in the form of a library saves programmers the
+effort of implementing that common functionality in their programs.
+
+Any libraries needed by a program have to be /linked/ with the program in order
+for that program to function. This can either be done in advance, which is
+called /static linking/ or at the time the program is run (or even later when
+the program needs that functionality) which is called /dynamic linking/.
+
+/Static linking/ has the advantage that the program file is complete and will
+run even if a library it uses is not available on the system where the
+application is installed.  /Static linking/ has the disadvantage that the program
+file is larger.
+
+/Dynamic linking/ not only saves space when a library is used by many installed
+programs, but it can also make it easier to provide updates, e.g. fixing
+security flaws, by simply updating the libraries. Making sure that appropriate
+versions of all the libraries needed by all of the installed programs used to be
+a tedious administrative task. Nowadays that task is largely or completely
+automated by automated /package managers/.
+
+*** Kernel Space
+**** The Kernel
+The purpose of the kernel is to
+- Create /User Space/
+- Replacing idiosyncratic and insecure hardware features with
+      - Portable, high-level services
+      - Programs running in /Tasks/ protected against interference
+            - Accidental or intentional!
+**** Example Kernel Services
+
+Virtual Memory
+- Each /Task/ appears to have a separate memory space
+- Physical memory is mapped as needed or requested into Virtual Memory
+- Memory cannot be accidentally shared across Tasks.
+
+Virtual I/O
+- Tasks have their own Input/Output "connections"
+- The connections actually live in /Kernel Space/
+- The kernel performs all I/O for all tasks
+- This includes both local and network I/O
+
+Threads
+- A thread is an execution sequence within a program
+- Some programs consist of multiple current execution sequences
+- The Kernel maps the threads to processor time slices
+      - The program doesn't have to know how many actual processors are
+        available
+
+Files, Directories and Filesystem Volumes
+- Storage on persistent hardware appears to be in the form of files
+      - Byte sequences without any apparent physical divisions
+- Files are indexed by Directory Files (aka folders)
+- Filesystem Volumes abstract physical devices to transparently
+      - share physical devices for convenience
+      - span multiple physical devices for greater capacity
+      - use redundancy to increase reliability and speed (RAID)
+      - use encryption for security
+
+**** The Top Part of the Kernel
+The Top Level of the Kernel
+- Responds to requests (System Calls) from programs
+- Performs the requested action on behalf of the program
+      - May or may not suspend the program while doing so
+- Places any results into an area of that program's private memory
+
+***** System Calls
+
+From the viewpoint of a programmer, a System Call appears to be a call to a
+library Procedure (aka Function). In actuality, a System Call is implemented by
+a special piece of machine language code which switches the hardware execution
+context from the permissions of /User Space/ to the wide-open permissions of
+/Kernel Space/ and calls a procedure within the Kernel.
+
+The thread executing code within the program is suspended while a replacement
+thread executing code within the kernel runs code carrying out the action in
+Kernel Space. This is invisible to the program, but it is much more expensive
+than a regular library procedure. if the program has permission to do the
+requested action, the Kernel performs the service for the program.
+
+Programs almost always make System Calls indirectly via higher-level library
+procedures which interface better with a particular programming language's
+syntax and semantics. It's also common for higher-level library procedures to
+use techniques such as buffering to reduce the overhead of System Calls.
+
+**** The Bottom Part of the Kernel
+
+The purpose of the bottom part of the kernel is to interface with physical
+devices in order to actually perform such actions and Input/Output, Memory
+Mapping, Processor Mapping, etc.
+
+It consists of chunks of code called /Device Drivers/.
+
+A System Call in the Top Part
+- creates a Kernel Thread
+- which might call a /Device Driver/ procedure to, e.g.
+      - load some bytes to be transmitted somewhere
+      - initiate the transfer
+- and that thread might then suspend itself
+
+The device will inform the device driver when it completes the action
+- this is done through a /hardware interrupt/
+- which the Kernel translates to
+      - the appropriate procedure of the appropriate device driver
+- which then might resumes the kernel thread
+
+One of the amazing things about all of this is that
+- I/O actions happen at less than a millionth the speed of a CPU
+- The kernel needs to manage vast numbers of such operations "at once"
+- The devices are often being shared by multiple programs
+- Without any interference or even awareness of those programs
+
+Further complicating all of this is that
+- Most hardware devices are flakey -- full of dangerous bugs!
+- Which are carefully worked around by the corresponding device drivers!
+
+Kernel Programming is not for Wizards, it's for Gurus!
+
+*** Physical Hardware
+
+Physical Hardware consists of a vast number of devices
+- There are several kinds of devices
+- With numerous variations on each kind of device
+- There are usually [[https://xkcd.com/927/][many competing standards]]
+      - Real devices imperfectly follow the applicable standards!
+
+**** Mother Boards
+
+A modern computer, including the computers embedded in cellphones and other
+consumer or utility devices generally consist of many separate electronic
+devices. These are generally assembled on [[https://en.wikipedia.org/wiki/Motherboard][a motherboard]] for physical support and
+interconnection.
+
+**** Processors
+***** CPUs: Central (General-Purpose) Processing Units
+One or more [[https://en.wikipedia.org/wiki/Central_processing_unit][CPU Chip(s)]] provide the execution of the machine code of binary
+programs. Modern CPU Chips often incorporate multiple processors along with a
+limited amount of memory (called cache) fast enough to keep up with the high
+speed of the CPU processors. Modern CPUs may provide other services as well,
+e.g. services related to secondary memory and I/O.
+
+***** GPUs: Graphics Processing Units
+[[https://en.wikipedia.org/wiki/Graphics_processing_unit][GPUs]] were originally simplified CPUs intended to execute simple repetitive
+graphics operations in parallel. As GPUs have evolved they have become able to
+take on more and more repetitive tasks in modern computing, e.g. machine
+learning and cryptographic processing. Modern GPUs can be programmed with high
+level languages. Some programming environments now support compiling parts of
+the high-level language code to the CPUs and part for the GPUs to increase
+overall throughput.
+
+CPUs and GPUs are often integrated into multi-chip modules which connect to a
+motherboard as if they were a single device.
+
+**** Physical Volatile Memory
+The main memory of a modern computer consists of DRAM.
+
+DRAM is volatile, it's contents will be lost
+- every few milliseconds
+      - unless it is refreshed (rewritten)
+- or if power is lost
+
+Circuits are provided to refresh DRAM automatically.
+
+DRAM is the main working memory of computers because
+- It only costs a few dollars per gigabyte
+- It only takes a few nanoseconds to access it
+
+DRAM is too slow to keep up with modern CPUs
+- So CPUs use smaller amounts of [[https://en.wikipedia.org/wiki/SRAM][SRAM]] as cache
+- 10 times faster, but more expensive!
+
+SRAM and DRAM are both volatile
+- So computers use slower non-volatile memory for long-term storage
+
+**** Physical Non-Volatile Memory
+
+There are three popular kinds of non-volatile memory
+- Flash -- Used in thumbdrives and "Solid State Drives"
+      - 1000 times the latency of DRAM
+- Rotating Magnetic Hard Disk Drives -- slower but higher capacity
+      - 1000 times the latency of Flash
+- Magnetic Tape -- highest capacity, ideal for backups
+      - a person or machine has find and mount the right tape!
+
+Increased latency makes these forms of storage look slow.  If the super-fast
+processors of the computer have to wait millions of cycles for the data they
+need, the system will appear to be very, very slow!
+
+However, if you want a large "chunk" of information and it is stored so that it
+can be delivered with a single request, the device can deliver the whole "chunk"
+very fast. This is "thoughput" as opposed to "latency".
+
+Well written high-performance programs make sure that the data they need to
+process is organized and staged so that you can keep the processors busy.
+
+**** Networking
+
+Modern networking breaks up all communication into packets.
+- Each packet has a a destination address
+- Large chunks of data are can be broken up into multiple packets
+      - They'll be reassembled on delivery
+- Any number of packets can fail to make it to the destination!
+      - Packets are retained at the source until delivery is acknowledged
+      - Packets will be resent if not acknowledged
+- Packets part of a larger chunk or stream might get out-of-order
+      - The receiving kernel will notice
+      - Reordering and retransmission will happen as needed
+
+Networking is a dance between the series of hardware devices which are
+imperfectly transmitting packets across the "fabric" of interconnected devices
+and the network protocols managed in the kernels on the various computer systems
+hosting the communicating processes.
+
+Here's a good [[https://en.wikipedia.org/wiki/OSI_model][Networking Reference Model]].
+
+For the popular TCP protocol, these mechanisms give the illusion of a reliable
+byte stream as if it were being carried by a dedicated pair of wires.
+
+In the Posix model, once a TCP connection is established, it is handled like any
+other I/O stream, with File Descriptors.
+
+**** Miscellaneous Hardware
+
+All of these things interface with Device Drivers in the Kernel.
+
+If application programmers are aware of them at all, they are aware of a
+convenient high-level abstraction of them provided by the Kernel!
+
+- Keyboards :: simple byte stream encoding of keys
+- Mice :: simple byte stream encoding of buttons and movement
+- Frame Buffers feeding to Graphics Displays
+      - 2-D arrays of DRAM
+      - often dual ported for GPU and CPU access
+- Sound input :: [[https://en.wikipedia.org/wiki/Analog-to-digital_converter][Analog-to-Digital converters]]
+- Sound output :: [[https://en.wikipedia.org/wiki/Digital-to-analog_converter][Digital-to-Analog converters]]
+- Video Camera Input :: Byte stream protocol
+- [[https://en.wikipedia.org/wiki/Bluetooth][Bluetooth]] :: Super-complex layers of committee-designed protocols!
+
+- Miscellanea
+      - Temperature sensors
+      - Open box sensors
+      - Fans
