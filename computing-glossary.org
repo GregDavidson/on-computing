@@ -1,9 +1,11 @@
 * Computing Magic Glossary
 
-This is a glossary for terms related to /Computing Magic/. It's also an [[https://orgmode.org][OrgMode]]
-Document. If you are reading it with [[file:Software-Tools/Emacs/emacs-readme.org][Emacs]] you can follow internal links to
-specific terms. You can also use a script to create such links for your
-documents!
+This is a glossary for computing terms relevant today the computing curricula of
+the [[https://gregdavidson.github.io/loel/][League of Extraordinary Learners]] such as [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]].
+
+This is an [[https://orgmode.org][OrgMode]] Document. If you are reading it with [[file:Software-Tools/Emacs/emacs-readme.org][Emacs]] you can follow
+internal links to specific terms. You can also use a script to create such links
+for your documents!
 
 ** Computing Terms                                :definition:computing_term:
 
