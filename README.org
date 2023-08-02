@@ -4,24 +4,29 @@ What is Computing?
 
 You may have been exposed to Computer Programming, whether in the form of the
 current craze to learn /Coding/ or through a serious course of study or even as
-your profession. If so, you probably have an idea of what computing is. It's
-highly likely, however, that what you know is one or two of the weaker
-[[https://www.info.ucl.ac.be/~pvr/paradigms.html][Programming Paradigms]], and you've probably missed most of the really powerful
-ones - especially metaprogramming!
+your profession. If so, you probably have some idea of what computing is. It's
+likely, however, that what you know is one or two of the conventional
+[[https://www.info.ucl.ac.be/~pvr/paradigms.html][Programming Paradigms]], and you've likely missed some of the really powerful
+ones, such as /Metaprogramming/ and /Constraint Logic Programming/!
 
-I'm creating some materials for learning Computer Basics and Computing Magic at
-/warp speed/. I invite you to study these materials for your own benefit and I
-would be delighted if you were to help make these materials better!
+This repository is in support of the various /Computing Curricula/ of the [[https://gregdavidson.github.io/loel/][League
+of Extraordinary Learners]]. We're accumulating materials for learning /Computer
+Fundamentals/ and [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] at /warp speed/. I invite you to study these
+materials for your own benefit and I would be delighted if you were to help make
+these materials better!
 
 The big picture: [[file:what-is-computing.org][What Is Computing?]]
 
 The details:
-- [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] -- Bits to Bytes to Words to Simple Data Structures
-- [[file:composites.org][Composite Data Structures]] -- Complex Data Structures
-- [[file:computing-architecture.org][Computer Architecture]] -- Software, Hardware, Kernels, oh my!
-- [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] -- It feels like magic, when you know the secrets!
-- [[https://github.com/GregDavidson/on-lisp#readme][On Lisp]] -- Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
-- [[https://github.com/GregDavidson/C-By-Example#readme][C By Example]] -- Reach out and touch the machine!
+- [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] :: Bits to Bytes to Words to Simple Data Structures
+- [[file:composites.org][Composite Data Structures]] :: Complex Data Structures
+- [[file:computing-architecture.org][Computer Architecture]] :: the major parts, in context!
+      - Software, Hardware, Kernels, oh my!
+      - Currently requires Emacs OrgMode to read it properly
+- [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] :: It feels like magic, when you know the secrets!
+- [[https://github.com/GregDavidson/on-lisp#readme][On Lisp]] :: Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
+- [[https://github.com/GregDavidson/C-By-Example#readme][C By Example]] :: Reach out and touch the machine!
+- [[file:computing-glossary.org][Computing Glossary]] :: All the terms!
 
 /This repository is intended to be a gateway to a lot of important materials,
 linked by the documents here. If you explore these materials, please share your
