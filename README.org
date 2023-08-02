@@ -18,7 +18,7 @@ The big picture: [[file:what-is-computing.org][What Is Computing?]]
 The details:
 - [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] -- Bits to Bytes to Words to Simple Data Structures
 - [[file:composites.org][Composite Data Structures]] -- Complex Data Structures
-- [[file:computing-architecture][Computer Architecture]] -- Software, Hardware, Kernels, oh my!
+- [[file:computing-architecture.org][Computer Architecture]] -- Software, Hardware, Kernels, oh my!
 - [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] -- It feels like magic, when you know the secrets!
 - [[https://github.com/GregDavidson/on-lisp#readme][On Lisp]] -- Paul Graham's Secret for [[http://www.paulgraham.com/avg.html][Beating The Averages]]
 - [[https://github.com/GregDavidson/C-By-Example#readme][C By Example]] -- Reach out and touch the machine!
