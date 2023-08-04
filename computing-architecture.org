@@ -137,7 +137,7 @@ Having the Source Code makes it possible to
       - A few Interpreted languages have partially overcome this
             - E.g. Java is often 1/3 as fast as C or better
                   - though often using 3 times as much memory
-            - E.g. Javascript is often 1/5 as fast as C or better
+            - E.g. JavaScript is often 1/5 as fast as C or better
                   - though often using 5 times as much memory
       - The techniques to achieve this are quite challenging!
             - E.g. [[https://en.wikipedia.org/wiki/Just-in-time_compilation][Just-in-time compilation]]
@@ -320,7 +320,7 @@ One of the amazing things about all of this is that
 - Without any interference or even awareness of those programs
 
 Further complicating all of this is that
-- Most hardware devices are flakey -- full of dangerous bugs!
+- Most hardware devices are flaky -- full of dangerous bugs!
 - Which are carefully worked around by the corresponding device drivers!
 
 Kernel Programming is not for Wizards, it's for Gurus!
@@ -397,7 +397,7 @@ need, the system will appear to be very, very slow!
 
 However, if you want a large "chunk" of information and it is stored so that it
 can be delivered with a single request, the device can deliver the whole "chunk"
-very fast. This is "thoughput" as opposed to "latency".
+very fast. This is "throughput" as opposed to "latency".
 
 Well written high-performance programs make sure that the data they need to
 process is organized and staged so that you can keep the processors busy.
