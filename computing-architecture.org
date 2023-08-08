@@ -63,14 +63,17 @@ are provided in sections below.
 Programs running in /User Space/ include
 
 **** Interactive Applications, aka Apps
+
 Interactive Application Programs (apps) are programs intended to interact with
 users through some kind of /User Interface/ such as a
 - Console User Interface :: Uses a /Text Console/ or /Terminal App/
 - /Graphical User Interface/ :: Uses a /Graphical Display/
 - /Web Interface/ :: Uses a /Web Browser/
+
 **** Non-Interactive Commands
-/Power Users/ who understand /Command Shells/ can start
-simple or complex Commands to perform desired tasks without further interaction.
+
+/Power Users/ who understand /Command Shells/ can start simple or complex
+Commands to perform desired tasks without further interaction.
 
 /Power Users/ can also direct non-interactive commands to run automatically when
 appropriate situations arise.
@@ -79,7 +82,7 @@ A mini-curriculum for learning this style of computing is [[https://github.com/G
 
 **** System Services, aka Daemons
 
-System Services can either be provided by code in the /Kernel/ or they can run
+/System Services/ can either be provided by code in the /Kernel/ or they can run
 as programs in /User Space/. Unless a system service requires some special
 access to hardware which is only available in /Kernel Space/, it is generally
 better for it to run as a program in /User Space/.
@@ -111,6 +114,8 @@ Machines can't execute /High-Level Languages/ directly
             - Microsoft uses the extension =.dll=
             - Posix uses =.a= for archive libraries, =.so= for /Shared Object/ Files
 - Translation is done /in advance/, before the program is run
+- /The object code file is not portable!/
+      - It will only run on one kind of computer system
 
 Few programmers understand machine language, or need to
 - Different kinds of computers have different machine languages
@@ -152,6 +157,9 @@ Having the Source Code makes it possible to
                   - though often using 5 times as much memory
       - The techniques to achieve this are quite challenging!
             - E.g. [[https://en.wikipedia.org/wiki/Just-in-time_compilation][Just-in-time compilation]]
+      - Interpreted Programs often leverage fast libraries written in Compiled Languages
+            - Programmers wind up limited to what available libraries can do
+            - Or they have to learn to write such libraries themselves
 
 Sometimes interpreted programs are /obfuscated/ before being distributed
 - translated into a program incomprehensible to humans
@@ -167,7 +175,7 @@ These may be provided any or all of
 These constitute /dependencies/ which are required to be present on your system
 in order for your application to run.
 
-There are a variety of tools and techniques designed to be sure that an
+There are a variety of tools and techniques designed to be sure that all
 applications are supplied with the right version of the needed dependencies when
 the application is installed or updated.
 
@@ -200,7 +208,7 @@ automated by automated /package managers/.
 security or reliability issues. Alas this is not the case! Libraries need to be
 audited for quality and should ideally be /Open Source Free Software/!
 
-***** Processes and Programs
+**** Processes and Programs
 
 /User Space/ consists of /Tasks/ running /Programs/.
 
