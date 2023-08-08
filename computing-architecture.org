@@ -210,10 +210,10 @@ audited for quality and should ideally be /Open Source Free Software/!
 
 **** Processes and Programs
 
-/User Space/ consists of /Tasks/ running /Programs/.
+***** /User Space/ consists of /Tasks/ running /Programs/.
 
-/Tasks/ are also called /Processes/ although there is another kind of
-process called /Threads/, covered below, which are different.
+/Tasks/ are also called /Processes/ although there is another kind of process
+called /Threads/, covered below, which are different!
 
 The /Kernel/ creates /Tasks/
 - in response to /System Calls/
@@ -224,31 +224,31 @@ Wait, that's circular!  How does it get started?
 After the bootstrapping system loads and starts the Kernel
 - The Kernel builds the first task
       - Traditionally called /init/
-      - It has Process ID 1
-- All other Tasks are created by request from an existing Task.
+      - /Init/ has Process ID 1
+- All other Tasks are created by requests from existing Tasks.
 
 We'll describe the original /Unix Model/ which is supported by Linux, BSD and
 other Unix-like or /Posix/ Operating Systems. Later /Posix/ systems often
 provide additional ways of doing things and Microsoft Windows has always been a
 bit different.
 
-The key Original System Calls are
-- =fork= :: creates a processs
-- =exit= :: terminates the process calling it
+The original System Calls include
+- =fork= :: creates a /Process/
+- =exit= :: terminates the /Process/ calling it
 - =wait= :: suspends processing until a /Child Process/ calls =exit=
-- =exec= :: changes the program being run by a process
+- =exec= :: runs a new /Program/ in an existing /Process/
 
-******  The Life Cycle of a Process (Task)
+***** The Life Cycle of a Process (Task)
 
 - An existing Process calls =fork=
 - The Existing Process is called the /Parent Process/
 - The Kernel responds by
-      - Creating a /Child Process with a New Process ID
+      - Creating a /Child Process/ with a new Process ID aka PID
       - which is otherwise /identical to the Parent!/
 The two identical processes execute in parallel
     - Both find themselves returning from =fork=
-          - The parent receives the new Process ID assigned to the Child
-          - The child receives 0
+          - The Parent receives the Child's PID
+          - The Child receives 0
     - Both processes examine that return value
           - They discover whether they're the Parent or the Child
           - They then set about their proper task
@@ -257,7 +257,7 @@ The two identical processes execute in parallel
           - The kernel terminates the process calling =exit=
           - And notifies the /Parent Process/ that a child has exited
 
-******  Why Create Multiple Processes?
+***** Why Create Multiple Processes?
 
 Imagine you want to go to the beach and enjoy yourself
 - but you have chores you need to do
@@ -270,20 +270,18 @@ If life worked like /Unix/
 In general, you want to create Multiple Processes
 - When there are multiple things that need to be done
 - And you don't want to do just one at a time
-- You want them to be happening
-      - At the same time
-      - Or at least in parallel
-      - With their processing steps overlapping in time
+- You don't want them to wait for one another
 
-******  So how do you do it?
+***** So How Do You Do It?
 
 In the usual situation
 - a /Parent/ creates a separate /Child/ for each responsibility
-- the /Parent/ repeatedly calls =wait=
+- each child starts its task as soon as it returns from =fork=
+- after all children are created, the /Parent/ repeatedly calls =wait=
       - each call to =wait= suspends the /Parent/ until a /Child/ exits.
       - when a /Parent/ returns from =wait= it receives
             - the PID of the child which has exited
-            - and the /exit status/ provided by that child
+            - the /exit status/ provided by that child
 
 When a process calls =exit=
 - It supplies an /exit status/ argument
@@ -291,7 +289,7 @@ When a process calls =exit=
       - /exit status/ =0= means /success/ or /true/
       - a non-zero /exit status/ means /failure/ or /false/
       - but you can use exit statuses to mean what you like
-            - as long as it's in the range =0= to =127=
+            - they just have to be an integer in the range =0= to =127=
 
 The Parent is responsible for coordinating the Children
 - If a Child fails its task, the Parent can, e.g.
@@ -299,19 +297,21 @@ The Parent is responsible for coordinating the Children
       - Using the same or a different strategy
       - Or just report the failure appropriately
 
-****** How do you Run a New Program?
+***** How do you Run a New Program?
 
-=exec= allows an existing /Process/ to run a new Program
-- the new program replaces the old program
-- a new /Virtual Memory/ space is created
-- the new program starts at the beginning
+When a program calls =exec=
+- it's asking the Kernel to replace it with a new program
+- running in the same process
+- the old program and its memory space will be discarded
+- the new program gets a new memory space
+- the new program starts execution at the beginning
       - typically with a call to a procedure called =main=
 
-The Kernel automatically creates a new /Virtual Memory/ space suitable for the
-program to start with. Most programs don't need more, but if they do, there are
-system calls to request more.
+The Kernel automatically creates a new /Virtual Memory Space/ big enough for the
+new program to start. Most programs don't need more, but if they do, there are
+System Calls to request more.
 
-***** Tasks are Heavyweight Processes
+**** Tasks are Heavyweight Processes
 
 Tasks
 - encapsulates several expensive system resources
@@ -322,7 +322,7 @@ Tasks are also called /Heavyweight Processes/
 
 Heavyweight Processes Contain
 
-***** Containing a Program in an Image
+**** Containing a Program in an Image
 
 Programs are stored as files outside of system memory.
 
@@ -333,7 +333,7 @@ When you "run" a program with =exec=, the Kernel
       - Traditionally from command used to run the program
 - All of this is called an /Image/.
 
-***** Virtual Memory
+**** Virtual Memory
 
 - Each /Task/ appears to have a separate /Memory Space/
       - With addresses from =0= to some large number
@@ -350,12 +350,12 @@ When you "run" a program with =exec=, the Kernel
       - Processes can't see the /Physical Memory Addresses/
       - Processes can't see any memory belonging to another Process
 
-***** Special Virtual Memory Tricks
+**** Special Virtual Memory Tricks
 
 There are some tricks with Virtual memory and some of them can allow Processes
 to see specific parts of the Virtual Memory of other Processes, by permission.
 
-****** Memory Mapped Files
+***** Memory Mapped Files
 
 You can map an area of physical memory to a file in a file system
 - Or anything which can act like a file (more on that later)
@@ -386,7 +386,7 @@ When you "run" a /Program/
 - Thus large programs with lots rarely used features don't necessarily require
   so much memory to run!
 
-****** Shared Memory Segments
+***** Shared Memory Segments
 
 Processes can ask the Kernel to create /Shared Memory Segments/.
 
@@ -430,7 +430,7 @@ process using regular I/O, usually TCP/IP Sockets. The PostgreSQL Child
 Processes communicate with their Parent (which coordinates access to the
 database) via Shared Memory Segments.
 
-****** Paging and Swapping
+***** Paging and Swapping
 
 Modern Computers are very fast:  In a single second
 - They can do billions of operations with main memory
@@ -455,7 +455,7 @@ important data you might have been in the middle of updating! Ensuring this can
 be challenging!
 
 
-***** Threads are Lightweight Processes
+**** Threads are Lightweight Processes
 
 A thread represents an execution sequence within a program, tracking the next
 instruction to execute within the program.
@@ -489,7 +489,7 @@ One Processor can handle the needs of any number of Threads if necessary.
 Operating Systems have sophisticated ways of prioritizing the access of Threads to Processors so that
 important processing activities can advance as fast as possible at the expense of activities which an afford to wait a bit.
 
-***** Virtual I/O
+**** Virtual I/O
 
 - Tasks have their own Input/Output "connections"
 - The connections actually live in /Kernel Space/
