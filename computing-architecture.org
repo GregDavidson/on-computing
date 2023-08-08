@@ -43,16 +43,19 @@ Many of the terms in this document are defined in our [[file:computing-glossary.
 by an /Operating System/ providing resources needed to run /Computer Programs/
 reliably.
 
-Processes running in /User Space/ are contained within /Tasks/ aka /Processes/.
-/Processes/ are associated with specific /User Accounts/ and /Groups/ which have
-associated /Permissions/ which limit what those /Processes/ are allowed to do.
+/Programs/ running in /User Space/ are contained within /Tasks/, usually called
+/Processes/. /Processes/ are associated with specific /User Accounts/ and
+/Groups/ which have associated /Permissions/ which limit what those /Processes/
+are allowed to do.
 
-For example, fundamentally insecure operations, such as direct access to the
-computer's hardware, are impossible from /User Space/.
+The Kernel and the Hardware protects /User Space/ /Processes/ from the System
+from accidentally or intentionally interfering with each other or with Operating
+System components.
 
-Both these protections and also many services provided to /Tasks/ in /User
-Space/ make it much, much easier to write programs to run in /User Space/ than
-the alternative of adding code to the /Kernel/ which runs in /Kernel Space/.
+The Operating System also provides /User Space/ /Processes/ with many convenient
+services. The bottom line is that it is much, much easier to write /User Space/
+/Programs/ than the alternative of adding code to the /Kernel/ which runs in
+/Kernel Space/.
 
 Details of /User Space/ Services, the /Kernel/ and /Kernel Space
 are provided in sections below.
