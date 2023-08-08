@@ -197,7 +197,7 @@ automated by automated /package managers/.
 security or reliability issues. Alas this is not the case! Libraries need to be
 audited for quality and should ideally be /Open Source Free Software/!
 
-**** Processes and Programs
+***** Processes and Programs
 
 /User Space/ consists of /Tasks/ running /Programs/.
 
@@ -216,17 +216,19 @@ After the bootstrapping system loads and starts the Kernel
       - It has Process ID 1
 - All other Tasks are created by request from an existing Task.
 
-****** Existing Processes Create New Processes with =fork=
+We'll describe the original /Unix Model/ which is supported by Linux, BSD and
+other Unix-like or /Posix/ Operating Systems. Later /Posix/ systems often
+provide additional ways of doing things and Microsoft Windows has always been a
+bit different.
 
-We'll describe the /Unix Model/ which is supported by Linux, BSD and other
-Unix-like or /Posix/ Operating Systems. (Microsoft Windows is a bit different.)
-
-The System Calls are
+The key Original System Calls are
 - =fork= :: creates a processs
 - =exit= :: terminates the process calling it
 - =wait= :: suspends processing until a /Child Process/ calls =exit=
+- =exec= :: changes the program being run by a process
 
-Here's the Life Cycle of a Process (Task):
+******  The Life Cycle of a Process (Task)
+
 - An existing Process calls =fork=
 - The Existing Process is called the /Parent Process/
 - The Kernel responds by
@@ -244,6 +246,8 @@ The two identical processes execute in parallel
           - The kernel terminates the process calling =exit=
           - And notifies the /Parent Process/ that a child has exited
 
+******  Why Create Multiple Processes?
+
 Imagine you want to go to the beach and enjoy yourself
 - but you have chores you need to do
 If life worked like /Unix/
@@ -252,13 +256,17 @@ If life worked like /Unix/
 - While the Child is doing the chores
 - The Parent is having a good time at the beach!
 
-When a process calls =exit=
-- It supplies an /exit status/ argument in the range =0= to =127=
-- by convention:
-      - /exit status/ 0 means /success/ or /true/
-      - a non-zero /exit status/ means /failure/ or /false/
+In general, you want to create Multiple Processes
+- When there are multiple things that need to be done
+- And you don't want to do just one at a time
+- You want them to be happening
+      - At the same time
+      - Or at least in parallel
+      - With their processing steps overlapping in time
 
-The more usual situation involves
+******  So how do you do it?
+
+In the usual situation
 - a /Parent/ creates a separate /Child/ for each responsibility
 - the /Parent/ repeatedly calls =wait=
       - each call to =wait= suspends the /Parent/ until a /Child/ exits.
@@ -266,29 +274,209 @@ The more usual situation involves
             - the PID of the child which has exited
             - and the /exit status/ provided by that child
 
-The 
+When a process calls =exit=
+- It supplies an /exit status/ argument
+- By convention:
+      - /exit status/ =0= means /success/ or /true/
+      - a non-zero /exit status/ means /failure/ or /false/
+      - but you can use exit statuses to mean what you like
+            - as long as it's in the range =0= to =127=
 
+The Parent is responsible for coordinating the Children
+- If a Child fails its task, the Parent can, e.g.
+      - =fork= a new Child to try again
+      - Using the same or a different strategy
+      - Or just report the failure appropriately
 
-The Kernel provides System Calls
-- :: Allows a /Parent Process/ to create a Child Process
-- =exec= :: Allows a /Process/ to run a new Program
-      - the new program replaces the old program
-      - a new /Virtual Memory/ space is created
-      - the new program starts at the beginning
-            - typically with a call to a procedure called =main=
+****** How do you Run a New Program?
 
-***** Tasks
+=exec= allows an existing /Process/ to run a new Program
+- the new program replaces the old program
+- a new /Virtual Memory/ space is created
+- the new program starts at the beginning
+      - typically with a call to a procedure called =main=
 
-When you "run" a program, the Kernel
-- creates a /Task/ to provide an /Execution Context/ for it
-- including an initial /Thread/
-- and then starts that /Thread/
+The Kernel automatically creates a new /Virtual Memory/ space suitable for the
+program to start with. Most programs don't need more, but if they do, there are
+system calls to request more.
+
+***** Tasks are Heavyweight Processes
+
+Tasks
+- encapsulates several expensive system resources
+- are therefore fairly expensive to create and to maintain
+Tasks are also called /Heavyweight Processes/
+- or just /Processes/ for short
+- /(there's another kind of Process called a Thread which we'll explain later)
+
+Heavyweight Processes Contain
+
+***** Containing a Program in an Image
+
+Programs are stored as files outside of system memory.
+
+When you "run" a program with =exec=, the Kernel
+- Creates a Virtual Memory Space
+- Maps the program's file into that virtual memory space
+- Includes any Options and Arguments passed to =exec=
+      - Traditionally from command used to run the program
+- All of this is called an /Image/.
 
 ***** Virtual Memory
 
 - Each /Task/ appears to have a separate /Memory Space/
+      - With addresses from =0= to some large number
+- =exec= makes sure there's enough memory for the new program to start
+      - The program can request more as needed
+- Memory cannot be accidentally shared across /Tasks/
+      - A numerical addresses in one Image has nothing to do with the
+        same numerical address in another Image
 - /Physical Memory/ is mapped as needed or requested into /Virtual Memory/
-- Memory cannot be accidentally shared across /Tasks/.
+      - Memory is allocated in chunks called /Pages/
+      - Each /Page/ in /Physical Memory/ has a /Physical Memory Address/
+      - From =0= to however much /Physical Memory/ your machine actually has
+      - Any /Page/ in /Physical Memory/ can be assigned an address in some one Process's Virtual Memory
+      - Processes can't see the /Physical Memory Addresses/
+      - Processes can't see any memory belonging to another Process
+
+***** Special Virtual Memory Tricks
+
+There are some tricks with Virtual memory and some of them can allow Processes
+to see specific parts of the Virtual Memory of other Processes, by permission.
+
+****** Memory Mapped Files
+
+You can map an area of physical memory to a file in a file system
+- Or anything which can act like a file (more on that later)
+
+When a program tries to access such a region of its memory
+- The Kernel pauses the process
+- The Kernel allocates enough real memory to hold the page(s) being accessed
+- The Kernel reads that data from the "file" into the allocated memory
+- The Kernel resumes the program
+
+- It's also possible to arrange for modifications in such a mapped area of
+  memory to propagate out to the "file".
+- /This can allow processes to Communicate as with Shared Memory (see below)!/
+
+This may seem like it has more overhead than the usual file Input/Output
+mechanisms, but it is in fact 2-3 times faster! Many high-performance programs
+map their files rather than reading or writing them in the usual way.
+
+******* Programs and Dynamic Libraries are Mapped!
+
+Remember that /Programs/ and Dynamic Libraries live in Files.
+
+When you "run" a /Program/
+- the program's File is /Memory Mapped/ into the Image memory of the Task
+- The code of any Dynamic Libraries is also Memory Mapped into the Image memory
+- Only the Pages of the Program and/or Library Code which are actually accessed
+  during the run of a program will actually wind up being /Paged In/.
+- Thus large programs with lots rarely used features don't necessarily require
+  so much memory to run!
+
+****** Shared Memory Segments
+
+Processes can ask the Kernel to create /Shared Memory Segments/.
+
+A Shared Memory Segment is
+- a collection of contiguous pages of Virtual Memory
+- with ownership and read/write permissions
+- similar to a Files in a Filessytem
+
+So it's not a file
+- but it a lot like a file
+- so it's a kind of "file"!
+
+One or more processing running on the same computer system
+- which might be a cluster or distributed computer
+- with many CPUs and Memory banks
+- communicating over high-speed buses
+can map the same Shared Memory Segment into their Virtual Memory Spaces
+- if the Shared Memory Segment's "file" permissions allow it
+
+Each process mapping a particular Shared Memory Segment
+- into their normally "Private" Virtual Memory
+- can map it at an address of their choosing in their Memory Space
+
+Yes, that means that any data in such a Shared Memory Segment may
+appear to be at different addresses within different Processes!
+
+Programmers Beware:
+- Do not store Pointers (memory addresses treated as data) in such Shared Memory
+  Spaces!
+- Such Pointers will reference a different memory area from the viewpoint of
+  other Processes
+- And High-Level Languages use Pointers to reference just about everything!
+
+Modifying data in Shared Memory Segments mapped into multiple Proccesses on the
+same Computer allows for a very fast form of Input/Output.
+
+An example is in the architecture of the PostgreSQL advanced Object-Relational
+Database System. A PostgreSQL Parent Process creates a Child Process to serve
+each database client. Database clients communicate with their PostgreSQL service
+process using regular I/O, usually TCP/IP Sockets. The PostgreSQL Child
+Processes communicate with their Parent (which coordinates access to the
+database) via Shared Memory Segments.
+
+****** Paging and Swapping
+
+Modern Computers are very fast:  In a single second
+- They can do billions of operations with main memory
+- They can move many millions of bytes in or out of memory
+
+When physical memory is running low, the Kernel can
+- Determine what Pages of Memory haven't been used in a long time
+      - i.e. in the last tenth of a second or so!
+- /Page Out/ pages of memory or /Swap Out/ whole Images of Tasks
+      - Moving any modified Pages to a /Disk Volume/ called the /Swap Space/
+      - Memory mapped to come right back in if and when needed
+
+When there's not enough /Swap Space/ and memory gets really low
+- The kernel will select and kill Processes as necessary
+- So that the system continues to be as usable as possible
+- This sometimes happens, e.g. to browsers with hundreds of tabs!
+
+Programmers Beware: This possible occurrance is just one of the things which can
+cause a Process to be terminated unexpectedly. You must design your program so
+that if it crashes (terminates unexpectedly at any time) you won't corrupt any
+important data you might have been in the middle of updating! Ensuring this can
+be challenging!
+
+
+***** Threads are Lightweight Processes
+
+A thread represents an execution sequence within a program, tracking the next
+instruction to execute within the program.
+
+On some systems a Thread also includes one or more pages of Thread Specific
+Memory within that Image which other Threads are /not supposed to access/. But
+there's no actual mechanism to prevent them from accessing another thread's
+Thread Specific Memory. And accidentally doing so can cause program errors which
+are very difficult to debug!
+
+That's all that comprises a Thread, so Threads are very lightweight when
+compared with tasks. Thus Threads are also called /Lightweigth Processes/.
+
+When =exec= causes the Kernel to "run" a new Program within a task, the Kernel
+creates an initial Thread which calls that Program's starting point (in many
+languages, a procedure called =main=) and the program is off and running!
+
+A program can request the Kernel to create additional Threads as desired.
+
+Modern computers increasingly have multiple CPUs and GPUs aka Hardware
+Processors. If a Task has Nt Threads and the machine has Np processors and if Nt
+> Np then it won't be possible for all of the threads to be running at once. In
+practice, all of the Threads of all of the Tasks in /User Space/ are competing
+for access to the system's Processors (CPUs and also sometimes GPUs).
+
+The solution to this delemma is Time Slicing. Because Processors are so very
+fast, it's possible for each one to spend a few milliseconds doing work for one
+thread, then the next few milliseconds doing work for another thread, and so on.
+One Processor can handle the needs of any number of Threads if necessary.
+
+Operating Systems have sophisticated ways of prioritizing the access of Threads to Processors so that
+important processing activities can advance as fast as possible at the expense of activities which an afford to wait a bit.
 
 ***** Virtual I/O
 
@@ -296,15 +484,6 @@ When you "run" a program, the Kernel
 - The connections actually live in /Kernel Space/
 - The /Kernel/ performs all I/O for all /Tasks/
       - This includes both Local I/O and Network I/O
-
-***** Threads
-
-- A thread is an execution sequence within a program
-- Some programs consist of multiple current execution sequences
-- The Kernel maps the threads to processor time slices
-      - The program doesn't have to know how many actual processors are
-      - Open Source Free Software empowers a creative comm
-        available
 
 *** Kernel Space
 **** The Kernel
