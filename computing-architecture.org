@@ -43,14 +43,19 @@ Many of the terms in this document are defined in our [[file:computing-glossary.
 by an /Operating System/ providing resources needed to run /Computer Programs/
 reliably.
 
-It is much, much easier to write programs to run in /User Space/ than to add
-code to the /Kernel/ which runs in /Kernel Space/. See below for /Kernel Space/.
+Processes running in /User Space/ are contained within /Tasks/ aka /Processes/.
+/Processes/ are associated with specific /User Accounts/ and /Groups/ which have
+associated /Permissions/ which limit what those /Processes/ are allowed to do.
 
-Programs running in /User Space/ are associated with specific /User Accounts/
-and /Groups/ with associated /Permissions/ which regulate their behavior.
+For example, fundamentally insecure operations, such as direct access to the
+computer's hardware, are impossible from /User Space/.
 
-Especially dangerous operations, e.g. direct access to the computer's hardware,
-are impossible in /User Space/.
+Both these protections and also many services provided to /Tasks/ in /User
+Space/ make it much, much easier to write programs to run in /User Space/ than
+the alternative of adding code to the /Kernel/ which runs in /Kernel Space/.
+
+Details of /User Space/ Services, the /Kernel/ and /Kernel Space
+are provided in sections below.
 
 Programs running in /User Space/ include
 
@@ -119,7 +124,10 @@ Having the Source Code makes it possible to
 - Study how the code works
 - Fix a bug
 - Improve the program for one's own needs
-- /Or hire someone else to do such things!/
+- Hire someone else to do such things for you!
+- Or benefit from community creativity
+      - Many programmers continuously improve interesting software
+      - Most of the internet infrastructure is Open Source Free Software!
 
 **** Interpreted Programs are Translated As The Application Runs
 
@@ -189,29 +197,85 @@ automated by automated /package managers/.
 security or reliability issues. Alas this is not the case! Libraries need to be
 audited for quality and should ideally be /Open Source Free Software/!
 
-*** Kernel Space
-**** The Kernel
+**** Processes and Programs
 
-The job of the kernel is to
-- Create /User Space/
-- Replace idiosyncratic and insecure hardware features with
-      - Portable, high-level services
-- Prevent Programs running in /User Space/ against
-      - Interfering with one another
-      - Doing anything disallowed by /Permissions/
+/User Space/ consists of /Tasks/ running /Programs/.
 
-Code running in /Kernel Space/ has no such protections.
-- All resources of all running programs are accessible
-- The computer's hardware is directly accessible
-- There are no permissions to worry about
-      - Which should make you worry!
+/Tasks/ are also called /Processes/ although there is another kind of
+process called /Threads/, covered below, which are different.
 
-Once a computer has finished /Bootstrapping/ the /Kernel/ should be the only
-code running in /Kernel Space/!
+The /Kernel/ creates /Tasks/
+- in response to /System Calls/
+- issued by /Programs/
+- running inside existing /Tasks/
+Wait, that's circular!  How does it get started?
 
-**** Kernel Services and Examples
+After the bootstrapping system loads and starts the Kernel
+- The Kernel builds the first task
+      - Traditionally called /init/
+      - It has Process ID 1
+- All other Tasks are created by request from an existing Task.
 
-The Kernel provides nice high-level abstractions as services to /User Space/ /Tasks/.
+****** Existing Processes Create New Processes with =fork=
+
+We'll describe the /Unix Model/ which is supported by Linux, BSD and other
+Unix-like or /Posix/ Operating Systems. (Microsoft Windows is a bit different.)
+
+The System Calls are
+- =fork= :: creates a processs
+- =exit= :: terminates the process calling it
+- =wait= :: suspends processing until a /Child Process/ calls =exit=
+
+Here's the Life Cycle of a Process (Task):
+- An existing Process calls =fork=
+- The Existing Process is called the /Parent Process/
+- The Kernel responds by
+      - Creating a /Child Process with a New Process ID
+      - which is otherwise /identical to the Parent!/
+The two identical processes execute in parallel
+    - Both find themselves returning from =fork=
+          - The parent receives the new Process ID assigned to the Child
+          - The child receives 0
+    - Both processes examine that return value
+          - They discover whether they're the Parent or the Child
+          - They then set about their proper task
+          - As written in the program they're both executing!
+    - A process calls =exit= when it is done with its work
+          - The kernel terminates the process calling =exit=
+          - And notifies the /Parent Process/ that a child has exited
+
+Imagine you want to go to the beach and enjoy yourself
+- but you have chores you need to do
+If life worked like /Unix/
+- You could /Fork A Child/ to run your chores for you
+- It knows just what to do, because it's an exact copy of you!
+- While the Child is doing the chores
+- The Parent is having a good time at the beach!
+
+When a process calls =exit=
+- It supplies an /exit status/ argument in the range =0= to =127=
+- by convention:
+      - /exit status/ 0 means /success/ or /true/
+      - a non-zero /exit status/ means /failure/ or /false/
+
+The more usual situation involves
+- a /Parent/ creates a separate /Child/ for each responsibility
+- the /Parent/ repeatedly calls =wait=
+      - each call to =wait= suspends the /Parent/ until a /Child/ exits.
+      - when a /Parent/ returns from =wait= it receives
+            - the PID of the child which has exited
+            - and the /exit status/ provided by that child
+
+The 
+
+
+The Kernel provides System Calls
+- :: Allows a /Parent Process/ to create a Child Process
+- =exec= :: Allows a /Process/ to run a new Program
+      - the new program replaces the old program
+      - a new /Virtual Memory/ space is created
+      - the new program starts at the beginning
+            - typically with a call to a procedure called =main=
 
 ***** Tasks
 
@@ -239,7 +303,42 @@ When you "run" a program, the Kernel
 - Some programs consist of multiple current execution sequences
 - The Kernel maps the threads to processor time slices
       - The program doesn't have to know how many actual processors are
+      - Open Source Free Software empowers a creative comm
         available
+
+*** Kernel Space
+**** The Kernel
+
+The job of the kernel is to
+- Create /User Space/
+- Replace idiosyncratic and insecure hardware features with
+      - Portable, high-level services
+- Prevent Programs running in /User Space/ against
+      - Interfering with one another
+      - Doing anything disallowed by /Permissions/
+
+Code running in /Kernel Space/ has no such protections.
+- All resources of all running programs are accessible
+- The computer's hardware is directly accessible
+- There are no permissions to worry about
+      - Which should make you worry!
+
+Once a computer has finished /Bootstrapping/ the /Kernel/ should be the only
+code running in /Kernel Space/!
+
+**** Kernel Services and Examples
+
+The Kernel provides nice high-level abstractions as services to /User Space/ /Tasks/.
+
+***** Processes and Programs
+
+Details are in the last section under /User Space/.
+
+The Kernel is responsible for
+- Processes: both Tasks and Threads
+- Memory Spaces and Segments
+- I/O Connections
+- Loading Programs and Libraries
 
 ***** File Systems
 
@@ -320,7 +419,7 @@ One of the amazing things about all of this is that
 - Without any interference or even awareness of those programs
 
 Further complicating all of this is that
-- Most hardware devices are flaky -- full of dangerous bugs!
+- Most hardware devices are flakey -- full of dangerous bugs!
 - Which are carefully worked around by the corresponding device drivers!
 
 Kernel Programming is not for Wizards, it's for Gurus!
