@@ -96,6 +96,99 @@ Example System Services
 - httpd :: provides access to locally stored or generated web pages
 - and many more!
 
+***** Show Me!
+
+This one-line script will list the daemons running on your system
+#+begin_src sh
+  ps aux | awk 'NR==1||($1=="root" && $7=="?" && $11 !~ /\[/){print $2, $11}'
+#+end_src
+
+#+RESULTS:
+|    PID | COMMAND                                  |
+|      1 | /sbin/init                               |
+|    385 | /lib/systemd/systemd-journald            |
+|    419 | /lib/systemd/systemd-udevd               |
+|    764 | /usr/lib/accountsservice/accounts-daemon |
+|    766 | /usr/sbin/acpid                          |
+|    772 | /usr/lib/bluetooth/bluetoothd            |
+|    774 | /usr/sbin/cron                           |
+|    778 | /usr/sbin/NetworkManager                 |
+|    783 | guix-daemon                              |
+|    786 | /usr/sbin/irqbalance                     |
+|    796 | /usr/bin/python3                         |
+|    803 | /usr/lib/policykit-1/polkitd             |
+|    813 | /lib/systemd/systemd-logind              |
+|    815 | /usr/sbin/thermald                       |
+|    820 | /usr/lib/udisks2/udisksd                 |
+|    821 | /sbin/wpa_supplicant                     |
+|    887 | /usr/sbin/ModemManager                   |
+|    974 | sshd:                                    |
+|   1110 | /usr/sbin/lightdm                        |
+|   1188 | /usr/lib/upower/upowerd                  |
+|   1224 | lightdm                                  |
+|   1264 | /lib/systemd/systemd                     |
+|   1265 | (sd-pam)                                 |
+|   1755 | fusermount                               |
+|  66169 | sshd:                                    |
+| 236151 | /usr/sbin/cupsd                          |
+| 236152 | /usr/sbin/cups-browsed                   |
+
+***** How can I learn more?
+
+You can use the =whatis= command to get a 1-line description of most things
+#+begin_src sh :results list drawer
+  whatis cron
+  whatis sshd
+  whatis chmod
+  whatis whatis
+  whatis man
+#+end_src
+
+#+RESULTS:
+:results:
+- cron (8)             - daemon to execute scheduled commands (Vixie Cron)
+- sshd (8)             - OpenSSH daemon
+- chmod (1)            - change file mode bits
+- chmod (2)            - change permissions of a file
+- whatis (1)           - display one-line manual page descriptions
+- man (7)              - macros to format man pages
+- man (1)              - an interface to the system reference manuals
+:end:
+
+The online reference manual is divided into 8 sections
+#+begin_src sh :results list drawer
+  whatis intro | sort
+#+end_src
+
+#+RESULTS:
+:results:
+- intro (1)            - introduction to user commands
+- intro (2)            - introduction to system calls
+- intro (3)            - introduction to library functions
+- intro (4)            - introduction to special files
+- intro (5)            - introduction to file formats and filesystems
+- intro (6)            - introduction to games
+- intro (7)            - introduction to overview and miscellany section
+- intro (8)            - introduction to administration and privileged commands
+:end:
+
+You can then use the =man= command (with optional -s SECTION-NUMBER) in a
+terminal to get to see the reference manual entry on that command:
+- =man man= # how to use the =man= command
+- =man ssh= # how to use the =ssh= client for the =sshd= server
+- =man -s 1= chmod # how to use the =chmod= command
+- =man -s 2= chmod # how to use the =chmod= system call
+
+Same commands in Emacs:
+- M-x man <ENTER> man <ENTER>
+- M-x man <ENTER> ssh <ENTER>
+- M-x man <ENTER> ssh(1) <ENTER>
+- M-x man <ENTER> ssh(2) <ENTER>
+
+Please note that the /Reference Manual/, which should be available on every
+/Posix/ system, is a Reference, /not/ a Tutorial. For Tutorials try searching
+the Web.
+
 **** Compiled Programs are Translated In Advance
 
 The /Source Code/ is written in a /High-Level Programming Language/.
@@ -297,6 +390,8 @@ The Parent is responsible for coordinating the Children
       - Using the same or a different strategy
       - Or just report the failure appropriately
 
+****** Show Me Some Code!
+
 ***** How do you Run a New Program?
 
 When a program calls =exec=
@@ -310,6 +405,8 @@ When a program calls =exec=
 The Kernel automatically creates a new /Virtual Memory Space/ big enough for the
 new program to start. Most programs don't need more, but if they do, there are
 System Calls to request more.
+
+****** Show Me Some Code!
 
 **** Tasks are Heavyweight Processes
 
@@ -350,12 +447,12 @@ When you "run" a program with =exec=, the Kernel
       - Processes can't see the /Physical Memory Addresses/
       - Processes can't see any memory belonging to another Process
 
-**** Special Virtual Memory Tricks
+***** Special Virtual Memory Features
 
-There are some tricks with Virtual memory and some of them can allow Processes
-to see specific parts of the Virtual Memory of other Processes, by permission.
+There are some special features with Virtual memory. Some of them can allow
+Processes to share parts of their Virtual Memory with other Processes.
 
-***** Memory Mapped Files
+****** Memory Mapped Files
 
 You can map an area of physical memory to a file in a file system
 - Or anything which can act like a file (more on that later)
@@ -386,7 +483,7 @@ When you "run" a /Program/
 - Thus large programs with lots rarely used features don't necessarily require
   so much memory to run!
 
-***** Shared Memory Segments
+****** Shared Memory Segments
 
 Processes can ask the Kernel to create /Shared Memory Segments/.
 
@@ -430,7 +527,7 @@ process using regular I/O, usually TCP/IP Sockets. The PostgreSQL Child
 Processes communicate with their Parent (which coordinates access to the
 database) via Shared Memory Segments.
 
-***** Paging and Swapping
+****** Paging and Swapping
 
 Modern Computers are very fast:  In a single second
 - They can do billions of operations with main memory
@@ -454,47 +551,224 @@ that if it crashes (terminates unexpectedly at any time) you won't corrupt any
 important data you might have been in the middle of updating! Ensuring this can
 be challenging!
 
-
 **** Threads are Lightweight Processes
 
 A thread represents an execution sequence within a program, tracking the next
-instruction to execute within the program.
+instruction to execute within the program. This is a virtualization of the
+traditional hardware /Program Counter/.
 
-On some systems a Thread also includes one or more pages of Thread Specific
+On some systems a Thread may also include one or more pages of Thread Specific
 Memory within that Image which other Threads are /not supposed to access/. But
 there's no actual mechanism to prevent them from accessing another thread's
 Thread Specific Memory. And accidentally doing so can cause program errors which
 are very difficult to debug!
 
 That's all that comprises a Thread, so Threads are very lightweight when
-compared with tasks. Thus Threads are also called /Lightweigth Processes/.
+compared with /Tasks/. For this reason Threads are also called /Lightweight
+Processes/.
 
 When =exec= causes the Kernel to "run" a new Program within a task, the Kernel
-creates an initial Thread which calls that Program's starting point (in many
+creates a /Main Thread/ which calls that Program's starting point (in many
 languages, a procedure called =main=) and the program is off and running!
 
 A program can request the Kernel to create additional Threads as desired.
 
 Modern computers increasingly have multiple CPUs and GPUs aka Hardware
-Processors. If a Task has Nt Threads and the machine has Np processors and if Nt
-> Np then it won't be possible for all of the threads to be running at once. In
+Processors. If a Task has N Threads and the machine has M processors and if N
+> M then it won't be possible for all of the threads to be running at once. In
 practice, all of the Threads of all of the Tasks in /User Space/ are competing
 for access to the system's Processors (CPUs and also sometimes GPUs).
 
 The solution to this delemma is Time Slicing. Because Processors are so very
 fast, it's possible for each one to spend a few milliseconds doing work for one
 thread, then the next few milliseconds doing work for another thread, and so on.
-One Processor can handle the needs of any number of Threads if necessary.
+One Processor can handle the needs of any number of Threads if necessary. This
+is especially true since it's common for Threads to spend much of their time
+waiting for events or data and therefore not ready to run.
 
-Operating Systems have sophisticated ways of prioritizing the access of Threads to Processors so that
-important processing activities can advance as fast as possible at the expense of activities which an afford to wait a bit.
+Operating Systems have sophisticated ways of prioritizing the access of Threads
+to Processors so that important processing activities can advance as fast as
+possible at the expense of activities which can afford to wait a bit.
+
+****** Show Me Some Code!
 
 **** Virtual I/O
 
-- Tasks have their own Input/Output "connections"
-- The connections actually live in /Kernel Space/
-- The /Kernel/ performs all I/O for all /Tasks/
-      - This includes both Local I/O and Network I/O
+***** - Tasks do I/O through /File Descriptors/
+
+/File Descriptors/ live in /Kernel Space/
+- The /Kernel/ keeps a table of their /File Descriptors/ for each /Task/
+- The /Program/ uses /Index Numbers/ to specify which /File Descriptor/ to use
+- We'll use *FD* to refer to those /Index Numbers/, not to actual File Descriptors
+- There's a way to /Redirect/ Inputs and Outputs to new Sources or Sinks
+      - See /Redirection/ below!
+
+I/O is normally done with Bytes using Sources or Sinks
+- A Source is an Input Stream which is a provide of Bytes
+- A Sink is an Output Stream which can receive Bytes
+
+- A /File/ is a Source when you read Bytes from it
+- A /File/ is a Sink when you
+      - append Bytes to it -- existing contents remain
+      - overwrite it -- new Bytes replacing some existing Bytes
+      - rewrite it -- all old bytes discarded, new Bytes replace them
+
+/File Descriptors/ are not necessarily associated with /Files/!
+- A /Pipe/ connects an Output Descriptor of one Task with an Input Descriptor of another Task
+- A /Network Stream/ connects
+      - a /File Descriptor/ of some Task T1 on some Computer C1
+      - with another /File Descriptor/ of some Task T2 on some Computer C2
+      - C1 and C2 could be anywhere on any computer network, e.g. the Internet
+
+- Three FDs should always exist
+      - =0= :: /Standard Input/ traditionally connected to a user's keyboard
+            - Can be connected to any /Input Stream/ which produces /Bytes/
+                  - including a /File/ /Open/ for /Reading/
+                  - or a /Pipe/ /Output/ or a /Readable/ /TCP Network Stream/, etc.
+      - =1= :: /Standard Output/ traditionally connected to a user's Terminal Display
+            - Can be connected to any /Output Stream/ which can consume /Bytes/
+                  - including a /File/ /Open/ for /Writing/ or /Appending To/
+                  - or a /Pipe/ /Input/ or a /Writeable/ /TCP Network Stream/, etc.
+      - =1= :: /Standard Output/ traditionally connected to a user's Terminal Display
+            - If a program has one main output stream, this will be it
+            - FD =1= is often /Redirected/
+      - =2= :: /Standard Error/ traditionally also connected to a user's Terminal Display
+            - If a program needs to report an error, this is the traditional FD for it
+            - /Standard Error/ is especially useful when FD =1= has been /Redirected/
+
+***** - System Calls for Regular I/O
+
+Remember that most Application Programs use more convenient High-Level
+Libraries. But those Libraries are ultimately using these System Calls.
+
+Since File Descriptors live in /Kernel Space/
+- The /Kernel/ must perform all I/O for all /Tasks/
+- This includes both Local I/O and Network I/O
+
+Traditional Fundamental I/O System Calls include
+- =open(PATH, FLAGS)= :: Open a File at PATH, Creating a File Descriptor
+      - Returns a FD Index or -1 if an error
+      - the FLAGS specify how you want to use the file, e.g. to read it, rewrite it or append to it.
+- =close(FD Index)= :: Close the corresponding /File Descriptor/, no more operations will be accepted
+- =read(FD Index, POINTER, NUM_BYTES)= :: Read up to NUM_BYTES into memory at POINTER
+      - May read fewer than NUM_Bytes
+            - if at end of a file
+            - if pipe or network channel has no more bytes
+      - Returns the actual number of bytes read, or -1 on error
+- =write(FD Index, POINTER, NUM_BYTES)= :: Write up to NUM_BYTES from memory at POINTER to the FD
+      - May write fewer than NUM_Bytes
+      - Returns the actual number of bytes read, or -1 on error
+- =ioctl(FD Index, REQUEST, ...)=  :: Do something else with a File Descriptor
+      - =ioctl= is for miscellaneous operations, each specified by an Integer REQUEST number
+      - Different kinds of files and devices provide different possible REQUESTs
+      - The other arguments are specific to the REQUEST number and device
+
+****** Show Me Some Code!
+
+Link to
+- an example of C Code directly using the System Calls
+- an example of Racket Code using a High-Level Library facility
+
+***** - Redirection Is A Nice Feature!
+
+In the Unix model, new FDs are always the smallest index number possible.
+- If all FDs up to a certain number are all in use
+- And then you close one of them, say FD #X
+- And then you ask for a new File Descriptor
+- You're guaranteed that the new FD is FD #X
+- This peculiar property allows us to /redirect/ descriptors!
+
+- dup, dup2, dup3 :: Duplicate an existing File Descriptor
+      - With the original =dup=, the new FD was always the smallest
+      - =dup2= let's you specify which descriptor to replace with the duplicate
+      - =dup3= is like =dup2= except the new descriptor will automatically close
+        the next time the /Program/ calls =exec=.
+
+Suppose
+- A Program is doing I/O on FD #Old
+- all descriptors below #N are in use.
+Given another (possibly new) /File Descriptor/ with FD #New
+- After =close(Old), dup(New)=
+- Further I/O with FD #Old is now using File Descriptor #New!
+- You can now =close(New)= if you've no further use for it
+
+This dance is now obsolete, the new dance is
+- A Program is doing I/O on FD #Old
+- There's another /File Descriptor/ with FD #New
+- After =dup2(Old, New)=
+- Further I/O with FD #Old is now using File Descriptor #New!
+
+****** Show Me Some Code!
+
+Link to
+- an example of C Code directly using the System Calls
+- an example of Racket Code using a High-Level Library facility
+
+ You can now =close(New)= if you've no further use for it
+
+***** Network I/O
+
+Remember that most Application Programs use more convenient High-Level
+Libraries. But those Libraries are ultimately using these System Calls.
+
+A key problem with network I/O is how to Rendezvous (find one another)
+- Local I/O traditionally uses Filesystem Paths to rendezvous
+      - Local Network I/O can also use such!
+- General network I/O uses Sockets to Rendezvous and to Communicate
+      - On /Posix/ Systems, Sockets are just a kind of /File Descriptor/
+- Sockets belong to a particular Network Family, e.g. Unix (Local) or Internet
+- Internet Sockets are labeled with three properties
+      - Protocol: Either Stream or Datagram
+      - Port: A 16-bit number identifying a FD of a local Task
+      - IP Address: A number identifying a particular computer
+            - IP Addresses identify to things:
+                  - what network the computer is on
+                  - the specific computer on that network
+            - IPv4 addresses are 32-bit numbers
+            - IPv6 addresses are 128-bit numbers
+      - The Domain Name System tranlates the Domain part of a URL into an IP Address
+            - So you can change the IP Address of a computer and still be found!
+
+Networking has a fundamental asymmetry
+- A Network Server is a Task providing a Service via a Socket
+      - The Network Server needs to be findable by Clients
+- A Network Client is a Task which wants access to a Service
+      - The Network Client needs to initiate any connection
+      - As it's identity is not generally known to the Server
+
+Let's assume we want to create a reliable Byte-Stream connection, e.g. TCP
+between a Client and a Server. (The alternative would be to use an unreliable
+Datagram service, e.g. UDP which would require us to deal with sending and
+verifying the transmission of individual packets.)
+
+The Server Dance, /system calls/ indicated =like this=
+- Create a =socket= with the desired Family and Protocol
+- =bind= a well-known (advertised) Port Number to the Socket
+- This is a /Rendezvous Socket/ which will /not be used for communication!/
+- =listen= creates a Kernel queue for arriving Client File Descriptors
+- =accept= suspends the /Server Task/ until a Client connects
+      - returns /a new socket/ to use in communicating with this Client
+      - a Server can have connections to more than one client at a time
+- The /Server/ now communicates with the /Client/
+      - Possibly with a /New Thread/ so it can =accept= more clients!
+
+The Client Dance
+- Create a =socket= with the desired Family and Protocol
+- It will be assigned some random unused Port Number
+- Use =connect= to attempt to connect to a given Service
+      - specifying the IP address of the Server's Computer
+      - and the Port Number of the Server's Socket
+
+For Posix Operating Systems, once two Sockets are Connected with a Stream
+Protocol, they're just File Descriptors. You can communicate using =read= and
+=write= as well as redirect them with =dup=, =dup2= or =dup3= and =close= them
+with done.
+
+Microsoft Windows does not consider /Sockets/ to be a kind of /File Descriptor/
+so you have to use a different set of /System Calls/ for working with /Sockets/
+and simple redirection is not possible.
+
+****** Show Me Some Code!
 
 *** Kernel Space
 **** The Kernel
