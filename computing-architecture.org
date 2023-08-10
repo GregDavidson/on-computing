@@ -422,6 +422,8 @@ System Calls to request more.
 
 ****** Show Me Some Code!
 
+See [[https://github.com/GregDavidson/C-By-Example/blob/main/Simple-C-Shell/README.org][Simple Posix Shell in C]]
+
 **** Tasks are Heavyweight Processes
 
 Tasks
@@ -606,6 +608,13 @@ possible at the expense of activities which can afford to wait a bit.
 
 ****** Show Me Some Code!
 
+Here's an excellent
+- [[https://docs.racket-lang.org/more/][Systems Programming Tutorial including Threads in Racket]]
+
+Here are two simple Thread Pool libraries in Rust
+- [[https://github.com/GregDavidson/managed-thread-pool][Managed Thread Pool in Rust]]
+- [[https://github.com/GregDavidson/unmanaged-thread-pool][Unmanaged Thread Pool in Rust]]
+
 **** Virtual I/O
 
 ***** - Tasks do I/O through /File Descriptors/
@@ -679,6 +688,8 @@ Traditional Fundamental I/O System Calls include
 
 ****** Show Me Some Code!
 
+!!! MISSING EXAMPLES !!!
+
 Link to
 - an example of C Code directly using the System Calls
 - an example of Racket Code using a High-Level Library facility
@@ -711,14 +722,11 @@ This dance is now obsolete, the new dance is
 - There's another /File Descriptor/ with FD #New
 - After =dup2(Old, New)=
 - Further I/O with FD #Old is now using File Descriptor #New!
+- You can now =close(New)= if you've no further use for it
 
 ****** Show Me Some Code!
 
-Link to
-- an example of C Code directly using the System Calls
-- an example of Racket Code using a High-Level Library facility
-
- You can now =close(New)= if you've no further use for it
+See [[https://github.com/GregDavidson/C-By-Example/blob/main/Simple-C-Shell/README.org][Simple Posix Shell in C]]
 
 ***** Network I/O
 
