@@ -1,3 +1,4 @@
+#+TITLE: Fundamental Computing Glossary
 * Computing Magic Glossary
 
 This is a glossary for computing terms relevant today the computing curricula of

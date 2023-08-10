@@ -1,4 +1,6 @@
-* What Computers Are: Architecture
+#+TITLE: What Computer Systems Are
+#+SUBTITLE: Posix Computer Architecture
+* (Un)Folding Computer Architecture
 
 Part of the [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] Curriculum.
 
@@ -10,6 +12,16 @@ Unfolding sections. Unfortunately, GitHub does not support this. We suggest that
 you copy this file (or even clone the whole repository) and then read this
 document with Emacs Org Mode. A path to learning Emacs and Orgmode is in our
 [[https://github.com/GregDavidson/computing-magic/blob/main/Software-Tools/Emacs/emacs-readme.org][Emacs Readme]].
+
+If you're reading this with Emacs in Org Mode (you'll see =Org= in the
+/modeline/ to the right of the /filename/) then you can expand or contract any
+section by putting the cursor on the section title and hitting TAB to cycle
+among expand, expand-all, contract.
+
+To explore this document, start by expanding to just the section headers, then
+only expand the part you're focusing on at any given time. Drill down only as
+far as your current interest. Return later to explore further. As time goes on,
+more details will be added and you'll be able to drill down further!
 
 ** Introduction
 
@@ -391,6 +403,8 @@ The Parent is responsible for coordinating the Children
       - Or just report the failure appropriately
 
 ****** Show Me Some Code!
+
+See [[https://github.com/GregDavidson/C-By-Example/blob/main/Simple-C-Shell/README.org][Simple Posix Shell in C]]
 
 ***** How do you Run a New Program?
 
