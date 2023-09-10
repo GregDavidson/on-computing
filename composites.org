@@ -1,5 +1,5 @@
 * Custom Data Structures: Composites
-  
+
 Read [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] first!  Be sure and click on the Switches!
 
 Now that you understand that everything in a computer program's memory is
@@ -73,13 +73,23 @@ Dynamically Typed languages, including most /Lisp/ dialects, /Python/ and
 provides for flexibility but can also increase complexity and reduce reliability
 and efficiency.
 
-*** (Manifestly) Typed Structures 
+*** (Manifestly) Typed Languages and Structures
 
-/Manifestly Typed/ structures explicitly specify which kind of data can be bound
-to each field of the structure. This can be used to communicate as well as to
-enforce the program designer's expectations and thus prevent bugs through
-inconsistent use. It can also be used to compile (translate) the program to more
-efficient machine code.
+In a /Manifestly Typed/ language, the type of every expression is Manifest in
+the Source Code, without having to run the program or otherwise evaluate the
+expression. For example, you might know that symbol =count= will always be bound
+to, e.g. some /whole number/ and that symbol =name= will always be bound to some
+/character string/, though you won't know /what number/ or /what string/ they
+are bound to until you run the program, and the actual values might vary
+depending on program input, etc. /Manifestly Typed Languages/ are also called
+/Statically Typed Languages/ but are usually just called /Typed
+Languages/ even though /Dynamically Typed Languages/ also have types.
+
+In a /Typed Language/ structures specify /in the program's source/ which kind of
+data can be bound to each field of the structure. Manifest types can be used to
+communicate as well as to enforce the program designer's expectations and thus
+prevent bugs through inconsistent use. It can also be used to compile
+(translate) the program to more efficient machine code.
 
 While most Lisp dialects are Dynamically Typed, Racket provides multiple
 languages, some of which are Dynamically Typed and some of which are
@@ -87,33 +97,45 @@ languages, some of which are Dynamically Typed and some of which are
 Racket/ for increased clarity, efficiency and reliability.
 
 #+begin_src racket
-  #lang typed/racket
-  (struct contact ( (type : String) (value : Any) )
-  (struct people ( (name : String)
-                   (contacts : (ListOf contact))
-                   (hobbies : (ListOf Symbol)) ))
-  (struct company ( (name : String)
-                    (employees : (ListOf people))
-                    (services : (ListOf Symbol)) ))
-  (define john
-    (people "John From" (list (contact 'mail "General Delivery, Fargo City ND")) '(travel)) )
-  (define dana
-    (people "Dana From" (list (contact 'phone "+1 (203) 123-4567")) '(reading)) )
-  (define nardles
-    (company "Nardles, Inc." (list john dana) ("Nardles Disposal")) )
+              #lang typed/racket
+              (define-type phone-number String)
+              (struct postal-address ([addressee: String] [location : String]))
+              (define-type contact (U phone-number postal-address))
+              (struct people ( [name : String]
+                               [contacts : (ListOf contact)]
+                               [hobbies : (ListOf Symbol)] ))
+              (struct company ( [name : String]
+                                [employees : (ListOf people)]
+                                [services : (ListOf Symbol)] ))
+              (define john
+                (people "John From"
+                        (list (postal-address "General Delivery" "Fargo City ND"))
+                        '(travel) ) )
+              (define dana
+                (people "Dana From"
+                        (list (phone-number "+1 (203) 123-4567"))
+                        '(reading) ) )
+              (define nardles
+                (company "Nardles, Inc."
+                         (list john dana)
+                         ("Nardles Disposal") ) )
 #+end_src
 
-/SQL/ and /Object-Relational Databases/
-- data lives in persistent memory over a long time
-- needs to support many versions of many programs over time
-- typed records and other constraints assist with data integrity
-- automatic storage management
-- relations usually multi-way for flexibility
-- unique data gives object (record) identity
-      - unique ids can be introduced where data values aren't unique
+** Persistence: /SQL/ and /Object-Relational Databases/
 
-SQL gives the most explicit model of what data looks like in persistent storage,
-i.e. storage that doesn't go away when program terminate.
+Persistent data
+- may live longer than the run-time of the programs using it
+- needs to support many versions of many programs over time
+      - including simultaneous usage by multiple programs
+- /Records/ are the database equivalent of /Structures/
+- /Typed Records/ and other /Constraints/ assist with data integrity
+- requires efficient automatic storage management
+- consists of /Relations/ which are /Sets of Records/
+- any Unique data in a Set provides object (record) Identity
+      - unique ids can be added when other fields aren't unique
+
+SQL gives an explicit model of what data looks like in persistent storage,
+i.e. storage that doesn't go away when programs terminate.
 
 #+begin_src sql
   CREATE ENUM contact_types (mail_contact, email_contact, phone_contact);
@@ -158,6 +180,8 @@ i.e. storage that doesn't go away when program terminate.
   INSERT INTO companies_services VALUES (1, 'Nardles Disposal');
 #+end_src
 
+** Systems Programming Languages
+
 Systems languages like /C/ and /Rust/ are similar
 - they require details of types and sizes of each element
 - programmers are responsible for managing resources
@@ -199,7 +223,7 @@ algorithms cost.
   Company nardles = {"Nardles, Inc.", nardles_employees, nardles_services};
 #+end_src
 
-*** Dynamically Typed Vector aka 1-dimensional Arrays
+** Dynamically Typed Vector aka 1-dimensional Arrays
 
 Lisps provide contiguous vectors (called arrays in many other languages).
 Vectors are similar to Lists (described below with Linked Structures).
@@ -249,16 +273,16 @@ program design and to consider /Vectors/ as an optimization only where profiling
 analysis clearly indicates significant inefficiency in a place where /Vectors/
 might be better.
 
-*** (Manifestly) Typed Arrays 
+** (Manifestly) Typed Arrays
 
 It's common to want to have all of the elements of an array to be the same kind
 of thing, i.e. to be of the same type. Arrays of pixels, customer records,
 shapes, etc. It is actually quite unusual to have an array of elements of
 arbitrarily varying types.
-    
+
 Typed Racket allows the programmer to specify the type of the elements of an
 array to a specific type, including a limited set of alternative types.
-    
+
 Systems programming languages like C and Rust are strongly biased towards using
 arrays whose elements are all of the same type. Arrays are usually allocated and
 deallocated as a whole whereas each element of a list needs to be individually
@@ -276,7 +300,7 @@ without limit. This works well as long as all of the component parts are of a
 known size (Manifest Types and homogeneous arrays) and as long as the whole
 composite object can be allocated at once. When you need more flexibility, you
 can link multiple objects together using their addresses.
-   
+
 Every object in a running program has a unique /address/ (location) in memory.
 Modern computers use /byte addresses/, i.e. they assign a unique address,
 starting with =0=, to the location of every byte in memory. All of the kinds of
@@ -372,7 +396,7 @@ an element deeply buried in a long list, you have to start at the beginning and
 follow the =cdr= pointers until you find the desired item.
 
 ** Hashes and Relations
-   
+
 ***   Hashes
 
 A program might run slowly if it often needs to examine many elements of a large
@@ -399,22 +423,7 @@ data structure (the way storage is arranged in memory) or algorithm (the
 strategy of the program's procedures). This way the overall complexity of the
 program is minimized. But there may be a better way!
 
-***   Relations
-
-Relational databases were designed to store data over long periods of time in
-the simplest and most general manner possible, so that the data can be used by
-many versions of many programs over time. You can think of relational data as
-being Tables of Records which are laid out in secondary (persistent) storage in
-a manner very similar to unordered arrays of structures in the volatile memory
-of a computer. While this is very simple and general, it can be expensive to
-work with when the computer has to search through large tables to find the
-desired data.
-
-Rather than complicating the Tables, Relational Database Systems allow the Database
-Administrator to /profile/ the database's operations to identify /performance bottlenecks/ and
-add /Indexes/ to speed up performance for specific /use cases/.
-    
-***   Indexes
+** Indexes for Performance
 
 An index is a data structure which provides fast access to the elements of an
 unordered table or array without changing the structure of the table or array.
@@ -424,42 +433,64 @@ they provide fast access to desired records of tables. Index in programs are
 generally designed as part of the program, as an alternative to using a more
 compalex data structure.
 
-In the database context, indexes can be added or removed by an administrator as
-the access patterns of the database system change over time. Index have to be
-updated as records are added (or changed), so having too many indexes can itself
-slow things down.
+In the database context, indexes can be added or removed by an Administrator as
+the access patterns of the database system change over time. Indexes have to be
+updated as records are added (or changed), and although this is done
+automatically, having many indexes can slow things down if data is frequently
+changing.
+
+Unlike in regular programming, a Database Developer doesn't have to know how
+their database will be used. They just need to describe the data's logical
+relationships in as simple and general a manner as possible.
+
+Database Administrators will periodically /profile/ the database's operations to
+identify /performance bottlenecks/ and add (or remove) /Indexes/ to speed up
+performance for current /use cases/. Thus a database can be efficient over a
+very long period of time.
 
 The advantage of Indexes is that they exist independent of the simple storage layout
 of the data they support.  This decreases overall complexity.
 
-So how do Indexes work?
+*** So how do Indexes work?
+
+Relational Databases hide most of the details of Indexes, but it's sometimes
+useful to have a sense of what's actually going on. This understanding can also
+allow you to use /Indexes/ in regular programming.
 
 Programs generally select desired records based on the values of one or a few
 fields. These are called /search keys/.
 
 There are two basic strategies: Trees and Hashes.
-  
+
 If these keys can be efficiently ordered, e.g. if for any two keys /K1/ and /K2/
 we can efficiently determine whether /K1/ < /K2/, /K1/ = /K2/ or /K1/ > /K2/,
 then we can construct an /Ordered Tree Index/ which will access the desired
-records in logarithmic time.
+records in /Logarithmic Time/.
 
-Alternatively, we can use a hash.  A hash is an integer value which can be computed
-from a key.  A good has should be
+Alternatively, we can use a /hash/. A hash is an integer value which can be
+computed from a key. A good hash should be
 - fast to compute
-- no larger than twice the number of elements to be stored
+- dense
+      - allowing the /hash indec/ (see below) to be at least half full
 - almost always unique
+      - minimizing /hash collisions/
 
-Suppose you have around n=1,000,000 records in a table. You want a function
-=hash(k1)= (or =hash(k1, k2, ... kn)= if there are multiple keys) which returns
-an integer in the range 0 to 2*n. It needs to be rare for =hash(k1)= to have the
-same value as =hash(k2)= when =k1= is not the same as =k2=. The hash index is
-simply an array indexed by the hash values which gives the location of the
-desired record in the table. There's extra room in the table, so in the case of
-a /collision/, i.e. where two keys give the same hash value, we can simply store
-one of them in the regular place and the other in the next free available
-element of the index array. Since collisions are rare (by design of the hash
-function), having to occasionally look again will not slow things down much.
+Suppose you have around n=1,000,000 records in a table.
+- You want a function =hash(k1)=
+      - (or =hash(k1, k2, ... kn)= if there are multiple keys)
+- which returns an integer in the range 0 to 2*n
+
+It needs to be rare for =hash(k1)= to have the same value as =hash(k2)= when
+=k1= is not the same as =k2=.
+
+The /hash index/ is simply an array indexed by the hash values which gives the
+location of the desired record in the table.
+
+There's extra room in the table, so in the case of a /collision/, i.e. where two
+keys give the same hash value, we can simply store one of them in the regular
+place and the other in the next free available element of the index array. Since
+collisions are rare (by design of the hash function), having to occasionally
+look again will not slow things down much.
 
 Some database systems can sometimes automatically figure out when indexes should
 be used and which kind.  They can usually figure out an appropriate ordering function
@@ -468,7 +499,7 @@ kind of index or an appropriate ordering or hash function.  All of these things 
 be explicitly provided by a Database Administrator as needed.
 
 ** More to Come - Ignore for Now!
-   
+
 Strategies for building larger, more interesting objects
 - Larger objects with adjacent components
       - arrays and structures
