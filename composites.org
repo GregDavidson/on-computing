@@ -113,7 +113,7 @@ Racket/ for clarity, efficiency and reliability.
       - unique ids can be introduced where data values aren't unique
 
 SQL gives the most explicit model of what data looks like in persistent storage,
-i.e. storage that doesn't go away when your program(s) terminate.
+i.e. storage that doesn't go away when program terminate.
 
 #+begin_src sql
   CREATE ENUM contact_types (mail_contact, email_contact, phone_contact);
@@ -143,19 +143,19 @@ i.e. storage that doesn't go away when your program(s) terminate.
     service text NOT NULL
   );
   INSERT INTO people VALUES
-     (1, "John From"),
-     (2, "Dana From");
+     (1, 'John From'),
+     (2, 'Dana From');
   INSERT INTO people_contacts VALUES
-     (1, mail_contact, "General Delivery, Fargo City ND"),
-     (2, phone_contact, "+1 (203) 123-4567");
+     (1, mail_contact, 'General Delivery, Fargo City ND'),
+     (2, phone_contact, '+1 (203) 123-4567');
   INSERT INTO people_hobbies VALUES
-     (1, "travel"),
-     (2, "reading");
+     (1, 'travel'),
+     (2, 'reading');
   INSERT INTO companies VALUES
-     (1, "Nardles, Inc.");
+     (1, 'Nardles, Inc.');
   INSERT INTO companies_employees VALUES
      (1, 1), (1, 2);
-  INSERT INTO companies_services VALUES (1, "Nardles Disposal");
+  INSERT INTO companies_services VALUES (1, 'Nardles Disposal');
 #+end_src
 
 Systems languages like /C/ and /Rust/ are similar
