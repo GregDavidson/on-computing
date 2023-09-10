@@ -55,10 +55,12 @@ Many of the terms in this document are defined in our [[file:computing-glossary.
 by an /Operating System/ providing resources needed to run /Computer Programs/
 reliably.
 
-/Programs/ running in /User Space/ are contained within /Tasks/, usually called
-/Processes/. /Processes/ are associated with specific /User Accounts/ and
-/Groups/ which have associated /Permissions/ which limit what those /Processes/
-are allowed to do.
+/Programs/ running in /User Space/ are contained within /Tasks/. A /Task/ is
+usually just called a /Process/, although there is another kind of /Process/,
+properly called a /Thread/, which are described further down in this document.
+For now, we'll use the terms /Task/ and /Process/ interchangeably. /Processes/
+are associated with specific /User Accounts/ and /Groups/ which have associated
+/Permissions/ which limit what those /Processes/ are allowed to do.
 
 The Kernel and the Hardware protects /User Space/ /Processes/ from the System
 from accidentally or intentionally interfering with each other or with Operating
