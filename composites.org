@@ -7,6 +7,8 @@ Now that you understand that everything in a computer program's memory is
 those are and what they can do for you on their own, it's time to put them
 together, like Lego blocks, into larger structures to serve your larger needs.
 
+** Basic Strategies
+
 /Objects/ are /Values/ stored in memory at specific locations. Objects occupy
 some number of bytes. Objects which are larger than a computer's /Word Size/ are
 often called /Composite Objects/. /Objects/ which have an Identity are sometimes
