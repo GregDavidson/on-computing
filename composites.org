@@ -182,7 +182,13 @@ i.e. storage that doesn't go away when programs terminate.
 
 ** Systems Programming Languages
 
-Systems languages like /C/ and /Rust/ are similar
+Systems Programming Languages like /C/ and /Rust/ are designed to compile to
+efficient machine code which can do anything the machine can do without
+requiring support from any additional software, e.g. garbage collectors,
+interpreters, etc. This makes them perfect for implementing higher-level
+languages, libraries, operating systems, device drivers, etc.
+
+Systems languages like /C/ and /Rust/ face similar challenges
 - they require details of types and sizes of each element
 - programmers are responsible for managing resources
       - including (de)allocation of objects
@@ -190,7 +196,7 @@ Systems languages like /C/ and /Rust/ are similar
 - Rust provides (partial) protection against doing this wrong!
 - Relationships are usually customized to specific use-cases
       - 1-way relationships often provided by pointers (see below)
-      - more efficient than SQL but more efficient
+      - more efficient than SQL but less flexible
 
 C gives the most explicit model of what data looks like in memory and what
 algorithms cost.
@@ -223,7 +229,30 @@ algorithms cost.
   Company nardles = {"Nardles, Inc.", nardles_employees, nardles_services};
 #+end_src
 
-** Dynamically Typed Vector aka 1-dimensional Arrays
+** Sequences: Lists, Vectors, Arrays and More
+
+When you need to manage a collection of values (or objects) the most popular
+programming data structure is the vector or 1-dimensional array.
+
+Dynamically Typed Vectors allow storing values of different types together in
+the same vector.
+
+Manifestly (Statically) Typed Vectors require that all of the elements of a
+particular Vector be of the same Type.
+
+Some Languages, e.g. Ada, Julia and SQL, provide explicit support for
+multidimensional arrays. Other languages require the programmer to simulate
+multidimensional arrays in various ways.
+
+An alternative to Vectors is the very flexible (but usually less efficient)
+/Linked List/ which is especially popular in Functional, Logical and Lisp-Family
+languages.
+
+Most Lisp dialects (and some other languages) provide /Sequence Operators/ which
+can operate on any kind of data organized as a /Sequence/ of values, including
+Lists, Vectors and other more exotic kinds of sequences.
+
+*** Dynamically Typed Vectors
 
 Lisps provide contiguous vectors (called arrays in many other languages).
 Vectors are similar to Lists (described below with Linked Structures).
@@ -273,7 +302,7 @@ program design and to consider /Vectors/ as an optimization only where profiling
 analysis clearly indicates significant inefficiency in a place where /Vectors/
 might be better.
 
-** (Manifestly) Typed Arrays
+*** (Manifestly) Typed Arrays
 
 It's common to want to have all of the elements of an array to be the same kind
 of thing, i.e. to be of the same type. Arrays of pixels, customer records,
