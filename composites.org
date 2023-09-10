@@ -84,7 +84,7 @@ efficient machine code.
 While most Lisp dialects are Dynamically Typed, Racket provides multiple
 languages, some of which are Dynamically Typed and some of which are
 (Manifestly) Typed. You can write all or part of a Racket program in /Typed
-Racket/ for clarity, efficiency and reliability.
+Racket/ for increased clarity, efficiency and reliability.
 
 #+begin_src racket
   #lang typed/racket
