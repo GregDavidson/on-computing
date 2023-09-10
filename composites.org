@@ -15,7 +15,10 @@ level of complexity for now.
 
 There are three common strategies for building /Composite Objects/:
 - Put things next to one another in memory
-      - Usually called /structures/ or /records/
+      - /structures/ aka /records/ contain a fixed number of named /fields/
+            - can have multiple records with the same field layout
+      - /vectors/ aka /arrays/ contain a fixed number of /elements/ indexed by integers
+            - it may be possible to add elements to a vector
 - Connect things via their locations
       - /Lists/, /Trees/ and other /Graph Structures/
 - Index things via content
