@@ -62,10 +62,17 @@ There are three common strategies for building /Composite Objects/:
   (people? john) ; returns #t
   (people? nardles) ; returns #f
   (people-name john) ; returns "John From"
-  (people-name nardles) ; error
   (company-name nardles) ; returns "Nardles, Inc."
   (map people-name (company-employees nardles)); returns '("John From" "Dana From")
+  (people-name nardles) ; runtime error
 #+end_src
+
+#+RESULTS:
+: #t
+: #f
+: "John From"
+: "Nardles, Inc."
+: '("John From" "Dana From")
 
 Because a named function is created for each /field/ (structure component)
 - the order of the elements doesn't matter
@@ -102,29 +109,47 @@ languages, some of which are Dynamically Typed and some of which are
 Racket/ for increased clarity, efficiency and reliability.
 
 #+begin_src racket
-              #lang typed/racket
-              (define-type phone-number String)
-              (struct postal-address ([addressee: String] [location : String]))
-              (define-type contact (U phone-number postal-address))
-              (struct people ( [name : String]
-                               [contacts : (ListOf contact)]
-                               [hobbies : (ListOf Symbol)] ))
-              (struct company ( [name : String]
-                                [employees : (ListOf people)]
-                                [services : (ListOf Symbol)] ))
-              (define john
-                (people "John From"
-                        (list (postal-address "General Delivery" "Fargo City ND"))
-                        '(travel) ) )
-              (define dana
-                (people "Dana From"
-                        (list (phone-number "+1 (203) 123-4567"))
-                        '(reading) ) )
-              (define nardles
-                (company "Nardles, Inc."
-                         (list john dana)
-                         ("Nardles Disposal") ) )
+#lang typed/racket
+(struct phone ([country : Integer] [number : String]))
+(struct post ([addressee : String] [address : String]))
+(define-type contact (U phone post))
+(struct people ( [name : String]
+                 [contacts : (Listof contact)]
+                 [hobbies : (Listof Symbol)] ))
+(struct company ( [name : String]
+                  [employees : (Listof people)]
+                  [services : (Listof String)] ))
+(define john
+  (people "John From"
+          (list (post "General Delivery" "Fargo City ND"))
+          '(travel) ) )
+(define dana
+  (people "Dana From"
+          (list (phone 1 "(203) 123-4567"))
+          '(reading) ) )
+(define nardles
+  (company "Nardles, Inc."
+           (list john dana)
+           (list "Nardles Disposal") ) )
+(people? john) ; returns #t
+(people? nardles) ; returns #f
+(people-name john) ; returns "John From"
+(company-name nardles) ; returns "Nardles, Inc."
+(map people-name (company-employees nardles)); returns '("John From" "Dana From")
+;; A compile-time error will prevent the program from being run at all.
+;; Try uncommenting it:
+;; (people-name nardles) ; compile-time error
 #+end_src
+
+#+RESULTS:
+: #t
+: #f
+: "John From"
+: "Nardles, Inc."
+: '("John From" "Dana From")
+
+Ideally we would refine the types based on String and Symbol to more specific
+types, and likely also add some constraints.
 
 ** Persistence: /SQL/ and /Object-Relational Databases/
 
@@ -314,7 +339,7 @@ of thing, i.e. to be of the same type. Arrays of pixels, customer records,
 shapes, etc. It is actually quite unusual to have an array of elements of
 arbitrarily varying types.
 
-Typed Racket allows the programmer to specify the type of the elements of an
+[[https://docs.racket-lang.org/ts-guide/][Typed Racket]] allows the programmer to specify the type of the elements of an
 array to a specific type, including a limited set of alternative types.
 
 Systems programming languages like C and Rust are strongly biased towards using
