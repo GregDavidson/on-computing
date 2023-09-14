@@ -7,6 +7,11 @@ Now that you understand that everything in a computer program's memory is
 those are and what they can do for you on their own, it's time to put them
 together, like Lego blocks, into larger structures to serve your larger needs.
 
+Please note that parts of this document are still in a draft state, especially
+the parts starting with on "Hashes and Relations" and "Indexes for Performance".
+We always appreciate your feedback and assistance! Feel free to post /issues/
+and to clone this repository and submit /pull requests/!
+
 ** Basic Strategies
 
 /Objects/ are /Values/ stored in memory at specific locations. Objects occupy
@@ -400,11 +405,13 @@ green blue)= exist in memory? How about the list ='(black red green blue)=?
   (define palette1 (cons 'white primaries))
   (define palette2 (cons 'black primaries))
   (define palette (cons 'white palette2))
-  palette1 ; prints '(white red green blue)
-  palette ; prints '(white black red green blue)
+  palette
 #+end_src
 
-Let's look at the same program in C to find out:
+#+RESULTS:
+| white | black | red | green | blue |
+
+Let's look at the same program in C for a lower-level view:
 #+begin_src C
   typedef char *StringPtr;
   typedef struct color_list {
