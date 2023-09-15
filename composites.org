@@ -69,7 +69,11 @@ There are three common strategies for building /Composite Objects/:
   (people-name john) ; returns "John From"
   (company-name nardles) ; returns "Nardles, Inc."
   (map people-name (company-employees nardles)); returns '("John From" "Dana From")
-  (people-name nardles) ; runtime error
+  #;  (people-name nardles) ; runtime error
+  (define widgets (company "Widgets, Inc." '("Big Boss" "Lowly Peon") '("3D Printing")))
+  ;; What would go wrong with this code:
+  #;(map people-name (company-employees widgets))
+  ;; What needs to be fixed?
 #+end_src
 
 #+RESULTS:
@@ -114,36 +118,36 @@ languages, some of which are Dynamically Typed and some of which are
 Racket/ for increased clarity, efficiency and reliability.
 
 #+begin_src racket
-#lang typed/racket
-(struct phone ([country : Integer] [number : String]))
-(struct post ([addressee : String] [address : String]))
-(define-type contact (U phone post))
-(struct people ( [name : String]
-                 [contacts : (Listof contact)]
-                 [hobbies : (Listof Symbol)] ))
-(struct company ( [name : String]
-                  [employees : (Listof people)]
-                  [services : (Listof String)] ))
-(define john
-  (people "John From"
-          (list (post "General Delivery" "Fargo City ND"))
-          '(travel) ) )
-(define dana
-  (people "Dana From"
-          (list (phone 1 "(203) 123-4567"))
-          '(reading) ) )
-(define nardles
-  (company "Nardles, Inc."
-           (list john dana)
-           (list "Nardles Disposal") ) )
-(people? john) ; returns #t
-(people? nardles) ; returns #f
-(people-name john) ; returns "John From"
-(company-name nardles) ; returns "Nardles, Inc."
-(map people-name (company-employees nardles)); returns '("John From" "Dana From")
-;; A compile-time error will prevent the program from being run at all.
-;; Try uncommenting it:
-;; (people-name nardles) ; compile-time error
+  #lang typed/racket
+  (struct phone ([country : Integer] [number : String]))
+  (struct post ([addressee : String] [address : String]))
+  (define-type contact (U phone post))
+  (struct people ( [name : String]
+                   [contacts : (Listof contact)]
+                   [hobbies : (Listof Symbol)] ))
+  (struct company ( [name : String]
+                    [employees : (Listof people)]
+                    [services : (Listof String)] ))
+  (define john
+    (people "John From"
+            (list (post "General Delivery" "Fargo City ND"))
+            '(travel) ) )
+  (define dana
+    (people "Dana From"
+            (list (phone 1 "(203) 123-4567"))
+            '(reading) ) )
+  (define nardles
+    (company "Nardles, Inc."
+             (list john dana)
+             (list "Nardles Disposal") ) )
+  (people? john) ; returns #t
+  (people? nardles) ; returns #f
+  (people-name john) ; returns "John From"
+  (company-name nardles) ; returns "Nardles, Inc."
+  (map people-name (company-employees nardles)); returns '("John From" "Dana From")
+  ;; A compile-time error will prevent the program from being run at all.
+  ;; Try uncommenting it:
+  ;; (people-name nardles) ; compile-time error
 #+end_src
 
 #+RESULTS:
@@ -156,32 +160,84 @@ Racket/ for increased clarity, efficiency and reliability.
 Ideally we would refine the types based on String and Symbol to more specific
 types, and likely also add some constraints.
 
-** Persistence: /SQL/ and /Object-Relational Databases/
+** Persistence
+
+When a program terminates, everything stored in its program memory is lost.
 
 Persistent data
 - may live longer than the run-time of the programs using it
+- may need to be accessed or modified by different programs over time
+
+*** Persistence: Serialization to Files or Sockets
+
+Serialization is the conversion of data in main (volatile) memory into byte
+sequences which can be, e.g. written to a file or a socket.
+
+De-Serialization is the conversion of byte sequences into data structures in
+main memory which are equivalent to the original data structures which were
+serialized to create those byte sequences.
+
+The obvious way to achieve this as a programmer is
+- For each data structure in your program
+- Write a serialization and a de-serialization function
+
+Sophisticated languages often provide libraries which can write your
+serialization and de-serialization functions automatically.
+
+But the structure of your data tends to change
+- as your program evolves
+- when you recompile your programs
+- when you run it on a different model of CPU
+- etc.
+
+Your carefully preserved data can easily become garbage!
+
+*** Persistence: /SQL/ and /Object-Relational Databases/
+
+Once again: Persistent data
+- may live longer than the run-time of the programs using it
 - needs to support many versions of many programs over time
       - including simultaneous usage by multiple programs
-- /Records/ are the database equivalent of /Structures/
-- /Typed Records/ and other /Constraints/ assist with data integrity
-- requires efficient automatic storage management
-- consists of /Relations/ which are /Sets of Records/
-- any Unique data in a Set provides object (record) Identity
-      - unique ids can be added when other fields aren't unique
 
-SQL gives an explicit model of what data looks like in persistent storage,
-i.e. storage that doesn't go away when programs terminate.
+Relational Databases are designed for exactly this need!
+
+The Relational View of Data
+- A Relation is a set of /Records/
+- /Records/ are the database equivalent of /Structures/
+      - They consist of named and typed /Fields/
+- A /Table/ is a /Persistently Stored Relation/
+- /Constraints/, including Types, assist with data integrity
+- The database storage engine provides
+      - efficient automatic storage management
+      - efficient backup and distribution of data
+- The database query engine provides
+      - efficient retrieval of selected data
+      - efficient updates when data needs to change
+- Unique Fields in a Set provide Object (Record) Identity
+      - Unique ids can be added when other Fields aren't unique
+
+/SQL/ is a language for writing
+- Schemas which define your data along with types and constraints
+- Queries which allow you to flexibly and efficiently retrieve your data
+
+Programs written in any Programming Language can use /SQL/ for all of their
+persistence needs.
+
+A Relational Database can often entirely replace a specialized Server Program!
 
 #+begin_src sql
-  CREATE ENUM contact_types (mail_contact, email_contact, phone_contact);
+  CREATE TYPE contact_types AS ENUM
+    (mail_contact, email_contact, phone_contact);
+  CREATE TYPE employee_roles AS ENUM
+    (partner, salaried, hourly);
   CREATE TABLE people (
     people_id bigint PRIMARY_KEY,
     name text
-   );
+    );
   CREATE TABLE people_contacts (
     people_id bigint REFERENCES people,
-     contact_type contact_types NOT NULL,
-     contact_value text NOT NULL
+      contact_type contact_types NOT NULL,
+      contact_value text NOT NULL
   );
   CREATE TABLE people_hobbies (
     people_id bigint REFERENCES people,
@@ -192,26 +248,27 @@ i.e. storage that doesn't go away when programs terminate.
     name text
   );
   CREATE TABLE companies_employees (
-    company_id bigint REFERENCES companies,
-    employee_id bigint REFERENCES people
+    company_id bigint REFERENCES companies NOT NULL,
+    employee_id bigint REFERENCES people NOT NULL,
+    employee_role employee_roles NOT NULL;
   );
   CREATE TABLE companies_services (
     company_id bigint REFERENCES companies,
-    service text NOT NULL
+    service text UNIQUE NOT NULL
   );
   INSERT INTO people VALUES
-     (1, 'John From'),
-     (2, 'Dana From');
+      (1, 'John From'),
+      (2, 'Dana From');
   INSERT INTO people_contacts VALUES
-     (1, mail_contact, 'General Delivery, Fargo City ND'),
-     (2, phone_contact, '+1 (203) 123-4567');
+      (1, mail_contact, 'General Delivery, Fargo City ND'),
+      (2, phone_contact, '+1 (203) 123-4567');
   INSERT INTO people_hobbies VALUES
-     (1, 'travel'),
-     (2, 'reading');
+      (1, 'travel'),
+      (2, 'reading');
   INSERT INTO companies VALUES
-     (1, 'Nardles, Inc.');
+      (1, 'Nardles, Inc.');
   INSERT INTO companies_employees VALUES
-     (1, 1), (1, 2);
+      (1, 1, 'partner'::employee_roles), (1, 2, 'salaried::employee_roles);
   INSERT INTO companies_services VALUES (1, 'Nardles Disposal');
 #+end_src
 
