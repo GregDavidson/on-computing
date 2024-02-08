@@ -1,0 +1,92 @@
+* Values and Objects
+
+One of the fundamental distinctions in Computing is
+- the distinction between a /Value/ and an /Object/.
+- applying to computing in general, in any language
+- several links and examples here are from the [[https://racket-lang.org][Racket Language]]
+
+After reading this, you might want to read
+
+** What's a Value?
+
+Values are
+- Immutable :: You can't change them
+- Etherial :: Not located anywhere
+
+Examples of Values
+- [[https://docs.racket-lang.org/guide/numbers.html][Numbers]], including
+      - Exact /Integers/ and /Rationals/
+      - Approximations to /Real/ and /Complex numbers/
+            - usually approximated using [[https://en.wikipedia.org/wiki/Floating-point_arithmetic][Floating Point]]
+      - and many more -- numbers are very diverse!
+- [[https://docs.racket-lang.org/guide/booleans.html][Booleans]] and [[https://docs.racket-lang.org/guide/characters.html][Characters]]
+- Etherialized Objects, e.g.the values in the
+      - the values in  functional graphical libraries such as
+            - [[https://docs.racket-lang.org/pict][Pict]], [[https://docs.racket-lang.org/teachpack/2htdpimage-guide.html][2htdp/image]]
+      - Immutable Lists, Strings, Structures, etc.
+            - See [[https://docs.racket-lang.org/rebellion/Collections.html][Rebellion's Immutable Collections]]
+
+- etherial :: A non-standard term introduced here to mean an entity which
+      - represents a value
+      - cannot be localized to a single memory location
+      - cannot be modifed
+
+- etherialized :: A non-standard term introduced here to mean an object which
+      - /acts like/ a value
+      - is represented as one or more objects at a lower level inaccessible
+        programmers
+
+** What's an Object?
+
+An /Object/ aka a /Memory Object/ is
+- One or more regions of physical storage
+      - of Finite Size at any given moment
+      - with predictable Storage Addresses
+            - single regions are often adjacent
+            - multiple regions are often connected with pointers
+
+The /Contents/ of an Object is called its /State/
+- Especially when the /Contents/ represent a /Meaningful Value/
+
+Objects /may or may not/ be part of an /Object-Oriented Programming System/
+
+Physical storage with persistent addresses includes
+- main DRAM memory (persists while a program is running)
+- Flash or Spinning Disk storage (persists until specifically erased)
+
+Objects /may/
+- be Mutable, i.e.
+      - their memory can be changed / overwritten
+            - in whole or in part
+- Represent a meaningful Value, e.g.
+      - Unicode /Text/ in a /String Object/
+      - Geometrical information in a /Vector/ or a /Tree/
+      - etc., etc. -- limitless possibilities
+- contain /Garbage/
+      - Bit values having no meaning to any program or programmer
+      - Ready to be overwritten with meaningful information
+      - Ready to be /Garbage Collected/ and recycled
+
+Objects /may have/ associated /methods/
+- a /Method/ is a procedure designed to operate on a particular kind of object
+- a /Method/ might or might not mutate the object when called
+- kinds of /Methods/ include
+      - Constructors :: store a meaningful value in an object
+      - Accessors :: retrieve values represented by an object
+      - Mutators :: modify all or part of an object to replace its old value
+        with a new value
+      - Destructors :: mark an object as /Garbage/ and facilitate the recycling of its storage
+
+/Accessors/ and /Mutators/ assume
+- the object is in a valid state when they are called
+
+/Mutators/ are designed to
+- leave the object in a valid state
+      - i.e. holding a meaningful value
+- if the object was in a valid state when they were called
+
+Object-Oriented Programming Systems are designed to
+- Manage the methods associated with objects
+- Ensure that only appropriate methods are called on objects
+      - that a constructor runs before any other methods
+- Ensure that objects are either in a valid state or are known to be garbage
