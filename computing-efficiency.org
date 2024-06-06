@@ -1,0 +1,273 @@
+* On Computing Efficiency
+
+This document is part of the [[https://github.com/GregDavidson/loel#readme][LOEL]] [[file:README.org][On-Computing]].
+
+Recommended Background
+- [[https://gregdavidson.github.io/on-computing/what-computers-are][What Computers Are]]
+      - Computer memory consists of contiguous Bits, Bytes and Words
+      - Words can hold /pointers/, i.e. addresses of any location in memory
+- [[https://github.com/GregDavidson/on-computing/blob/main/composites.org][Composite Data Structures]]
+      - Multi-Word Data Structures
+      - Contiguous, Linked, Volatile or Persistent
+
+Please assist us in making this material for learners interested in creating and
+software systems.
+
+**  [[https://github.com/GregDavidson/loel/blob/main/Gloss/tldr.org][TL;DR]]
+
+We want to be able to make our systems
+- Maximally responsive to interactive users
+      - No perceptible lag or jitter in audio or video or user interfaces
+- Perform computationally challenging operations ASAP
+      - With an option to monitor their progress
+      - And ability to prioritize multiple slow jobs
+
+Computers are really really fast, but
+- Good Realtime performance requires some sophistication
+- Some languages and libraries are much more performant than others!
+
+"*Premature optimization is the root of all evil*" - Donald Knuth
+
+Program first for
+- clarity
+- ease of understanding
+- ease of maintenance
+This will actually tend to improve performance!
+
+When performance is still not good enough
+- Find the small hot spots which are performance bottlenecks
+      - There are software tools which can help you find them
+- Optimize only the hot spots
+      - Verify that performance actually improves
+      - Some or all of the hot spots might not be in your code!
+
+** Improving Performance
+
+If you're here, you presumably have a program which is not exhibiting the
+performance you would like.
+
+Determine what aspect of performance is not what you'd like?
+- Speed
+- Memory Consumption
+- Network latency or bandwidth
+- Something else
+
+Improving performance where you don't need to is likely to make other aspects of
+your program worse, so start by finding out what aspect of performance you'd
+like to improve.
+
+Now, find out *what's stealing your performance*!
+- There may be software tools which can help you determine this.
+
+If you're very lucky, the issue is that you're using an Algorithm or Data Structure
+from a library which is less efficient than a much better one.
+- See /Evaluating Algorithms and Data Structures below/
+
+If you're somewhat lucky, the issue is with the way you wrote your code.
+- See /Evaluating Algorithms and Data Structures below/
+
+It's very common to discover that your performance is going into a part of the system
+which you can't directly fix, e.g.
+- Fundamental Local or Network Input/Output throughput or latency
+- Local or Remote Services
+- Algorithm / Data Structure libraries and you're using the most efficient
+
+If you can't change the code or the system where the bottleneck exists
+- see /Improving Your Design/ below!
+
+** What Is "Realtime"
+
+Is "realtime" the same as "real fast"?
+- Nope!
+
+Consider a music synthesizer
+- Do you want it to play the music faster?
+
+Consider a video game engine
+- Do you want the animation to happen as fast as possible?
+
+How does your graphical user interface respond to your gestures?
+- Does the display ever change just before you click on something?
+- Does the image of what you're interacting with visibly and smoothly respond to your gesture?
+      - Button changing shape
+      - Scrolling / dragging following your mouse
+      - Is there observable lag or jitter?
+      - etc.
+
+Realtime means
+- managing the computation and delivery of results so that the program is
+- in synchrony with real-world entities, i.e. users, devices, etc.
+
+Achieving realtime performance is difficult because
+- Modern computers are generally performing multiple processes
+- Predicting how long any significant computational step is hard
+      - rendering an image
+      - analyzing data
+      - communicate with a server over a network
+      - exchange updates with other clients over a network
+
+Techniques to maintain realtime include
+- Graceful degredation of resolution of video or high-resolution image
+      - e.g. Do a low-quality rendering first
+            - Discard or update with better as time allows
+            - Reuse 1 or 2 previous frames of a video
+- Immediately show smooth feedback to gestures
+      - Button changes appearance
+      - Drag low-resolution image smoothly if high-resolution drag would have
+        lag
+- If a visual control, e.g. a button or menu, was changed just an instant before
+  receiving a gesture
+      - do not assume the gesture was for the changed control area
+            - would the action be consequential and difficult to undo?
+                  - consider dropping the gesture
+                  - or getting confirmation
+      - do you have access to any lead-up gesture?
+            - 3D mouse, gesture tracking, eye tracking, etc.?
+      - avoid having control areas change once other things do!
+
+** Efficiency of Lists vs. Vectors
+
+Many elegant languages are oriented towards managing multiple values (or
+objects) in Lists, aka Linked-Lists. If so, you'll probably also have a vector
+(might be called an array) data structure as an alternative.
+
+On modern computer architectures Lists usually have worse performance than
+vectors. You should initially ignore that performance difference!
+
+Programmers should always try to make their programs as easy to understand as
+possible. They should also design their programs so that reasonable future
+changes are likely to be easy to make and can probably be made without program's
+clarity much if at all.
+
+"*Premature optimization is the root of all evil*, or at least most of it, in
+programming!"
+- to quote [[https://en.wikipedia.org/wiki/Donald_Knuth][Donald Knuth]]
+
+Knuth's principle suggests that the programmer should only optimize a program
+- when the program with all of its features is complete
+- yet it isn't as performant as desired
+- and you've run out of ways to optimize it for clarity
+
+After making any changes for efficiency
+- test thoroughly to confirm that the program is significantly more efficient
+      - make sure your input data is realistic
+- if it isn't more efficient, revert the changes!
+
+*** Analyzing Efficiency
+
+Big efficiency differences are generally caused by differences in algorithmic
+complexity, represented by /Order Notation/ aka /Big-O Notation/.
+
+An algorithm which requires =n*n= steps to processes =n= data elements has
+- time complexity of =Order n*n= aka =O(n*n)=
+An algorithm which requires extra storage proportional to =n*n= when it processes =n= data elements has
+- space complexity of =Order n*n= aka =O(n*n)=
+
+Here are a few examples
+- Indexing to a random place in a List requires =O(n)= steps.
+      - i.e. the average number of =cdr= operations required will be
+        proportional to the length of the list
+- Indexing to a random place in a Vector requires =O(1)= steps.
+      - i.e. 1 primitive machine operation to access any element
+- The best sorting algorithms for list or vector have time complexity of
+      - =O(n * log n)=
+      - sorting a list will also require =O(n)= extra space
+
+There are two additional reasons why Vectors tend to be more efficient than
+lists for most algorithms
+- Lists require twice as much memory since /cons-cells/ require 2 words
+- Modern computers use /cache/ memory for speed
+
+It used to be that lists were as efficient as vectors for sequential access.
+This has not been true since processors adopted /cache memory/. /Cache Memory/
+is a special kind of memory which is faster for the CPU to access than a
+computer's main memory. It can be more than 10 times faster. When modern
+processors load data from main memory, they will try to load several words of
+data at once, placing it into cache. When a vector is accessed this way, several
+elements of the vector are likely to now be in cache. When this is done with a
+list, only one cons-cell of the list will wind up in cache.
+
+*** Keep Your Simplest Code!
+
+If you wind up changing any of your code to improve its efficiency, and the new
+code isn't as simple as your own code:
+
+- Keep the original code, but /commented out/
+      - it's good documentation
+      - and a fall-back for when maintenance obsoletes the optimization
+            - a very common occurrence!
+
+** Janet Language prefers Vectors to Lists
+
+The very new [[https://janet-lang.org][Janet Language]] has a program syntax and programming style very
+similar to Lisp but it replaces Lists with Vectors. Some people argue that Janet
+is not a Lisp since it doesn't use lists. Others argue that using vectors
+instead of lists is not an important difference and that Janet is the future of
+Lisp! We'll reserve judgment and we won't mention Janet any further unless and
+until Janet or Janet-like languages get a lot more popular!
+
+** Evaluating Algorithms and Data Structures
+
+Algorithms and Data Structures get expensive when they're working with lots of
+values.
+
+Big efficiency differences are generally caused by differences in /algorithmic
+complexity/, represented by /Order Notation/ aka /Big-O Notation/.
+
+An algorithm which requires =n*n= steps to processes =n= data elements has
+- time complexity of =Order n*n= aka =O(n*n)=
+An algorithm which requires extra storage proportional to =n*n= when it processes =n= data elements has
+- space complexity of =Order n*n= aka =O(n*n)=
+
+Some examples of Time Complexity
+- Accessing a random place in a Linked List requires =O(n)= steps.
+      - Point at the beginning of the List
+      - The first element (if any) has index =i=0=
+      - the only way to get to element =i>0= is to follow pointers =i= times
+      - a random value of =i= is proportional to the number of elements =n=
+      - thus the time complexity is proportional to =n= or =O(n)=
+- Indexing to a random place in a Vector requires =O(1)= steps.
+      - Point at the beginning of the vector
+      - The elements of a vector are all the same size
+            - by definition of a vector
+            - (they may be pointer objects of diverse sizes)
+      - Add =i= times the address unit size of one element
+      - You're now pointing at the desired element
+      - This operation is cheap and the same for any element, so =O(1)=
+- The best sorting algorithms for list or vector have time complexity of
+      - =O(n * log n)=
+
+Some examples of Space Complexity
+- Storing a fixed size vector of =n= elements is =O(n)=
+      - There's usually a small header followed by =n= words of memory
+- Storing a growable vector of =n= elements is =O(n)=
+      - Such vectors usually allocate twice as much space as they need
+      - But /Order Analysis/ ignores small constant factors like 2!
+      - And when the space is full
+            - The vector gets reallocated twice as large
+            - The old elements are copied into the new space
+            - The space of the old vector space will need to be reallocated
+      - This is expensive (in time and space) but infrequent
+            - So it's also ignored!
+- Storing a Linked-List of =n= elements is =O(n)=
+      - Despite the fact that it requires two words per element!
+      - Order analysis ignores small constant factors like 2!
+- sorting a Linked-List requires =O(n)= extra space
+      - Storage needs to double, from =2*n= to =4*n=
+      - But it's temporary, so it might not matter to you!
+
+** Cacheing
+
+There are two additional reasons why Vectors tend to be more efficient than
+lists for most algorithms
+- Lists require twice as much memory since /cons-cells/ require 2 words
+- Modern computers use /cache/ memory for speed
+
+It used to be that lists were as efficient as vectors for sequential access.
+This has not been true since processors adopted /cache memory/. /Cache Memory/
+is a special kind of memory which is faster for the CPU to access than a
+computer's main memory. It can be more than 10 times faster. When modern
+processors load data from main memory, they will try to load several words of
+data at once, placing it into cache. When a vector is accessed this way, several
+elements of the vector are likely to now be in cache. When this is done with a
+list, only one cons-cell of the list will wind up in cache.

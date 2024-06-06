@@ -1,0 +1,80 @@
+#+TITLE: Programming Paradigms Matter
+# TAG OR CATEGORY HERE?
+
+* Programming Paradigms Matter
+
+** Introduction and Prerequisites
+
+Elsewhere I explain
+- When Choice of Programming Language Matters
+- Why Programming Tools Matter
+
+Here we want to explain
+- How, When and Why *Programming Paradigms Matter*
+- How the choice of Programming Paradigms interacts with
+      - Languages and Tools
+      - Application Domains
+      - Programming Situations
+- And the bottom line: *How you can program better!*
+
+Peter Van Roy has written brilliantly on this subject
+- Read the famous [[https://info.ucl.ac.be/~pvr/VanRoyChapter.pdf][Van Roy Chapter]]
+      - from his awesome but challenging [[https://www.info.ucl.ac.be/~pvr/book.html][Programming Book]]
+- *Really: Read the chapter now!* 
+
+Wikipedia has some articles based on Van Roy's distinctions
+- [[https://en.wikipedia.org/wiki/Programming_paradigm][wikipedia: Programming Paradigm]]
+- Wikipedia: [[https://en.wikipedia.org/wiki/Concepts,_Techniques,_and_Models_of_Computer_Programming][Concepts, Techniques, and Models of Computer Programming]]
+- *Read a bit of these articles now!*
+      - Come back and read more later!
+
+In what follows, I'm assuming
+- you have been exposed to the distinctions
+- but you haven't fully absorbed them
+- so they're not giving you all the value that's available
+
+My goal here is to increase the absorption!
+
+** Really Good Tutorials
+
+*** Casual Functional Programming
+
+You can greatly improve your programming by adopting a /Mostly Functional/
+approach to programming in any language.
+
+**** Languages which make Mostly-Functional Programming Especially Easy
+
+- Any Scheme-Based Lisp, such as Racket
+- Clojure and ClojureScript
+      - PROS:
+            - The builtin datatypes and operators make function programming
+              natural!
+      - CONS:
+            - Because of wanting to be compatible with Java and JavaScript
+                  - Clojure and ClojureScript lack
+                        - Tail-Call Optimization
+                        - Continuations
+            - Because of Rich Hickey's preferences
+                  - Clojure and ClojureScript lack
+                        - Manifest Typing
+
+*** Full-On Functional Programming
+
+Strongly Functional Programming Languages
+1. Haskell
+2. OCaml
+3. F#
+
+*** Object Oriented Programming
+
+Install either of
+- https://squeak.org/
+- https://pharo.org/
+Learn them by exploring them
+- Explore their various Tutorials
+- including the builtin ProfStef tutorials
+
+Needed: A step-by-step exploration guide for each of these two 1st-class
+Smalltalk environments.
+
+** Further Programming Paradigm Resources
