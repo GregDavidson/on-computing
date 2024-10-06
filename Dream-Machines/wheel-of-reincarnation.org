@@ -4,7 +4,7 @@ The /Wheel of Reincarnation/ is a term coined by the great [[https://en.wikipedi
 
 Ivan Sutherland is one of the most creative and seminal geniuses in the the
 development of computing and especially in computer graphics. In his 1963 PhD
-Project Sutherland invented
+thesis project Sutherland invented
 - Interactive 2d and 3d Computer Graphics
 - [[https://en.wikipedia.org/wiki/Computer-aided_design][CAD - Computer Aided Design]]
 - Parametric Constraint-Oriented Geometric Programming
@@ -20,26 +20,28 @@ ideas in some Eastern spiritual traditions.
 
 The pattern Sutherland noticed went like this:
 1. A general purpose processing unit, i.e. a CPU is programmed to solve an
-   important computationally task.
+   important computationally-intensive task.
 2. To speed up this solution a specialized but less flexible co-processor is
-   invented allowing the CPU to offload the routine computation. The CPU
-   offloads as much of the routine part of the computation to the co-processor
-   while providing overall control. Examples would be highly-parallel graphics
-   co-processors (GPUs) which perform repetitious graphics computations very
-   fast which themselves evolved from vector arithmetic co-processors.
+   invented which can do the simpler parts of the computation faster and
+   cheaper. The CPU continues to handle the more general parts of the program
+   which now includes managing the co-processor. Examples would be
+   highly-parallel graphics co-processors (GPUs) which perform repetitious
+   graphics computations very fast which themselves evolved from vector
+   arithmetic co-processors.
 3. These specialized processors are gradually improved to become more powerful,
    more flexible and gradually acquire programming capabilities. Eventually they
    become as programmable as the original general-purpose CPU. They take on more
    of the original task, then all of the original task, then an expansion of the
-   original task and brand new tasks. An example is how current GPUs have (1)
-   expanded the scope of graphics rendering to include, e.g. ray-tracing and (2)
-   have taken on the completely new task of training multi-level AI networks.
+   original task and then brand new tasks. An example is how current GPUs have
+   (1) expanded the scope of graphics rendering to include, e.g. ray-tracing and
+   (2) have taken on the completely new task of training multi-level AI
+   networks.
 4. To further speed up these new tasks, faster and more specialized but
    less-programmable co-processors are created, allowing the specialized CPU to
    off-load the computation which doesn't require the overhead of its
    programmability. But this is just a return to Step 2!
 
-The Wheel of Reincarnation have given us our modern computing systems with our
+The Wheel of Reincarnation has given us our modern computing systems with our
 CPU modules often having multiple chips, each chip having multiple "cores" and
 our motherboards having multiple additional CPUs, co-processors and
 device-specific "channel processors". (Multiple general-purpose processors and
@@ -78,19 +80,20 @@ With computation we have seen
 - Vacuum Tube Computing
 - Discrete Transistor Computing
 - Photolithographically-Etched Integrated-Circuit Computing
-      - Mostly silicon-based but also some other semiconductors
+      - Mostly silicon-based but exploiting some other semiconductors too
       - This turned the wheel fast for some time and is now slowing
 
 The current movement is towards
 - 2D to 3D circuitry
 
-Future big turns may involve shifts to new computing substrates
+Current research is exploring radical new computing substrates including
 - Optical computing
 - Molecular computing, e.g. DNA, biomolecular and nanotechnology
 - Ultra low power superconducting computing
 - Quantum Computing
-      - Great potential for specialized co-processing
-- and other alternative computing substrates
+
+Most of these potential new substrates are more suitable for building powerful
+specialized co-processors controlled by more conventional general processors.
 
 *We've only just begun!*
 
