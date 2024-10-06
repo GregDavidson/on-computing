@@ -1,0 +1,22 @@
+* Dream Machines
+
+I'm using the title /Dream Machines/ here to honor Ted Nelson's extraordinary
+1970 book /Dream Machines/ which is full of ideas for revolutionary computing
+devices which were at the edge of the /State of the Art/ in 1970 and which
+remain unbuilt despite being well within the /State of the Art/ for at least 30
+years now.
+
+I will be including here some of the ideas from /Dream Machines/ along with
+other ideas and systems from the imagination and early work of other seminal
+computists.
+
+It is our hope that this document inspire and support the development of some of
+these Dream Machines. Ideally as many as possible and ideally with Free/Libre
+Open-Source Software.
+
+Here are some of our favorite Dream Machines. And we'd like to hear about yours.
+Please feel free to contribute to this OrgMode document on our GitHub
+repository!
+
+** Augmentation of Intellect
+** EMycin Expert Systems

@@ -1,0 +1,105 @@
+* The Wheel Of Reincarnation
+
+The /Wheel of Reincarnation/ is a term coined by the great [[https://en.wikipedia.org/wiki/Ivan_Sutherland][Ivan Sutherland]].
+
+Ivan Sutherland is one of the most creative and seminal geniuses in the the
+development of computing and especially in computer graphics. In his 1963 PhD
+Project Sutherland invented
+- Interactive 2d and 3d Computer Graphics
+- [[https://en.wikipedia.org/wiki/Computer-aided_design][CAD - Computer Aided Design]]
+- Parametric Constraint-Oriented Geometric Programming
+- Object-Oriented Programming
+- and more!
+
+In 1968 Sutherland co-founded [[https://en.wikipedia.org/wiki/Evans_%26_Sutherland][Evans & Sutherland Computer Corporation]]
+which pushed the state of the art in computer graphics systems for many years.
+
+Over his career Sutherland noticed a pattern recurring over many generations of
+computer technology which he called /The Wheel of Reincarnation/ after analogous
+ideas in some Eastern spiritual traditions.
+
+The pattern Sutherland noticed went like this:
+1. A general purpose processing unit, i.e. a CPU is programmed to solve an
+   important computationally task.
+2. To speed up this solution a specialized but less flexible co-processor is
+   invented allowing the CPU to offload the routine computation. The CPU
+   offloads as much of the routine part of the computation to the co-processor
+   while providing overall control. Examples would be highly-parallel graphics
+   co-processors (GPUs) which perform repetitious graphics computations very
+   fast which themselves evolved from vector arithmetic co-processors.
+3. These specialized processors are gradually improved to become more powerful,
+   more flexible and gradually acquire programming capabilities. Eventually they
+   become as programmable as the original general-purpose CPU. They take on more
+   of the original task, then all of the original task, then an expansion of the
+   original task and brand new tasks. An example is how current GPUs have (1)
+   expanded the scope of graphics rendering to include, e.g. ray-tracing and (2)
+   have taken on the completely new task of training multi-level AI networks.
+4. To further speed up these new tasks, faster and more specialized but
+   less-programmable co-processors are created, allowing the specialized CPU to
+   off-load the computation which doesn't require the overhead of its
+   programmability. But this is just a return to Step 2!
+
+The Wheel of Reincarnation have given us our modern computing systems with our
+CPU modules often having multiple chips, each chip having multiple "cores" and
+our motherboards having multiple additional CPUs, co-processors and
+device-specific "channel processors". (Multiple general-purpose processors and
+channel processors are now part of our smallest computers, but were already
+ubiquitous in mainframe computers in the 1960s!)
+
+The Wheel of Reincarnation keeps turning and new trends are emerging, such as
+[[https://en.wikipedia.org/wiki/Dark_silicon][Dark Silicon]]. Once the Wheel was being driven only by the desire to increase
+computational power, but no longer!
+
+As we add more-and-more powerful processing units and more-and-more specialized
+co-processing units, we find that we can't afford to have all of that electronic
+circuitry fully powered up or turned on all at once! Our computing units will
+use too much power:
+- smart phones and wearables will get too hot and burn us!
+- battery-powered devices will run down too fast!
+- utility servers will cost too much to run!
+- desktop gaming systems and high-end servers will burn themselves up!
+
+Now a key part of the operating system is to strategically decide how to
+accomplish the desired workload while optimizing the energy usage and heat
+accumulation. Slow general CPUs and the simplest co-processors handle as much as
+possible. Faster CPUs and programmable co-processors are used in tactical
+bursts.
+
+Something like the Wheel of Reincarnation may be a general pattern in
+[[https://en.wikipedia.org/wiki/Accelerating_change][Accelerating change]]. The fastest turns of the wheel involve improvements along a
+known trajectory, such as improvements due to increasingly high-resolution
+photolithography or increasing exploitation of 3-dimensional circuitry. The
+slowest but largest turns of the Wheel involve shifts to entirely new
+technological bases.
+
+With computation we have seen
+- Mechanical Computing
+- Electro-Mechanical Computing
+- Vacuum Tube Computing
+- Discrete Transistor Computing
+- Photolithographically-Etched Integrated-Circuit Computing
+      - Mostly silicon-based but also some other semiconductors
+      - This turned the wheel fast for some time and is now slowing
+
+The current movement is towards
+- 2D to 3D circuitry
+
+Future big turns may involve shifts to new computing substrates
+- Optical computing
+- Molecular computing, e.g. DNA, biomolecular and nanotechnology
+- Ultra low power superconducting computing
+- Quantum Computing
+      - Great potential for specialized co-processing
+- and other alternative computing substrates
+
+*We've only just begun!*
+
+** References
+
+- [[https://en.wikipedia.org/wiki/Ivan_Sutherland][Ivan Sutherland]]
+- [[https://en.wikipedia.org/wiki/Sketchpad][Sketchpad Program]]
+- [[http://cva.stanford.edu/classes/cs99s/papers/myer-sutherland-design-of-display-processors.pdf][On the Design of Display Processors T. H. Myer, I. E. Sutherland]]
+- [[https://en.wikipedia.org/wiki/Evans_%26_Sutherland][Evans & Sutherland Computer Corporation]]
+- [[https://en.wikipedia.org/wiki/Moore%27s_law][Moore's law]] - computations per unit cost
+- [[https://en.wikipedia.org/wiki/Koomey%27s_law][Koomey's law]] -computations per unit of energy
+- [[https://en.wikipedia.org/wiki/Accelerating_change][Accelerating change]]
