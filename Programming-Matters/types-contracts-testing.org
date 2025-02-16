@@ -1,0 +1,125 @@
+* Types, Contracts, Testing: Oh Why?
+
+** TL;dr
+
+Computer Programs often behave differently
+than their authors and maintainers expect.
+
+What can you trust?
+
+Types, Contracts and Testing
+- Specify and clarify the program's possible behavior.
+- Provides some guarantees the program will behave that way!
+
+You can trust these things to the extent that they are
+- Clear, complete
+- Automatically checked by reliable tools
+
+** What Can You Trust and How Much?
+
+*** You Need a Specification
+
+A Program's Specification
+- Is what you want it to do when it runs.
+- Is what informs the programmer(s) how to write the code.
+
+Specifications need to be
+- Clear
+      - easily understood by all stakeholders
+      - Precise and unambiguous
+- Complete
+      - leaving no wiggle-room for unwanted behavior
+
+Specifications may expressed with some or all of
+- formal mathematical language
+      - precise
+      - not necessarily unambiguous or complete
+      - often not clear to human stakeholders
+- informal language and diagrams, e.g.
+      - English descriptions
+      - [[https://en.wikipedia.org/wiki/Unified_Modeling_Language][UML Models]]
+
+The specifications you can trust need to be enforced by
+- Compilers
+- Static Constraint Checkers
+- Dynamic (runtime) Checks
+      - Automatically inserted into the code.
+- Automated Testing
+
+*** Specifications Emerge from your Development Process
+
+Software Development and Maintenance is /Iterative/:
+- Everything evolves over time.
+- The specifications evolve
+      - ideally becoming more complete and clear
+      - changing as expectations and needs change
+ 
+The [[https://en.wikipedia.org/wiki/Unified_process][Unified Software Development Process]] describes this very well
+- We will not try to reiterate it!
+
+*** Automate Everything!
+
+As your specifications emerge and develop, convert them into
+automatically enforceable constraints:
+- /Constraints/ expressed in a formal language
+      - Including [[https://en.wikipedia.org/wiki/Data_type][Datatype Specifications]] on
+            - the parameters and results of all procedures and APIs
+            - all data values that are part of the system
+- [[https://web.archive.org/web/20240103193804/https://en.wikipedia.org/wiki/Test_case][Test Cases]] written in clear code
+      - Ideally [[https://en.wikipedia.org/wiki/Data_type][Statically Typed]] [[https://en.wikipedia.org/wiki/Declarative_programming][Declarative Code]], e.g.
+            - Typed [[https://en.wikipedia.org/wiki/Functional_programming][Functional Code]]
+            - Typed [[https://en.wikipedia.org/wiki/Constraint_programming][Constraint]] [[https://en.wikipedia.org/wiki/Constraint_logic_programming][Logic]] Code
+
+** Terminology
+
+*** Constraint
+
+- A formal (mathematical) expression limiting the behavior of a system and/or
+  the values allowed in, e.g. a system's inputs or outputs.
+- See
+      - [[https://duckduckgo.com/?q=sql+schema+constraints][SQL Schema Constaints (Web Search)]]
+            - [[https://en.wikipedia.org/wiki/Relational_database#Constraints][SQL (Relational Database) Schema Constraints]]
+      - [[https://en.wikipedia.org/wiki/Object_Constraint_Language][UML Object Constraint Language]]
+      - [[https://en.wikipedia.org/wiki/Constraint_(mathematics)][Constraint (mathematics)]]
+      - [[https://en.wikipedia.org/wiki/Constraint_programming][Constraint Programming]]
+
+*** Data Type
+
+In a computer program, a /value/ is a /piece of data/ which represents some
+meaningful value in the domain of the program.
+- See
+      - [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] for Elementary Data
+      - [[https://github.com/GregDavidson/on-computing/blob/main/composites.org][Composite Data Structures]]
+
+Data values can be thought of as members of a [[https://en.wikipedia.org/wiki/Data_type][Data Type]].
+
+Values are typically associated with an /Identifier/ or held in a /Collection/
+associated with such. For convenience we'll call any place a Value occupies in a
+program a /Parameter/ of that program.
+
+While it is often impossible to know the /value/ of a parameter within a system,
+it is often possible to know what /Data Type/ that value will have.
+
+Specifying the /Data Type/ of a parameter is a /Type Constraint/.
+
+For example, a Parameter's allowed Values could be constrained to be
+- The name of a US State
+- A Temperature in Celsius
+- A Graphical Image for a character in a Computer Game
+- etc.
+
+A /Static Type Constraint/ on a parameter can be checked without running the
+program. Such constraints must be expressed Lexically, i.e. as part of or
+referencing the [[https://en.wikipedia.org/wiki/Programming_language][Programming Language]] Code defining the program.
+
+A /Dynamic Type Constraint/ is dependent on the behavior of the program.  Such 
+a constraint can only be checked while the program is running.
+
+Ideally Dynamic Type Constraints are expressed as part of the specification of
+some part of the system and extra code is automatically generated to check all
+such constraints while the program is running.
+
+See Dynamic General Constraints in the section below for issues related to
+Dynamic Type Constraints.
+
+*** General Constraints
