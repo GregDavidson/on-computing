@@ -1,0 +1,280 @@
+* Leveraging Artificial Intelligence Opportunities
+
+** TL/dr: Executive Overview
+
+Artificial Intelligence (AI) technologies present many potential opportunities
+for humanity.  This includes
+- IKAI :: [[https://en.wikipedia.org/wiki/Machine_learning][Implicit-Knowledge based AI]]
+- EKAI :: [[https://en.wikipedia.org/wiki/GOFAI][Explicit-Knowledge based AI]]
+- Hybrid-AI :: Systems combining elements of IKAI and EKAI
+
+Much of the recent excitement around AI is based on recent successes of the IKAI
+approach, especially with [[https://en.wikipedia.org/wiki/Large_language_model][Large-Language Models (LLMs)]].
+
+We claim that
+- directly applying IKAI to challenging problems is usually a mistake.
+and that instead
+- *IKAI should be used to help build Non-AI and Hybrid-AI solutions!*
+
+** Expanding our Claims
+
+IKAIs consist of multi-layered networks trained on huge datasets.
+- inspired by networks of biological neurons
+- but IKAI systems don't actually work like biological nueral networks
+- /Researchers don't yet know why IKAIs work so well!/
+
+IKAIs go by various names such as
+- Machine Learning Systems (ML)
+- Large Language Models (LLMs)
+- Artificial Neural Networks
+      - despite their /not/ working like biological neural networks
+
+IKAI contrasts with EKAI: Explicit Knowledge-based Artificial Intelligence.
+
+EKAI is based on explicit human-auditable facts and rules.
+
+Creating good EKAI systems has traditionally required
+- lots of time and effort
+- from teams of expert human AI developers
+- with a significant risk of project failure
+- Just like all other ambitious computer programming projects!
+
+EKAI includes many techniques, including
+- [[https://en.wikipedia.org/wiki/GOFAI][GOFAI: Good Old-Fashioned AI]]
+- [[https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning][Knowledge Representation and Reasoning]]
+- [[https://en.wikipedia.org/wiki/Knowledge-based_systems][Knowledge-Based Systems]]
+
+The hope of many is that IKAI systems can
+- Be built largely automatically
+      - without expensive expert human AI developers
+      - with less chance of project failure
+- Will outperform EKAI systems
+
+Currently
+- IKAIs have indeed outperformed some EKAI systems
+      - Board Games such as Chess, Go, Backgammon, et al.
+- IKAI /development/ is very expensive in computer resources and energy
+      - but that is [[https://en.wikipedia.org/wiki/Koomey%27s_law][expected to decrease]]
+- IKAI systems require more resources to run than EKAI and non-AI systems require
+      - already being addressed with recent more powerful "AI" chips
+- Many IKAI systems are proving to be unreliable
+      - e.g. LLMs often "hallucinate" incorrect results
+
+** Direct Application of IKAI
+
+Most current AI projects attempt to use IKAI to
+- directly solve problems
+- without human collaboration
+
+Board Games, e.g. Chess, Go, Backgammon, et al
+- Training Data: Huge numbers of complete games
+      - Some involving human players
+      - Many more from AIs playing against AIs
+- Input: A game board in play
+- Output: A good next move
+
+Automated Driving
+- Training Data: Very many practice drives with correlated
+      - location information
+      - camera images
+      - vehicle control signals
+- Input:
+      - Desired Destination
+      - Continuous
+            - location information
+            - camera images
+- Desired Output: Appropriate realtime control signals to
+      - safely and efficiently
+      - drive the vehicle to the desired destination
+      - parking if desired
+
+AI Generated Raster-Graphics Imagery
+- Training Data:
+      - Massive amounts of imagery accompanied by descriptions
+            - available by scraping the web
+            - imagery in or converted-to a common raster format
+- Input: Description of desired imagery
+- Desired Output: Raster Graphic Image
+
+Realtime Speech-Based Systems
+- Training Data: Lots of audio of speech with desired responses
+      - Transcriptions might be provided as well
+- Input: Speech in audio form
+- Desired Output: Task behavior, e.g.
+      - Reply to customer request
+      - Operation of equipment
+
+We claim that
+- These systems are a poor use of AI
+because
+- they are black-boxes which can't be validated
+- nothing prevents them occasionally making serious mistakes
+- they can't easily take advantage of what a human partner could offer
+
+** AI / Human Partnership
+
+Some of the work produces results which can be readily inspected by and altered
+by humans:
+
+Speech Recognition
+- Training Data: Lots of audio of speech with transcriptions
+- Input: New speech audio
+- Output: Transcription of new speech
+
+AI Generated SVG Imagery Descriptions
+- Training Data:
+      - Massive amounts of SVG imagery accompanied by descriptions
+            - available by scraping the web
+- Input: Description of desired imagery
+- Output: SVG Model of Graphic Image
+
+Research Reports
+- Training Data:
+      - all recorded human knowledge in written form
+      - Lots of example questions with example reports
+            - with human criticism and ratings on quality metrics
+- Input: New research question
+- Output: Research report addressing the research question
+      - hopefully accurately and succinctly
+
+Computer Programming
+- Training Data: Huge numbers of computer programs in many programming
+  languages along with their specifications.
+- Input: Short description of desired new problem to solve
+      - in selected programming language
+- Output: Human-Understandable program in required programming language
+      - which correctly solves the desired problem
+      - with reasonable efficiency
+
+We claim that
+- These systems could be made much better
+by
+1. Producing higher-level human-friendly output formats
+- Especially for computer programs (see below)
+2. Collaborating with humans
+- Responding to human input and edits
+3. Where possible, rather than directly performing a task
+- Producing transparent, verifiable non-AI computer programs to do a task
+- Producing explicit Knowledge-Based AI Systems where conventional
+  programs can't do a task.
+- Using LLM and similar non-explicit AI to support rather than replace the
+  more transparent approaches.
+
+If AI systems can automate /Computer Programming/
+- why can't they automate the production of EKAI systems
+- and Hybrid-AI systems
+and *get the best of both worlds?!*
+
+** An AI-Enabled Development Process for a Non-AI System
+
+When a problem can be solved with a
+- a traditional Non-AI computer system
+it tends to be better than an AI system
+- More predictable and verifiable
+- More efficient
+
+This is especially the case if the program is produced
+- with an excellent [[https://en.wikipedia.org/wiki/Software_development_process][Software Development Process]]
+- producing a complete, excellent declarative specification
+- leveraging maximally-declarative [[https://en.wikipedia.org/wiki/Programming_paradigm][Programming paradigms]]
+      - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]]
+
+Excellent Non-AI software systems consist of
+
+- Specification
+      - a declarative model of the desired system viewed from the outside
+            - a concise, readable, complete and correct
+                  - may include formal and informal language and diagrams
+            - it is declarative (specifying what is true about it)
+            - not procedural (saying how it works)
+- Architecture Model
+      - Divides the system's functionality into modules
+            - based on [[https://en.wikipedia.org/wiki/Separation_of_concerns][a separation of concerns]]
+            - each module responsible for one part of system functionality
+            - modules are developed just as whole system developed
+                  - Specification of module from the outside
+                  - Specification of how modules work together
+            - good modules exhibit
+                  - high-cohesion & low coupling
+                  - clean interfaces hiding internal complexity
+      - Modules can be further subdivided into sub-modules, recursively
+- Design Model and Implementation Model for each Module
+      - The Design Model specifies higher-level layers
+            - directly related to the specification of each module
+            - using high-level computing concepts, e.g.
+                  - generic operations on generic datatypes
+                  - relations among abstract elements
+      - The Implementation Model specifies lower-level layers
+            - how to implement the corresponding Design Model layers
+            - with completely specified mechanisms, e.g.
+                  - fully elaborated algorithms and data types
+                  - procedures with complete signatures and computable bodies
+                  - specific types and other constraints
+                  - indexes and other performance-related elements
+            - often customized and adapted for the specific problem
+- Testing and Constraint Models
+      - Static and Dynamic Type & Value Constraints
+      - Unit and Integration Test Models
+            - covering all operating scenarios of the system
+            - complete coverage ideally guaranteed by automated prover
+      - Assurances that the system meets the specification
+            - maximally verified before running the program
+                  - static type checking and static evaluation
+            - otherwise checked at runtime
+                  - ideally by tests
+
+Do you see why creating such a complex artifact
+- consisting of all of the models described above
+requires
+- a team of expert developers
+- working over months or years
+- with a significant risk of failure?
+
+If AI can help, we don't want it to just produce
+- a large chuck of software code which seems to do the job
+- which we'll now need a team of software engineers to debug
+
+A good software development AI system should
+- all of the models described above
+- collaborating with a small team of expert software developers
+
+At least some collaboration with human experts is required to ensure
+- the system has all of the characteristics we need now
+      - including subtleties like resilience and security
+- and will be easy to adapt as needs change over time
+
+What we should expect and demand is not total automation, but
+- the ability to set the highest standards
+- a significant decrease in the cost of development
+- a reduction is the risk of failure
+- ==> an increase in total productivity!
+
+** A Development Process For A System Incorporating AI
+
+We would like to automate all tasks
+- that humans want done
+- but don't want to do themselves.
+
+Any task that doesn't need AI
+- should be automated using non-AI technology
+- using AI to help develop the solution
+
+When a task needs AI
+- The Development Process should notice that!
+- The Architecture Model should break the system down into
+      - Modules which don't require AI technologies
+      - Modules which will require AI
+      - Modules which will require Human Collaboration
+- Any module might require /a combination of these approaches!/
+- Any AI required might be
+      - just EKAI - preferred
+      - Hybrid-AI - the next best
+            - the EKAI parts check the IKAI parts
+            - (Reference Generate & Test; Heuristic Search?)
+      - pure IKAI
+            - probably a mistake!
+            - IKAI is usually untrustworthy by itself
+
+The overall development process will have all of the elements described above
+for A Non-AI Development Process, and should produce all of the models described
+there!
