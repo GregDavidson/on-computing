@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>(jgd simple note) What Computers Are</title>
+		<!-- <link rel="stylesheet" type="text/css" href="/jgd/jgd.css"> -->
+		<link rel="stylesheet" type="text/css" href="../tech-notes.css" />
+		<link rel="stylesheet" type="text/css" href="what-computers-are.css" />
+		<script type="text/javascript" src="what-computers-are.js"> </script>
+		<!-- How can we move javaScript to end of <body> for efficiency??? -->
+	</head>
+  
+	<body>
+		<h1>What Computers Are, Part 2</h1>
+		<h3>
+			<a href="https://github.com/GregDavidson">J. Greg Davidson</a>
+			<a href="https://github.com/GregDavidson/on-computing">On Computing</a>
+    </h3>
+    <div class="h2">
+      <h2>Read <a href="index.html">Part 1</a> First!</h2>
+      <p>
+        In <a href="index.html">Part 1</a> we learned about Bits, Bytes and Words.
+      </p>
+      <p>
+        We're going to want to find out how to build arbitrarily large and sophisticated Data Structures
+        out of those small building blocks.
+      </p>
+      <p>
+        But first: We need to go down a level to find out about the more primitive
+        switches which bits are made out of, because they're also what the
+        circuitry which implements computer operations are made of.
+      </p>
+    </div>                      <!-- h2 -->
+    <div class="h2">
+      <h2> How do Memory and Operations work physically? </h2>
+      <p>
+        In modern computers memory and operations are implemented by physical
+        devices called <a
+        href="https://en.wikipedia.org/wiki/Transistor">transistors</a>.
+      </p>
+      <p>
+        In digital electronics, transistors are switches. But not the kind we
+        looked at in Part 1.
+      </p>
+      <p>
+        Transistors change their output almost immediately when their
+        input changes and they tend to consume power all the time.
+      </p>
+      <p>
+        Fortunately, it's possible to wire up a collection of transistors
+        to not use much power until something needs to change and to hold values
+        constant until that time.
+      </p>
+    </div>                      <!-- h2 -->
+    <div class="h2">
+      <h2> Fast Memory </h2>
+      <ul>
+        <li> Modern CPU
+        <a href="https://en.wikipedia.org/wiki/Integrated_circuit">chips</a>
+        use fast
+        <a href="https://en.wikipedia.org/wiki/Static_random-access_memory">SRAM</a>
+        memory to hold data.
+        </li>
+        <li> It takes 4-6 <em>transistors</em> to make one SRAM <em>bit</em>!</li>
+      </ul>
+    </div>                      <!-- h2 -->
+    <div class="h2">
+      <h2> Logic Gates to Operations </h2>
+      <p>
+        A few transistors can be wired together to create
+        <a href="https://en.wikipedia.org/wiki/Logic_gate">logic gates</a> which can
+        compute simple operations on single bits
+        <br />
+        e.g. a
+        <a href="https://en.wikipedia.org/wiki/NAND_gate">NAND gate</a>
+        computes NOT AND:
+      </p>
+      <table border="1">
+	      <thead>
+          <tr> <td> Input 1</td> <td>Input 2</td> <td> <em>(AND)</em> </td> <td> Output (NAND)</td> </tr>
+        </thead>
+        <tbody>
+          <tr> <td>false</td> <td>false</td> <td><em>false</em></td> <td>true</td> </tr>
+          <tr> <td>false</td> <td>true</td> <td><em>false</em></td> <td>true</td> </tr>
+          <tr> <td>true</td> <td>false</td> <td><em>false</em></td> <td>true</td> </tr>
+          <tr> <td>true</td> <td>true</td> <td><em>true</em></td> <td>false</td> </tr>
+        </tbody>
+      </table>
+      <p>
+        Logic gates can be wired together to create more complex
+        <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit">operations</a>
+        on groups of bits, e.g. <em>words</em>.
+      </p>
+    </div>                      <!-- h2 -->
+    <div class="h2">
+      <h2> Operations work on Registers </h2>
+      <ul>
+        <li>
+          All CPUs have a small number of words called <em>registers</em> made of DRAM.
+        </li>
+        <ul>
+          <li> e.g. the original ARM CPU had 15 32-bit registers</li>
+        </ul>
+        <li> The built-in operations of a computer are designed to work between registers</li>
+        <li>There are, however, special operations which can copy data between registers and
+        <ul>
+          <li> main memory, made of slower but much cheaper
+          <a href=" https://en.wikipedia.org/wiki/Dynamic_random-access_memory">DRAM</a>
+          </li>
+          <li> Input/Output devices, e.g. displays, keyboards, network cards, etc.</li>
+        </ul>
+        </li>
+      </ul>
+      At this
+      <a href="https://en.wikipedia.org/wiki/Microarchitecture"> lowest level</a>,
+      computing consists of
+      <ul>
+        <li> bits, bytes and words being transfered to registers from Main Memory or Input Devices </li>
+        <li> operations being carried out between registers </li>
+        <li> results being transfered to main memory or Output Devices </li>
+      </ul>
+    </p>
+    <h2> Going Large Now: Data Structures </h2>
+    <p>
+        Data Structures are the heart of computer programs. Arbitrarily large and
+        complex data structures can be created from Bytes and Words using only four
+        strategies, each of which builds on the earlier ones and the techniques
+        introduced above.
+      </p>
+      <ol>
+        <li> Store Data Objects Contiguously in Memory </li>
+        <p>
+          This is the strategy we applied with building Bits into Bytes and Bytes
+          into Words. We can continue using this strategy to build larger objects.
+          <br />
+          We generally distinguish between three kinds of contiguous objects:
+          <dl>
+            <dt>Arrays aka Vectors</dt>
+            <dd>whose components, called <em>elements</em>, are all of the same size</dd>
+            <dt>Structures aka Records</dt>
+            <dd>whose components, called <em>fields</em> may be of different sizes</dd>
+            <dt> Dictionaries aka Hashs aka Hash Arrays</dt>
+            <dd> store Data Objects using Key Values!
+              <ul>
+                <li> Associate each object with a <em>Key Value</em> </li>
+                <li>
+                  A <a href="https://en.wikipedia.org/wiki/Hash_function">Hash Function</a>
+                  maps the Key Value to a unique integer Hash Code
+                </li>
+                <ul>
+                  <li> Creating a good Hash Function is a bit of an art! </li>
+                  <li> You want the integers to be as random as possible. </li>
+                  <li> With a range from 0 to twice the number of expected items. </li>
+                </ul>
+              </ul>
+            </dd>
+          </dl>
+        </p>
+        <li>
+          Graph Structures: Objects Connected by Pointers
+          <dl>
+            <dt>Pointer aka Address</dt>
+            <dd>the location of an objects in Main Memory
+              <ul>
+                <li> Think of Main Memory as a huge array of bytes numbered from 0.</li>
+                <li> All objects in Main Memory consist of one or more bytes. </li>
+                <li> An object's address is the address (number) of its first byte. </li>
+              </ul>
+            </dd>
+          </dl>
+          <ul>
+            <li> Array elements can contain <em>Pointers</em> to any Object in Memory</li>
+            <li> Records can have fields which contain <em>Pointers</em> to other Objects</li>
+            <li> Each <em>Nodes</em> aka <em>Components</em> Object of a Graph Structure
+            <ul>
+              <li> Can be located anywhere in memory </li>
+              <li> Can be shared, i.e. be part of multiple Graph Structures </li>
+            </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+      <p>
+        A key property of each of these strategies is how they allow a program to find the component parts of each object.
+      </p>
+      <dl>
+        <dt> array </dt>
+        <dd> the location of any element is its index times the element size </dd>
+        <dt> structure </dt>
+        <dd> the program must know the offset of each field from the beginning of the structure </dd>
+        <dt> hash </dt>
+        <dd> the program computes the hash from a key to find the desired element </dd>
+        <dt> graph </dt>
+        <dd> the program uses the stored pointer to find the desired element </dd>
+      </dl>
+      <p>
+        Because their storage is not contigious, Graph Structures
+        can <em>grow</em> and <em>rearrange their Nodes</em> without
+        having to move or copy any existing parts!
+      </p>
+      <p>
+        Most advanced Data Stuctures are various kinds of Graph
+        Structures!
+      </p>
+      <p>
+        At this point I recommend browsing the examples at <a href="https://www.geeksforgeeks.org/data-structures/">GeeksForGeek's Data Structures</a>.
+      </p>
+    </div>
+    <div class="h2">
+      <h2>Low-Level Assembly-Language Programming</h2>
+      <p>
+        The lowest level a human programmer can work at is the language defined
+        by the <em>Instruction Set Architecture</em> aka <em>ISA</em> of a given
+        family of CPUs.
+      </p>
+      <p>
+        In practice, low-level programmers write programs in an <em>Assembly Language</em> which is
+        <ol>
+          <li> unique to a specific <em>ISA</em> </li>
+          <li> a text notation that's more human-friendly than binary <em>ISA</em> instructions </li>
+          <li> easily translated into the binary <em>ISA</em> instructions </li>
+        </ol>
+      </p>
+      <ol>
+        <li> A low-level programmer writes their program in <em>Assembly
+        Language</em> with a text editor.
+        </li>
+        <li>
+          An <em>Assembler</em> program translates the assembly-language
+          <em>source program</em> into a binary program file.
+        </li>
+        <li>
+          When the binary program is loaded into the computer the hardware of
+          the machine starts translating and executing the <em>ISA</em>
+          instructions.
+        </li>
+      </ol>
+      <p>
+        High performance CPUs don't directly execute <em>ISA</em> instructions!
+      </p>
+      <p>
+        An ISA is defined for a family of compatible Processors implemented by
+        many CPU models which can all understand the same ISA instructions.
+      </p>
+      <p>
+        Each model of CPU within a Processor family has its own Micro-Architecture
+        with its own hidden internal machine language.
+        <br />
+        It has the ability to translate the generic family <em>ISA</em>
+        instructions into its own internal language.
+        <br />
+        It may also may understand (translate) some extra <em>ISA</em>
+        instructions which only some models of the Processor family understand.
+      </p>
+      <p>
+        The advantages of this arrangement are that
+        <ul>
+          <li>
+            All chips within a Processor family can execute any program written in its
+            family's common <em>ISA</em> language. (Using any model-specific
+            instruction features in a program will limit which CPU models will
+            be able to execute that program.)
+          </li>
+          <li>
+            New models of chips can come up with new and faster ways to carry
+            out the operations specified by the family's <em>ISA</em> language.
+            They can also come up with special new instructions and even
+            extensions to existing instructions.
+          </li>
+        </ul>
+        Some disadvantages of this arrangement are that
+        <ul>
+          <li>
+            A significantly more efficient program can be written for a specific
+            CPU model by utilizing knowledge of it's special capabilities
+            and how it will translate the program.
+          </li>
+          <li>
+            Most programmers don't want their programs to be restricted to only
+            running on a single Processor family, let alone only running efficiently
+            on some models of that family!
+        </ul>
+        For these reasons most programmers do not use Assembly Language much.  Instead, most programmers
+        write most of their code using <em>High-Level Programming Languages</em>.
+      </p>
+    </div>
+    <div class="h2">
+      <h2>Programming in High-Level Languages</h2>
+      <p>
+        An assembly Language is designed to help programmers deal with a
+        language which is oriented to the architecture of a particular Processor
+        family. An fairly simple <em>Assembler</em> program translates an
+        <em>Assembly Language</em> program into a binary program which a CPU can
+        "understand", i.e. translate and execute.
+      </p>
+      <p>
+        A modern high-level programming language is designed for a human
+        programmer's concepts of programming. A sophisticated <em>Compiler</em>
+        program translates a high-level programming language into the binary
+        language of a Processor family or of a particular model (or set of
+        models) within a Processor family. The best compilers can produce more
+        efficient code than all but the very best low-level programmers.
+        High-level programs
+        <ul>
+          <li>
+            Will work with any model of many different Processor families. Even
+            new CPUs and Processor Families which didn't exist when the program
+            was written. And as compilers improve, the same programs
+            automatically get more efficient.
+          </li>
+          <li>
+            Are easier for programmers to write, understand and maintain,
+            including adding new features and otherwise adapting a program for
+            changing requirements.
+          </li>
+      </p>
+    </div>
+    <div class="h2">
+      <h2>Which Language Should You Use?</h2>
+      <p>
+        Most programmers find it easiest to learn and be productive in Programming
+        Languages which are similar to languages they already know. This is
+        unfortunate because most languages which are taught in Schools are very
+        limited.
+      </p>
+      <p>
+        But don't just take our word for it. Read
+        <a href="https://en.wikipedia.org/wiki/Paul_Graham_(programmer)">Paul Graham's</a>
+        account of how he became rich and influential because of his choice of language:
+        <a href="http://www.paulgraham.com/avg.html">Beating the Averages</a>.
+      </p>
+      <p>
+        If you want to do powerful and creative things with computers it is
+        important to (1) use a low-level language just long enough to understand
+        how to build powerful abstractions and then (2) graduate to using
+        higher-level languages which build-in some of those key abstractions
+        allowing you to program more concisely with less effort.
+      </p>
+      <p>
+      We recommend reading our guide to
+      <a href="https://github.com/GregDavidson/computing-magic/blob/main/Languages-And-Platforms/choosing-languages.org">Choosing Computer Languages</a>.
+      </p>
+    </div>
+    <div class="h2">
+      <h2> Learn Many Programming Paradigms! </h2>
+      <p>
+        A Programming Paradigm is a fundamental way of approaching programming,
+        of thinking of computation. Problems which are difficult to solve using
+        one Paradigm can often be easily solved by applying a different
+        Paradigm. Programming Languages can be seen as belonging to different
+        families based on which Programming Paradigms they are best at
+        exploiting. One of the best ways of learning diverse and powerful
+        Programming Paradigms is by programming for awhile in elegant languages
+        of diverse families!
+      </p>
+      <p>
+        Perhaps the real value of High-Level Programming Languages is that they
+        make it easier to leverage powerful Programming Paradigms. The
+        Programming Paradigms which are most useful for your needs should inform
+        your choice of programming language.
+      </p>
+      <p>
+        Key reading material
+      </p>
+      <ul>
+        <li>
+          <a href="https://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia's List of Programming Paradigms</a>
+        </li>
+        <li>
+          <a href="https://www.info.ucl.ac.be/~pvr/paradigms.html">the Programing Paradigms Poster</a>
+        </li>
+        <li>
+          <a href="http://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf">Programming Paradigms for Dummies: What Every Programmer Should Know (PDF)</a>
+        </li>
+      </ul>
+        </dd>
+      </dl>
+    </div>
+    <div class="h2">
+      <h2> References for What Computers Are </h2>
+      <dl>
+        <dt> <a href="https://en.wikipedia.org/wiki/Memory_hierarchy"> Memory Hierarchy </a> </dt>
+        <dd> Computers use several kinds of memory with very different performance characteristics </dd>
+        <dt> <a href="https://github.com/GregDavidson/on-computing/blob/main/composites.org"> Custom Data Structures: Composites </a> </dt>
+        <dd> Details on Composite Data Structures with code in multiple Computer Programming Languages </dd>
+      </dl>
+    </div>
+  </body>
+</html>
