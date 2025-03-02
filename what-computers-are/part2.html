@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="what-computers-are.js"> </script>
 		<!-- How can we move javaScript to end of <body> for efficiency??? -->
 	</head>
-  
+
 	<body>
 		<h1>What Computers Are, Part 2</h1>
 		<h3>
@@ -94,16 +94,17 @@
       <h2> Operations work on Registers </h2>
       <ul>
         <li>
-          All CPUs have a small number of words called <em>registers</em> made of SRAM.
+          CPUs have a small number of words called <em>registers</em> made of SRAM.
           <ul>
-            <li> e.g. the original ARM CPU had 15 32-bit registers</li>
+            <li> the original 8086 CPU had 14 32-bit registers</li>
+            <li> the original ARM CPU had 15 32-bit registers</li>
           </ul>
         </li>
-        <li> The built-in operations of a computer are designed to work between registers</li>
-        <li>There are, however, special operations which can copy data between registers and
+        <li> The built-in operations of a computer work between registers.</li>
+        <li> Plus special operations which can copy data between registers and
         <ul>
-          <li> main memory, made of slower but much cheaper
-          <a href="https://en.wikipedia.org/wiki/Dynamic_random-access_memory">DRAM</a>
+          <li> Main Memory, made of slower but much cheaper
+          <a href="https://en.wikipedia.org/wiki/Dynamic_random-access_memory">DRAM</a>.
           </li>
           <li> Input/Output devices, e.g. displays, keyboards, network cards, etc.</li>
         </ul>
@@ -111,7 +112,7 @@
       </ul>
       <p>
         At this
-        <a href="https://en.wikipedia.org/wiki/Microarchitecture"> lowest level</a>,
+        <a href="https://en.wikipedia.org/wiki/Microarchitecture">lowest level</a>,
         computing consists of
       </p>
       <ol>
@@ -122,6 +123,15 @@
     </div>
     <div class="h2">
       <h2> Going Large Now: Data Structures </h2>
+      <dl>
+        <dt>Note</dt>
+        <dd>
+          When you've finished this section and the later section on High-Level
+          Languages, see the reference at the bottom with examples of
+          <em>Composite Data Structures in High-Level Programming
+          Languages</em>.
+        </dd>
+      </dl>
       <p>
         Data Structures are the heart of computer programs. Arbitrarily large and
         complex data structures can be created from Bytes and Words using only four
@@ -139,39 +149,42 @@
         </p>
         <dl>
           <dt>Arrays aka Vectors</dt>
-          <dd>whose components, called <em>elements</em>, are all of the same size</dd>
+          <dd>have <em>elements</em> which are all of the same size</dd>
           <dt>Structures aka Records</dt>
-          <dd>whose components, called <em>fields</em> may be of different sizes</dd>
-          <dt> Dictionaries aka Hashs aka Hash Arrays</dt>
-          <dd> store Data Objects using Key Values!
+          <dd>have <em>fields</em> which may be of different sizes</dd>
+          <dt>
+            Dictionaries aka
+            <a href="https://en.wikipedia.org/wiki/Hash_table">Hash Tables</a>
+          </dt>
+          <dd> store Elements in an Array at Locations based on <em>Key Values</em>.
           <ul>
-            <li> Associate each object with a <em>Key Value</em> </li>
             <li>
-              A <a href="https://en.wikipedia.org/wiki/Hash_function">Hash Function</a>
-              maps the Key Value to a unique integer Hash Code
-            <ul>
-              <li> Creating a good Hash Function is a bit of an art! </li>
-              <li> You want the integers to be as random as possible. </li>
-              <li> With a range from 0 to twice the number of expected items. </li>
-            </ul>
+              A <a href="https://en.wikipedia.org/wiki/Hash_function">Hash
+              Function</a> is used to map a Key Value to an integer <em>Hash
+              Code</em> suitable for use as an Array Index.
+              <ul>
+                <li> You want the integers to be as random as possible, </li>
+                <li> with a range from 0 to about twice the number of expected items. </li>
+                <li> Creating a good Hash Function is a bit of an art! </li>
+              </ul>
             </li>
           </ul>
           </dd>
         </dl>
-    </li>
-    <li>
-      Graph Structures: Objects Connected by Pointers
-      <dl>
-        <dt>Pointer aka Address</dt>
-        <dd>the location of an objects in Main Memory
-        <ul>
-          <li> Think of Main Memory as a huge array of bytes numbered from 0.</li>
-          <li> All objects in Main Memory consist of one or more bytes. </li>
-          <li> An object's address is the address (number) of its first byte. </li>
-        </ul>
-        </dd>
-      </dl>
-      <ul>
+        </li>
+        <li>
+          Graph Structures: Objects Connected by Pointers
+          <dl>
+            <dt>Pointer aka Address</dt>
+            <dd>the location of an objects in Main Memory
+            <ul>
+              <li> Think of Main Memory as a huge array of bytes numbered from 0.</li>
+              <li> All objects in Main Memory consist of one or more bytes. </li>
+              <li> An object's address is the address (number) of its first byte. </li>
+            </ul>
+            </dd>
+          </dl>
+          <ul>
             <li> Array elements can contain <em>Pointers</em> to any Object in Memory</li>
             <li> Records can have fields which contain <em>Pointers</em> to other Objects</li>
             <li> Each <em>Nodes</em> aka <em>Components</em> Object of a Graph Structure
@@ -206,195 +219,195 @@
         Structures!
       </p>
     </div>
-  <div class="h2">
-    <h2>Low-Level Assembly-Language Programming</h2>
-    <p>
-      The lowest level a human programmer can work at is the language defined
-      by the <em>Instruction Set Architecture</em> aka <em>ISA</em> of a given
-      family of CPUs.
-    </p>
-    <p>
-      In practice, low-level programmers write programs in an <em>Assembly Language</em> which is
-    </p>
-    <ol>
-      <li> unique to a specific <em>ISA</em> </li>
-      <li> a text notation that's more human-friendly than binary <em>ISA</em> instructions </li>
-      <li> easily translated into the binary <em>ISA</em> instructions </li>
-    </ol>
-    <ol>
-      <li> A low-level programmer writes their program in <em>Assembly
-      Language</em> with a text editor.
-      </li>
-      <li>
-        An <em>Assembler</em> program translates the assembly-language
-        <em>source program</em> into a binary program file.
-      </li>
-      <li>
-        When the binary program is loaded into the computer the hardware of
-        the machine starts translating and executing the <em>ISA</em>
-        instructions.
-      </li>
-    </ol>
-    <p>
-      High performance CPUs don't directly execute <em>ISA</em> instructions!
-    </p>
-    <p>
-      An ISA is defined for a family of compatible Processors implemented by
-      many CPU models which can all understand the same ISA instructions.
-    </p>
-    <p>
-      Each model of CPU within a Processor family has its own Micro-Architecture
-      with its own hidden internal machine language.
-      <br />
-      It has the ability to translate the generic family <em>ISA</em>
-      instructions into its own internal language.
-      <br />
-      It may also may understand (translate) some extra <em>ISA</em>
-      instructions which only some models of the Processor family understand.
-    </p>
-    <p>
-      The advantages of this arrangement are that
-    </p>
-    <ul>
-      <li>
-        All chips within a Processor family can execute any program written in its
-        family's common <em>ISA</em> language. (Using any model-specific
-        instruction features in a program will limit which CPU models will
-        be able to execute that program.)
-      </li>
-      <li>
-        New models of chips can come up with new and faster ways to carry
-        out the operations specified by the family's <em>ISA</em> language.
-        They can also come up with special new instructions and even
-        extensions to existing instructions.
-      </li>
-    </ul>
-    <p>
-      Some disadvantages of this arrangement are that
-    </p>
-    <ul>
-      <li>
-        A significantly more efficient program can be written for a specific
-        CPU model by utilizing knowledge of it's special capabilities
-        and how it will translate the program.
-      </li>
-      <li>
-        Most programmers don't want their programs to be restricted to only
-        running on a single Processor family, let alone only running efficiently
-        on some models of that family!
-      </li>
-    </ul>
-    <p>
-      For these reasons most programmers do not use Assembly Language much.  Instead, most programmers
-      write most of their code using <em>High-Level Programming Languages</em>.
-    </p>
-  </div>
-  <div class="h2">
-    <h2>Programming in High-Level Languages</h2>
-    <p>
-      An assembly Language is designed to help programmers deal with a
-      language which is oriented to the architecture of a particular Processor
-      family. An fairly simple <em>Assembler</em> program translates an
-      <em>Assembly Language</em> program into a binary program which a CPU can
-      "understand", i.e. translate and execute.
-    </p>
-    <p>
-      A modern high-level programming language is designed for a human
-      programmer's concepts of programming. A sophisticated <em>Compiler</em>
-      program translates a high-level programming language into the binary
-      language of a Processor family or of a particular model (or set of
-      models) within a Processor family. The best compilers can produce more
-      efficient code than all but the very best low-level programmers.
-      High-level programs
-    </p>
-    <ul>
-      <li>
-        Will work with any model of many different Processor families. Even
-        new CPUs and Processor Families which didn't exist when the program
-        was written. And as compilers improve, the same programs
-        automatically get more efficient.
-      </li>
-      <li>
-        Are easier for programmers to write, understand and maintain,
-        including adding new features and otherwise adapting a program for
-        changing requirements.
-      </li>
-    </ul>
-  </div>
-  <div class="h2">
-    <h2>Which Language Should You Use?</h2>
-    <p>
-      Most programmers find it easiest to learn and be productive in Programming
-      Languages which are similar to languages they already know. This is
-      unfortunate because most languages which are taught in Schools are very
-      limited.
-    </p>
-    <p>
-      But don't just take our word for it. Read
-      <a href="https://en.wikipedia.org/wiki/Paul_Graham_(programmer)">Paul Graham's</a>
-      account of how he became rich and influential because of his choice of language:
-      <a href="http://www.paulgraham.com/avg.html">Beating the Averages</a>.
-    </p>
-    <p>
-      If you want to do powerful and creative things with computers it is
-      important to (1) use a low-level language just long enough to understand
-      how to build powerful abstractions and then (2) graduate to using
-      higher-level languages which build-in some of those key abstractions
-      allowing you to program more concisely with less effort.
-    </p>
-    <p>
-      We recommend reading our guide to
-      <a href="https://github.com/GregDavidson/computing-magic/blob/main/Languages-And-Platforms/choosing-languages.org">Choosing Computer Languages</a>.
-    </p>
-  </div>
-  <div class="h2">
-    <h2> Learn Many Programming Paradigms! </h2>
-    <p>
-      A Programming Paradigm is a fundamental way of approaching programming,
-      of thinking of computation. Problems which are difficult to solve using
-      one Paradigm can often be easily solved by applying a different
-      Paradigm. Programming Languages can be seen as belonging to different
-      families based on which Programming Paradigms they are best at
-      exploiting. One of the best ways of learning diverse and powerful
-      Programming Paradigms is by programming for awhile in elegant languages
-      of diverse families!
-    </p>
-    <p>
-      Perhaps the real value of High-Level Programming Languages is that they
-      make it easier to leverage powerful Programming Paradigms. The
-      Programming Paradigms which are most useful for your needs should inform
-      your choice of programming language.
-    </p>
-    <p>
-      Key reading material on Programming Paradigms
-    </p>
-    <ul>
-      <li>
-        <a href="https://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia's List of Programming Paradigms</a>
-      </li>
-      <li>
-        <a href="https://www.info.ucl.ac.be/~pvr/paradigms.html">the Programing Paradigms Poster</a>
-      </li>
-      <li>
-        <a href="http://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf">Programming Paradigms for Dummies: What Every Programmer Should Know (PDF)</a>
-      </li>
-    </ul>
-  </div>
-  <div class="h2">
-    <h2> References for What Computers Are </h2>
-    <dl>
-      <dt> <a href="https://en.wikipedia.org/wiki/Memory_hierarchy"> Memory Hierarchy </a> </dt>
-      <dd> Computers use several kinds of memory with very different performance characteristics </dd>
-      <dt> <a href="https://github.com/GregDavidson/on-computing/blob/main/composites.org"> Custom Data Structures: Composites </a> </dt>
-      <dd> Details on Composite Data Structures with code in multiple Computer Programming Languages </dd>
-      <dt>
-        <a href="https://www.geeksforgeeks.org/data-structures/">GeeksForGeek's Data Structures</a>
-      </dt>
-      <dd>
-        Find some examples you would like to use. How might your implement them
-        in your favorite programming language?
-      </dd>
-    </dl>
-  </div>
-</body>
+    <div class="h2">
+      <h2>Low-Level Assembly-Language Programming</h2>
+      <p>
+        The lowest level a human programmer can work at is the language defined
+        by the <em>Instruction Set Architecture</em> aka <em>ISA</em> of a given
+        family of CPUs.
+      </p>
+      <p>
+        In practice, low-level programmers write programs in an <em>Assembly Language</em> which is
+      </p>
+      <ol>
+        <li> unique to a specific <em>ISA</em> </li>
+        <li> a text notation that's more human-friendly than binary <em>ISA</em> instructions </li>
+        <li> easily translated into the binary <em>ISA</em> instructions </li>
+      </ol>
+      <ol>
+        <li> A low-level programmer writes their program in <em>Assembly
+        Language</em> with a text editor.
+        </li>
+        <li>
+          An <em>Assembler</em> program translates the assembly-language
+          <em>source program</em> into a binary program file.
+        </li>
+        <li>
+          When the binary program is loaded into the computer the hardware of
+          the machine starts translating and executing the <em>ISA</em>
+          instructions.
+        </li>
+      </ol>
+      <p>
+        High performance CPUs don't directly execute <em>ISA</em> instructions!
+      </p>
+      <p>
+        An ISA is defined for a family of compatible Processors implemented by
+        many CPU models which can all understand the same ISA instructions.
+      </p>
+      <p>
+        Each model of CPU within a Processor family has its own Micro-Architecture
+        with its own hidden internal machine language.
+        <br />
+        It has the ability to translate the generic family <em>ISA</em>
+        instructions into its own internal language.
+        <br />
+        It may also may understand (translate) some extra <em>ISA</em>
+        instructions which only some models of the Processor family understand.
+      </p>
+      <p>
+        The advantages of this arrangement are that
+      </p>
+      <ul>
+        <li>
+          All chips within a Processor family can execute any program written in its
+          family's common <em>ISA</em> language. (Using any model-specific
+          instruction features in a program will limit which CPU models will
+          be able to execute that program.)
+        </li>
+        <li>
+          New models of chips can come up with new and faster ways to carry
+          out the operations specified by the family's <em>ISA</em> language.
+          They can also come up with special new instructions and even
+          extensions to existing instructions.
+        </li>
+      </ul>
+      <p>
+        Some disadvantages of this arrangement are that
+      </p>
+      <ul>
+        <li>
+          A significantly more efficient program can be written for a specific
+          CPU model by utilizing knowledge of it's special capabilities
+          and how it will translate the program.
+        </li>
+        <li>
+          Most programmers don't want their programs to be restricted to only
+          running on a single Processor family, let alone only running efficiently
+          on some models of that family!
+        </li>
+      </ul>
+      <p>
+        For these reasons most programmers do not use Assembly Language much.  Instead, most programmers
+        write most of their code using <em>High-Level Programming Languages</em>.
+      </p>
+    </div>
+    <div class="h2">
+      <h2>Programming in High-Level Languages</h2>
+      <p>
+        An assembly Language is designed to help programmers deal with a
+        language which is oriented to the architecture of a particular Processor
+        family. An fairly simple <em>Assembler</em> program translates an
+        <em>Assembly Language</em> program into a binary program which a CPU can
+        "understand", i.e. translate and execute.
+      </p>
+      <p>
+        A modern high-level programming language is designed for a human
+        programmer's concepts of programming. A sophisticated <em>Compiler</em>
+        program translates a high-level programming language into the binary
+        language of a Processor family or of a particular model (or set of
+        models) within a Processor family. The best compilers can produce more
+        efficient code than all but the very best low-level programmers.
+        High-level programs
+      </p>
+      <ul>
+        <li>
+          Will work with any model of many different Processor families. Even
+          new CPUs and Processor Families which didn't exist when the program
+          was written. And as compilers improve, the same programs
+          automatically get more efficient.
+        </li>
+        <li>
+          Are easier for programmers to write, understand and maintain,
+          including adding new features and otherwise adapting a program for
+          changing requirements.
+        </li>
+      </ul>
+    </div>
+    <div class="h2">
+      <h2>Which Language Should You Use?</h2>
+      <p>
+        Most programmers find it easiest to learn and be productive in Programming
+        Languages which are similar to languages they already know. This is
+        unfortunate because most languages which are taught in Schools are very
+        limited.
+      </p>
+      <p>
+        But don't just take our word for it. Read
+        <a href="https://en.wikipedia.org/wiki/Paul_Graham_(programmer)">Paul Graham's</a>
+        account of how he became rich and influential because of his choice of language:
+        <a href="http://www.paulgraham.com/avg.html">Beating the Averages</a>.
+      </p>
+      <p>
+        If you want to do powerful and creative things with computers it is
+        important to (1) use a low-level language just long enough to understand
+        how to build powerful abstractions and then (2) graduate to using
+        higher-level languages which build-in some of those key abstractions
+        allowing you to program more concisely with less effort.
+      </p>
+      <p>
+        We recommend reading our guide to
+        <a href="https://github.com/GregDavidson/computing-magic/blob/main/Languages-And-Platforms/choosing-languages.org">Choosing Computer Languages</a>.
+      </p>
+    </div>
+    <div class="h2">
+      <h2> Learn Many Programming Paradigms! </h2>
+      <p>
+        A Programming Paradigm is a fundamental way of approaching programming,
+        of thinking of computation. Problems which are difficult to solve using
+        one Paradigm can often be easily solved by applying a different
+        Paradigm. Programming Languages can be seen as belonging to different
+        families based on which Programming Paradigms they are best at
+        exploiting. One of the best ways of learning diverse and powerful
+        Programming Paradigms is by programming for awhile in elegant languages
+        of diverse families!
+      </p>
+      <p>
+        Perhaps the real value of High-Level Programming Languages is that they
+        make it easier to leverage powerful Programming Paradigms. The
+        Programming Paradigms which are most useful for your needs should inform
+        your choice of programming language.
+      </p>
+      <p>
+        Key reading material on Programming Paradigms
+      </p>
+      <ul>
+        <li>
+          <a href="https://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia's List of Programming Paradigms</a>
+        </li>
+        <li>
+          <a href="https://www.info.ucl.ac.be/~pvr/paradigms.html">the Programing Paradigms Poster</a>
+        </li>
+        <li>
+          <a href="http://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf">Programming Paradigms for Dummies: What Every Programmer Should Know (PDF)</a>
+        </li>
+      </ul>
+    </div>
+    <div class="h2">
+      <h2> References for What Computers Are </h2>
+      <dl>
+        <dt> <a href="https://en.wikipedia.org/wiki/Memory_hierarchy"> Memory Hierarchy </a> </dt>
+        <dd> Computers use several kinds of memory with very different performance characteristics </dd>
+        <dt> <a href="https://github.com/GregDavidson/on-computing/blob/main/composites.org">Composite Data Structures in High-Level Languages</a> </dt>
+        <dd> Details on Composite Data Structures with code in multiple Computer Programming Languages </dd>
+        <dt>
+          <a href="https://www.geeksforgeeks.org/data-structures/">GeeksForGeek's Data Structures</a>
+        </dt>
+        <dd>
+          Find some examples you would like to use. How might your implement them
+          in your favorite programming language?
+        </dd>
+      </dl>
+    </div>
+  </body>
 </html>
