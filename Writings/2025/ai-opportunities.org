@@ -176,14 +176,14 @@ it tends to be better than an AI system
 This is especially the case if the program is produced
 - with an excellent [[https://en.wikipedia.org/wiki/Software_development_process][Software Development Process]]
 - producing a complete, excellent declarative specification
-- leveraging maximally-declarative [[https://en.wikipedia.org/wiki/Programming_paradigm][Programming paradigms]]
+- leveraging /maximally-declarative/ [[https://en.wikipedia.org/wiki/Programming_paradigm][Programming paradigms]]
       - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]]
 
 Excellent Non-AI software systems consist of
 
 - Specification
-      - a declarative model of the desired system viewed from the outside
-            - a concise, readable, complete and correct
+      - a /declarative/ model of the desired system /viewed from the outside/
+            - concise, readable, complete and correct
                   - may include formal and informal language and diagrams
             - it is declarative (specifying what is true about it)
             - not procedural (saying how it works)
@@ -225,7 +225,7 @@ Excellent Non-AI software systems consist of
 
 Do you see why creating such a complex artifact
 - consisting of all of the models described above
-requires
+has traditionally required
 - a team of expert developers
 - working over months or years
 - with a significant risk of failure?
@@ -234,7 +234,7 @@ If AI can help, we don't want it to just produce
 - a large chuck of software code which seems to do the job
 - which we'll now need a team of software engineers to debug
 
-A good software development AI system should
+A good software development AI system should help build
 - all of the models described above
 - collaborating with a small team of expert software developers
 
@@ -243,10 +243,10 @@ At least some collaboration with human experts is required to ensure
       - including subtleties like resilience and security
 - and will be easy to adapt as needs change over time
 
-What we should expect and demand is not total automation, but
-- the ability to set the highest standards
-- a significant decrease in the cost of development
-- a reduction is the risk of failure
+What we should expect and demand is not total automation, but to
+- set the highest quality standards
+- significantly decrease the cost of development
+- reduce the risk of failure
 - ==> an increase in total productivity!
 
 ** A Development Process For A System Incorporating AI
