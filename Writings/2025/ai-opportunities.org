@@ -4,15 +4,16 @@
 
 Artificial Intelligence (AI) technologies present many potential opportunities
 for humanity.  This includes
-- IKAI :: [[https://en.wikipedia.org/wiki/Machine_learning][Implicit-Knowledge based AI]]
-- EKAI :: [[https://en.wikipedia.org/wiki/GOFAI][Explicit-Knowledge based AI]]
+- IKAI :: [[https://en.wikipedia.org/wiki/Machine_learning][Implicit-Knowledge AI]]
+- EKAI :: [[https://en.wikipedia.org/wiki/GOFAI][Explicit-Knowledge AI]]
 - Hybrid-AI :: Systems combining elements of IKAI and EKAI
+- NOTE :: IKAI and EKAI are not standard industry terms.
 
 Much of the recent excitement around AI is based on recent successes of the IKAI
 approach, especially with [[https://en.wikipedia.org/wiki/Large_language_model][Large-Language Models (LLMs)]].
 
 We claim that
-- directly applying IKAI to challenging problems is usually a mistake.
+- directly applying IKAI to challenging problems is usually a mistake
 and that instead
 - *IKAI should be used to help build Non-AI and Hybrid-AI solutions!*
 
@@ -20,7 +21,7 @@ and that instead
 
 IKAIs consist of multi-layered networks trained on huge datasets.
 - inspired by networks of biological neurons
-- but IKAI systems don't actually work like biological nueral networks
+- but IKAI systems don't actually work like biological neural networks
 - /Researchers don't yet know why IKAIs work so well!/
 
 IKAIs go by various names such as
@@ -149,15 +150,15 @@ Computer Programming
 We claim that
 - These systems could be made much better
 by
-1. Producing higher-level human-friendly output formats
-- Especially for computer programs (see below)
-2. Collaborating with humans
-- Responding to human input and edits
-3. Where possible, rather than directly performing a task
-- Producing transparent, verifiable non-AI computer programs to do a task
-- Producing explicit Knowledge-Based AI Systems where conventional
+1. producing higher-level human-friendly output formats
+- especially for computer programs (see below)
+2. collaborating with humans
+- responding to human input and edits
+3. where possible, rather than directly performing a task
+- producing transparent, verifiable non-AI computer programs to do a task
+- producing explicit Knowledge-Based AI Systems where conventional
   programs can't do a task.
-- Using LLM and similar non-explicit AI to support rather than replace the
+- using LLM and similar non-explicit AI to support rather than replace the
   more transparent approaches.
 
 If AI systems can automate /Computer Programming/
@@ -170,14 +171,14 @@ and *get the best of both worlds?!*
 When a problem can be solved with a
 - traditional Non-AI computer system
 it tends to be better than an AI system
-- More predictable and verifiable
-- More efficient
+- more predictable and verifiable
+- more efficient
 
 This is especially the case if the program is produced
 - with an excellent [[https://en.wikipedia.org/wiki/Software_development_process][Software Development Process]]
 - producing a complete, excellent declarative specification
 - leveraging /maximally-declarative/ [[https://en.wikipedia.org/wiki/Programming_paradigm][Programming paradigms]]
-      - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]]
+      - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]].
 
 Excellent Non-AI software systems consist of
 
@@ -239,9 +240,9 @@ A good software development AI system should help build
 - collaborating with a small team of expert software developers
 
 At least some collaboration with human experts is required to ensure
-- the system has all of the characteristics we need now
+- the system has all of the characteristics we need /now/
       - including subtleties like resilience and security
-- and will be easy to adapt as needs change over time
+- and will be easy to adapt as needs change /over time/
 
 What we should expect and demand is not total automation, but to
 - set the highest quality standards
@@ -257,7 +258,7 @@ We would like to automate all tasks
 
 Any task that doesn't need AI
 - should be automated using non-AI technology
-- using AI to help develop the solution
+- using AI to help develop the solution.
 
 When a task needs AI
 - The Development Process should notice that!
