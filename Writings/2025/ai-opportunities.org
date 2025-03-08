@@ -168,7 +168,7 @@ and *get the best of both worlds?!*
 ** An AI-Enabled Development Process for a Non-AI System
 
 When a problem can be solved with a
-- a traditional Non-AI computer system
+- traditional Non-AI computer system
 it tends to be better than an AI system
 - More predictable and verifiable
 - More efficient
