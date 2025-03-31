@@ -34,41 +34,79 @@ There are three common strategies for building /Composite Objects/:
 - Index things via content
       - /Hashes/, /Relations/ and Indexes
 
+*** A Note About Procedures:
+
+A procedure is a module of a program's behavior consisting of
+- An /interface/ specifying
+      - any required or optional /arguments/
+      - possible /return values/
+- Code (instuctions) which can /perform operations/ i.e. do something
+
+A procedure's code doesn't run until it is
+- /called/ (aka /invoked/) by another procedure
+- which supplies any required arguments
+
+When the procedure is invoked the procedure's code can make use of
+- parameters -- initialized by the provided arguments
+- [optionally] other data available from outside of the procedure
+- [optionally] /side-effects/
+      - modifying stored data outside of the procedure
+      - performing Input/Output operations
+      - otherwise interacting with systems outside of the procedure
+
+A /functional procedure/ is a procedure
+- which does NOT have /side-effects/
+- it computes and returns 1 or more values from its arguments
+
+In various programming language cultures, the word /function/ can mean
+- a mathematical function
+- which might be implemented with a procedure
+- a functional procedure
+- any /procedure/ - sigh!
+
+We try to avoid
+- using the word /function/ for a /procedure/ with /side-effects/
+
+Functional Programming is a popular computing paradigm
+- centered around functional procedures
+- prohibiting procedures with /side-effects/
+
 ** Structures (aka Records) and Arrays
 
 *** Dynamically Typed Structures aka Dynamically Typed Records
 
-    Most dialects of Lisp let you create a new atom type made up of a fixed
-    number of components. Structures of your new type can be distinguished from
-    all other Lisp Types. Structures are usually created with a macro which
-    creates a set of functions to manage your new type, e.g.
-    - =(struct people (name contacts hobbies))=
-    - creates five functions
-          - the constructor =people= :: creates a /people structure/
-                - given a /name/, contacts /list/ and /hobbies/ list
-          - the discriminator =people?= :: takes a value and returns
-                - #t (Boolean True) for /people structures/
-                - #f (Boolean False) for anything else
-                - /? is a conventional suffix for Boolean functions in Scheme/
-          - the selectors =people-name=, =people-contacts=, =people-hobbies= ::
-                - each take a people value and
-                - return the value of their respective field (component)
-          - there can optionally be mutator functions for changing field values
-                - /functional programming/ discourages mutation
-                - mutation makes programs harder to debug
-          - =(eq? x y)= checks if =x= and =y= are the same /Object/
-                - it simply checks their location in memory
-                - location gives us the concept of /object identity/
+Most dialects of Lisp let you create a new atom type made up of a fixed
+number of components. Structures of your new type can be distinguished from
+all other Lisp Types. Structures are usually created with a macro which
+creates several custom procedures to manage your new type, e.g.
+- =(struct people (name contacts hobbies))=
+- creates five procedures
+- the constructor =people= :: creates a /people structure/
+- given a /name/, contacts /list/ and /hobbies/ list
+- the discriminator =people?= :: takes a value and returns
+- #t (Boolean True) for /people structures/
+- #f (Boolean False) for anything else
+- /the suffix ? is part of the name of the procedure/
+    - /suggesting that the procedure returns a Boolean value/
+- the selectors =people-name=, =people-contacts=, =people-hobbies= :: each
+- take a value of type =people=
+- return the value of their respective field (component)
+- there can optionally be mutator procedures for changing field values
+- /functional programming/ discourages mutation
+- mutation makes programs harder to debug
+- =(eq? x y)= checks if =x= and =y= are the same /Object/
+- it simply checks their location in memory
+    - location gives us the concept of /object identity/
 
 #+begin_src racket
-  #lang racket
-  (struct people (name contacts hobbies))
-  (struct company (name employees services))
-  (define john (people "John From" '("General Delivery, Kansas City KS") '(travel)))
-  (define dana (people "Dana From" '("+1 (203) 123-4567") '(reading)))
-  (define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Disposal)))
-  (people? john) ; returns #t
-  (people? nardles) ; returns #f
+#lang racket
+(struct people (name contacts hobbies))
+(struct company (name employees services))
+(define john (people "John From" '("General Delivery, Kansas City KS") '(travel)))
+(define dana (people "Dana From" '("+1 (203) 123-4567") '(reading)))
+(define nardles (company "Nardles, Inc." (list john dana) '(Nardles-Disposal)))
+(people? john) ; returns #t
+(people? nardles) ; returns #f
   (people-name john) ; returns "John From"
   (company-name nardles) ; returns "Nardles, Inc."
   (map people-name (company-employees nardles)); returns '("John From" "Dana From")
@@ -79,14 +117,14 @@ There are three common strategies for building /Composite Objects/:
   ;; What needs to be fixed?
 #+end_src
 
-#+RESULTS:
+*#+RESULTS:*
 : #t
 : #f
 : "John From"
 : "Nardles, Inc."
 : '("John From" "Dana From")
 
-Because a named function is created for each /field/ (structure component)
+Because a named procedure is created for each /field/ (structure component)
 - the order of the elements doesn't matter
 - new versions of a program can add new fields
 - the number and layout of fields is fixed during a program execution
@@ -153,7 +191,7 @@ Racket/ for increased clarity, efficiency and reliability.
   ;; (people-name nardles) ; compile-time error
 #+end_src
 
-#+RESULTS:
+*#+RESULTS:*
 : #t
 : #f
 : "John From"
@@ -182,10 +220,10 @@ serialized to create those byte sequences.
 
 The obvious way to achieve this as a programmer is
 - For each data structure in your program
-- Write a serialization and a de-serialization function
+- Write a serialization and a de-serialization procedure
 
 Sophisticated languages often provide libraries which can write your
-serialization and de-serialization functions automatically.
+serialization and de-serialization procedures automatically.
 
 But the structure of your data tends to change
 - as your program evolves
@@ -370,7 +408,7 @@ In Scheme and many other Lisps
             - pos goes from =0= to =(- (vector-length vec) 1)= for /reasons/
       - =(vector-set! vec pos v)= :: sets element at position pos to v
             - vector-set! modifies (mutates) the vector
-            - Scheme naming convention uses ! suffix for names of mutating functions
+            - Scheme naming convention uses ! suffix for names of mutating procedures
 - Racket also has /immutable vectors/ which /do not/ support =vector-set!=
 
 /Strings/ are usually implemented as a contiguous /array of bytes/. Modern
@@ -468,7 +506,7 @@ green blue)= exist in memory? How about the list ='(black red green blue)=?
   palette
 #+end_src
 
-#+RESULTS:
+*#+RESULTS:*
 | white | black | red | green | blue |
 
 Let's look at the same program in C for a lower-level view:
@@ -511,7 +549,7 @@ Let's look at the same program in C for a lower-level view:
 How many 2-word consColor nodes were allocated? When should the '(red green blue)
 list be deallocated?
 
-The Lisp function =cons= is the foundation of Lisp's Lists. It allocates a
+The Lisp procedure =cons= is the foundation of Lisp's Lists. It allocates a
 structure called a /Pair/ or /cons cell/ which is two words long. A /cons cell/
 contain two pointer fields, conventionally called =car= and =cdr=, aka =head=
 and =tail= aka =first= and =rest=. Each =car= points to a single element of the
@@ -602,7 +640,7 @@ computed from a key. A good hash should be
       - minimizing /hash collisions/
 
 Suppose you have around n=1,000,000 records in a table.
-- You want a function =hash(k1)=
+- You want a procedure =hash(k1)=
       - (or =hash(k1, k2, ... kn)= if there are multiple keys)
 - which returns an integer in the range 0 to 2*n
 
@@ -633,10 +671,10 @@ Strategies for building larger, more interesting objects
       - Lists, Trees and much more!
 - Hash structures - much like crypto!
       - Dictionaries, Indexes
-- Functional interfaces
+- Procedural interfaces
       - Dynamic computing
       - Metaprogramming
-      - Functions are also Data!
+      - Procedures are also Data!
 - Byte sequences are the interchange format
       - Files, Streams
       - (De)Serialization
