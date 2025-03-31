@@ -2,7 +2,7 @@
 
 If you're not 100% clear on how memory consists of
 - bits, bytes and words
-- read [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]] first!
+- read [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are, Part 1]] first!
       - Be sure and click on the Switches!
 
 Now that you understand that everything in a computer program's memory is
