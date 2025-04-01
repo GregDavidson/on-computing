@@ -59,7 +59,13 @@
         <a href="https://en.wikipedia.org/wiki/Static_random-access_memory">SRAM</a>
         memory to hold data.
         </li>
-        <li> It takes 4-6 <em>transistors</em> to make one SRAM <em>bit</em>!</li>
+        <li> It takes 4-6 <em>transistors</em> to make one SRAM <em>bit</em>! </li>
+        <li> SRAM is used for
+            <a href="https://en.wikipedia.org/wiki/Processor_register">Processor Registers</a>
+        </li>
+        <li> and also for <a href="https://en.wikipedia.org/wiki/Cache_(computing)>Cache Memory</a>"
+            <ul> <li><em>an optimization not discussed further in this document</em></li></ul>
+        </li>
       </ul>
     </div>                      <!-- h2 -->
     <div class="h2">
@@ -94,14 +100,15 @@
       <h2> Operations work on Registers </h2>
       <ul>
         <li>
-          CPUs have a small number of words called <em>registers</em> made of SRAM.
+          CPUs have a small number of words called <em>registers</em>e made of
+          the fastest and most expensive SRAM.
           <ul>
-            <li> the original 8086 CPU had 14 32-bit registers</li>
-            <li> the original ARM CPU had 15 32-bit registers</li>
+            <li> the original 8086 CPU had only 14 32-bit registers</li>
+            <li> the original ARM CPU had only 15 32-bit registers</li>
           </ul>
         </li>
-        <li> The built-in operations of a computer work between registers.</li>
-        <li> Plus special operations which can copy data between registers and
+        <li> Most computer operations work between registers.</li>
+        <li> Special operations copy data between registers and
         <ul>
           <li> Main Memory, made of slower but much cheaper
           <a href="https://en.wikipedia.org/wiki/Dynamic_random-access_memory">DRAM</a>.
