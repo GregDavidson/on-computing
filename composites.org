@@ -149,11 +149,12 @@ depending on program input, etc. /Manifestly Typed Languages/ are also called
 /Statically Typed Languages/ but are usually just called /Typed
 Languages/ even though /Dynamically Typed Languages/ also have types.
 
-In a /Typed Language/ structures specify /in the program's source/ which kind of
-data can be bound to each field of the structure. Manifest types can be used to
-communicate as well as to enforce the program designer's expectations and thus
-prevent bugs through inconsistent use. It can also be used to compile
-(translate) the program to more efficient machine code.
+In a /Typed Language/ the program's high-level language /source code/ specifies
+which type of data can be associated with any identifier and the type of each
+component of each composite object. Manifest types can be used both to
+communicate and to enforce the program designer's expectations and thus prevent
+bugs through misunderstandings and inconsistent usage. It can also be used to
+compile (translate) the program into more efficient machine code.
 
 While most Lisp dialects are Dynamically Typed, Racket provides multiple
 languages, some of which are Dynamically Typed and some of which are
@@ -188,8 +189,8 @@ Racket/ for increased clarity, efficiency and reliability.
   (people-name john) ; returns "John From"
   (company-name nardles) ; returns "Nardles, Inc."
   (map people-name (company-employees nardles)); returns '("John From" "Dana From")
-  ;; A compile-time error will prevent the program from being run at all.
-  ;; Try uncommenting it:
+  ;; A compile-time error will prevent the program from being run at all
+  ;; if you uncomment this erroneous form:
   ;; (people-name nardles) ; compile-time error
 #+end_src
 
@@ -201,7 +202,7 @@ Racket/ for increased clarity, efficiency and reliability.
 : '("John From" "Dana From")
 
 Ideally we would refine the types based on String and Symbol to more specific
-types, and likely also add some constraints.
+types, and perhaps add some constraints on the permitted values.
 
 ** Persistence
 
