@@ -598,9 +598,9 @@ Computer Science. Most programmers have only a slight acquaintance with it and
 tend to just trust that the more knowledgeable implementors of the language and
 libraries which they're using will make their programs reasonably efficient.
 Alas, this abrogation of responsibility is one of the reasons why modern
-programs tend to be noticeably inefficient. It's at least a good idea to consult
-a suitably experienced computer scientist at strategic points in a software
-development project!
+programs tend to be noticeably inefficient, e.g. annoyingly or horribly slow.
+It's at least a good idea to consult a suitably experienced computer scientist
+at strategic points in a software development project!
 
 ** Indexes for Performance
 
