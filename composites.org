@@ -377,7 +377,7 @@ the same vector.
 Manifestly (Statically) Typed Vectors require that all of the elements of a
 particular Vector be of the same Type.
 
-Some Languages, e.g. Ada, Julia and SQL, provide explicit support for
+Some Languages, e.g. Ada and Julia, provide explicit support for
 multidimensional arrays. Other languages require the programmer to simulate
 multidimensional arrays in various ways.
 
@@ -399,9 +399,9 @@ whole vector.
 
 In Scheme and many other Lisps
 - vector constructors
-      - like lists except with added =#= in front of the open parenthesis
+      - literals look like lists except with added =#= in front of the open parenthesis
             - =#(elem1 elem2 ... elemN)=
-      - =vector= and =make-vector=
+      - =vector= and =make-vector= constructor procedures
             - =(vector elem1 elem2 ... elemN)=
             - =(make-vector num-elements-desired default-value)=
                   - all elements will be initialized to /default-value/
@@ -422,7 +422,9 @@ occupy more than one byte, as needed.
 Some languages provide /bit vectors/, i.e. a contiguous array of bits.
 
 Most vectors consist of objects that are at least a full machine word long, e.g.
-numbers, addresses and structures.
+numbers, addresses and structures. Elements which require more than a machine
+word are usually replaced with a pointer so they can be stored as a separate
+object /- these low-level considerations are transparent to the programmer/.
 
 Vectors vs. Lists
 
@@ -556,7 +558,7 @@ list be deallocated?
 
 The Lisp procedure =cons= is the foundation of Lisp's Lists. It allocates a
 structure called a /Pair/ or /cons cell/ which is two words long. A /cons cell/
-contain two pointer fields, conventionally called =car= and =cdr=, aka =head=
+contains two pointer fields, conventionally called =car= and =cdr=, aka =head=
 and =tail= aka =first= and =rest=. Each =car= points to a single element of the
 List while the =cdr= either contains a special value indicating an empty list,
 or it points to the =cons= cell containing the rest of the list. Thus for every
@@ -577,20 +579,28 @@ such as a tree. This allows for faster access. An alternative is to let the data
 itself serve as a quick way to find it.  The data can be turned into a /hash/ and the
 /hash/ can be turned into an /index/.
 
-Program designers often put a lot of work into storing data in such a way that
-access and updating of the data will be very fast. This often leads to complex
-code which can hide bugs. Its actually quite difficult to predict in advance
-what will be the most efficient storage layout for data. The best practice is to
-program for clarity rather than efficiency. Once the program has all of its
-desired features, if it runs too slowly there are tools called /profilers/ that
-can help the programmer find the performance bottlenecks, i.e. the (usually very
-small) parts of the code which need to be sped up.
+Expert program designers often put a lot of work into storing data in such a way
+that access and updating of the data will be very fast. This often leads to
+complex code which can hide bugs. Its actually quite difficult to predict in
+advance what will be the most efficient storage layout for data. The best
+practice is to program for clarity rather than efficiency. Once the program has
+all of its desired features, if it runs too slowly there are tools called
+/profilers/ that can help the programmer find the performance bottlenecks, i.e.
+the (usually very small) parts of the code which need to be sped up.
 
-Conventional programmers following good practice will then redesign only the
-parts of the program that are performance bottlenecks to use a more efficient
-data structure (the way storage is arranged in memory) or algorithm (the
-strategy of the program's procedures). This way the overall complexity of the
-program is minimized. But there may be a better way!
+Programmers following best practice will redesign only the parts of the program
+that are performance bottlenecks with a more efficient data structure (the way
+storage is arranged in memory) or algorithm (the strategy of the program's
+procedures). This way the overall complexity of the program is minimized.
+
+Analyzing the time and space costs of algorithms is part of the discipline of
+Computer Science. Most programmers have only a slight acquaintance with it and
+tend to just trust that the more knowledgeable implementors of the language and
+libraries which they're using will make their programs reasonably efficient.
+Alas, this abrogation of responsibility is one of the reasons why modern
+programs tend to be noticeably inefficient. It's at least a good idea to consult
+a suitably experienced computer scientist at strategic points in a software
+development project!
 
 ** Indexes for Performance
 
@@ -600,7 +610,7 @@ You can use an Index in a regular program to provide fast access to the elements
 of a vector or array. Indexes are most known in the context of databases where
 they provide fast access to desired records of tables. Index in programs are
 generally designed as part of the program, as an alternative to using a more
-compalex data structure.
+complex data structure.
 
 In the database context, indexes can be added or removed by an Administrator as
 the access patterns of the database system change over time. Indexes have to be
