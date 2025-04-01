@@ -42,15 +42,16 @@ A procedure is a module of a program's behavior consisting of
       - possible /return values/
 - Code (instuctions) which can /perform operations/ i.e. do something
 
-A procedure's code doesn't run until it is
+A procedure's code doesn't run until the procedure is
 - /called/ (aka /invoked/) by another procedure
 - which supplies any required arguments
+A procedure can be called as many times as desired.
 
 When the procedure is invoked the procedure's code can make use of
 - parameters -- initialized by the provided arguments
 - [optionally] other data available from outside of the procedure
 - [optionally] /side-effects/
-      - modifying stored data outside of the procedure
+      - modifying data stored outside of the procedure
       - performing Input/Output operations
       - otherwise interacting with systems outside of the procedure
 
@@ -60,14 +61,14 @@ A /functional procedure/ is a procedure
 
 In various programming language cultures, the word /function/ can mean
 - a mathematical function
-- which might be implemented with a procedure
+      - which might be implemented with a procedure
 - a functional procedure
-- any /procedure/ - sigh!
+- any /procedure/, i.e. the two terms are synonyms
 
 We try to avoid
 - using the word /function/ for a /procedure/ with /side-effects/
 
-Functional Programming is a popular computing paradigm
+/Functional Programming/ is a powerful computing paradigm
 - centered around functional procedures
 - prohibiting procedures with /side-effects/
 
@@ -82,21 +83,22 @@ creates several custom procedures to manage your new type, e.g.
 - =(struct people (name contacts hobbies))=
 - creates five procedures
 - the constructor =people= :: creates a /people structure/
-- given a /name/, contacts /list/ and /hobbies/ list
+- given a /name/, a /contacts/ list and a /hobbies/ list
 - the discriminator =people?= :: takes a value and returns
 - #t (Boolean True) for /people structures/
 - #f (Boolean False) for anything else
 - /the suffix ? is part of the name of the procedure/
-    - /suggesting that the procedure returns a Boolean value/
+      - /suggesting that the procedure returns a Boolean value/
 - the selectors =people-name=, =people-contacts=, =people-hobbies= :: each
-- take a value of type =people=
-- return the value of their respective field (component)
-- there can optionally be mutator procedures for changing field values
-- /functional programming/ discourages mutation
-- mutation makes programs harder to debug
+- takes a value of type =people=
+- returns the value of the respective field (component)
+- [optionally] there can be mutator procedures for changing field values
+      - a mutation is a /side-effect/
+      - modern /functional programming/ discourages mutations
+      - /mutations makes programs harder to debug/
 - =(eq? x y)= checks if =x= and =y= are the same /Object/
 - it simply checks their location in memory
-    - location gives us the concept of /object identity/
+      - location provides a concept of /object identity/
 
 #+begin_src racket
 #lang racket
