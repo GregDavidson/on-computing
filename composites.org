@@ -212,10 +212,10 @@ Persistent data
 - may live longer than the run-time of the programs using it
 - may need to be accessed or modified by different programs over time
 
-*** Persistence: Serialization to Files or Sockets
+*** Persistence: Serialization to Files or Network Sockets
 
 Serialization is the conversion of data in main (volatile) memory into byte
-sequences which can be, e.g. written to a file or a socket.
+sequences which can be, e.g. written to a file or a network socket.
 
 De-Serialization is the conversion of byte sequences into data structures in
 main memory which are equivalent to the original data structures which were
@@ -258,7 +258,7 @@ The Relational View of Data
       - efficient retrieval of selected data
       - efficient updates when data needs to change
 - Unique Fields in a Set provide Object (Record) Identity
-      - Unique ids can be added when other Fields aren't unique
+      - /Unique ids can be added when other Fields aren't unique/
 
 /SQL/ is a language for writing
 - Schemas which define your data along with types and constraints
@@ -320,9 +320,9 @@ A Relational Database can often entirely replace a specialized Server Program!
 
 Systems Programming Languages like /C/ and /Rust/ are designed to compile to
 efficient machine code which can do anything the machine can do without
-requiring support from any additional software, e.g. garbage collectors,
-interpreters, etc. This makes them perfect for implementing higher-level
-languages, libraries, operating systems, device drivers, etc.
+requiring support from any additional software, e.g. garbage collectors, This
+makes them perfect for implementing interpreters, operating systems, device
+drivers, low-level libraries needed by higher-level languages, etc.
 
 Systems languages like /C/ and /Rust/ face similar challenges
 - they require details of types and sizes of each element
@@ -334,8 +334,9 @@ Systems languages like /C/ and /Rust/ face similar challenges
       - 1-way relationships often provided by pointers (see below)
       - more efficient than SQL but less flexible
 
-C gives the most explicit model of what data looks like in memory and what
-algorithms cost.
+Experienced C programmers find that C makes it clear what data will look like in
+memory and what algorithms will cost, e.g. how many low-level operations will be
+required to run them.
 
 #+begin_src C
   typedef char *String;
@@ -433,10 +434,11 @@ Vectors vs. Lists
 | Random access     | slow, O(n)                      | fast, O(1)                   |
 | Mutability        | heavily discouraged             | lightly discouraged          |
 
-Lisp programmers are encouraged to use /Lists/ and /Structs/ in their initial
-program design and to consider /Vectors/ as an optimization only where profiling
-analysis clearly indicates significant inefficiency in a place where /Vectors/
-might be better.
+Lisp programmers prefer to use /Lists/ and /Structs/ in their initial program
+design and to consider /Vectors/ as an optimization only where profiling
+analysis indicates that using the less flexible /Vector/ type would make the
+whole program significantly more efficient. Unnecessary and/or premature
+optimization impedes software development.
 
 *** (Manifestly) Typed Arrays
 
