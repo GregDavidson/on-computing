@@ -147,19 +147,18 @@ Computer Programming
       - which correctly solves the desired problem
       - with reasonable efficiency
 
-We claim that
-- These systems could be made much better
-by
+We claim that these systems could be made much better by
+
 1. producing higher-level human-friendly output formats
-- especially for computer programs (see below)
+    - especially for computer programs (see below)
 2. collaborating with humans
-- responding to human input and edits
+    - responding to human input and edits
 3. where possible, rather than directly performing a task
-- producing transparent, verifiable non-AI computer programs to do a task
-- producing explicit Knowledge-Based AI Systems where conventional
-  programs can't do a task.
-- using LLM and similar non-explicit AI to support rather than replace the
-  more transparent approaches.
+    - producing transparent, verifiable non-AI computer programs to do a task
+    - producing explicit Knowledge-Based AI Systems where conventional
+      programs can't do a task.
+    - using LLM and similar non-explicit AI to support rather than replace the
+      more transparent approaches.
 
 If AI systems can automate /Computer Programming/
 - why can't they automate the production of EKAI systems
