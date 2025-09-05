@@ -149,11 +149,11 @@ Computer Programming
 
 We claim that these systems could be made much better by
 
-1. producing higher-level human-friendly output formats
+1. Producing higher-level human-friendly output formats
     - especially for computer programs (see below)
-2. collaborating with humans
+2. Collaborating with humans
     - responding to human input and edits
-3. where possible, rather than directly performing a task
+3. Where possible, rather than directly performing a task
     - producing transparent, verifiable non-AI computer programs to do a task
     - producing explicit Knowledge-Based AI Systems where conventional
       programs can't do a task.
