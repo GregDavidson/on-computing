@@ -46,10 +46,11 @@ EKAI includes many techniques, including
 - [[https://en.wikipedia.org/wiki/Knowledge-based_systems][Knowledge-Based Systems]]
 
 The hope of many is that IKAI systems can
-- Be built largely automatically
+- be built largely automatically
       - without expensive expert human AI developers
       - with less chance of project failure
-- Will outperform EKAI systems
+- outperform EKAI systems
+      - following their expensive training
 
 Currently
 - IKAIs have indeed outperformed some EKAI systems
