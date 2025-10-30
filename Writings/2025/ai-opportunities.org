@@ -4,149 +4,169 @@
 
 Artificial Intelligence (AI) technologies present many potential opportunities
 for humanity.  This includes
-- IKAI :: [[https://en.wikipedia.org/wiki/Machine_learning][Implicit-Knowledge AI]]
-- EKAI :: [[https://en.wikipedia.org/wiki/GOFAI][Explicit-Knowledge AI]]
-- Hybrid-AI :: Systems combining elements of IKAI and EKAI
-- NOTE :: IKAI and EKAI are not standard industry terms.
+- ImKAI :: [[https://en.wikipedia.org/wiki/Machine_learning][Implicit-Knowledge AI]]
+- ExKAI :: [[https://en.wikipedia.org/wiki/GOFAI][Explicit-Knowledge AI]]
+- Hybrid-AI :: Systems combining elements of ImKAI and ExKAI
+- NOTE :: ImKAI and ExKAI are not standard industry terms.
 
-Much of the recent excitement around AI is based on recent successes of the IKAI
-approach, especially with [[https://en.wikipedia.org/wiki/Large_language_model][Large-Language Models (LLMs)]].
+Much of the recent excitement around AI is based on recent successes
+of the ImKAI approach, especially with [[https://en.wikipedia.org/wiki/Large_language_model][Large-Language Models (LLMs)]].
 
 We claim that
-- directly applying IKAI to challenging problems is usually a mistake
+- directly applying ImKAI to challenging problems is usually a mistake
 and that instead
-- *IKAI should be used to help build Non-AI and Hybrid-AI solutions!*
+- *ImKAI should be used to help build Non-AI and Hybrid-AI solutions!*
 
 ** Expanding our Claims
 
-IKAIs consist of multi-layered networks trained on huge datasets.
-- inspired by networks of biological neurons
-- but IKAI systems don't actually work like biological neural networks
-- /Researchers don't yet know why IKAIs work so well!/
+ImKAIs consist of multi-layered networks trained on huge datasets.
+- inspired by networks of biological neurons in the brain
+- although ImKAI systems don't work like biological networks
+    - Researchers don't yet know why ImKAIs work so well!
 
-IKAIs go by various names such as
+ImKAIs go by various names such as
 - Machine Learning Systems (ML)
 - Large Language Models (LLMs)
 - Artificial Neural Networks
-      - despite their /not/ working like biological neural networks
+    - despite /not/ working like neural networks!
 
-IKAI contrasts with EKAI: Explicit Knowledge-based Artificial Intelligence.
+ImKAI is very different from ExKAI
+- Explicit Knowledge-based Artificial Intelligence.
 
-EKAI is based on explicit human-auditable facts and rules.
+ExKAI is based on explicit human-auditable facts and rules
 
-Creating good EKAI systems has traditionally required
-- lots of time and effort
+Creating good ExKAI systems has traditionally required
+- Significant amounts of time and effort
 - from teams of expert human AI developers
-- with a significant risk of project failure
-- Just like all other ambitious computer programming projects!
+- with a significant risk of project failure!
+- /Just like all ambitious computer programming projects!/
 
-EKAI includes many techniques, including
+ExKAI covers many techniques, including
 - [[https://en.wikipedia.org/wiki/GOFAI][GOFAI: Good Old-Fashioned AI]]
 - [[https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning][Knowledge Representation and Reasoning]]
 - [[https://en.wikipedia.org/wiki/Knowledge-based_systems][Knowledge-Based Systems]]
-
-The hope of many is that IKAI systems can
+- and more - it's a broad discipline!
+  
+The hope of many is that ImKAI systems can
 - be built largely automatically
-      - without expensive expert human AI developers
-      - with less chance of project failure
-- outperform EKAI systems
-      - following their expensive training
+    - without expensive expert human AI developers
+    - with less chance of project failure
+- outperform ExKAI systems
+    - once trained on enough suitable data
 
 Currently
-- IKAIs have indeed outperformed some EKAI systems
-      - Board Games such as Chess, Go, Backgammon, et al.
-- IKAI /development/ is very expensive in computer resources and energy
-      - but that is [[https://en.wikipedia.org/wiki/Koomey%27s_law][expected to decrease]]
-- IKAI systems require more resources to run than EKAI and non-AI systems require
-      - already being addressed with recent more powerful "AI" chips
-- Many IKAI systems are proving to be unreliable
-      - e.g. LLMs often "hallucinate" incorrect results
+- ImKAIs have indeed outperformed some ExKAI systems
+    - Board Games such as Chess, Go, Backgammon, et al.
+- ImKAI /development/ is very expensive in computer resources and energy
+    - but that is [[https://en.wikipedia.org/wiki/Koomey%27s_law][expected to decrease]]
+- ImKAI systems require more resources to run than ExKAI and non-AI
+  systems require
+    - already being addressed with recent more powerful "AI" chips
+- Many ImKAI systems are proving to be unreliable
+    - e.g. LLMs often "hallucinate" incorrect results
 
-** Direct Application of IKAI
+** Direct Application of ImKAI
 
-Most current AI projects attempt to use IKAI to
+Most current AI projects attempt to use ImKAI to
 - directly solve problems
 - without human collaboration
 
 Board Games, e.g. Chess, Go, Backgammon, et al
 - Training Data: Huge numbers of complete games
-      - Some involving human players
-      - Many more from AIs playing against AIs
+    - Some involving human players
+    - Many more from AIs playing against AIs
 - Input: A game board in play
 - Output: A good next move
 
 Automated Driving
 - Training Data: Very many practice drives with correlated
-      - location information
-      - camera images
-      - vehicle control signals
+    - location information
+    - camera images
+    - vehicle control signals
 - Input:
-      - Desired Destination
-      - Continuous
-            - location information
-            - camera images
-- Desired Output: Appropriate realtime control signals to
-      - safely and efficiently
-      - drive the vehicle to the desired destination
-      - parking if desired
+    - Desired Destination
+    - Continuous
+        - location information
+        - camera images
+- Desired Output: Appropriate real-time control signals to
+    - safely and efficiently
+    - drive the vehicle to the desired destination
+    - parking if desired
 
 AI Generated Raster-Graphics Imagery
 - Training Data:
-      - Massive amounts of imagery accompanied by descriptions
-            - available by scraping the web
-            - imagery in or converted-to a common raster format
+    - Massive amounts of imagery accompanied by descriptions
+        - available by scraping the web
+        - imagery in or converted-to a common raster format
 - Input: Description of desired imagery
 - Desired Output: Raster Graphic Image
 
-Realtime Speech-Based Systems
+Real-time Speech-Based Systems
 - Training Data: Lots of audio of speech with desired responses
-      - Transcriptions might be provided as well
+    - Transcriptions might be provided as well
 - Input: Speech in audio form
 - Desired Output: Task behavior, e.g.
-      - Reply to customer request
-      - Operation of equipment
+    - Reply to customer request
+    - Operation of equipment
 
 We claim that
-- These systems are a poor use of AI
+- These systems are a primitive use of AI
 because
 - they are black-boxes which can't be validated
-- nothing prevents them occasionally making serious mistakes
-- they can't easily take advantage of what a human partner could offer
-
+- nothing prevents them making serious mistakes
+- they don't interoperate well with other kinds of systems
+    - database systems, constraint-solvers, high-level data
+      representations, ExKAI systems, etc.
+- they don't interoperate well with humans
+    - "prompts" are NOT a reliable and repeatable method!
+    
 ** AI / Human Partnership
 
-Some of the work produces results which can be readily inspected by and altered
-by humans:
+Some ImKAI systems *do* produce results which can be readily inspected
+by and altered by humans:
 
 Speech Recognition
 - Training Data: Lots of audio of speech with transcriptions
 - Input: New speech audio
 - Output: Transcription of new speech
+- Bad Application: Transcribing  recordings of other people's
+    speech to allow reading (or skimming) the transcription
+    instead of listening to the original recording.  This causes
+    trouble because occasional transcription errors can be arbitrarily
+    bad.
+- Good Application: Providing transcriptions to the /speaker/ for
+  their review before being releasing accurate transcriptions to
+  others!
 
 AI Generated SVG Imagery Descriptions
 - Training Data:
-      - Massive amounts of SVG imagery accompanied by descriptions
-            - available by scraping the web
+    - Massive amounts of SVG imagery accompanied by descriptions
+        - available by scraping the web
 - Input: Description of desired imagery
 - Output: SVG Model of Graphic Image
 
 Research Reports
 - Training Data:
-      - all recorded human knowledge in written form
-      - Lots of example questions with example reports
-            - with human criticism and ratings on quality metrics
+    - All recorded human knowledge in written form
+        - ultimately in all media!
+    - Lots of example questions with example reports
+        - with human criticism and ratings on quality metrics
 - Input: New research question
 - Output: Research report addressing the research question
-      - hopefully accurately and succinctly
+- State of the Art:
+    - Data and references are often "hallucinated"!
+    - Very careful human review is essential!
 
 Computer Programming
 - Training Data: Huge numbers of computer programs in many programming
   languages along with their specifications.
 - Input: Short description of desired new problem to solve
-      - in selected programming language
-- Output: Human-Understandable program in required programming language
-      - which correctly solves the desired problem
-      - with reasonable efficiency
+    - in selected programming language
+- Output: Human-Understandable program using desired programming
+  language, libraries, techniques, etc.
+- State of the Art:
+    - Output programs often contain every kind of error.
+    - Expert human review and debugging is required.
 
 We claim that these systems could be made much better by
 
@@ -162,7 +182,7 @@ We claim that these systems could be made much better by
       more transparent approaches.
 
 If AI systems can automate /Computer Programming/
-- why can't they automate the production of EKAI systems
+- why can't they automate the production of ExKAI systems
 - and Hybrid-AI systems
 and *get the best of both worlds?!*
 
@@ -178,51 +198,51 @@ This is especially the case if the program is produced
 - with an excellent [[https://en.wikipedia.org/wiki/Software_development_process][Software Development Process]]
 - producing a complete, excellent declarative specification
 - leveraging /maximally-declarative/ [[https://en.wikipedia.org/wiki/Programming_paradigm][Programming paradigms]]
-      - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]].
+    - and the [[https://en.wikipedia.org/wiki/Rule_of_least_power][Rule of Least Power]].
 
 Excellent Non-AI software systems consist of
 
-- Specification
-      - a /declarative/ model of the desired system /viewed from the outside/
-            - concise, readable, complete and correct
-                  - may include formal and informal language and diagrams
-            - it is declarative (specifying what is true about it)
-            - not procedural (saying how it works)
+- Specifications
+    - a /declarative/ model of the desired system /viewed from the outside/
+        - concise, readable, complete and correct
+            - may include formal and informal language and diagrams
+        - it is declarative (specifying what is true about it)
+        - not procedural (saying how it works)
 - Architecture Model
-      - Divides the system's functionality into modules
-            - based on [[https://en.wikipedia.org/wiki/Separation_of_concerns][a separation of concerns]]
-            - each module responsible for one part of system functionality
-            - modules are developed just as whole system developed
-                  - Specification of module from the outside
-                  - Specification of how modules work together
-            - good modules exhibit
-                  - high-cohesion & low coupling
-                  - clean interfaces hiding internal complexity
-      - Modules can be further subdivided into sub-modules, recursively
+    - Divides the system's functionality into modules
+        - based on [[https://en.wikipedia.org/wiki/Separation_of_concerns][a separation of concerns]]
+        - each module responsible for one part of system functionality
+        - modules are developed just as whole system developed
+            - Specification of module from the outside
+            - Specification of how modules work together
+        - good modules exhibit
+            - high-cohesion & low coupling
+            - clean interfaces hiding internal complexity
+    - Modules can be further subdivided into sub-modules, recursively
 - Design Model and Implementation Model for each Module
-      - The Design Model specifies higher-level layers
-            - directly related to the specification of each module
-            - using high-level computing concepts, e.g.
-                  - generic operations on generic datatypes
-                  - relations among abstract elements
-      - The Implementation Model specifies lower-level layers
-            - how to implement the corresponding Design Model layers
-            - with completely specified mechanisms, e.g.
-                  - fully elaborated algorithms and data types
-                  - procedures with complete signatures and computable bodies
-                  - specific types and other constraints
-                  - indexes and other performance-related elements
-            - often customized and adapted for the specific problem
+    - The Design Model specifies higher-level layers
+        - directly related to the specification of each module
+        - using high-level computing concepts, e.g.
+            - generic operations on generic datatypes
+            - relations among abstract elements
+    - The Implementation Model specifies lower-level layers
+        - how to implement the corresponding Design Model layers
+        - with completely specified mechanisms, e.g.
+            - fully elaborated algorithms and data types
+            - procedures with complete signatures and computable bodies
+            - specific types and other constraints
+            - indexes and other performance-related elements
+        - often customized and adapted for the specific problem
 - Testing and Constraint Models
-      - Static and Dynamic Type & Value Constraints
-      - Unit and Integration Test Models
-            - covering all operating scenarios of the system
-            - complete coverage ideally guaranteed by automated prover
-      - Assurances that the system meets the specification
-            - maximally verified before running the program
-                  - static type checking and static evaluation
-            - otherwise checked at runtime
-                  - ideally by tests
+    - Static and Dynamic Type & Value Constraints
+    - Unit and Integration Test Models
+        - covering all operating scenarios of the system
+        - complete coverage ideally guaranteed by automated provers
+    - Assurances that the system meets the specification
+        - maximally verified before running the program
+            - static type checking and static evaluation
+        - otherwise checked at runtime
+            - ideally by tests
 
 Do you see why creating such a complex artifact
 - consisting of all of the models described above
@@ -241,7 +261,7 @@ A good software development AI system should help build
 
 At least some collaboration with human experts is required to ensure
 - the system has all of the characteristics we need /now/
-      - including subtleties like resilience and security
+    - including subtleties like resilience and security
 - and will be easy to adapt as needs change /over time/
 
 What we should expect and demand is not total automation, but to
@@ -263,19 +283,37 @@ Any task that doesn't need AI
 When a task needs AI
 - The Development Process should notice that!
 - The Architecture Model should break the system down into
-      - Modules which don't require AI technologies
-      - Modules which will require AI
-      - Modules which will require Human Collaboration
+    - Modules which don't require AI technologies
+    - Modules which will require AI
+    - Modules which will require Human Collaboration
 - Any module might require /a combination of these approaches!/
 - Any AI required might be
-      - just EKAI - preferred
-      - Hybrid-AI - the next best
-            - the EKAI parts check the IKAI parts
-            - (Reference Generate & Test; Heuristic Search?)
-      - pure IKAI
-            - probably a mistake!
-            - IKAI is usually untrustworthy by itself
+    - Just ExKAI - preferred
+    - Hybrid-AI - the next best
+        - the ExKAI parts check the ImKAI parts
+        - (Reference Generate & Test; Heuristic Search?)
+    - Pure ImKAI
+        - Carefully evaluate if this is appropriate!
+        - ImKAI is usually untrustworthy by itself!
 
-The overall development process will have all of the elements described above
-for A Non-AI Development Process, and should produce all of the models described
-there!
+Instead of replacing traditional computing technologies:
+
+1. AI should almost always be used to more efficiently
+build non-AI systems.
+2. In some cases AI might be used to implement
+- specific parts of sophisticated systems
+- where outputs of any ImKAI components are verified by non-AI or
+  ExKAI parts of the system.
+
+Instead of AI replacing humans the two should collaborate:
+- Hybrid-AI should be used to assist humans
+    - Doing most of the boring, routine tasks
+    - Suggesting solutions for non-routine tasks
+- AI systems should work /transparently/ so that
+    - both the humans and the AI systems get better,
+    - as they actively review each other's work!
+As the productivity and the sophistication of the human workers
+increases, their labor should increase in value and be increasingly
+well compensated.  Wise employers will want to hold onto their
+employees and seize new opportunities for the scope of their
+enterprises.
