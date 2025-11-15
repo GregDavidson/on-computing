@@ -21,7 +21,7 @@ and that instead
 
 ImKAIs consist of multi-layered networks trained on huge datasets.
 - inspired by networks of biological neurons in the brain
-- although ImKAI systems don't work like biological networks
+- although ImKAI systems /don't/ work like biological networks
     - Researchers don't yet know why ImKAIs work so well!
 
 ImKAIs go by various names such as
@@ -31,7 +31,7 @@ ImKAIs go by various names such as
     - despite /not/ working like neural networks!
 
 ImKAI is very different from ExKAI
-- Explicit Knowledge-based Artificial Intelligence.
+- ExKAI :: Explicit Knowledge-based Artificial Intelligence.
 
 ExKAI is based on explicit human-auditable facts and rules
 
@@ -59,8 +59,8 @@ Currently
     - Board Games such as Chess, Go, Backgammon, et al.
 - ImKAI /development/ is very expensive in computer resources and energy
     - but that is [[https://en.wikipedia.org/wiki/Koomey%27s_law][expected to decrease]]
-- ImKAI systems require more resources to run than ExKAI and non-AI
-  systems require
+- ImKAI systems typically require more resources to run than ExKAI and
+  non-AI systems require
     - already being addressed with recent more powerful "AI" chips
 - Many ImKAI systems are proving to be unreliable
     - e.g. LLMs often "hallucinate" incorrect results
@@ -99,13 +99,15 @@ AI Generated Raster-Graphics Imagery
         - available by scraping the web
         - imagery in or converted-to a common raster format
 - Input: Description of desired imagery
-- Desired Output: Raster Graphic Image
+- Desired Output: Raster Graphic Image corresponding to the
+  description which meets the user's needs.
 
 Real-time Speech-Based Systems
 - Training Data: Lots of audio of speech with desired responses
     - Transcriptions might be provided as well
 - Input: Speech in audio form
-- Desired Output: Task behavior, e.g.
+- Desired Output: Various, e.g.
+    - Accurate Transcription
     - Reply to customer request
     - Operation of equipment
 
@@ -125,7 +127,7 @@ because
 Some ImKAI systems *do* produce results which can be readily inspected
 by and altered by humans:
 
-Speech Recognition
+Transcribing Speech
 - Training Data: Lots of audio of speech with transcriptions
 - Input: New speech audio
 - Output: Transcription of new speech
@@ -135,15 +137,17 @@ Speech Recognition
     trouble because occasional transcription errors can be arbitrarily
     bad.
 - Good Application: Providing transcriptions to the /speaker/ for
-  their review before being releasing accurate transcriptions to
-  others!
+  review and correction before being released to others!
 
 AI Generated SVG Imagery Descriptions
 - Training Data:
     - Massive amounts of SVG imagery accompanied by descriptions
         - available by scraping the web
 - Input: Description of desired imagery
-- Output: SVG Model of Graphic Image
+- Output: SVG Model of Graphic Image with objects and parts separated.
+- Note: Good SVG Models are much more editable than Raster Graphic
+  Images.  AI should be able to update parts without having to
+  regenerate the whole output.
 
 Research Reports
 - Training Data:
@@ -161,11 +165,11 @@ Computer Programming
 - Training Data: Huge numbers of computer programs in many programming
   languages along with their specifications.
 - Input: Short description of desired new problem to solve
-    - in selected programming language
-- Output: Human-Understandable program using desired programming
-  language, libraries, techniques, etc.
+    - specifying desired formats, resources, etc.
+- Output: Human-Understandable code using desired programming
+  language(s), libraries, techniques, etc.
 - State of the Art:
-    - Output programs often contain every kind of error.
+    - Output code often contain every kind of error.
     - Expert human review and debugging is required.
 
 We claim that these systems could be made much better by
@@ -175,11 +179,12 @@ We claim that these systems could be made much better by
 2. Collaborating with humans
     - responding to human input and edits
 3. Where possible, rather than directly performing a task
-    - producing transparent, verifiable non-AI computer programs to do a task
+    - producing transparent, verifiable non-AI computer programs to do
+      a task
     - producing explicit Knowledge-Based AI Systems where conventional
       programs can't do a task.
-    - using LLM and similar non-explicit AI to support rather than replace the
-      more transparent approaches.
+    - using LLM and similar non-explicit AI to support rather than
+      replace the more transparent (auditable) approaches.
 
 If AI systems can automate /Computer Programming/
 - why can't they automate the production of ExKAI systems
@@ -206,32 +211,33 @@ Excellent Non-AI software systems consist of
     - a /declarative/ model of the desired system /viewed from the outside/
         - concise, readable, complete and correct
             - may include formal and informal language and diagrams
-        - it is declarative (specifying what is true about it)
-        - not procedural (saying how it works)
+        - it is declarative (specifying what is true in the problem domain)
+        - not procedural (an algorithm, i.e. what to do, how it works)
 - Architecture Model
     - Divides the system's functionality into modules
         - based on [[https://en.wikipedia.org/wiki/Separation_of_concerns][a separation of concerns]]
         - each module responsible for one part of system functionality
-        - modules are developed just as whole system developed
-            - Specification of module from the outside
-            - Specification of how modules work together
+        - modules developed just as whole system developed
+            - Declarative specification of module from the outside
+            - Declarative specification of how modules collaborate
         - good modules exhibit
             - high-cohesion & low coupling
-            - clean interfaces hiding internal complexity
+            - clean interfaces hide internal complexity
     - Modules can be further subdivided into sub-modules, recursively
 - Design Model and Implementation Model for each Module
     - The Design Model specifies higher-level layers
         - directly related to the specification of each module
         - using high-level computing concepts, e.g.
-            - generic operations on generic datatypes
+            - generic operations, generic datatypes
             - relations among abstract elements
     - The Implementation Model specifies lower-level layers
+        - less declarative, more procedural
         - how to implement the corresponding Design Model layers
-        - with completely specified mechanisms, e.g.
-            - fully elaborated algorithms and data types
+        - with specified mechanisms, e.g.
+            - detailed algorithms and data types
             - procedures with complete signatures and computable bodies
             - specific types and other constraints
-            - indexes and other performance-related elements
+            - indexes and other performance-related elements (optional)
         - often customized and adapted for the specific problem
 - Testing and Constraint Models
     - Static and Dynamic Type & Value Constraints
@@ -298,8 +304,8 @@ When a task needs AI
 
 Instead of replacing traditional computing technologies:
 
-1. AI should almost always be used to more efficiently
-build non-AI systems.
+1. AI should almost always be used to more efficiently build non-AI
+   systems.
 2. In some cases AI might be used to implement
 - specific parts of sophisticated systems
 - where outputs of any ImKAI components are verified by non-AI or
