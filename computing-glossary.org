@@ -12,11 +12,43 @@ for your documents!
 
 *** General Computing Terms
 
-- Computer :: A tool which can /almost magically/ perform any task you can
-  specify with a suitable spell, err, /Program/. As many fantasy books will warn
-  you, creating spells can be perilous - a good grounding in /Computing Magic/
-  is recommended!
+- Platform :: Something you can build things on.  A /Computing
+  Platform/ is something programmable with software which you can add
+  functionality to by adding software and/or additional hardware.  The
+  platform can be a
+  - /Physical Machine/
+  - /Virtual Machine/, an
+  /Operating System/, a /Computer Language/ with accompanying
+  /Libraries/, a /Database System/, a /Programmable Application/ or
+  something else.  What you build can be a Computer Program, e.g. an
+  /Application Program/ or a /Service Program/.  
 
+- Computer :: A tool which can /almost magically/ perform any task you
+  can specify with a suitable spell, err, /Program/. As many fantasy
+  books will warn you, creating spells can be perilous - a good
+  grounding in /Computing Magic/ is recommended!  A physical computer
+  can utilize any physical process which can be interpreted as
+  performing logical operations - examples include
+  - A few wildly different possibilities
+    - [[https://www.youtube.com/watch?v=w6E7aQnA4Ws][A Computer Built With Dominos]]
+    - [[https://en.wikipedia.org/wiki/Optical_computing][Opticals Computers using Light]]
+    - [[https://en.wikipedia.org/wiki/Analog_computer][Analog Computers]] :: the largest class of computers!
+  - The First Programmable Digital Computers
+    - [[https://en.wikipedia.org/wiki/Z1_(computer)][The Z1 Mechanical Computer]]
+    - [[https://en.wikipedia.org/wiki/Z3_(computer)][The Z3 Electromechanical Computer]]
+  - Most familiar computers today are
+    - [[https://en.wikipedia.org/wiki/Digital_electronics][Digital Electronic]] [[https://en.wikipedia.org/wiki/Computer_programming][Programmable]] Computers
+    - [[https://en.wikipedia.org/wiki/Virtual_machine][Virtual Digital Programmable Computers]]
+
+- Virtual Computer :: A Computer Simulated in software as a program
+  running on another computer.  Indeed, most of today's physical
+  computers consist of a hidden (not accessible to programmers)
+  low-level computer running built-in [[https://en.wikipedia.org/wiki/Microcode][Microcode]] simulating a
+  higher-level computer executing [[https://en.wikipedia.org/wiki/Machine_code][Machine Code]], the lowest-level
+  language available to programmers!  Some Virtual Computers have a
+  wildly different (and radically more useful) architecture than any
+  non-virtual computer.
+  
 - Shell :: A program or collection of programs designed to allow a computer user
   to run (and possibly control) other programs, e.g. Application Programs aka
   Apps. Graphical Shells are designed to be easy to learn at the expense of
@@ -25,21 +57,36 @@ for your documents!
   the shell or they can be placed in a text file to be performed automatically
   or whenever desired.
 
-- High-Level Language (HLL) :: A language invented to clearly explain the
-  specification and/or solution methods of a problem of interest to humans.
-  Specifying such things in human languages, e.g. English proved to be less
-  suitable due to the lack of needed distinctions and precision. /Programming
-  Languages/ were originally used by humans as guidance in writing programs in
-  the machine language of a computer. Eventually programmers invented
-  interpreter programs which could directly execute expressions in HLL notation
-  and compiler programs which can translate such "code" into machine language
-  "code" which can then perform the desired instructions at full speed. Two
-  influential early HLLs originally only understood by humans are the [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda
-  Calculus]] and [[https://en.wikipedia.org/wiki/ALGOL][ALGOL]]. Thousands of HLLs have since been designed of [[https://en.wikipedia.org/wiki/Computer_language][many
-  different kinds]]. Some interesting or popular examples are: [[https://github.com/GregDavidson/on-lisp#readme][Lisp]], [[https://xpqz.github.io/learnapl/intro.html][APL]], [[https://github.com/GregDavidson/C-By-Example#readme][C]],
-  [[https://github.com/GregDavidson/computing-magic/blob/main/Prolog/README.org][Prolog]], [[https://github.com/GregDavidson/computing-magic/blob/main/SQL/SQL-README.org][SQL]], [[https://en.wikipedia.org/wiki/Java_%28programming_language%29][Java]] and [[https://en.wikipedia.org/wiki/Python_(programming_language)][Python]]. Code in different languages can [[https://rosettacode.org/wiki/Category:Programming_Languages][look very
-  different]] and have [[https://benchmarksgame-team.pages.debian.net/benchmarksgame/index.html][very different performance]]. There are many criteria for
-[[https://github.com/GregDavidson/computing-magic/blob/main/Languages-And-Platforms/choosing-languages.org][choosing a programming language]].
+- High-Level Language (HLL) :: A language invented to
+  - unambiguously describe a problem of interest to humans
+  - along with guidance of how to solve the problem
+  Specifying such things in a human language, e.g. English, is less
+  suitable due to the lack of needed distinctions and precision. HLL
+  notation ("code") was originally translated by hand (by people
+  called "coders") into the machine language "code" of a physical
+  computer. Eventually programmers invented
+  - Interpreters :: Programs which directly interpret (execute) HLL
+    "code" in software
+  - Compilers :: Programs which translate HLL "code" into machine
+    language "code" which can then be run by a computer at full speed.
+  Two influential early HLLs originally only understood by humans are
+  the
+  - the [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]] :: predates programmable computers!
+  - [[https://en.wikipedia.org/wiki/ALGOL][ALGOL]] :: a precise notatoin for expressing algorithms.
+  Thousands of HLLs have since been invented
+  - of [[https://en.wikipedia.org/wiki/Computer_language][many different kinds!]]
+  Some interesting or popular examples are:
+  -  [[https://github.com/GregDavidson/on-lisp#readme][Lisp]] :: a family of radically general-purpose languages
+  -  [[https://xpqz.github.io/learnapl/intro.html][APL]] :: the first [[https://en.wikipedia.org/wiki/Array_programming][Array Programming Language]]
+  -  [[https://github.com/GregDavidson/C-By-Example#readme][C]] :: used to create most of today's operating systems
+  -  [[https://github.com/GregDavidson/computing-magic/blob/main/Prolog/README.org][Prolog]] :: programming with Logic!
+  -  [[https://github.com/GregDavidson/computing-magic/blob/main/SQL/SQL-README.org][SQL]] :: used to program relational databases
+  -  [[https://en.wikipedia.org/wiki/Python_(programming_language)][Python]] :: a popular [[https://en.wikipedia.org/wiki/Scripting_language][scripting language]]
+  Code in different languages
+  - can [[https://rosettacode.org/wiki/Category:Programming_Languages][look very different]]
+  - have [[https://benchmarksgame-team.pages.debian.net/benchmarksgame/index.html][very different performance characteristics]]!
+  There are many criteria for
+  - [[https://github.com/GregDavidson/computing-magic/blob/main/Languages-And-Platforms/choosing-languages.org][choosing a programming language]].
 
 *** Scripting Terms                                          :scripting_term:
 
@@ -71,9 +118,9 @@ for your documents!
   =heavyweight process= which provides the resources needed for the execution of
   the program.
 
-- Application Program :: aka =app=. A =program= which is intended to directly interact
-  with a computer user or at least be known to them as something which is
-  carrying out their wishes.
+- Application Program :: aka =app=. A =program= which is intended to
+  directly interact with a computer user or at least be known to them
+  as something which is carrying out their wishes.
 
 - Service Program :: A =program= which exists to serve the needs of other
   Programs or the Operating System rather than to directly interact with Users
