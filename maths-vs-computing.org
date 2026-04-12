@@ -136,7 +136,7 @@ Like Ordered Sets, Numbers can be represented by Sets too!
 There are various kinds of Numbers, including
 - The natural numbers :: 0, 1, 2, ....
 - Integers :: ... -2, -1, 0, 1, 2, ....
-- Rational Numbers N/D where N and D are Integers
+- Rational Numbers n/d where n and d are Integers
 - etc.
 
 We'll give two examples of how to represent "Natural Numbers" as sets
