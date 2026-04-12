@@ -89,7 +89,7 @@ how ugly it might be) can be ignored in favor of treating Ordered Sets
 strictly in terms of the properties they have been proved to have.
 
 A Set can be denoted informally as text by denoting its elements
-separated by commas inside of a matching pair of {curly, brakets} aka
+separated by commas inside of a matching pair of {curly, brackets} aka
 Set Brackets.  Of course this only works when there's a suitable
 unambiguous denotation of the elements as text OR one uses a symbolic
 variable to reference such.
