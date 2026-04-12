@@ -1,0 +1,754 @@
+* Mathematics vs. Computing
+
+** Mathematics is not part of the Physical World
+
+Mathematics is a [[https://en.wikipedia.org/wiki/Theory_of_forms][realm of timeless abstractions]] with rich internal
+relationships and no necessary relationship to anything outside of
+that abstract realm.
+
+Many things in mathematics can be interpreted as useful [[https://en.wikipedia.org/wiki/Model][models]] for
+interesting domains outside of the realm of mathematics.  All
+scientific models are such.  The domain of Computing is especially
+enriched by applicable mathematical models.
+
+Warning:
+- [[https://en.wikipedia.org/wiki/All_models_are_wrong]["All models are false.  Some models are useful!"]]
+- Pendantic Translation: Within the mathematical realm models can
+  often be proven to be true or false.  It is only when a model is
+  applied to domains outside of the mathematical realm that the
+  validity of the model shifts from one of validity to one of
+  usefulness!
+
+Mathematical expressions denoting the same mathematical entity are
+equivalent, with no preference except as a mathematician might find
+one more to their taste in an exposition.  In particular, mathematical
+constructions are not concerned with any concept of cost as applies to
+physical machinery, e.g. space or time or complexity costs.
+
+Our Plan:
+
+We're going to present
+- the /Foundational Entities/ of
+- Mathematics and Computing
+so that you can
+- compare them side-by-side!
+
+This will be very useful because
+- The mathematical entities can serve as models for the corresponding
+  computing entities
+- Without the complexity of the computing entities
+- Allowing enhanced reasoning about the computing entities!
+
+The /Foundational Entities/ will be
+- Sets
+- Types
+- Ordered Sets
+- Numbers
+- Functions
+- Procedures
+- Typed Values
+
+** Foundational Entities in Mathematics
+
+*** Sets
+
+A central (usually taken as primitive) abstraction of mathematics is
+- [[https://en.wikipedia.org/wiki/Set_(mathematics)][a set]] :: a collection of entities called "elements"
+- The study of sets in mathematics is called [[https://en.wikipedia.org/wiki/Set_theory][Set Theory]]
+- In naive Set Theory elements can be pretty-much anything which can
+  be clearly defined, but this can result in paradoxes.
+- Set Theory generally serves as a or the foundation of modern mathematics.
+    
+Properties of elements in Sets:
+- An element E is either a member of a set S or it is not.
+- It is not meaningful to talk about an element occurring more than
+  once in a set.
+- The elements in a set do not have any necessary order.
+
+*** Types
+
+An alternative or optional foundation to Set Theory is
+- [[https://en.wikipedia.org/wiki/Type_theory][Type Theory]] :: a theory of categorization of sets and their elements
+- Type Theory constrains what kinds of elements are allowed to be present in particular sets.
+- Type Theory can eliminate the paradoxes of naive Set Theory.
+- Type Theory was developed later, after the paradoxes of naive Set
+  Theory were discovered.
+- In an alternative foundation of mathematics, Type Theory is the
+  primitive foundation, with a type-informed Set Theory defined in
+  terms of it.
+
+*** Ordered Sets
+
+An important derived concept
+- An ordered set :: like a set, a collection of elements, but ordered,
+  and possibly with duplicates.
+
+There are various ways to construct Ordered Sets from regular Sets.
+Once some such method has been demonstrated, the method (regardless of
+how ugly it might be) can be ignored in favor of treating Ordered Sets
+strictly in terms of the properties they have been proved to have.
+
+A Set can be denoted informally as text by denoting its elements
+separated by commas inside of a matching pair of {curly, brakets} aka
+Set Brackets.  Of course this only works when there's a suitable
+unambiguous denotation of the elements as text OR one uses a symbolic
+variable to reference such.
+
+Here's an example of an ad hoc construction of Ordered Sets in terms of Sets:
+- Let E = { }, the empty set, also represent any empty Ordered Set.
+- Let O = { {{o1}} { {}, o2 } } represent an Ordered Set where
+  - o1 is the first element of O
+  - o2 is an Ordered Set representing all elements of O past o1, if any.
+
+Examples:
+- { } :: an empty OS (Ordered Set)
+- { {{1}} { {}, {} } } :: an OS with one element
+  - the first and only element is the number 1
+- { {{0}} { {}, { {{1}} { {}, {} } } } } :: an OS with two elements
+  - the first element is the number 0
+  - the second element is the number 1
+- { {{1}} { {}, { {{0}} { {}, { {{1}} { {}, {} } } } } } } :: with 3 elements
+  - the first element is the number 1
+  - the second element is the number 0
+  - the third element is the number 1
+  - and: its first element is equivalent to its third element!
+
+Horrible, right?  But now that you see that "it can be done", it doesn't matter.  We can now just think that
+- An Ordered Set :: a collection of Elements, like a Set, except
+  - The Elements are totally ordered
+  - Some Elements might be Equivalent!
+
+Remember, the way we represented Ordered Sets here is just one method.
+Any method which has Ordered Sets operate the same way will work as
+well!
+
+We'll denote Ordered Sets in Text (where clear) as
+- (e1, e2, ...)
+- i.e. by listing the elements inside of parentheses, separated by commas.
+
+*** Numbers
+
+Wait, what did we mean by 0 and 1 in the last section?  Are numbers
+primitives?  No!
+
+Like Ordered Sets, Numbers can be represented by Sets too!
+
+There are various kinds of Numbers, including
+- The natural numbers :: 0, 1, 2, ....
+- Integers :: ... -2, -1, 0, 1, 2, ....
+- Rational Numbers N/D where N and D are Integers
+- etc.
+
+We'll give two examples of how to represent "Natural Numbers" as sets
+- If you're interested in how to represent other kinds of natural numbers
+  - First, try coming up with a representation yourself
+    - It doesn't have to be efficient in any sense,
+    - just clear!
+- You can then look up some of the known methods.
+
+- Let 0 = { }, i.e. the empty set!
+- Let N+1, i.e. the successor to any natural number N = { N }
+Thus: 1 = { {} }, 2 = { { {} } }, etc.
+
+Here's an alternative representation:
+- Given that we know how to represent Ordered Sets
+- We can represent any Natural Number in Binary where
+- 0 = {}
+- 1 = {{}}
+- 2 = 10 = ( {{}}, {} )
+- 100  = 1100100 = ( {{}}, {{}}, {}, {}, {{}}, {}, {} )
+
+Note that modern computers typically represent natural numbers as an
+ordered sequence of binary digits - because it's efficient given the
+physical basis of computers.  Mathematics doesn't care!
+
+Using our first method
+- 3 =  { { { {} } } }
+Using our second method
+- 3 = 11 = ( {{}}, {{}} ) = { {{{}}} { {}, { {{{{}}}} { {}, {} } } } }
+
+But now we can simply denote natural numbers using the usual decimal
+notation, or any other equivalent notation (binary, hexidecimal, etc.)
+that we find convenient, knowing that there's a way to translate that
+to sets, and knowing that we'll never have to!
+
+*** Functions
+In Mathematics
+- Pair :: An Ordered Set of two elements
+  - We can call them p1 & p2 if we like, or q1 & q2 if desired!
+- Function :: A set of pairs where the first elements are all distinct
+  - i.e. none of the first elements of the pairs are equivalent
+  - A set of pairs with no more than 2 elements is a Function - why??
+  - Consider a set of pairs with 2 or more elements
+    - S = { (p1, p2), (q1, q2), ... }
+    - where for ANY two elements (p1, p2) and (q1, q2) in S
+      - p1 is distinct from q1
+    - note that it's fine is p2 and q2 are equivalent!
+
+Which of these are Functions?
+- S1 = { (1, "red"), (2, "blue") }
+- S2 = { ({}, "red"), ({}, "blue") }
+- S3 = { (1, "red"), (2, "blue"), (3, "red") }
+- S4 = { }
+- S5 = { ({}, "red") }
+
+**** Applying a Function to a Value
+
+Given a function F
+- The notation F x refers to
+- the second element of the pair whose First element is x
+
+Example:
+- Given F = { (1, "red"), (2, "blue") }
+- F 1 = "red"
+- F 2 = "blue"
+- F x where x is neither 1 nor 2 is undefined!
+
+Warning:
+- When we see something like F x
+  - It's easy to imagine F as a computational entity
+    - "Taking a value" x and "yielding" a result
+  - That's Computing, NOT Mathematics!
+
+Mathematics is timeless!
+
+Even when we define
+- F = x, y: natural, { (x, y) | y = 2 * x^2 }
+  - i.e. pair all values x with two times x squared
+  - i.e. F = { (0, 0), (1, 2), (2, 8), (3, 18), ...)
+    - an infinite set, and remember that sets are not ordered!
+- F 3 = 18
+  - Is not /doing/ anything!
+  - In the element of set F
+    - where the first element is 3,
+    - the second element is 18.
+  - It's simply a true statement!
+  - Or if it's a question, the answer is simply: Yes, it is!
+
+**** Question: Strings
+
+How might entities like text strings be represented in Mathematics?
+e.g. What might entities like "red" and "blue" be in Mathematics?
+
+Hint: What might you want them to mean?
+
+*** Relations
+
+- Relation :: A set of pairs
+
+Given a Relation R we might ask for
+- R1 = the subset of all elements x of R where the first elements of x = 1
+  - R1 might have any number of elements
+- R2 = the subset of all elements x of R where the second element of x = "red"
+  - R2 might have any number of elements
+- R3 = the subset of all elements x of R where
+  - the first elements of x = 1
+  - OR the second element of x = "red"
+- etc.
+
+**** Relational Algebra Relations
+
+In the theory of [[https://en.wikipedia.org/wiki/Relational_algebra][Relational Algebra]], which was developed to model
+Relational Databases in practical computing, Relations are slightly
+different than we've just described.
+
+A Tuple :: An Ordered Set
+A Relation in Relational Algebra :: a Set of Tuples where
+- Each Tuple has the same number of Elements
+  - We'll call the number of elements of a Tuple its Cardinality
+- The Cardinality is finite!
+- The corresponding elements have the same Type
+  - i.e. the type of element i of each tuple in the relation is equivalent
+
+Relational Algebra generally includes a sophisticated Type Theory
+- There will be a representation of each possible type
+- The types for each of the elements of the tuples in the relation are
+  associated with the relation.
+
+In addition to the Constraints on
+- The number of elements of the Tuples
+- The types of those elements
+There can be Constraints on the values of the elements
+- allowed values at a given "position" within a single Tuple
+- allowed relationships among values of elements of the Tuples in a
+  given Relation
+  - where relationships can be represented by any mathematical rule
+    which must be satisfied
+    
+In addition to the Tuples X in a Relation
+- Let Ti represent the Type of Element i in a Tuple of Relation R.
+- Let Ci represent an Entity Constaint for an Entity at Index i in R
+- Let C represent a Relation Constraint on allowed Tuples in Relation R
+  - any definite rule which must be satisfied
+  - involving any entities in any set of the tuples of R
+- Any Tuple X must be compatible with all of the constraints of
+  Relation R
+
+Representing a Relation
+- We can represent Relation R as (Ti*, Ci*, C*, X*) where
+  - X* is a set of all of the Tuples X of R
+  - Ti* is an Ordered Set of the Ti representations
+    - with their indexes corresponding to the Tuple entity indexes.
+  - Ci* is an Ordered Set of Sets of Entity Constraints
+    - With the same Cardinality as Ti*
+    - And the Constraints in each Set applying to the entities in X*
+      at corresponding indexes.
+  - C* is a Set of Relation Constraints referencing the entities and
+    tuples of R
+  - X* is the set of Tuples of R.
+
+The explanation here of Relations in Relational Algebra is intended to make it as easy as possible to
+1. Explain Relational Operations
+2. Model Real Relational Databases
+3. Provide useful analyses of real situations invovling Relational Databases
+
+*** Procedures
+
+**** How Can We Model Procedures?
+
+In Mathematics
+- Functions are just sets.
+- They don't /do/ anything.
+
+We can use them to model procedures in computing systems where
+- The procedure takes an input value as an /argument/
+- The procedure computes a value which it returns as a /result/
+- We don't care about how the procedure works internally.
+
+Notes:
+1. We don't need to model procedures which take multiple arguments,
+as we can simply model them as procedures which take a single argument
+which is an Ordered Set containing as many values as we like.  And we
+can even use a notation which looks like we're modeling procedures
+taking multiple values and know that this is just "syntactic sugar"
+for passing an approprite Ordered Set.
+2. We'll see an alternative way to model procedures with multiple arguments once we understand the Lambda Calculus - coming up soon!
+
+How can we model what a procedure does internally?
+- What it does to compute a result?
+- Other things it might do?
+
+We're going to need some Mathematics!
+
+What if we want to model what a computational procedure DOES to
+COMPUTE the result?  Mathematics is timeless, but it can certainly
+represent a computation as
+- an Ordered Set of Computational Steps where each
+- Computational Step = an Ordered Set of (Input Value, Operation, Output Value)
+
+Can we do better?
+
+**** The Lambda Calculus vs The Turing Machine
+
+Amazingly, [[https://en.wikipedia.org/wiki/Alonzo_Church][Alonzo Church]] invented the [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]] in the 1930's to model exactly this kind of thing!  It's amazing because
+- Programmable computers didn't exist yet!
+- Programming Languages didn't exist yet!
+- [[https://en.wikipedia.org/wiki/Alan_Turing][Alan Turing]] was one of Alonzo Church's doctoral students!
+
+In case you're not familiar with [[https://en.wikipedia.org/wiki/Alan_Turing][Alan Turing]]
+- He was a key developer of some of the first computers.
+- He may have saved Britain from being conquered in World War II.
+- He invented another mathematical model for computation, the [[https://en.wikipedia.org/wiki/Turing_machine][Turing Machine]].
+- The Turing Award is the most prestigious award in Computing.
+- You can read about the rest - it's worth it!
+
+The Turing Machine helped people understand aspects of early computer
+designs, but is hard to use mathematically for understanding
+procedures, so we'll use the Lambda Calculus!
+
+**** Using The Lambda Calculus
+
+Let's model the function we saw earlier
+- F = x, y: natural, { (x, y) | y = 2 * x^2 }
+- This is simply an infinite set, existing eternally
+  
+Let's model it as a Lambda Calculus Procedure which
+- given an x, COMPUTES a corresponding y
+
+Notes:
+- The greek letter λ is called lambda in English.
+- In the Lambda Calculus, λ creates procedures.
+
+Let's define a procedure p as
+- p=λx.2*x^2
+  - with ^ having precedence over * as usual
+- or p=λx.(2*(x^2))
+  - same thing, clarified with parentheses
+We can get a computation as a sequence of "substitutions"
+  - p 3
+  - 2*3^2 -- after substituting x with 3
+  - 2*9 -- after squaring the 3
+  - 18 -- after appling the *
+
+But how do sub-computations actually work?
+- Let a=λx.x+x -- a for add
+- Let s=λx.x*x -- s for square
+- Let p=λx.a s x  -- the new procedure p
+This let's us get the sequence
+- p 3
+- a s 3
+- a (3 * 3)
+- a 9
+- 9 + 9
+- 18
+
+We could show how the * and + operations work as sub-computations but
+that would get into unwanted complexity: Let's just pretend that
+they're built-in operations.  In the real Lambda Calculus, the only
+built-in operation is λ!
+
+Let's get fancier still!
+- Let s=λx.x*x
+  - s is a procedure which takes a value and returns its square
+- Let a=λx.λy.x+y
+  - a is a procedure which takes a value x and returns
+  - a NEW, anonymous procedure which takes a value y and returns x + y
+- Let p=λx.λy.(a y) (s x)
+  - p is a procedure which takes a value x and returns
+    - a NEW, anonymous procedure which takes a value y and returns (a y) (s x)
+    - the procedure returned by (a y) will take the value returned by (s x)
+This let's us get the sequence
+- p 3 4
+- (λy.(a y) (s 3)) 4
+- (a 4) (s 3)
+- (a 4) 3*3
+- (a 4) 9
+- (λy.4+y) 9
+- 4 + 9
+- 13
+
+Things to notice:
+- We're modeling a computation as a sequence of transformations
+- Procedure applications get replaced with new values
+- Results can be new procedures as well as new numbers
+  - i.e., procedures are values just like numbers are values
+- This provides another way to deal with multiple-argument procedures
+  - i.e. You can think of procedure a as taking two arguments
+    - it actually takes one argument and returns a NEW procedure
+      - which then takes the "second" argument
+- The order in which we've done the substitutions is a bit arbitrary
+  - Other orders are possible, or even
+  - multiple substitutions in parallel where there's no conflict
+- Variations of the Lambda Calculus can account for such variations!
+- Given "built=in" operations which model the operations built-in to a
+  real computer, and substitution orders which model how the real
+  computer applies such operations, then the sequences produced in a
+  Lambda Calculus "computation" is a good model for what happens when
+  that computer "executes a procedure".
+- The Lambda Calculus can "abstract away" a lot of the messiness of an
+  actual computer allowing greater understanding of what's important.
+
+Note:
+- When today's advanced programming languages are "compiled"
+  (translated) into machine language for fast execution, the first
+  step is to translate them into a variation of the Lambda Calculus
+  for "optimization", then the optimized Lambda Calculus is translated
+  into machine code!
+
+*** Typed Values
+
+Did you notice that our various representations for
+- Ordered Sets
+- Numbers
+- etc.
+lead to ambiguous entities?
+
+If we choose our representation strategies independently, we could
+wind up with a situation such that a particular set S might be a valid
+representation of an Ordered Set and a Number.  And maybe other things
+too!  And maybe we just wanted it to represent a regular set?
+
+Can you think of a method for eliminating this ambiguity?
+
+Goal:
+-  We want to be able to represent all values of all of the kinds of
+  entities we've discussed
+-  And any others we come up with in the future
+- Including arbitrary Sets
+- Such that
+  - We can inspect any such Representation Sets and know
+    - What kind of Entity it Represents
+    - Which Value of that Entity Type it Represents
+
+Come up with your own ideas first
+- Then [[file:maths-tagged-sets.org][see a possible solution]]
+
+More sophisticated solution are variations of the [[https://en.wikipedia.org/wiki/Typed_lambda_calculus][Typed Lambda Calculus]].
+- This may seem like Greek to you, but knowning Greek won't help! ;-)
+- Quite a few pre-requisites are required to properly understand this stuff!
+- The best way is to learn a typed functional programming language
+  - We recommend [[https://www.haskell.org/][Haskell]] because of the [[https://www.haskell.org/documentation/][extensive learning resources]]
+- After learning Haskell you'll find
+  - You're now a VERY powerful computer programmer!
+  - It's now easy to learn the theory of computation!
+
+** Foundational Entities in Computing
+
+Before reading this section, please read
+- [[https://gregdavidson.github.io/on-computing/what-computers-are/][What Computers Are]]
+and then
+- [[https://github.com/GregDavidson/on-computing/blob/main/composites.org][Composite Data Structures]]
+
+Okay, now you're ready, please proceed!
+
+*** Sets
+
+Any Composite Data Structure can represent a set.
+- Simply ignore the order of the elements
+- and either remove any duplicates
+- or ignore duplicates!
+
+Standard practice in Relational Database Programming with SQL is to
+1. Produce the desired result set from the input sets
+2. If the result is simply to be stored, remove any duplicates at that time.
+3. If the result is to be presented to a human, order it in a way that
+   will please the human, removing duplicates as a side-effect of the
+   ordering procedure.
+
+*** Types
+
+Almost all modern programming languages use fairly strong typing to
+make sure that operations are only applied to the correct kinds of
+data.  Languages differ in their typing model, both in how strong it
+is and whether it is Dynamically-Typed (types are checked when the
+program is running) or Lexically-checked (typed are checked when the
+program is being prepared, before it is run).
+
+**** Dynamically-Typed Programming Languages
+
+Dynamically-Typed programming languages generally
+- Run slower because they need to spend additional computation to deal
+  with datatype considerations and other constraints.
+- Consume additional memory to tag data values with type information.
+- The extra data is similar to what we saw with
+    - [[file:maths-tagged-sets.org][Tagged Sets in Mathematics]].
+
+Many programmers enjoy the freedom dynamically-typed languages provide
+to write code casually and fix any type problems later when they [[https://en.wikipedia.org/wiki/Test-driven_development][test
+their code]].
+- A big downside of dynamically-typed code is that any type error you
+  don't catch during testing can cause the program to crash after it's
+  been deployed.
+
+Dynamically-typed languages are very popular for websites and web
+applications.  Type errors in such systems account for much of the
+unreliability of websites and web-applications!
+
+Popular Dynamically-Typed Languages Include
+- [[https://www.python.org/][Python]]
+- [[https://en.wikipedia.org/wiki/JavaScript][JavaScript]]
+- [[https://en.wikipedia.org/wiki/PHP][PHP]]
+
+More modern Dynamically-Typed Languages Include
+- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]]
+- [[https://julialang.org/][Julia]]
+
+**** Lexically-Typed Programming Languages
+
+Lexically-Typed programming languages compile (get translated into)
+more efficient machine-language programs.  Type considerations and
+other constraints are largely handled during automatic analysis of the
+program before it is translated into machine-language, allowing for a
+more efficient program
+- Programs run faster and takes up less memory!
+
+Lexical typing (aka static typing aka manifest typing) simply means
+that it's possible to tell what the types of expressions are without
+having to run the program.
+- It makes it easier for programmers to understand the program!
+- It reduces time needed to test and debug the program.
+- All possible type errors are caught automaticaly, guaranteeing that the program will never crash or otherwise misbehave due to type errors.
+
+Programmers who find extensive testing and debugging tedious generally
+prefer to use lexically-typed languages.
+- Sometimes writing code takes longer, but because less testing and
+  debugging are required, development of complex programs is usually
+  much faster.
+
+Most of the expense of programming is not in initial development, but rather is in what's called "maintenance", i.e. modifying programs for accommodate
+changed requirements.  Lexically-typed code is usually much easier (and more reliable) to modify for maintenance.
+
+Enterprises which value reliability insist on lexically-typed languages.
+
+Lexically-typed languages with very strong typing include
+- [[https://rust-lang.org/][Rust]] :: Rapidly replacing C and C++
+- [[https://www.haskell.org/][Haskell]] :: Longer learning curve, high productivity
+- [[https://docs.racket-lang.org/ts-guide/][Typed Racket]] :: Somewhat obscure, easy learning, high productivity
+  
+Lexically-typed languages with moderately strong typing include
+- [[https://www.typescriptlang.org/][TypeScript]]
+- [[https://go.dev/][Go]]
+
+*** Ordered Sets
+
+Almost all Composite Data Structures used in Computing
+- You did read [[https://github.com/GregDavidson/on-computing/blob/main/composites.org][Composite Data Structures]], yes?
+directly support Ordered Sets.
+
+It's often desirable to order the same data collection multiple ways.
+- Just store the data in the order that you read or compute it.
+- Access it through an Index which provides a desired order.
+- Conventional programming languages usually implement indexes with Pointers.
+- Relational Languages, e.g. SQL, support Indexes as a first-class feature.
+  - Much easier and much more reliable than Pointers!
+- (Misuse of Pointers causes a large number of programmer errors!)
+    
+*** Numbers
+
+Most programming languages only provide access to the numeric types supported directly by the computer's hardware: Generally Integers and Floating-Point numbers in a small number of sizes and precisions.
+- These "Primitive Numeric Types" are
+  - Very Fast
+  - And not always what you need!
+
+More advanced languages provide more
+the basics.
+- Scheme and Racket support (out of the box)
+  - Infinite Precision Integers and Rationals
+  - Complex Numbers
+- Many languages allow you to redefine the arithmetic operators to
+  support more numeric types, including
+- Scheme & Racket
+- Rust and C++
+- and many more, but NOT Java!
+
+Warning:
+- Extending the numeric operators in Dynamically-Typed languages can
+  make arithmetic much more expensive!
+
+Python allows you to extend the numeric operations
+- But you have to do it in the C language!
+- Much of Python's power comes from code written in C!
+
+*** Functions
+
+Since a Mathematical Function is just a set, if it's small enough it
+can just be represented as a data structure in a computer program.
+
+If a Mathematical Function would be too large to store, it will usually be represented by a Procedure which computes it as needed.
+
+Sometimes a combination approach is used, called [[https://en.wikipedia.org/wiki/Memoization][Memoization]].
+- Some languages have great support for memoization.
+
+Functional Programming Languages forbid or restrict procedures from
+behaving differently than mathematical functions.  The result is
+usually simpler and more reliable code.  Sometimes there is an
+efficiency cost though, as some common optimizations become more
+difficult.
+
+Other languages "improperly" use the term "function" as a synonym for
+any and all procedures.  This confuses a very important issue!
+
+*** Relations
+
+Relational programming is most commonly used with the [[https://en.wikipedia.org/wiki/SQL][SQL]] language
+with [[https://en.wikipedia.org/wiki/Relational_database#RDBMS][Relational Databases]].
+
+SQL and Relational Databases provide many advantages over conventional
+programming, including
+- Lexical Typing and Constraints :: Strong protection for Data Integrity.
+- Persistence :: If a program crashes, the data will be safe on
+  secondary storage.
+- Transactions :: If part of an operation fails, the whole operatoin
+  is "rolled-back" as if it didn't happen
+- Multi-Processing :: Data can be safely used by multiple programs
+  simultaneously.
+- Administrator Analysis and Indexing :: Without changing an SQL
+  program, it's straight-forward to analyze performance bottlenecks
+  and add indexes to increase performance.  This is especially
+  valuable when usage patterns change over time.
+
+The downside to SQL and Relational Databases are
+- Most Relational Databases are not designed to directly support
+  application-specific code.  Applications must be written in other
+  languages and awkwardly interfaced with the Database through SQL.
+- The design of SQL and Relational Databases assumed that data lived
+  on (relatively slow by modern standards) rotating hard disk drives.
+  Data access time would always outpace compute time so it wasn't
+  necessary to compile SQL into fast native code.
+
+A wonderful exception to these and other limitations is
+- [[https://www.postgresql.org/][PostgreSQL]]
+
+PostgreSQL
+- is Open Source Free Software
+- is very well maintained by the PostgreSQL Project
+- is much more flexible and extensible than other Relational Databases
+- supports extentions in
+  - SQL (easy but slow)
+  - fast compiled languages including
+    - Rust, C
+
+It's often possible to move most of the complex parts of an
+application to PostgreSQL and only have to use conventional
+programming for a (relatively simple) user interface.
+
+*** Procedures
+
+Procedures are the main feature of most programming languages.
+
+Yet in most programming languages procedures are not First Class.
+
+First Class values can be
+- Passed as an argument value to appropriate operations and procedures.
+- Created as the result of an operation and/or returned from a procedure.
+- Stored in Data Structures.
+- Built-on as part of a more complex value.
+
+The Lisp family of languages has always treated procedures as First Class Values.
+- Lisp was inspired by the Lambda Calculus
+- Lisp Procedures are created by Lambda, just as in the Lambda Calculus
+
+Recently many popular programming languages have added support for
+second-class procedures with limited functionality using a Lambda-like
+syntax.  Adding this feature has usually been touted as a major
+improvement.  Unfortunately, it falls far short of what every Lisp
+provides!
+
+Popular Languages supporting partial Lambda support
+- Rust, C++, Java, Python
+- Most procedures are NOT first-class.
+
+Lisps with full Lambda support
+- All procedures are first-class in all lisps!
+
+Lisp Caveats
+- Lisp is an old family of language with many dialects!
+- Newer Lisps based on Scheme, including Racket have the most
+  support for lambda procedures including some important guaranteed
+  optimizations which make programming simpler and more efficient.
+- Typed Racket gives the benefits of Lexical-Typing as well as the
+  other benefits of the Scheme sub-family.
+- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]] are excellent despite not having
+  Lexical-Typing and not having some of the optimizations of Scheme
+  and Racket.
+- [[https://www.common-lisp.net/][Common Lisp]] has more built-in features than other lisps which
+  sometimes allows a shorter path to solutions.  The [[https://www.sbcl.org/][Steel Bank Common
+  Lisp]] implementation of Common Lisp has the most efficient optimizing
+  compiler of all Lisps, helping make programs especially fast.
+
+Important Programming Language Caveats
+- Most of the good and bad performance of programs is due to the
+  programmer's choice of algorithms and data structures, NOT to the
+  efficiency of the language's implementation!
+- It's better to program in a language which allows the clearest
+  expression of your intent rather than in a more "efficient" language
+  which requires you to write less clear code.
+- If programming in a language doesn't give you joy, you're unlikely
+  to write very good code in it!
+- Some of the most powerful and well-designed languages, e.g. Haskell
+  and Rust, take longer to learn, but they pay off handsomely once you
+  know them well.
+- Any language requires you to think differently from what you are
+  used to is likely to seem very strange!  You may think such a
+  language has something wrong with it!  Experienced programmers jump
+  to learn such languages!  As [[https://en.wikipedia.org/wiki/Alan_Perlis][Alan Perlis]] famously said
+  - "A language that doesn't affect the way you think about
+    programming, is not worth knowing."
+  
+*** Typed Values
+
+This topic wound up being sufficiently covered in the /Types/ section
+above.
+
+We'll leave this section in place, though, to correspond with the
+Mathematics section on /Typed Values/.
