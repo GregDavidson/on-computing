@@ -92,7 +92,7 @@ A Set can be denoted informally as text by denoting its elements
 separated by commas inside of a matching pair of {curly, brackets} aka
 Set Brackets.  Of course this only works when there's a suitable
 unambiguous denotation of the elements as text OR one uses a symbolic
-variable to reference such.
+reference in its place.
 
 Here's an example of an ad hoc construction of Ordered Sets in terms of Sets:
 - Let E = { }, the empty set, also represent any empty Ordered Set.
