@@ -1,28 +1,25 @@
 * Mathematics vs. Computing
 
-** Mathematics is Abstract, not Physical!
+** Computers are Physical, Mathematics is Abstract
 
-Is Mathematics [[https://science.howstuffworks.com/math-concepts/math4.htm][something humans Invent or Discover?]]  This ancient
-question has no agreed-upon answer!  What we do know is that
-Mathematical objects are "abstract" rather than physical.  What does
-this mean?
-
-Unlike physical objects,
-- mathematical objects can be (and often are) infinitely large!
+Computers are Physical.  Despite the massive trick of partitioning
+physical phenomena into only two values (0 and 1) computers still
+suffer from the limitations of being physical.
+- Hardware costs resources to make and energy to run.
+  - You'll always have less of it than you'd like!
+   
+Being abstract has some advantages
+- Mathematical objects can be (and often are) infinitely large!
 - They don't
   - require time or energy to build
   - wear out or need mainteance
   - take up space
 - and their properties are fixed for all time.
 
-Note that despite computers being considered "mathematical", None of
-this is true of computers.  Computer hardware and computer software
-are physical, mathematics isn't!
-
 Despite (or because of) being abstract, mathematics turns out to be
 ideal for creating useful [[https://en.wikipedia.org/wiki/Model][models]] for interesting domains outside of
 the realm of mathematics.  All of science, including computing, is
-understood through these kinds of abstract mathematical models!
+understood through abstract mathematical models!
 
 Warning:
 - [[https://en.wikipedia.org/wiki/All_models_are_wrong]["All models are false.  Some models are useful!"]]
@@ -31,6 +28,13 @@ Warning:
   model is applied to domains outside of the mathematical realm, we
   don't ask whether it is the truth but rather whether it is a useful
   approximation and a reliable guide within a particular context.
+
+Consider a map vs. a satellite photo.  A map is a model of the
+territory it abstractly represents.  The Satellite photo depicts the
+territory more accurately.  The map is more useful for planning a
+trip.  Abstraction gains value by suppressing extraneous information.
+It's an error to "confuse a map with the territory" and it's foolish
+to use a satellite photo for a task that's easier with a map.
 
 Mathematical expressions denoting the same mathematical entity are
 considered equivalent, with no preference except as a mathematician
@@ -42,29 +46,35 @@ costs.
 In contrast, different ways of realizing a mathematical idea in
 computer hardware or software can have very different performance
 characteristics.  Choices in realization of mathematical ideals are
-not just a matter of a programmer's taste!
+not just a matter of a programmer's taste!  Saying that "computers do
+math" or "computers are mathematical by nature" should not confuse the
+map with the territory: Computer systems (hardware and software) are
+physical, abstract mathematical models are useful in describing them.
 
 Our Plan:
 
 We're going to present
-- the /Foundational Entities/ of
+- some of the /Foundational Entities/ of
 - Mathematics and Computing
 so that you can
 - compare them side-by-side!
 
-This will be very useful because
+This will be useful because
 - The mathematical entities can serve as models for the corresponding
   computing entities
 - Without the complexity of the computing entities
 - Allowing enhanced reasoning about the computing entities!
 
-The /Foundational Entities/ will be
+The /Foundational Entities/ will include
 - Sets
 - Ordered Sets
 - Numbers
 - Functions
 - Procedures
 - Types
+
+and we'll try to cover them in the same order to make it easier for
+you to compare them.
 
 ** Foundational Entities in Mathematics
 
@@ -769,6 +779,7 @@ Lexically-typed languages with very strong typing include
 Lexically-typed languages with moderately strong typing include
 - [[https://www.typescriptlang.org/][TypeScript]]
 - [[https://go.dev/][Go]]
+
 *** Typed Values
 
 This topic wound up being sufficiently covered in the /Types/ section
@@ -779,14 +790,32 @@ Mathematics section on /Typed Values/.
 
 ** Notes
 
+*** Keeping it Simple!
+   
 The goal is to keep this document simple rather than try to cover all
 of these topics in great detail.  Ideally we'd simplify some of this
 material rather than go deeper!
 
-We should provide more examples.
-
 We should provide more links to deeper coverage of these issues
 - even if we need to write suitable additional documents!
+
+*** More Examples?
+
+More examples on the maths side.
+
+Should we show the Lambda --> Lisp trick?
+
+And then how other programming languages and notations are kinda sorta
+Lisp-in-Disguise?
+    
+*** Atoms: Non-Composite Values
+
+Should we be more clear about values which are not general container
+types?  In mathematics these are generally constructed FROM general
+containers, i.e. either sets or lambda-expressions, but they're less
+general by design.
+
+*** Types
 
 We should expand Types though
 - start with Types as Sets of Value
@@ -797,3 +826,42 @@ We should expand Types though
      - nominal vs. structural
      - dimensions, units
  - Pointer to our deeper Types document
+
+*** What does it mean that Mathematics is Abstract
+
+This is something which Mathematicians and Philosophers have been
+debating for literally thousands of years!
+
+If you're interested in the topic, here are some links:
+- [[https://www.scientificamerican.com/article/is-the-mathematical-world-real/][Is the Mathematical World Real?]] (Scientific American)
+- Is Mathematics [[https://science.howstuffworks.com/math-concepts/math4.htm][something humans Invent or Discover?]] (How Stuff Works)
+- The [[https://en.wikipedia.org/wiki/Theory_of_forms][Theory of Forms]] (Wikipedia)
+  - A separate realm for abstractions!
+
+*** Computational Complexity
+
+Big-O notation would be useful!
+
+Some mention of practical issues which reduce the accuracy of abstract models, e.g.
+- memory hierarchies
+- parallelism and synchronization issues
+
+*** More on Computational Complexity
+
+Mathematical models of computational complexity model usually model
+how programs run on our current computers, not how they might run on
+better computers.  When we model how computation might work on the
+best possible computers that should be realizable given our knowledge
+of physics it turns out that there is an enormous amount of potential
+left untapped.
+
+Perhaps because computers are so complex, their
+fundamental design is extremely conservative and is limited by design
+decisions made at the beginning, more than 60 years ago.
+    
+The massive cost of digitization?
+- The world is Analog and we lose most of the potential computational
+  power available in physics by reducing everything to 0 or 1.
+
+The cost of the [[https://en.wikipedia.org/wiki/Von_Neumann_architecture#Von_Neumann_bottleneck][Von Neumann Bottleneck]] in traditional computer
+architecture.
