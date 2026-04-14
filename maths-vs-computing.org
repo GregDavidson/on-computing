@@ -539,13 +539,15 @@ It's often desirable to order the same data collection multiple ways.
     
 *** Numbers
 
-Most programming languages only provide access to the numeric types supported directly by the computer's hardware: Generally Integers and Floating-Point numbers in a small number of sizes and precisions.
+Most programming languages only provide access to the "primitive"
+numeric types supported directly by the computer's hardware: Generally
+Integers and Floating-Point numbers in a small number of sizes and
+precisions.
 - These "Primitive Numeric Types" are
   - Very Fast
   - And not always what you need!
 
-More advanced languages provide more
-the basics.
+Some advanced languages provide more than the "Primitive Numeric Types".
 - Scheme and Racket support (out of the box)
   - Infinite Precision Integers and Rationals
   - Complex Numbers
@@ -568,7 +570,8 @@ Python allows you to extend the numeric operations
 Since a Mathematical Function is just a set, if it's small enough it
 can just be represented as a data structure in a computer program.
 
-If a Mathematical Function would be too large to store, it will usually be represented by a Procedure which computes it as needed.
+If a Mathematical Function would be too large to store, it will
+usually be represented by a Procedure which computes it as needed.
 
 Sometimes a combination approach is used, called [[https://en.wikipedia.org/wiki/Memoization][Memoization]].
 - Some languages have great support for memoization.
@@ -592,12 +595,12 @@ programming, including
 - Lexical Typing and Constraints :: Strong protection for Data Integrity.
 - Persistence :: If a program crashes, the data will be safe on
   secondary storage.
-- Transactions :: If part of an operation fails, the whole operatoin
+- Transactions :: If part of an operation fails, the whole operation
   is "rolled-back" as if it didn't happen
 - Multi-Processing :: Data can be safely used by multiple programs
   simultaneously.
 - Administrator Analysis and Indexing :: Without changing an SQL
-  program, it's straight-forward to analyze performance bottlenecks
+  program, it's straightforward to analyze performance bottlenecks
   and add indexes to increase performance.  This is especially
   valuable when usage patterns change over time.
 
@@ -619,56 +622,60 @@ PostgreSQL
 - is much more flexible and extensible than other Relational Databases
 - supports extentions in
   - SQL (easy but slow)
-  - fast compiled languages including
-    - Rust, C
+  - fast compiled languages
+    - including Rust and C
+  - other popular application languages
+    - including Python and JavaScript
 
 It's often possible to move most of the complex parts of an
-application to PostgreSQL and only have to use conventional
-programming for a (relatively simple) user interface.
+application to PostgreSQL and then only need to use conventional
+programming for an application's user interface.
 
 *** Procedures
 
 Procedures are the main feature of most programming languages.
 
-Yet in most programming languages procedures are not First Class.
+Yet in most programming languages procedures are not First Class Values!
 
-First Class values can be
-- Passed as an argument value to appropriate operations and procedures.
+First Class Values means Values which can be
+- Passed as an argument to appropriate operations and procedures.
 - Created as the result of an operation and/or returned from a procedure.
 - Stored in Data Structures.
 - Built-on as part of a more complex value.
 
-The Lisp family of languages has always treated procedures as First Class Values.
+The Lisp family of languages has always treated procedures as First
+Class Values.
 - Lisp was inspired by the Lambda Calculus
 - Lisp Procedures are created by Lambda, just as in the Lambda Calculus
 
 Recently many popular programming languages have added support for
 second-class procedures with limited functionality using a Lambda-like
 syntax.  Adding this feature has usually been touted as a major
-improvement.  Unfortunately, it falls far short of what every Lisp
-provides!
+improvement despite not making all procedures First Class Values!
 
-Popular Languages supporting partial Lambda support
+Popular Languages supporting this partial Lambda support
 - Rust, C++, Java, Python
 - Most procedures are NOT first-class.
 
 Lisps with full Lambda support
 - All procedures are first-class in all lisps!
 
-Lisp Caveats
+There are Many Lisps!
 - Lisp is an old family of language with many dialects!
-- Newer Lisps based on Scheme, including Racket have the most
-  support for lambda procedures including some important guaranteed
-  optimizations which make programming simpler and more efficient.
-- Typed Racket gives the benefits of Lexical-Typing as well as the
-  other benefits of the Scheme sub-family.
-- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]] are excellent despite not having
-  Lexical-Typing and not having some of the optimizations of Scheme
-  and Racket.
-- [[https://www.common-lisp.net/][Common Lisp]] has more built-in features than other lisps which
-  sometimes allows a shorter path to solutions.  The [[https://www.sbcl.org/][Steel Bank Common
-  Lisp]] implementation of Common Lisp has the most efficient optimizing
-  compiler of all Lisps, helping make programs especially fast.
+- The Scheme dialect introduced the most advanced support for lambda
+  procedures including some important guaranteed optimizations which
+  make programming simpler and more efficient.
+- Newer Lisps based on Scheme are said to be in the Scheme Sub-Family.
+- Racket is based on Scheme but adds many additional features to
+  support common programming situations.
+- Typed Racket adds Lexical-Typing to Racket.
+- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]] are truly excellent modern lisps although
+  they lack some of the optimizations of Scheme and Racket.
+- [[https://www.common-lisp.net/][Common Lisp]] has more built-in features than other lisps so it takes
+  longer to learn but often allows a shorter path to solutions.
+- [[https://www.sbcl.org/][Steel Bank Common Lisp]] is an implementation of Common Lisp with the
+  most efficient optimizing compiler of all Lisps, helping make
+  programs especially fast.
 
 Important Programming Language Caveats
 - Most of the good and bad performance of programs is due to the
@@ -772,3 +779,11 @@ Mathematics section on /Typed Values/.
 
 ** Notes
 
+The goal is to keep this document simple rather than try to cover all
+of these topics in great detail.  Ideally we'd simplify some of this
+material rather than go deeper!
+
+We should provide more examples.
+
+We should provide more links to deeper coverage of these issues
+- even if we need to write suitable additional documents!
