@@ -1,29 +1,48 @@
 * Mathematics vs. Computing
 
-** Mathematics is not part of the Physical World
+** Mathematics is Abstract, not Physical!
 
-Mathematics is a [[https://en.wikipedia.org/wiki/Theory_of_forms][realm of timeless abstractions]] with rich internal
-relationships and no necessary relationship to anything outside of
-that abstract realm.
+Is Mathematics [[https://science.howstuffworks.com/math-concepts/math4.htm][something humans Invent or Discover?]]  This ancient
+question has no agreed-upon answer!  What we do know is that
+Mathematical objects are "abstract" rather than physical.  What does
+this mean?
 
-Many things in mathematics can be interpreted as useful [[https://en.wikipedia.org/wiki/Model][models]] for
-interesting domains outside of the realm of mathematics.  All
-scientific models are such.  The domain of Computing is especially
-enriched by applicable mathematical models.
+Unlike physical objects,
+- mathematical objects can be (and often are) infinitely large!
+- They don't
+  - require time or energy to build
+  - wear out or need mainteance
+  - take up space
+- and their properties are fixed for all time.
+
+Note that despite computers being considered "mathematical", None of
+this is true of computers.  Computer hardware and computer software
+are physical, mathematics isn't!
+
+Despite (or because of) being abstract, mathematics turns out to be
+ideal for creating useful [[https://en.wikipedia.org/wiki/Model][models]] for interesting domains outside of
+the realm of mathematics.  All of science, including computing, is
+understood through these kinds of abstract mathematical models!
 
 Warning:
 - [[https://en.wikipedia.org/wiki/All_models_are_wrong]["All models are false.  Some models are useful!"]]
 - Pendantic Translation: Within the mathematical realm models can
-  often be proven to be true or false.  It is only when a model is
-  applied to domains outside of the mathematical realm that the
-  validity of the model shifts from one of validity to one of
-  usefulness!
+  often be proven to be true or false, with no middle ground.  When a
+  model is applied to domains outside of the mathematical realm, we
+  don't ask whether it is the truth but rather whether it is a useful
+  approximation and a reliable guide within a particular context.
 
 Mathematical expressions denoting the same mathematical entity are
-equivalent, with no preference except as a mathematician might find
-one more to their taste in an exposition.  In particular, mathematical
-constructions are not concerned with any concept of cost as applies to
-physical machinery, e.g. space or time or complexity costs.
+considered equivalent, with no preference except as a mathematician
+might find one more to their taste in an exposition.  In particular,
+mathematical constructions are not concerned with any concept of cost
+as applies to physical machinery, e.g. space or time or complexity
+costs.
+
+In contrast, different ways of realizing a mathematical idea in
+computer hardware or software can have very different performance
+characteristics.  Choices in realization of mathematical ideals are
+not just a matter of a programmer's taste!
 
 Our Plan:
 
@@ -41,12 +60,11 @@ This will be very useful because
 
 The /Foundational Entities/ will be
 - Sets
-- Types
 - Ordered Sets
 - Numbers
 - Functions
 - Procedures
-- Typed Values
+- Types
 
 ** Foundational Entities in Mathematics
 
@@ -64,18 +82,6 @@ Properties of elements in Sets:
 - It is not meaningful to talk about an element occurring more than
   once in a set.
 - The elements in a set do not have any necessary order.
-
-*** Types
-
-An alternative or optional foundation to Set Theory is
-- [[https://en.wikipedia.org/wiki/Type_theory][Type Theory]] :: a theory of categorization of sets and their elements
-- Type Theory constrains what kinds of elements are allowed to be present in particular sets.
-- Type Theory can eliminate the paradoxes of naive Set Theory.
-- Type Theory was developed later, after the paradoxes of naive Set
-  Theory were discovered.
-- In an alternative foundation of mathematics, Type Theory is the
-  primitive foundation, with a type-informed Set Theory defined in
-  terms of it.
 
 *** Ordered Sets
 
@@ -246,61 +252,57 @@ Given a Relation R we might ask for
   - OR the second element of x = "red"
 - etc.
 
-**** Relational Algebra Relations
+**** Relational Algebra
 
-In the theory of [[https://en.wikipedia.org/wiki/Relational_algebra][Relational Algebra]], which was developed to model
-Relational Databases in practical computing, Relations are slightly
-different than we've just described.
+[[https://en.wikipedia.org/wiki/Relational_algebra][Relational Algebra]], which was developed to model Relational Databases
+in practical computing, Relations are sets of sets with some specific properties.
 
-A Tuple :: An Ordered Set
-A Relation in Relational Algebra :: a Set of Tuples where
-- Each Tuple has the same number of Elements
-  - We'll call the number of elements of a Tuple its Cardinality
-- The Cardinality is finite!
-- The corresponding elements have the same Type
-  - i.e. the type of element i of each tuple in the relation is equivalent
+A Tuple :: An Ordered Set with a finite number of Elements called Fields.
+A Relation R in Relational Algebra :: a Set of Tuples X where
+- All Tuples X in R have the same number of Fields
+- The Tuples in R satisfy all the Relational Constraints of R
+
+A Relational Constraint is
+- a definite mathematical statement
+- which can be determined to be either true or false
+- which we require to be true for some aspect of a Relation
+
+An Field Type Constraint is
+- a Constraint on the Type of a specific Field of a Tuple
 
 Relational Algebra generally includes a sophisticated Type Theory
-- There will be a representation of each possible type
-- The types for each of the elements of the tuples in the relation are
-  associated with the relation.
+- For now, think of a Type as a set of Allowed Values
+- We'll cover types more fully in their own section below!
 
-In addition to the Constraints on
-- The number of elements of the Tuples
-- The types of those elements
-There can be Constraints on the values of the elements
-- allowed values at a given "position" within a single Tuple
-- allowed relationships among values of elements of the Tuples in a
-  given Relation
-  - where relationships can be represented by any mathematical rule
-    which must be satisfied
-    
-In addition to the Tuples X in a Relation
-- Let Ti represent the Type of Element i in a Tuple of Relation R.
-- Let Ci represent an Entity Constaint for an Entity at Index i in R
+Types of Corresponding Fields in a Relation must be Equivalent
+- Let X be a Tuple in a Relation R
+- Let Xi represent the field at position (index) i in X
+  - e.g. X1 is the first field in that Tuple, X2 is the second, etc.
+- For any position i, all Xi in R must have the same type!
+  - all Tuples X in R have the same number of Fields by definition
+  - so the range of i is the number of Fields of any X in R
+
+A Relation consists of its Tuples plus any Constraints
+- Let X be a Tuple in a Relation R
+  - Remember that a Tuple is just an Ordered Set
+- Let Xi represent field i of X
+  - e.g. X1 is the first field in that Tuple, X2 is the second, etc.
+- Let Ti represent the Type of ALL fields at Index i in R
+  - There can only be one Ti for a given i
+- Let Ci represent a Constraint on all Fields i in R
+  - There can be multiple Ci constraints for a given i
 - Let C represent a Relation Constraint on allowed Tuples in Relation R
-  - any definite rule which must be satisfied
-  - involving any entities in any set of the tuples of R
+  - C might involve multiple fields of multiple tuples of R
+  - it just has to be a definite rule which must be satisfied
 - Any Tuple X must be compatible with all of the constraints of
   Relation R
 
-Representing a Relation
-- We can represent Relation R as (Ti*, Ci*, C*, X*) where
-  - X* is a set of all of the Tuples X of R
-  - Ti* is an Ordered Set of the Ti representations
-    - with their indexes corresponding to the Tuple entity indexes.
-  - Ci* is an Ordered Set of Sets of Entity Constraints
-    - With the same Cardinality as Ti*
-    - And the Constraints in each Set applying to the entities in X*
-      at corresponding indexes.
-  - C* is a Set of Relation Constraints referencing the entities and
-    tuples of R
-  - X* is the set of Tuples of R.
-
-The explanation here of Relations in Relational Algebra is intended to make it as easy as possible to
+The explanation here of Relations in Relational Algebra is intended to
+make it as easy as possible to
 1. Explain Relational Operations
 2. Model Real Relational Databases
-3. Provide useful analyses of real situations invovling Relational Databases
+3. Provide useful analyses of real situations involving Relational
+   Databases
 
 *** Procedures
 
@@ -316,13 +318,14 @@ We can use them to model procedures in computing systems where
 - We don't care about how the procedure works internally.
 
 Notes:
-1. We don't need to model procedures which take multiple arguments,
-as we can simply model them as procedures which take a single argument
-which is an Ordered Set containing as many values as we like.  And we
-can even use a notation which looks like we're modeling procedures
-taking multiple values and know that this is just "syntactic sugar"
-for passing an approprite Ordered Set.
-2. We'll see an alternative way to model procedures with multiple arguments once we understand the Lambda Calculus - coming up soon!
+1. We don't need to model procedures which take multiple arguments, as
+   we can simply model them as procedures which take a single argument
+   which is an Ordered Set containing as many values as we like.  And
+   we can even use a notation which looks like we're modeling
+   procedures taking multiple values and know that this is just
+   "syntactic sugar" for passing an approprite Ordered Set.
+2. We'll see an alternative way to model procedures with multiple
+   arguments once we understand the Lambda Calculus - coming up soon!
 
 How can we model what a procedure does internally?
 - What it does to compute a result?
@@ -445,6 +448,18 @@ Note:
   for "optimization", then the optimized Lambda Calculus is translated
   into machine code!
 
+*** Types
+
+An alternative or optional foundation to Set Theory is
+- [[https://en.wikipedia.org/wiki/Type_theory][Type Theory]] :: a theory of categorization of sets and their elements
+- Type Theory constrains what kinds of elements are allowed to be present in particular sets.
+- Type Theory can eliminate the paradoxes of naive Set Theory.
+- Type Theory was developed later, after the paradoxes of naive Set
+  Theory were discovered.
+- In an alternative foundation of mathematics, Type Theory is the
+  primitive foundation, with a type-informed Set Theory defined in
+  terms of it.
+
 *** Typed Values
 
 Did you notice that our various representations for
@@ -462,7 +477,7 @@ Can you think of a method for eliminating this ambiguity?
 
 Goal:
 -  We want to be able to represent all values of all of the kinds of
-  entities we've discussed
+   entities we've discussed
 -  And any others we come up with in the future
 - Including arbitrary Sets
 - Such that
@@ -476,11 +491,14 @@ Come up with your own ideas first
 More sophisticated solution are variations of the [[https://en.wikipedia.org/wiki/Typed_lambda_calculus][Typed Lambda Calculus]].
 - This may seem like Greek to you, but knowning Greek won't help! ;-)
 - Quite a few pre-requisites are required to properly understand this stuff!
-- The best way is to learn a typed functional programming language
+
+The best way to develop intuitions about types is to learn a typed
+functional programming language
   - We recommend [[https://www.haskell.org/][Haskell]] because of the [[https://www.haskell.org/documentation/][extensive learning resources]]
 - After learning Haskell you'll find
   - You're now a VERY powerful computer programmer!
-  - It's now easy to learn the theory of computation!
+  - It's now much easier to learn the mathematical theory of types and
+    much more!
 
 ** Foundational Entities in Computing
 
@@ -504,80 +522,6 @@ Standard practice in Relational Database Programming with SQL is to
 3. If the result is to be presented to a human, order it in a way that
    will please the human, removing duplicates as a side-effect of the
    ordering procedure.
-
-*** Types
-
-Almost all modern programming languages use fairly strong typing to
-make sure that operations are only applied to the correct kinds of
-data.  Languages differ in their typing model, both in how strong it
-is and whether it is Dynamically-Typed (types are checked when the
-program is running) or Lexically-checked (typed are checked when the
-program is being prepared, before it is run).
-
-**** Dynamically-Typed Programming Languages
-
-Dynamically-Typed programming languages generally
-- Run slower because they need to spend additional computation to deal
-  with datatype considerations and other constraints.
-- Consume additional memory to tag data values with type information.
-- The extra data is similar to what we saw with
-    - [[file:maths-tagged-sets.org][Tagged Sets in Mathematics]].
-
-Many programmers enjoy the freedom dynamically-typed languages provide
-to write code casually and fix any type problems later when they [[https://en.wikipedia.org/wiki/Test-driven_development][test
-their code]].
-- A big downside of dynamically-typed code is that any type error you
-  don't catch during testing can cause the program to crash after it's
-  been deployed.
-
-Dynamically-typed languages are very popular for websites and web
-applications.  Type errors in such systems account for much of the
-unreliability of websites and web-applications!
-
-Popular Dynamically-Typed Languages Include
-- [[https://www.python.org/][Python]]
-- [[https://en.wikipedia.org/wiki/JavaScript][JavaScript]]
-- [[https://en.wikipedia.org/wiki/PHP][PHP]]
-
-More modern Dynamically-Typed Languages Include
-- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]]
-- [[https://julialang.org/][Julia]]
-
-**** Lexically-Typed Programming Languages
-
-Lexically-Typed programming languages compile (get translated into)
-more efficient machine-language programs.  Type considerations and
-other constraints are largely handled during automatic analysis of the
-program before it is translated into machine-language, allowing for a
-more efficient program
-- Programs run faster and takes up less memory!
-
-Lexical typing (aka static typing aka manifest typing) simply means
-that it's possible to tell what the types of expressions are without
-having to run the program.
-- It makes it easier for programmers to understand the program!
-- It reduces time needed to test and debug the program.
-- All possible type errors are caught automaticaly, guaranteeing that the program will never crash or otherwise misbehave due to type errors.
-
-Programmers who find extensive testing and debugging tedious generally
-prefer to use lexically-typed languages.
-- Sometimes writing code takes longer, but because less testing and
-  debugging are required, development of complex programs is usually
-  much faster.
-
-Most of the expense of programming is not in initial development, but rather is in what's called "maintenance", i.e. modifying programs for accommodate
-changed requirements.  Lexically-typed code is usually much easier (and more reliable) to modify for maintenance.
-
-Enterprises which value reliability insist on lexically-typed languages.
-
-Lexically-typed languages with very strong typing include
-- [[https://rust-lang.org/][Rust]] :: Rapidly replacing C and C++
-- [[https://www.haskell.org/][Haskell]] :: Longer learning curve, high productivity
-- [[https://docs.racket-lang.org/ts-guide/][Typed Racket]] :: Somewhat obscure, easy learning, high productivity
-  
-Lexically-typed languages with moderately strong typing include
-- [[https://www.typescriptlang.org/][TypeScript]]
-- [[https://go.dev/][Go]]
 
 *** Ordered Sets
 
@@ -745,6 +689,79 @@ Important Programming Language Caveats
   - "A language that doesn't affect the way you think about
     programming, is not worth knowing."
   
+*** Types
+
+Almost all modern programming languages use fairly strong typing to
+make sure that operations are only applied to the correct kinds of
+data.  Languages differ in their typing model, both in how strong it
+is and whether it is Dynamically-Typed (types are checked when the
+program is running) or Lexically-checked (typed are checked when the
+program is being prepared, before it is run).
+
+**** Dynamically-Typed Programming Languages
+
+Dynamically-Typed programming languages generally
+- Run slower because they need to spend additional computation to deal
+  with datatype considerations and other constraints.
+- Consume additional memory to tag data values with type information.
+- The extra data is similar to what we saw with
+    - [[file:maths-tagged-sets.org][Tagged Sets in Mathematics]].
+
+Many programmers enjoy the freedom dynamically-typed languages provide
+to write code casually and fix any type problems later when they [[https://en.wikipedia.org/wiki/Test-driven_development][test
+their code]].
+- A big downside of dynamically-typed code is that any type error you
+  don't catch during testing can cause the program to crash after it's
+  been deployed.
+
+Dynamically-typed languages are very popular for websites and web
+applications.  Type errors in such systems account for much of the
+unreliability of websites and web-applications!
+
+Popular Dynamically-Typed Languages Include
+- [[https://www.python.org/][Python]]
+- [[https://en.wikipedia.org/wiki/JavaScript][JavaScript]]
+- [[https://en.wikipedia.org/wiki/PHP][PHP]]
+
+More modern Dynamically-Typed Languages Include
+- [[https://clojure.org/][Clojure]] and [[https://clojurescript.org/][ClojureScript]]
+- [[https://julialang.org/][Julia]]
+
+**** Lexically-Typed Programming Languages
+
+Lexically-Typed programming languages compile (get translated into)
+more efficient machine-language programs.  Type considerations and
+other constraints are largely handled during automatic analysis of the
+program before it is translated into machine-language, allowing for a
+more efficient program
+- Programs run faster and takes up less memory!
+
+Lexical typing (aka static typing aka manifest typing) simply means
+that it's possible to tell what the types of expressions are without
+having to run the program.
+- It makes it easier for programmers to understand the program!
+- It reduces time needed to test and debug the program.
+- All possible type errors are caught automaticaly, guaranteeing that the program will never crash or otherwise misbehave due to type errors.
+
+Programmers who find extensive testing and debugging tedious generally
+prefer to use lexically-typed languages.
+- Sometimes writing code takes longer, but because less testing and
+  debugging are required, development of complex programs is usually
+  much faster.
+
+Most of the expense of programming is not in initial development, but rather is in what's called "maintenance", i.e. modifying programs for accommodate
+changed requirements.  Lexically-typed code is usually much easier (and more reliable) to modify for maintenance.
+
+Enterprises which value reliability insist on lexically-typed languages.
+
+Lexically-typed languages with very strong typing include
+- [[https://rust-lang.org/][Rust]] :: Rapidly replacing C and C++
+- [[https://www.haskell.org/][Haskell]] :: Longer learning curve, high productivity
+- [[https://docs.racket-lang.org/ts-guide/][Typed Racket]] :: Somewhat obscure, easy learning, high productivity
+  
+Lexically-typed languages with moderately strong typing include
+- [[https://www.typescriptlang.org/][TypeScript]]
+- [[https://go.dev/][Go]]
 *** Typed Values
 
 This topic wound up being sufficiently covered in the /Types/ section
@@ -752,3 +769,6 @@ above.
 
 We'll leave this section in place, though, to correspond with the
 Mathematics section on /Typed Values/.
+
+** Notes
+
