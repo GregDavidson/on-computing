@@ -787,3 +787,13 @@ We should provide more examples.
 
 We should provide more links to deeper coverage of these issues
 - even if we need to write suitable additional documents!
+
+We should expand Types though
+- start with Types as Sets of Value
+  - This could be Types Part 1 and covered Early
+- Types Part 2
+  -  Overview of
+     - enums
+     - nominal vs. structural
+     - dimensions, units
+ - Pointer to our deeper Types document
