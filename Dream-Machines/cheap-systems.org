@@ -1,0 +1,41 @@
+* The Cost of Shoddy Commodity Computer Systems
+
+Computers and software are everywhere today.  In a few decades they've become
+- millions of times cheaper
+- millions of times more powerful
+- easier to use for many purposes
+
+Unfortunatley, they're also
+- insecure
+- unreliable -- data is easily lost
+- harder to use for innovative goals
+
+With computers now so essential to our lives, including our finances,
+it is no urgent that we at least solve the problem of their
+insecurity.  This is difficult because
+- Security can't be added to an insecure system.
+- Security must be part of the fundamental design of a secure system.
+
+Fortunately
+- We long known how to build secure computer systems.
+- Most of the key technical pieces are readily available.
+
+Unfortunately
+- Inertia 
+
+The best approach will solve all three problems.
+- Build at least one flexible but secure computer platform
+  - Formally Verified Hardware
+  - Formally Verified Operating System Components
+  - Eschewing functionally unnecessary complexity
+    - Non-Modifiable data where possible
+    - Transactional monotonic major versioning where modification required
+      and monotonicity is possible
+    - Transactional non-monotonic major-versioning where modification
+      is required and monotonicity is not possible
+
+** References
+
+- [[https://en.wikipedia.org/wiki/Worse_is_better][Worse Is Better - Wikipedia]]
+  - [[https://dreamsongs.com/WorseIsBetter.html][Worse Is Better - Gabriel, 1999]]
+

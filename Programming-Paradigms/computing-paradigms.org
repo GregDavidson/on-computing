@@ -1,0 +1,59 @@
+* Programming Paradigms
+
+What is computing?
+
+- [[https://en.wikipedia.org/wiki/Programming_paradigm][Wikipedia: Programming Paradigms]]
+- [[https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf][Programming Paradigms for Dummies: What Every Programmer Should Know]]
+
+** Preferred Paradigms
+
+** Problematic Paradigms
+
+*** Imperative Programming Paradigm
+
+The Imperative Programming Paradigm imitates the low-level programming
+techniques for the earliest electronic computers.
+
+*** Assembly and Machine Code Programming Paradigm
+
+The Assembly and Machine Code Programming Paradigm directly corresponds to the
+macro-architecture of computer hardware.
+
+Data consists of
+- modifiable word-size registers
+- modifiable (mutable) chunks of bits, bytes and words in main memory.
+
+Operations consist of
+: either access (read) data from
+
+** Terminology
+
+*** Micro-Architecture
+
+The physical architecture of a specific model of a CPU, implemented as electronic circuitry.
+
+A Micro-Architecture is usually only designed to efficiently implement the
+macro-architecture of a family of CPUs.
+
+The micro-architecture is usually hidden from direct programmability, i.e. there
+is usually no way for a machine-language program to directly access and
+manipulate micro-architecture constructs.
+
+***  Macro-Architecture
+
+A virtual machine architecture emulated by a range of CPUs by a built-in
+instruction decoder.
+
+The various models of CPUs of a given macro-architecture family will accept machine the language instructions
+of the macro-architecture and translate them to the lower-level micro-instructions which are implemented
+by the micro-architecture circuitry of that specific CPU model.
+
+Macro architectures are targeted by
+- assembly-language programmers
+- compiler back-ends
+
+To obtain maximum efficiency, programmers and compilers using macro-architecture
+languages have to know how the macro-architecture operations will be implemented
+by the micro-architecture. Unfortunately, this will be different for different
+models of CPUs within the same Processor Family. "Generic" Binary code written
+for any member of a Processor Family will be much less efficient.

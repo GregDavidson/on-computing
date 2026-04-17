@@ -1,0 +1,14 @@
+/* css specific to the tech-notes article "What Computers Are" */
+.hide {
+    /* elements of class hide are not at first displayed,
+       i.e. they are invisible!
+     */
+    display:none;
+}
+.show {
+    /* elements of class hide begin as inline,
+       i.e. they are displayed inline like spans,
+       not layed out vertically like divs.
+    */
+    display:inline;
+}

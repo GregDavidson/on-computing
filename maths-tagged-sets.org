@@ -1,0 +1,38 @@
+* Tagged Sets in Mathematics
+
+Goal:
+-  We want to be able to represent all values of all of the kinds of
+  entities discussed in [[file:maths-vs-computing.org][maths-vs-computing]]
+-  And any others we come up with in the future
+- Including arbitrary Sets
+- Such that
+  - We can inspect any such Representation Sets and know
+    - What kind of Entity it Represents
+    - Which Value of that Entity Type it Represents
+
+Simple Solution:
+- Assuming that there are a finite number of kinds of entities
+- Assign each kind of entity a unique non-zero natural number, e.g.
+  - 1 for Regular (Unordered) Set
+  - 2 for Ordered Set
+  - 3 for Natural Number
+  - etc.
+- Call these numbers the Tag of that kind of entity
+- Represent all entities as a pair: P = (T, R)
+- Where T is a tag of the entity we want to represent
+- and R is a valid representation of that kind of entity.
+
+Questions:
+- Why did we skip using 0 as a Tag?
+- What other things might we do with this and similar tricks?
+
+Note:
+- This trick is similar to the trick used for Dynamic Types in
+  Computing.  For example, in the Python programming language, all
+  objects (entities in memory) begin with a Tag Value which specifies
+  the type and representation of the rest of the object.
+
+Question:
+- How is this different from what Python does?
+- How do other computer programming languages solve the same problem
+  without the time and space overhead incurred by Python?

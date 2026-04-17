@@ -1,0 +1,729 @@
+* What Computers Are: Architecture
+
+Part of the [[https://github.com/GregDavidson/computing-magic#readme][Computing Magic]] Curriculum.
+
+** Read This First!
+
+This is an [[https://orgmode.org][OrgMode]] Document. Although OrgMode documents are just text, this
+particular document makes extensive use of OrgMode support for Folding and
+Unfolding sections. Unfortunately, GitHub does not support this. We suggest that
+you copy this file (or even clone the whole repository) and then read this
+document with Emacs Org Mode. A path to learning Emacs and Orgmode is in our
+[[https://github.com/GregDavidson/computing-magic/blob/main/Software-Tools/Emacs/emacs-readme.org][Emacs Readme]].
+
+** Introduction
+
+People who simply use applications running on computers don't need to
+know much about
+- How the applications work
+- How the operating system supporting the applications work
+- How the computer's hardware works
+- And the architecture which fits those things (and more) together.
+
+Who needs to understand Computer Architecture?
+- Programmers :: some parts!
+- System Administrators :: some other parts!
+- Serious Learners :: Computers are an important part of our world!
+
+The Architecture of most modern computers is similar in general with large
+amounts of differences in detail. It consists of a number of layers which
+communicate only to adjacent layers.
+
+The next part of this document is structured using nested sections imitating the
+architecture of a typical modern Computer System which includes Unix and the
+Unix-imitating Gnu/Linux and MacOS and even the but deviant (but significantly
+Unix-culture-influenced) Microsoft Windows.
+
+Many of the terms in this document are defined in our [[file:computing-glossary.org][Computing Glossary]].
+
+** A Modern Computer System
+*** User Space
+
+/User Space/ is the "space" (in the sense of an arena or environment) provided
+by an /Operating System/ providing resources needed to run /Computer Programs/
+reliably.
+
+Processes running in /User Space/ are contained within /Tasks/ aka /Processes/.
+/Processes/ are associated with specific /User Accounts/ and /Groups/ which have
+associated /Permissions/ which limit what those /Processes/ are allowed to do.
+
+For example, fundamentally insecure operations, such as direct access to the
+computer's hardware, are impossible from /User Space/.
+
+Both these protections and also many services provided to /Tasks/ in /User
+Space/ make it much, much easier to write programs to run in /User Space/ than
+the alternative of adding code to the /Kernel/ which runs in /Kernel Space/.
+
+Details of /User Space/ Services, the /Kernel/ and /Kernel Space
+are provided in sections below.
+
+Programs running in /User Space/ include
+
+**** Interactive Applications, aka Apps
+Interactive Application Programs (apps) are programs intended to interact with
+users through some kind of /User Interface/ such as a
+- Console User Interface :: Uses a /Text Console/ or /Terminal App/
+- /Graphical User Interface/ :: Uses a /Graphical Display/
+- /Web Interface/ :: Uses a /Web Browser/
+**** Non-Interactive Commands
+/Power Users/ who understand /Command Shells/ can start
+simple or complex Commands to perform desired tasks without further interaction.
+
+/Power Users/ can also direct non-interactive commands to run automatically when
+appropriate situations arise.
+
+A mini-curriculum for learning this style of computing is [[https://github.com/GregDavidson/computing-magic/blob/main/Scripting/README.org][HERE]]!
+
+**** System Services, aka Daemons
+
+System Services can either be provided by code in the /Kernel/ or they can run
+as programs in /User Space/. Unless a system service requires some special
+access to hardware which is only available in /Kernel Space/, it is generally
+better for it to run as a program in /User Space/.
+
+Example System Services
+- init or /SystemD/ :: starts and controls the other system services
+- login daemons :: start a user's session when they log in
+- logging daemons :: log status and error messages for diagnostics
+- thermald :: adjust CPU frequency to prevent overheating
+- sshd :: provides secure connections to accounts on other computers
+- httpd :: provides access to locally stored or generated web pages
+- and many more!
+
+**** Compiled Programs are Translated In Advance
+
+The /Source Code/ is written in a /High-Level Programming Language/.
+- Ideally in terms of /High-Level Abstractions/
+- Available on any modern /Operating System/
+- Such a program is therefore /Portable/
+      - It should run the same on any modern computer
+
+Machines can't execute /High-Level Languages/ directly
+- The /Source Code/ is translated (compiled) to Machine Language
+- The translated code is stored in an /object code/ file
+      - Either an executable program file
+            - Microsoft uses the extension =.exe= for such files
+            - Posix uses /no/ extension for such files
+      - or a library file
+            - Microsoft uses the extension =.dll=
+            - Posix uses =.a= for archive libraries, =.so= for /Shared Object/ Files
+- Translation is done /in advance/, before the program is run
+
+Few programmers understand machine language, or need to
+- Different kinds of computers have different machine languages
+- None of them are designed to be easily understood by humans
+
+Users might have only the machine language, e.g. a =.exe= file.
+- They can only run a =.exe= /as is/
+- /Open Source Free Software Licenses/ require distributors to provide Source
+  Code to Users
+
+Having the Source Code makes it possible to
+- Check the program for security weaknesses or backdoors
+- Rebuild the program for another kind of computer
+- Study how the code works
+- Fix a bug
+- Improve the program for one's own needs
+- Hire someone else to do such things for you!
+- Or benefit from community creativity
+      - Many programmers continuously improve interesting software
+      - Most of the internet infrastructure is Open Source Free Software!
+
+**** Interpreted Programs are Translated As The Application Runs
+
+- The application file is /Source Code/ in that language
+- There must be an /Interpreter Program/ which understands that language
+- The /Interpreter Program/ is a /Compiled Program/
+- When you run your application
+      - The Interpreter for that language is started instead
+      - The Interpreter performs (interprets) the program
+            - like an actor performing a scripted role
+            - hence these programs are often called /Scripts/
+      - /Interpreted Code/ usually runs /much slower/ than /Compiled Code/
+            - E.g. Interpreted Python is around 50 times slower than
+              compiled C or Rust
+      - A few Interpreted languages have partially overcome this
+            - E.g. Java is often 1/3 as fast as C or better
+                  - though often using 3 times as much memory
+            - E.g. JavaScript is often 1/5 as fast as C or better
+                  - though often using 5 times as much memory
+      - The techniques to achieve this are quite challenging!
+            - E.g. [[https://en.wikipedia.org/wiki/Just-in-time_compilation][Just-in-time compilation]]
+
+Sometimes interpreted programs are /obfuscated/ before being distributed
+- translated into a program incomprehensible to humans
+- to prevent empowering users with access to proper source code
+
+***** Leveraging a variety of Libraries and Services
+
+These may be provided any or all of
+- Language-specific support or extension features
+- Third-Party extensions
+- /Operating System/ core or added features
+
+These constitute /dependencies/ which are required to be present on your system
+in order for your application to run.
+
+There are a variety of tools and techniques designed to be sure that an
+applications are supplied with the right version of the needed dependencies when
+the application is installed or updated.
+
+**** Libraries
+
+Libraries consist of parts of programs, most often procedures or classes which
+provide functionality often needed by programs.
+
+Providing such functionality in the form of a library saves programmers the
+effort of implementing that common functionality in their programs.
+
+Any libraries needed by a program have to be /linked/ with the program in order
+for that program to function. This can either be done in advance, which is
+called /static linking/ or at the time the program is run (or even later when
+the program needs that functionality) which is called /dynamic linking/.
+
+/Static linking/ has the advantage that the program file is complete and will
+run even if a library it uses is not available on the system where the
+application is installed. /Static linking/ has the disadvantage that the program
+file is larger.
+
+/Dynamic linking/ not only saves space when a library is used by many installed
+programs, but it can also make it easier to provide updates, e.g. fixing
+security flaws, by simply updating the libraries. Making sure that appropriate
+versions of all the libraries needed by all of the installed programs used to be
+a tedious administrative task. Nowadays that task is largely or completely
+automated by automated /package managers/.
+
+/Novice Programmers/ often imagine that code in libraries is free of bugs or
+security or reliability issues. Alas this is not the case! Libraries need to be
+audited for quality and should ideally be /Open Source Free Software/!
+
+***** Processes and Programs
+
+/User Space/ consists of /Tasks/ running /Programs/.
+
+/Tasks/ are also called /Processes/ although there is another kind of
+process called /Threads/, covered below, which are different.
+
+The /Kernel/ creates /Tasks/
+- in response to /System Calls/
+- issued by /Programs/
+- running inside existing /Tasks/
+Wait, that's circular!  How does it get started?
+
+After the bootstrapping system loads and starts the Kernel
+- The Kernel builds the first task
+      - Traditionally called /init/
+      - It has Process ID 1
+- All other Tasks are created by request from an existing Task.
+
+We'll describe the original /Unix Model/ which is supported by Linux, BSD and
+other Unix-like or /Posix/ Operating Systems. Later /Posix/ systems often
+provide additional ways of doing things and Microsoft Windows has always been a
+bit different.
+
+The key Original System Calls are
+- =fork= :: creates a processs
+- =exit= :: terminates the process calling it
+- =wait= :: suspends processing until a /Child Process/ calls =exit=
+- =exec= :: changes the program being run by a process
+
+******  The Life Cycle of a Process (Task)
+
+- An existing Process calls =fork=
+- The Existing Process is called the /Parent Process/
+- The Kernel responds by
+      - Creating a /Child Process with a New Process ID
+      - which is otherwise /identical to the Parent!/
+The two identical processes execute in parallel
+    - Both find themselves returning from =fork=
+          - The parent receives the new Process ID assigned to the Child
+          - The child receives 0
+    - Both processes examine that return value
+          - They discover whether they're the Parent or the Child
+          - They then set about their proper task
+          - As written in the program they're both executing!
+    - A process calls =exit= when it is done with its work
+          - The kernel terminates the process calling =exit=
+          - And notifies the /Parent Process/ that a child has exited
+
+******  Why Create Multiple Processes?
+
+Imagine you want to go to the beach and enjoy yourself
+- but you have chores you need to do
+If life worked like /Unix/
+- You could /Fork A Child/ to run your chores for you
+- It knows just what to do, because it's an exact copy of you!
+- While the Child is doing the chores
+- The Parent is having a good time at the beach!
+
+In general, you want to create Multiple Processes
+- When there are multiple things that need to be done
+- And you don't want to do just one at a time
+- You want them to be happening
+      - At the same time
+      - Or at least in parallel
+      - With their processing steps overlapping in time
+
+******  So how do you do it?
+
+In the usual situation
+- a /Parent/ creates a separate /Child/ for each responsibility
+- the /Parent/ repeatedly calls =wait=
+      - each call to =wait= suspends the /Parent/ until a /Child/ exits.
+      - when a /Parent/ returns from =wait= it receives
+            - the PID of the child which has exited
+            - and the /exit status/ provided by that child
+
+When a process calls =exit=
+- It supplies an /exit status/ argument
+- By convention:
+      - /exit status/ =0= means /success/ or /true/
+      - a non-zero /exit status/ means /failure/ or /false/
+      - but you can use exit statuses to mean what you like
+            - as long as it's in the range =0= to =127=
+
+The Parent is responsible for coordinating the Children
+- If a Child fails its task, the Parent can, e.g.
+      - =fork= a new Child to try again
+      - Using the same or a different strategy
+      - Or just report the failure appropriately
+
+****** How do you Run a New Program?
+
+=exec= allows an existing /Process/ to run a new Program
+- the new program replaces the old program
+- a new /Virtual Memory/ space is created
+- the new program starts at the beginning
+      - typically with a call to a procedure called =main=
+
+The Kernel automatically creates a new /Virtual Memory/ space suitable for the
+program to start with. Most programs don't need more, but if they do, there are
+system calls to request more.
+
+***** Tasks are Heavyweight Processes
+
+Tasks
+- encapsulates several expensive system resources
+- are therefore fairly expensive to create and to maintain
+Tasks are also called /Heavyweight Processes/
+- or just /Processes/ for short
+- /(there's another kind of Process called a Thread which we'll explain later)
+
+Heavyweight Processes Contain
+
+***** Containing a Program in an Image
+
+Programs are stored as files outside of system memory.
+
+When you "run" a program with =exec=, the Kernel
+- Creates a Virtual Memory Space
+- Maps the program's file into that virtual memory space
+- Includes any Options and Arguments passed to =exec=
+      - Traditionally from command used to run the program
+- All of this is called an /Image/.
+
+***** Virtual Memory
+
+- Each /Task/ appears to have a separate /Memory Space/
+      - With addresses from =0= to some large number
+- =exec= makes sure there's enough memory for the new program to start
+      - The program can request more as needed
+- Memory cannot be accidentally shared across /Tasks/
+      - A numerical addresses in one Image has nothing to do with the
+        same numerical address in another Image
+- /Physical Memory/ is mapped as needed or requested into /Virtual Memory/
+      - Memory is allocated in chunks called /Pages/
+      - Each /Page/ in /Physical Memory/ has a /Physical Memory Address/
+      - From =0= to however much /Physical Memory/ your machine actually has
+      - Any /Page/ in /Physical Memory/ can be assigned an address in some one Process's Virtual Memory
+      - Processes can't see the /Physical Memory Addresses/
+      - Processes can't see any memory belonging to another Process
+
+***** Special Virtual Memory Tricks
+
+There are some tricks with Virtual memory and some of them can allow Processes
+to see specific parts of the Virtual Memory of other Processes, by permission.
+
+****** Memory Mapped Files
+
+You can map an area of physical memory to a file in a file system
+- Or anything which can act like a file (more on that later)
+
+When a program tries to access such a region of its memory
+- The Kernel pauses the process
+- The Kernel allocates enough real memory to hold the page(s) being accessed
+- The Kernel reads that data from the "file" into the allocated memory
+- The Kernel resumes the program
+
+- It's also possible to arrange for modifications in such a mapped area of
+  memory to propagate out to the "file".
+- /This can allow processes to Communicate as with Shared Memory (see below)!/
+
+This may seem like it has more overhead than the usual file Input/Output
+mechanisms, but it is in fact 2-3 times faster! Many high-performance programs
+map their files rather than reading or writing them in the usual way.
+
+******* Programs and Dynamic Libraries are Mapped!
+
+Remember that /Programs/ and Dynamic Libraries live in Files.
+
+When you "run" a /Program/
+- the program's File is /Memory Mapped/ into the Image memory of the Task
+- The code of any Dynamic Libraries is also Memory Mapped into the Image memory
+- Only the Pages of the Program and/or Library Code which are actually accessed
+  during the run of a program will actually wind up being /Paged In/.
+- Thus large programs with lots rarely used features don't necessarily require
+  so much memory to run!
+
+****** Shared Memory Segments
+
+Processes can ask the Kernel to create /Shared Memory Segments/.
+
+A Shared Memory Segment is
+- a collection of contiguous pages of Virtual Memory
+- with ownership and read/write permissions
+- similar to a Files in a Filessytem
+
+So it's not a file
+- but it a lot like a file
+- so it's a kind of "file"!
+
+One or more processing running on the same computer system
+- which might be a cluster or distributed computer
+- with many CPUs and Memory banks
+- communicating over high-speed buses
+can map the same Shared Memory Segment into their Virtual Memory Spaces
+- if the Shared Memory Segment's "file" permissions allow it
+
+Each process mapping a particular Shared Memory Segment
+- into their normally "Private" Virtual Memory
+- can map it at an address of their choosing in their Memory Space
+
+Yes, that means that any data in such a Shared Memory Segment may
+appear to be at different addresses within different Processes!
+
+Programmers Beware:
+- Do not store Pointers (memory addresses treated as data) in such Shared Memory
+  Spaces!
+- Such Pointers will reference a different memory area from the viewpoint of
+  other Processes
+- And High-Level Languages use Pointers to reference just about everything!
+
+Modifying data in Shared Memory Segments mapped into multiple Proccesses on the
+same Computer allows for a very fast form of Input/Output.
+
+An example is in the architecture of the PostgreSQL advanced Object-Relational
+Database System. A PostgreSQL Parent Process creates a Child Process to serve
+each database client. Database clients communicate with their PostgreSQL service
+process using regular I/O, usually TCP/IP Sockets. The PostgreSQL Child
+Processes communicate with their Parent (which coordinates access to the
+database) via Shared Memory Segments.
+
+****** Paging and Swapping
+
+Modern Computers are very fast:  In a single second
+- They can do billions of operations with main memory
+- They can move many millions of bytes in or out of memory
+
+When physical memory is running low, the Kernel can
+- Determine what Pages of Memory haven't been used in a long time
+      - i.e. in the last tenth of a second or so!
+- /Page Out/ pages of memory or /Swap Out/ whole Images of Tasks
+      - Moving any modified Pages to a /Disk Volume/ called the /Swap Space/
+      - Memory mapped to come right back in if and when needed
+
+When there's not enough /Swap Space/ and memory gets really low
+- The kernel will select and kill Processes as necessary
+- So that the system continues to be as usable as possible
+- This sometimes happens, e.g. to browsers with hundreds of tabs!
+
+Programmers Beware: This possible occurrance is just one of the things which can
+cause a Process to be terminated unexpectedly. You must design your program so
+that if it crashes (terminates unexpectedly at any time) you won't corrupt any
+important data you might have been in the middle of updating! Ensuring this can
+be challenging!
+
+
+***** Threads are Lightweight Processes
+
+A thread represents an execution sequence within a program, tracking the next
+instruction to execute within the program.
+
+On some systems a Thread also includes one or more pages of Thread Specific
+Memory within that Image which other Threads are /not supposed to access/. But
+there's no actual mechanism to prevent them from accessing another thread's
+Thread Specific Memory. And accidentally doing so can cause program errors which
+are very difficult to debug!
+
+That's all that comprises a Thread, so Threads are very lightweight when
+compared with tasks. Thus Threads are also called /Lightweigth Processes/.
+
+When =exec= causes the Kernel to "run" a new Program within a task, the Kernel
+creates an initial Thread which calls that Program's starting point (in many
+languages, a procedure called =main=) and the program is off and running!
+
+A program can request the Kernel to create additional Threads as desired.
+
+Modern computers increasingly have multiple CPUs and GPUs aka Hardware
+Processors. If a Task has Nt Threads and the machine has Np processors and if Nt
+> Np then it won't be possible for all of the threads to be running at once. In
+practice, all of the Threads of all of the Tasks in /User Space/ are competing
+for access to the system's Processors (CPUs and also sometimes GPUs).
+
+The solution to this delemma is Time Slicing. Because Processors are so very
+fast, it's possible for each one to spend a few milliseconds doing work for one
+thread, then the next few milliseconds doing work for another thread, and so on.
+One Processor can handle the needs of any number of Threads if necessary.
+
+Operating Systems have sophisticated ways of prioritizing the access of Threads to Processors so that
+important processing activities can advance as fast as possible at the expense of activities which an afford to wait a bit.
+
+***** Virtual I/O
+
+- Tasks have their own Input/Output "connections"
+- The connections actually live in /Kernel Space/
+- The /Kernel/ performs all I/O for all /Tasks/
+      - This includes both Local I/O and Network I/O
+
+*** Kernel Space
+**** The Kernel
+
+The job of the kernel is to
+- Create /User Space/
+- Replace idiosyncratic and insecure hardware features with
+      - Portable, high-level services
+- Prevent Programs running in /User Space/ against
+      - Interfering with one another
+      - Doing anything disallowed by /Permissions/
+
+Code running in /Kernel Space/ has no such protections.
+- All resources of all running programs are accessible
+- The computer's hardware is directly accessible
+- There are no permissions to worry about
+      - Which should make you worry!
+
+Once a computer has finished /Bootstrapping/ the /Kernel/ should be the only
+code running in /Kernel Space/!
+
+**** Kernel Services and Examples
+
+The Kernel provides nice high-level abstractions as services to /User Space/ /Tasks/.
+
+***** Processes and Programs
+
+Details are in the last section under /User Space/.
+
+The Kernel is responsible for
+- Processes: both Tasks and Threads
+- Memory Spaces and Segments
+- I/O Connections
+- Loading Programs and Libraries
+
+***** File Systems
+
+The /Kernel/ creates the abstractions of /Files/, /Directories/ (Folders) and
+/Filesystem Volumes/.
+
+Storage on persistent hardware appears to be in the form of files
+- Byte sequences without any apparent physical divisions
+
+Directories (Folders) are /Files/ containing /Links/ to other /Files/
+- A /Link/ contains a filename + an /Index Number/
+- /Index Numbers/ are unique within /Filesystem Volumes/
+- So /Files/ get their names from a /Directory File/
+      - Regular Files can have multiple names from multiple /Directory Files/!
+- /Directory Files/ get their name from /Parent Directory Files/!
+      - /Directory  Files/ are prohibited by policy from having multiple names
+
+Filesystem Volumes abstract physical devices to transparently
+- can share physical devices for convenience
+- can span multiple physical devices for greater capacity
+- can use redundancy to increase reliability and speed (RAID)
+- can use encryption for security
+- given an /Index Number/ can return
+      - The File's /Data/ and /Metadata/
+      - A File's Metadata includes /Ownership/ and /Permission/ data
+
+**** The Top Part of the Kernel
+The Top Level of the Kernel
+- Responds to requests (System Calls) from programs
+- Performs the requested action on behalf of the program
+      - May or may not suspend the program while doing so
+- Places any results into an area of that program's private memory
+
+***** System Calls
+
+From the viewpoint of a programmer, a System Call appears to be a call to a
+library Procedure (aka Function). In actuality, a System Call is implemented by
+a special piece of machine language code which switches the hardware execution
+context from the permissions of /User Space/ to the wide-open permissions of
+/Kernel Space/ and calls a procedure within the Kernel.
+
+The thread executing code within the program is suspended while a replacement
+thread executing code within the kernel runs code carrying out the action in
+Kernel Space. This is invisible to the program, but it is much more expensive
+than a regular library procedure. if the program has permission to do the
+requested action, the Kernel performs the service for the program.
+
+Programs almost always make System Calls indirectly via higher-level library
+procedures which interface better with a particular programming language's
+syntax and semantics. It's also common for higher-level library procedures to
+use techniques such as buffering to reduce the overhead of System Calls.
+
+**** The Bottom Part of the Kernel
+
+The purpose of the bottom part of the kernel is to interface with physical
+devices in order to actually perform such actions and Input/Output, Memory
+Mapping, Processor Mapping, etc.
+
+It consists of chunks of code called /Device Drivers/.
+
+A System Call in the Top Part
+- creates a Kernel Thread
+- which might call a /Device Driver/ procedure to, e.g.
+      - load some bytes to be transmitted somewhere
+      - initiate the transfer
+- and that thread might then suspend itself
+
+The device will inform the device driver when it completes the action
+- this is done through a /hardware interrupt/
+- which the Kernel translates to
+      - the appropriate procedure of the appropriate device driver
+- which then might resumes the kernel thread
+
+One of the amazing things about all of this is that
+- I/O actions happen at less than a millionth the speed of a CPU
+- The kernel needs to manage vast numbers of such operations "at once"
+- The devices are often being shared by multiple programs
+- Without any interference or even awareness of those programs
+
+Further complicating all of this is that
+- Most hardware devices are flakey -- full of dangerous bugs!
+- Which are carefully worked around by the corresponding device drivers!
+
+Kernel Programming is not for Wizards, it's for Gurus!
+
+*** Physical Hardware
+
+Physical Hardware consists of a vast number of devices
+- There are several kinds of devices
+- With numerous variations on each kind of device
+- There are usually [[https://xkcd.com/927/][many competing standards]]
+      - Real devices imperfectly follow the applicable standards!
+
+**** Mother Boards
+
+A modern computer, including the computers embedded in cellphones and other
+consumer or utility devices generally consist of many separate electronic
+devices. These are generally assembled on [[https://en.wikipedia.org/wiki/Motherboard][a motherboard]] for physical support and
+interconnection.
+
+**** Processors
+***** CPUs: Central (General-Purpose) Processing Units
+One or more [[https://en.wikipedia.org/wiki/Central_processing_unit][CPU Chip(s)]] provide the execution of the machine code of binary
+programs. Modern CPU Chips often incorporate multiple processors along with a
+limited amount of memory (called cache) fast enough to keep up with the high
+speed of the CPU processors. Modern CPUs may provide other services as well,
+e.g. services related to secondary memory and I/O.
+
+***** GPUs: Graphics Processing Units
+[[https://en.wikipedia.org/wiki/Graphics_processing_unit][GPUs]] were originally simplified CPUs intended to execute simple repetitive
+graphics operations in parallel. As GPUs have evolved they have become able to
+take on more and more repetitive tasks in modern computing, e.g. machine
+learning and cryptographic processing. Modern GPUs can be programmed with high
+level languages. Some programming environments now support compiling parts of
+the high-level language code to the CPUs and part for the GPUs to increase
+overall throughput.
+
+CPUs and GPUs are often integrated into multi-chip modules which connect to a
+motherboard as if they were a single device.
+
+**** Physical Volatile Memory
+The main memory of a modern computer consists of DRAM.
+
+DRAM is volatile, it's contents will be lost
+- every few milliseconds
+      - unless it is refreshed (rewritten)
+- or if power is lost
+
+Circuits are provided to refresh DRAM automatically.
+
+DRAM is the main working memory of computers because
+- It only costs a few dollars per gigabyte
+- It only takes a few nanoseconds to access it
+
+DRAM is too slow to keep up with modern CPUs
+- So CPUs use smaller amounts of [[https://en.wikipedia.org/wiki/SRAM][SRAM]] as cache
+- 10 times faster, but more expensive!
+
+SRAM and DRAM are both volatile
+- So computers use slower non-volatile memory for long-term storage
+
+**** Physical Non-Volatile Memory
+
+There are three popular kinds of non-volatile memory
+- Flash -- Used in thumbdrives and "Solid State Drives"
+      - 1000 times the latency of DRAM
+- Rotating Magnetic Hard Disk Drives -- slower but higher capacity
+      - 1000 times the latency of Flash
+- Magnetic Tape -- highest capacity, ideal for backups
+      - a person or machine has find and mount the right tape!
+
+Increased latency makes these forms of storage look slow.  If the super-fast
+processors of the computer have to wait millions of cycles for the data they
+need, the system will appear to be very, very slow!
+
+However, if you want a large "chunk" of information and it is stored so that it
+can be delivered with a single request, the device can deliver the whole "chunk"
+very fast. This is "throughput" as opposed to "latency".
+
+Well written high-performance programs make sure that the data they need to
+process is organized and staged so that you can keep the processors busy.
+
+**** Networking
+
+Modern networking breaks up all communication into packets.
+- Each packet has a a destination address
+- Large chunks of data are can be broken up into multiple packets
+      - They'll be reassembled on delivery
+- Any number of packets can fail to make it to the destination!
+      - Packets are retained at the source until delivery is acknowledged
+      - Packets will be resent if not acknowledged
+- Packets part of a larger chunk or stream might get out-of-order
+      - The receiving kernel will notice
+      - Reordering and retransmission will happen as needed
+
+Networking is a dance between the series of hardware devices which are
+imperfectly transmitting packets across the "fabric" of interconnected devices
+and the network protocols managed in the kernels on the various computer systems
+hosting the communicating processes.
+
+Here's a good [[https://en.wikipedia.org/wiki/OSI_model][Networking Reference Model]].
+
+For the popular TCP protocol, these mechanisms give the illusion of a reliable
+byte stream as if it were being carried by a dedicated pair of wires.
+
+In the Posix model, once a TCP connection is established, it is handled like any
+other I/O stream, with File Descriptors.
+
+**** Miscellaneous Hardware
+
+All of these things interface with Device Drivers in the Kernel.
+
+If application programmers are aware of them at all, they are aware of a
+convenient high-level abstraction of them provided by the Kernel!
+
+- Keyboards :: simple byte stream encoding of keys
+- Mice :: simple byte stream encoding of buttons and movement
+- Frame Buffers feeding to Graphics Displays
+      - 2-D arrays of DRAM
+      - often dual ported for GPU and CPU access
+- Sound input :: [[https://en.wikipedia.org/wiki/Analog-to-digital_converter][Analog-to-Digital converters]]
+- Sound output :: [[https://en.wikipedia.org/wiki/Digital-to-analog_converter][Digital-to-Analog converters]]
+- Video Camera Input :: Byte stream protocol
+- [[https://en.wikipedia.org/wiki/Bluetooth][Bluetooth]] :: Super-complex layers of committee-designed protocols!
+
+- Miscellanea
+      - Temperature sensors
+      - Open box sensors
+      - Fans

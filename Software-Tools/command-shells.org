@@ -1,0 +1,12 @@
+* Command Shells
+
+** Primary Power User Tool
+
+A Command Shell is an application which provides a simplified language
+primarily oriented around running and controlling other programs,
+including running multiple other programs in combination to solve
+problems which would be beyond any one program to solve by itself.
+
+Command shells leverage the fact that almost all computer applications
+can be executed from a textual command, even if they are now more
+commonly launched from a [[file:graphical-shells.org][]Graphical Shell]].

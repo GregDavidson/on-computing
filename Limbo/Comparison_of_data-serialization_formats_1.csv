@@ -1,0 +1,66 @@
+Name,Creator-maintainer,Based on,Standardized?[definition needed],Specification,Binary?,Human-readable?,Supports references?e,Schema-IDL?,Standard APIs,Supports zero-copy operations
+Apache Arrow,Apache Software Foundation,—,De facto,Arrow Columnar Format,Yes,No,Yes,Built-in,"C, C++, C#, Go, Java, JavaScript, Julia, Matlab, Python, R, Ruby,  Rust, Swift",Yes
+Apache Avro,Apache Software Foundation,—,No,Apache Avro™ Specification,Yes,Partialg,—,Built-in,"C, C#, C++, Java, PHP, Python, Ruby",—
+Apache Parquet,Apache Software Foundation,—,No,Apache Parquet,Yes,No,No,—,"Java, Python, C++",No
+Apache Thrift,"Facebook (creator)
+Apache (maintainer)",—,No,Original whitepaper,Yes,Partialc,No,Built-in,"C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml, Delphi and other languages",—
+ASN.1,"ISO, IEC, ITU-T",—,Yes,"ISO/IEC 8824 / ITU-T X.680 (syntax) and ISO/IEC 8825 / ITU-T X.690 (encoding rules) series. X.680, X.681, and X.683 define syntax and semantics.","BER, DER, PER, OER, or custom via ECN","XER, JER, GSER, or custom via ECN",Yesf,Built-in,—,OER
+Bencode,"Bram Cohen (creator)
+BitTorrent, Inc. (maintainer)",—,De facto as BEP,Part of BitTorrent protocol specification,"Except numbers and delimiters, being ASCII",No,No,No,No,No
+BSON,MongoDB,JSON,No,BSON Specification,Yes,No,No,No,No,No
+Cap'n Proto,Kenton Varda,—,No,Cap'n Proto Encoding Spec,Yes,Partialh,No,Yes,No,Yes
+CBOR,"Carsten Bormann, P. Hoffman",MessagePack,Yes,RFC 8949,Yes,No,"Yes, 
+through tagging",CDDL,FIDO2,No
+Comma-separated values (CSV),"RFC author:
+Yakov Shafranovich",—,Myriad informal variants,"RFC 4180
+(among others)",No,Yes,No,No,No,No
+Common Data Representation (CDR),Object Management Group,—,Yes,General Inter-ORB Protocol,Yes,No,Yes,Yes,"Ada, C, C++, Java, Cobol, Lisp, Python, Ruby, Smalltalk",—
+D-Bus Message Protocol,freedesktop.org,—,Yes,D-Bus Specification,Yes,No,No,"Partial
+(Signature strings)",Yes,—
+Efficient XML Interchange (EXI),W3C,"XML, Efficient XML",Yes,Efficient XML Interchange (EXI) Format 1.0,Yes,XML,"XPointer, XPath",XML Schema,"DOM, SAX, StAX, XQuery, XPath",—
+Extensible Data Notation (edn),Rich Hickey / Clojure community,Clojure,Yes,Official edn spec,No,Yes,No,No,"Clojure, Ruby, Go, C++, Javascript, Java, CLR, ObjC, Python",No
+FlatBuffers,Google,—,No,Flatbuffers GitHub,Yes,Apache Arrow,"Partial
+(internal to the buffer)",Yes,"C++, Java, C#, Go, Python, Rust, JavaScript, PHP, C, Dart, Lua, TypeScript",Yes
+Fast Infoset,"ISO, IEC, ITU-T",XML,Yes,ITU-T X.891 and ISO/IEC 24824-1:2007,Yes,No,"XPointer, XPath",XML schema,"DOM, SAX, XQuery, XPath",—
+FHIR,Health Level 7,REST basics,Yes,Fast Healthcare Interoperability Resources,Yes,Yes,Yes,Yes,"Hapi for FHIR JSON, XML, Turtle",No
+Ion,Amazon,JSON,No,The Amazon Ion Specification,Yes,Yes,No,Ion schema,"C, C#, Go, Java, JavaScript, Python, Rust",—
+Java serialization,Oracle Corporation,—,Yes,Java Object Serialization,Yes,No,Yes,No,Yes,—
+JSON,Douglas Crockford,JavaScript syntax,Yes,"STD 90/RFC 8259
+(ancillary:
+RFC 6901,
+RFC 6902), ECMA-404, ISO/IEC 21778:2017","No, but see BSON, Smile, UBJSON",Yes,"JSON Pointer (RFC 6901), or alternately, JSONPath, JPath, JSPON, json:select(); and JSON-LD","Partial
+(JSON Schema Proposal, ASN.1 with JER, Kwalify Archived 2021-08-12 at the Wayback Machine, Rx, JSON-LD","Partial
+(Clarinet, JSONQuery / RQL, JSONPath), JSON-LD",No
+MessagePack,Sadayuki Furuhashi,JSON (loosely),No,MessagePack format specification,Yes,No,No,No,No,Yes
+Netstrings,Dan Bernstein,—,No,netstrings.txt,Except ASCII delimiters,Yes,No,No,No,Yes
+OGDL,Rolf Veen,?,No,Specification,Binary specification,Yes,Path specification,Schema WD,,—
+OPC-UA Binary,OPC Foundation,—,No,opcfoundation.org,Yes,No,Yes,No,No,—
+OpenDDL,Eric Lengyel,"C, PHP",No,OpenDDL.org,No,Yes,Yes,No,OpenDDL library,—
+PHP serialization format,PHP Group,—,Yes,No,Yes,Yes,Yes,No,Yes,—
+Pickle (Python),Guido van Rossum,Python,De facto as PEPs,PEP 3154 – Pickle protocol version 4,Yes,No,Yes,No,Yes,No
+Property list,"NeXT (creator)
+Apple (maintainer)",?,Partial,Public DTD for XML format,Yesa,Yesb,No,?,"Cocoa, CoreFoundation, OpenStep, GnuStep",No
+Protocol Buffers (protobuf),Google,—,No,"Developer Guide: Encoding, proto2 specification, and proto3 specification",Yes,Yesd,No,Built-in,"C++, Java, C#, Python, Go, Ruby, Objective-C, C, Dart, Perl, PHP, R, Rust, Scala, Swift, Julia, Erlang, D, Haskell, ActionScript, Delphi, Elixir, Elm, Erlang, GopherJS, Haskell, Haxe, JavaScript, Kotlin, Lua, Matlab, Mercurt, OCaml, Prolog, Solidity, Typescript, Vala, Visual Basic",No
+S-expressions,"John McCarthy (original)
+Ron Rivest (internet draft)","Lisp, Netstrings",Largely de facto,"""S-Expressions"" Archived 2013-10-07 at the Wayback Machine Internet Draft","Yes, canonical representation","Yes, advanced transport representation",No,No,,—
+Smile,Tatu Saloranta,JSON,No,Smile Format Specification,Yes,No,Yes,"Partial
+(JSON Schema Proposal, other JSON schemas/IDLs)","Partial
+(via JSON APIs implemented with Smile backend, on Jackson, Python)",—
+SOAP,W3C,XML,Yes,"W3C Recommendations:
+SOAP/1.1
+SOAP/1.2","Partial
+(Efficient XML Interchange, Binary XML, Fast Infoset, MTOM, XSD base64 data)",Yes,"Built-in id/ref, XPointer, XPath","WSDL, XML schema","DOM, SAX, XQuery, XPath",—
+Structured Data eXchange Formats,Max Wildgrube,—,Yes,RFC 3072,Yes,No,No,No,,—
+UBJSON,"The Buzz Media, LLC","JSON, BSON",No,ubjson.org,Yes,No,No,No,No,—
+eXternal Data Representation (XDR),"Sun Microsystems (creator)
+IETF (maintainer)",—,Yes,STD 67/RFC 4506,Yes,No,Yes,Yes,Yes,—
+XML,W3C,SGML,Yes,"W3C Recommendations:
+1.0 (Fifth Edition)
+1.1 (Second Edition)","Partial
+(Efficient XML Interchange, Binary XML, Fast Infoset, XSD base64 data)",Yes,"XPointer, XPath","XML schema, RELAX NG","DOM, SAX, XQuery, XPath",—
+XML-RPC,Dave Winer,XML,No,XML-RPC Specification,No,Yes,No,No,No,No
+YAML,"Clark Evans,
+Ingy döt Net,
+and Oren Ben-Kiki","C, Java, Perl, Python, Ruby, Email, HTML, MIME, URI, XML, SAX, SOAP, JSON",No,Version 1.2,No,Yes,Yes,"Partial
+(Kwalify Archived 2021-08-12 at the Wayback Machine, Rx, built-in language type-defs)",No,No
+Name,Creator-maintainer,Based on,Standardized?,Specification,Binary?,Human-readable?,Supports references?e,Schema-IDL?,Standard APIs,Supports zero-copy operations

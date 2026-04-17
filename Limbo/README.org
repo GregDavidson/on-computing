@@ -1,0 +1,3 @@
+* Data Serialization Formats
+
+[[https://en.wikipedia.org/wiki/Comparison_of_data-serialization_formats][Comparison of data-serialization formats (Wikipedia)]]

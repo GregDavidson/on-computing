@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>(jgd simple note) A Model Computer</title>
+    <link rel="stylesheet" type="text/css" href="/ngender.net/jgd/jgd.css">
+  </head>
+  <body>
+    <div class="Top">
+      <h1><a href="http://ngender.net/jgd">J. Greg Davidson</a></h1>
+      <h2><a href="http://ngender.net/jgd/tech-notes">Simple Notes on Computing</a></h2>
+      <h3>A Model Computer</h3>
+    </div>
+    <div>
+      <h4>Prerequisites</h4>
+      <p>
+	You should first read the earlier <em>Simple
+	Note</em> <a href="http://ngender.net/jgd/tech-notes/what-computers-are">What
+	Computers Are</a>.
+      </p>
+    </div>
+    <div>
+      <h4>Preface</h4>
+      <p>
+	This <em>Simple Note</em> presents a model computer system
+	roughly comparable to a modern 32-bit personal computer, pared
+	down to its essentials.  This model computer is then used as a
+	baseline for understanding a variety of actual computers, both
+	common and exotic.  Here are its specs (which will be fully
+	explained by the end of this note):
+	<ul>
+	  <li> 1 32-bit CPU core running at 2 GHz</li>
+	  <li> Up to 4 Gi Bytes Dual-Ported ECC RAM </li>
+	  <li> 1 Video subsystem driving a 2 Ki by 1 Ki wide-screen
+	    monitor, i.e. 2048 pixels wide by 1024 pixels high.</li>
+	  <li> 8 24-bit 88 KHz audio channels </li>
+	  <li> 4 1 GHz ethernet channels </li>
+	  <li> 1 USB 2.0 bus </li>
+	  <li> 2 500 Gi byte hard disk drives </li>
+	  <li> 1 DVD reader/burner </li>
+	  <li> 4 software-defined radios </li>
+	  <li> A variety of USB equipment including a pointing device
+	  such as a mouse and a keyboard with extra USB ports.  The
+	  keyboard can be plugged into the computer and any other USB
+	  devices can then be plugged into the keyboard.
+	  </li>
+	</ul>
+      </p>
+      <p>
+	To understand this computer we must understand
+	<ol>
+	  <li> How this computer uses its memory. </li>
+	  <li> How this computer uses its devices. </li>
+	  <li> What operations this computer can do. </li>
+	  <li> How the instructions which control this computer can be
+	  stored as data. </li>
+	  <li> How data, including instructions, can create
+	  abstractions which make a much better system. </li>
+	</ol>
+      </p>
+    </div>
+    <div>
+      <h4> Main Memory vs. Registers </h4>
+      <p>
+	Our model computer supports up to 4 Gi Bytes of main memory
+	(RAM).  That's 32 Gi bits or 34,359,738,368 ON/OFF switches.
+	Amazing, isn't it?  The switches in the main memory are wired
+	together so that the CPU can load (read) or store (write)
+	their contents by number.  The first byte in main memory is
+	byte 0, the next is byte 1, and so on all the way up to byte
+	4,294,967,295 which is the last of the 4 Gi Bytes of memory.
+	The number indicates the location or address of the byte in
+	main memory.
+      </p>
+      <p>
+	The computer's CPU has a much smaller number of switches
+	ganged together in groups of 32.  Each group of 32 switches in
+	the CPU is called a register.  The fact that the CPU's
+	registers are all 32-bits wide is why this is a 32-bit CPU.
+	Registers are much faster to read and write than main memory, often
+	by a factor of 10 or more, so fast programs try to keep frequently
+	used values in Registers rather than in main memory.
+      </p>
+      <p>
+	Most of the CPU's Registers can be used to hold any one-word
+	value at the programmer's discretion - these are called the
+	General Purpose Registers.  A few of the registers have
+	special dedicated purposes, here are a few of those:
+	<dl>
+	  <dt>PCR = Program Counter Register</dt>
+	  <dd>
+	    Holds the location in main memory of the next instruction
+	    to perform.  After most instructions the PCR is
+	    automatically incremented to address the following
+	    instruction.
+	  </dd>
+	  <dt>FPR = Frame Pointer Register </dt>
+	  <dd>
+	    Holds the location in main memory associated with
+	    the current procedure being performed.  A procedure
+	    consists of some instructions and some temporary data.
+	  </dd>
+	  <dt>SPR = Stack Pointer Register </dt>
+	  <dd>
+	    <p>
+	      Holds the location in the current procedure's scratch area
+	      where the next unused space is available.  A subtle point
+	      is that the temporary data of the current procedure may
+	      either be stored in main memory or in some of the General
+	      Purpose Registers.
+	    </p>
+	    <p>
+	      The notation SP(0) refers to the first <em>unused</em>
+	      word referenced by the SPR.  SP(1) refers to
+	      the <em>used</em> word <em>below</em> SP(0) and so on.
+	    </p>	      
+	  </dd>
+	</dl> 
+      </p>
+    </div>
+    <div>
+      <h4> Fundamental Instructions </h4>
+      <dd>
+	Computers have a fixed set of built-in instructions, each of
+	which has a specific representation determining, e.g. where
+	it finds it's data, where it leaves any results, etc.  When
+	a computer program is being processed, the computer simply performs
+	each instruction in the order they are loaded into memory, except
+	for <em>branch</em> instructions which may store a new address into the PCR.
+	The details of instructions vary from computer to computer, but here
+	are a few typical examples:
+	  <h5> Load, Store, Dup, Flip Instructions </h5>
+	  <dl>
+	    <dt>LOAD</dt>
+	    <dd>
+	      <ul>
+		<li> Before: SP(1) contains a main memory address divisible by 4. </li>
+		<li> After: SP(1) is loaded with the four bytes from main memory location Before: SP(1). </li>
+	      </ul>
+	    </dd>
+	    <dt>STORE</dt>
+	    <dd>
+	      <ul>
+		<li> Before: SP(2) contains a main memory address divisible by 4. </li>
+		<li> Before: SP(1) contains some value. </li>
+		<li> After: The four bytes of Before:SP(1) are stored in main memory at Before:SP(2). </li>
+		<li> After: SPR has decremented by 8 bytes, we've <em>popped</em> two words off the stack. </li>
+	      </ul>
+	    </dd>
+	    <dt>DUP</dt>
+	    <dd>
+	      <ul>
+		<li> Before: SP(1) contains some value. </li>
+		<li> After: SPR has incremented by 4 bytes. </li>
+		<li> SP(1) contains a copy of SP(2) which is the same as Before:SP(1). </li>
+	      </ul>
+	    </dd>
+	    <dt>FLIP</dt>
+	    <dd>
+	      <ul>
+		<li> Before: SP(1) contains some value. </li>
+		<li> Before: SP(2) contains some value. </li>
+		<li> After: SP(1) = Before:SP(2). </li>
+		<li> After: SP(2) = Before:SP(1). </li>
+	      </ul>
+	    </dd>
+	  </dl>
+	  <h5> Arithmetic Instructions </h5>
+	  <p>
+	    Integer arithmetic is <em>exact</em>, e.g. 10 / 3 = 3
+	    remainder 1.<br />  Floating point arithmetic
+	    is <em>inexact</em>, e.g. 10.0 / 3.0 = 3.3333333 where the
+	    number of digits in the output is a function of the
+	    precision.  On the other hand, integer arithmetic can only
+	    span a short range of values.  A floating point value uses part
+	    of its bits for an exponent and the rest for a mantissa.  The exponent
+	    holds the exact magnitude of the value, while the mantissa holds
+	    the approximate value.  Scientists and
+	    engineers like floating point because their measurements
+	    are usually approximate anyway, but they may span very
+	    large magnitudes.
+	  </p>
+	  <p>
+	    Most modern machines have simple integer arithetic
+	    instructions and very fancy floating-point instructions.
+	    For simplicity, our model computer handles floating-point
+	    arithmetic as much as possible like the integer
+	    arithmetic.
+	  </p>
+	  <dl>
+	    <dt>IADD: Integer Addition</dt>
+	    <dd>
+	      Before:SP(1) and SP(2) contain values we think of as integers<br />
+	      After:SP(1) and SP(2) contain the sum of Before:SP(1) and Before:SP(2)<br />
+	      where After:SP(2) is the overflow, if any.
+	    </dd>
+	    <dt>ISUB: Integer Subtraction</dt>
+	    <dd>
+	      Before:SP(1) and SP(2) contain values we think of as integers<br />
+	      After:SP(1) and SP(2) contain the difference Before:SP(1) - Before:SP(2)<br />
+	      where After:SP(2) is the overflow, if any.
+	    </dd>
+	    <dt>IADD: Integer Addition</dt>
+	    <dd>
+	      Before:SP(1) and SP(2) contain values we think of as integers<br />
+	      After:SP(1) and SP(2) contain the sum of Before:SP(1) and Before:SP(2)<br />
+	      where After:SP(2) is the overflow, if any.
+	    </dd>
+	    <dt>ISUB</dt>
+	    <dd>
+	      Integer addition<br />
+	      Before:SP(1) and SP(2) contain values we think of as integers<br />
+	      After:SP(1) and SP(2) contain the sum of Before:SP(1) and Before:SP(2)<br />
+	      where After:SP(2) is the overflow, if any.
+	    </dd>
+	    <dt>ISUB, FSUB</dt>
+	    <dd> Integer or Floating-Point subtraction</dd>
+	    <dt>IMUL, FMUL</dt>
+	    <dd> Integer or Floating-Point multiplication</dd>
+	    <dt>IDIV, FDIV</dt>
+	    <dd> Integer division<br />
+	      Floating-Point division</dd>
+	    <dt>IADD, FADD</dt>
+	    <dd>
+	      Integer or Floating-Point addition<br />
+	      Before:SP(1) and SP(2) 
+	    </dd>
+	    <dt>ISUB, FSUB</dt>
+	    <dd> Integer or Floating-Point subtraction</dd>
+	    <dt>IMUL, FMUL</dt>
+	    <dd> Integer or Floating-Point multiplication</dd>
+	    <dt>IDIV, FDIV</dt>
+	    <dd> Integer division<br />
+	      Floating-Point division</dd>
+	  </dl>
+	  <h5> Input/Output Instructions </h5>
+	  <p>
+	    Input and Output involves transferring data to or from
+	    something <em>outside</em> the little world of our model
+	    computer.  This data transfer requires coordinating the
+	    action of our general-purpose CPU with the special-purpose
+	    device processor attached to the device.  Device addresses
+	    are unique numbers identifying a specific device.
+	  </p>
+	  <p>
+	    Managing Input/Output efficiently requires some
+	    sophisticated software called a device driver.  There are
+	    a number of subtle issues here which will be dealt with
+	    later!
+	  </p>
+	  <dl>
+	    <dt> SEND <em>X=device-address</em> <em>Y=memory-location</em> <em>Z=num-bytes</em> <em>ZZ=bytes-sent</em> </dt>
+	    <dd> Requests that the device at bus location X receive up to Z bytes from memory location Y.  The device (printer, ethernet channel, etc.)
+	      might not be able to accept that much data, so the number of bytes it was able to receive is stored in ZZ.
+	    </dd>
+	    <dt> RECV <em>X=device-address</em> <em>Y=memory-location</em> <em>Z=num-bytes</em> <em>ZZ=bytes-sent</em> </dt>
+	    <dd> Requests that the device at bus location X send up to Z bytes to memory location Y.  The device (printer, ethernet channel, etc.)
+	      might have that much data available, so the number of bytes it was able to send is stored in ZZ.
+	    </dd>
+	  </dl>
+    </div>
+      <p>
+	Here's how the computer accesses data from main memory:
+	<ol>
+	  <li>An instruction places the address of a byte in main
+	    memory into the MAR.</li>
+	  <li>The computer issues a LOAD WORD instruction.</li>
+	  <li>This causes the four bytes (32-bits) in main memory starting at the address
+	    stored in the MAR to be transferred to the MCR, replacing
+	    the previous settings of those switches we call the MCR.</li>
+	</ol>
+      </p>
+      <p>
+	Storing data into main memory is very similar:
+	<ol>
+	  <li>An instruction places the address of a byte in main
+	    memory into the MAR.</li>
+	  <li>The computer issues a STORE WORD instruction.</li>
+	  <li>This causes the four bytes (32-bits) in the MCR to be transferred
+	    to main memory starting at the address
+	    stored in the MAR, replacing the previous settings of
+	    those switches in main memory.</li>
+	</ol>
+      </p>
+      <p>
+	Because we can access main memory in any order, simply by
+	placing the address of the first byte we want to load or store
+	into the MAR, we sometimes call main memory Random Access
+	Memory or RAM.
+      </p>
+    </div>
+    <div>
+      <h4> Complex Instructions </h4>
+      <p>
+	Most computers build in some complex instructions which can do 
+      </p>
+	<dd>
+	  Computers have a fixed set of built-in instructions, each of
+	  which has a specific representation determining, e.g. where
+	  it finds it's data, where it leaves any results, etc.  When
+	  a computer program is being processed, the computer simply performs
+	  each instruction in the order they are loaded into memory, <em>except
+	    where those instructions say to do something different</em>.
+	  The details of instructions vary from computer to computer, but here
+	  are a few typical examples:
+	  <dl>
+	    <dt>INTEGER-ADD <em>location1</em> <em>location2</em> <em>location3</em>"</dt>
+	    <dd> Fetch two words of data from the memory locations <em>location1</em> and <em>location2</em>, add them
+	      and store the sum in memory <em>location3</em>.</dd>
+	    <dt> SEND-BYTES <em>num-bytes</em> <em>memory-location</em> <em>device-address</em></dt>
+	    <dd>
+	  which might send a num-bytes bytes to a printer, a network
+	  channel, etc. depending on the device-address from a
+	  specified memory-location.  A particularly interesting instruction is the procedure call, e.g. "CALL-PROC <em>memory-location</em>" which would transfer control to a sequence of instructions at the given memory-location, perform those instructions, and then come back and perform 
+	    </dd>
+	  </dl>
+    </div>
+    <hr />
+    <address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
+    <!-- Created: Friday, 2 January 2009 -->
+    <!-- hhmts start -->
+    Last modified: Sat Jan  3 01:25:58 PST 2009
+    <!-- hhmts end -->
+  </body>
+</html>

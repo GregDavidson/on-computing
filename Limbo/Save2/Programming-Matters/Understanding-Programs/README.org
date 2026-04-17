@@ -1,0 +1,103 @@
+* Understanding Programs
+
+How well can you understand a moderately large and complex program by
+- studying it without running it?
+- running it in multiple test scenarios?
+- [[https://en.wikipedia.org/wiki/Abstract_interpretation][abstract interpretation]]?
+
+What do you need to look at?
+- Specifications?
+  - In what [[https://en.wikipedia.org/wiki/Specification_language][specification language]] or notation?
+  - Can you prove that the program will [[https://en.wikipedia.org/wiki/Correctness_(computer_science)][honor the specification]]?
+- [[https://en.wikipedia.org/wiki/Type_system][Type Declarations]]?
+- [[https://en.wikipedia.org/wiki/Design_by_contract][Contracts]]?
+- The code?
+- [[https://en.wikipedia.org/wiki/Test-driven_development][Tests]]
+
+A program which can't be well understood is a setup for a disaster!
+
+** How Programs Can Go Wrong and Potential Consequences
+
+A program can fail for a number of reasons
+- Invalid input
+- Unavailable external resources
+- An error in the program's logic, i.e. a software bug
+- A hardware fault in the underlying computing system
+
+The failure can take many forms and have many consequences!
+
+Consider
+- Air traffic Control Systems
+- Vehical control systems
+- Medical instruments
+- Financial analysis systems
+- Data security systems
+- Safety monitoring systems
+- Factory control systems
+- etc.
+
+The program might crash, i.e. stop execution
+- in-Process operations are left in an unknown state
+- data may be corrupted
+
+The program seems to work but produces invalid output
+- What might be the consequence of this?
+  - Especially if nothing detects that the data is invalid, i.e. it
+    looks plausible to any monitoring system?
+  - A patient receives the wrong treatment
+    - Deaths and disabilities!
+  - An automated vehicle crashes
+    - Deaths and disabilities!
+  - An automated factory is incorrectly controlled
+    - Damage to expensive equipment
+    - Waste of expensive materials
+    - Release of defective products
+    - Release of environmental pollutants
+    - Potential deaths and disabilities from all of the above!
+  - Incorrect financial decisions are taken
+    - Collapse of companies
+    - Loss of people's investments
+
+It's usually better to have a program crash than produce invalid data.
+
+In critical systems, e.g. spacecraft carrying humans, it is common to
+have multiple redundant programs (written independently) running on
+separate hardware systems of similar performance but different design.
+- The programs can "vote" on the correct thing to do.
+- If one of them crashes the others can continue.
+- Failing programs can be restarted or shut down as appropriate to
+  their failure mode.
+
+** Dynamically-Typed Languages
+
+Most people learn programming using Dynamically-Typed languages
+- JavaScript
+- Python
+- Most Lisp dialects
+- Smalltalk systems
+- etc.
+
+With Dynamically-Typed Languages it is generally /not possible/ to be sure about what a moderately large and complex program might in general do.
+- Tests can reveal the presence of bugs if you're luck
+- Tests can never assure the absence of bugs
+
+Runtime Contracts can be added to the code to constrain what it might do
+- A contract violation will stop the program
+- With an error message helping to find the problem
+Alas, runtime contracts are expensive
+- So programmers often turn most of them off once the code is put in production!
+
+Modern processors now offer multiple CPU cores and threads for
+high-performance computing.  Logical threads can also be used to allow
+the program to perform useful work while waiting for the results of
+I/O or other computations to complete.
+
+Runtime testing is especially weak at finding problems with any
+programs which use concurrency, e.g. where the program is using
+multiple logically or physically simultaneous processes
+collaboratively.
+
+** Statically-Typed Languages
+
+  
+** Proving Program Correctness

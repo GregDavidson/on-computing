@@ -1,0 +1,72 @@
+* An Example Low-Level Data Model for General Computation
+
+** What are we trying to design here?
+
+A strategy for mapping all of the data structures of general computation into
+main memory.
+- It should be able to efficiently represent all of the data structures used by
+      - Scheme, Common Lisp, Clojure
+      - C and Rust
+      - Prolog, Mercury, Curry
+      - Constrant-Satisfaction Languages
+      - In-RAM Relational Databases
+
+** Fundamental Objects
+
+These should all default to immutable.
+- Monotonic Marking for incomplete objects
+      - Including Logic-Variable-Like Slots
+- Full Mutability Marking for structured objects and slots
+
+Slots, Templates, Molecules
+- A =slot= is like a logic variable
+      - It represents a missing or temporary value
+      - It might have static and dynamic properties
+            - a type
+            - a default value
+            - a multiplicity and grouping strategy
+                  - how many values can fill it
+                  - how those values are grouped
+            - constraints
+            - foreign references
+            - guard functions and fill functions to generalize all this
+- A =template= is an incomplete Data Structure
+      - Empty Slots appear in place of
+      - Incomplete Data structures with =slots=
+- =molecules= associate =templates= with =slot= =fillers=
+      - Fillers can be
+            - =values=
+            - unification with other slots
+            - futures/promises
+
+Numbers
+- Anything which satisfies /typeclass/ =Num=
+- Everything in Scheme's Numeric Tower
+- Fixed and Infinite Precision and Range versions of
+      - Integer, Rational, Floating-Point, Posits, Modern BCD
+      - Complex numbers based on pairs of the above
+
+Vectors
+- Heterogeneous vectors of =AnyType= Elements
+- Homogeneous vectors of a specified element types
+- Subranges of Vectors
+- Hierarchical =gloms= of Vectors and Vector Subranges
+      - Append functions should create =gloms=
+      - GC should eliminate =gloms=
+
+Records
+- Fields of =AnyType=
+- Fields of specified types
+      - Separating pointers and atomic values
+
+Enums
+- Variant Records as in Rust
+
+Environment trees
+- Associating symbols with =slots= or =values=
+
+Closures
+
+Delimited Continuations
+
+Reified Procedures

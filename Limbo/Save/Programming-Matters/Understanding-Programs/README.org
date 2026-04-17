@@ -1,0 +1,136 @@
+* Understanding Programs
+
+This file has become too complex.  It might also have lost some
+valuable content from the last check-in version! Similarly:
+- static-vs-dynamic.org
+- types-contracts-testing.org
+
+Start over
+- Make the main file simpler and more natural
+- Put specialized material in other files
+- Pull material from the previous version
+- Pull material from the working version
+
+How well can you understand a moderately large and complex program by
+- studying it without running it?
+- running it in multiple test scenarios?
+- [[https://en.wikipedia.org/wiki/Abstract_interpretation][abstract interpretation]]?
+
+What do you need to look at?
+- Specifications?
+  - In what [[https://en.wikipedia.org/wiki/Specification_language][specification language]] or notation?
+  - Can you prove that the program will [[https://en.wikipedia.org/wiki/Correctness_(computer_science)][honor the specification]]?
+- [[https://en.wikipedia.org/wiki/Type_system][Type Declarations]]?
+- [[https://en.wikipedia.org/wiki/Design_by_contract][Contracts]]?
+- The code?
+- [[https://en.wikipedia.org/wiki/Test-driven_development][Tests]]
+
+A program which can't be well understood is a setup for a disaster!
+
+** How Programs Can Go Wrong and Potential Consequences
+
+A program can fail for a number of reasons
+- Invalid input
+- Unavailable external resources
+- An error in the program's logic, i.e. a software bug
+- A hardware fault in the underlying computing system
+
+The failure can take many forms and have many consequences!
+
+Consider
+- Air traffic Control Systems
+- Vehical control systems
+- Medical instruments
+- Financial analysis systems
+- Data security systems
+- Safety monitoring systems
+- Factory control systems
+- etc.
+
+The program might crash, i.e. stop execution
+- in-Process operations are left in an unknown state
+- data may be corrupted
+
+The program seems to work but produces invalid output
+- What might be the consequence of this?
+  - Especially if nothing detects that the data is invalid, i.e. it
+    looks plausible to any monitoring system?
+  - A patient receives the wrong treatment
+    - Deaths and disabilities!
+  - An automated vehicle crashes
+    - Deaths and disabilities!
+  - An automated factory is incorrectly controlled
+    - Damage to expensive equipment
+    - Waste of expensive materials
+    - Release of defective products
+    - Release of environmental pollutants
+    - Potential deaths and disabilities from all of the above!
+  - Incorrect financial decisions are taken
+    - Collapse of companies
+    - Loss of people's investments
+
+It's usually better to have a program crash than produce invalid data.
+
+In critical systems, e.g. spacecraft carrying humans, it is common to
+have multiple redundant programs (written independently) running on
+separate hardware systems of similar performance but different design.
+- The programs can "vote" on the correct thing to do.
+- If one of them crashes the others can continue.
+- Failing programs can be restarted or shut down as appropriate to
+  their failure mode.
+
+
+** Ensuring Type Correctness of Operations Applied To Data
+
+A Type Violation occurs if and when an operation is applied or could
+be applied to the wrong Type of Data.
+
+For example, what might happen if an operation is performed on an
+unexpected type of data, e.g. a string is passed where a TimeStamp or
+a CustomerID or a number is required, or vice versa?
+
+There are two fundamental ways of 
+
+
+
+
+
+** Proving Program Correctness
+
+
+** Mutability
+
+** Miscellaneous Notes
+
+*** Resiliency
+
+How should the program behave if
+- Any of its required external resources are not available?
+  - Including if they became inaccessible after the program started?
+- Requied permissions are denied?
+  - Including if they were allowed eariler?
+- Data is invalid, e.g. corrupted?
+- A subsystem (component of the program) reports an error?
+  - E.g. "throws an exception" or /returns a value indicating
+    something is wrong/.
+
+Does the program /degrade gracefully/ in such situations?
+- Can it continue with some loss of functionality?
+- Can it recover if things go wrong?
+
+Does the program create check-points it can fall back to or be
+restarted from in the case of a later problem?
+
+Does the program create and operate within transactions?
+- A transaction can be rolled-back in case of a failure.
+- Are the transactions nestable?
+- Can multiple transactions be processed concurrently?
+  - E.g. with [[https://en.wikipedia.org/wiki/Multiversion_concurrency_control][Multiversion Concurrency Control]]
+
+Does the above allow multiple instances of the program to run safely at the same time?
+- On the same or different computers?
+- Sharing inputs and outputs?
+
+Can you tell if a colleague has modified the program since you last
+studied it?
+- And what consequences those modifications might have?

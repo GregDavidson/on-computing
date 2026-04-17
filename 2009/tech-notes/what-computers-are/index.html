@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>(jgd simple note) What Computers Are</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/jgd/jgd.css"> -->
+    <link rel="stylesheet" type="text/css" href="../tech-notes.css">
+    <link rel="stylesheet" type="text/css" href="what-computers-are.css">
+    <script type="text/javascript" src="what-computers-are.js"> </script>
+  </head>
+
+  <body>
+    <div class="Top">
+      <h1><a href="http://ngender.net/jgd">J. Greg Davidson</a></h1>
+      <h2><a href="http://ngender.net/jgd/tech-notes/">Simple Notes on Computing</a></h2>
+      <h3>What Computers Are</h3>
+      <h4>Preface</h4>
+      <p>
+	As a Computer Scientist I'm relieved when people honestly
+	declare that they don't really understand computers.  This
+	relief is in contrast to my feeling of distress when I
+	discover that someone I'm interacting with has a seriously
+	inaccurate or at best limited and distorted understanding of
+	computers.
+      </p>
+      <p>
+	It would be useful for most people to have at least a basic
+	understanding of what computers are along with some basic
+	ability to make use of them.  This <em>Simple Note</em> is not designed
+	for most people.  Some people may find themselves interested in
+	knowing quite a bit about computers but not know where to
+	start.  This <em>Simple Note</em> is for them.
+      </p>
+      <p>
+	I have a strong preference for starting with fundamentals
+	every time I undertake a project, especially if I'm going to
+	go very deep.  This <em>Simple Note</em> is intended to cover the very
+	basics of <em>What Computers Are</em> for someone who
+	thinks they might want to go on and learn a lot about
+	computers and computing.  Such a person will have the patience
+	for a very careful introduction.
+      </p>
+      <h4>OK, So what Are Computers?</h4>
+      <p>
+	A computer is a collection of switches linked together to
+	provide memory functions and logic functions.  To understand
+	computers you need to know
+	<ol>
+	  <li> what is a switch</li>
+	  <li> how switches can be combined to represent
+ information</li>
+	  <li> how switches can be combined to perform meaningful
+	operations </li>
+	  <li> how such information and operations can be organized to reliably and conveniently
+	    address your needs and desires </li>
+	</ol>
+      </p>
+      <h5>So what is a Switch?</h5>
+      <img alt="off switch" src="../Icons/cropped-off-switch.png">
+      <img alt="on switch" src="../Icons/cropped-on-switch.png">
+      <p>
+	A binary switch is a two-position switch like the simple ones
+	used to turn lights on and off.  We call it a binary switch
+	because it has only two positions, ON and OFF.  You can use
+	such a switch to represent any either-or kind of
+	information.  Here are some examples:
+	<ul>
+	  <li> ON = she loves me, OFF = she doesn't</li>
+	  <li> ON = it's raining, OFF = it's not raining</li>
+	  <li> ON = innocent, OFF = guilty</li>
+	  <li> ON = black-and-white, OFF = color </li>
+	</ul>
+	and so on.  The choice of which switch position to use for
+	which meaning is arbitrary, it is a matter of which interpretation we choose.  Here
+	are some more examples:
+	<table border="1">
+		<thead>
+			<tr> <td> Interpretation </td> <td> First Meaning </td> <td> Second
+			Meaning </td> </tr>
+		</thead>
+		<tbody>
+			<tr> <td> Switch  </td> <td> On </td> <td> Off </td> </tr>
+			<tr> <td> Answer </td> <td> Yes </td> <td> No </td> </tr>
+			<tr> <td> Truth </td> <td> True </td> <td> False </td> </tr>
+			<tr> <td> Number </td> <td> 1 </td> <td> 0 </td> </tr>
+			<tr> <td> Quantity  </td> <td> Some </td> <td> None </td> </tr>
+			<tr> <td> Value Is </td> <td> Known </td> <td> Unknown </td> </tr>
+		</tbody>
+	</table>
+	What you call them is just a matter of convenience or
+	convention.  What you decide to have them mean is the big deal.
+      </p>
+      <div id="interpreted_bit">
+	Here's a bit:
+	<div id="bit1">
+	  <span class="abit">
+	    <img class="show" name="off" alt="off switch" src="../Icons/cropped-off-switch.png">
+	    <img class="hide" name="on" alt="on switch" src="../Icons/cropped-on-switch.png">
+	  </span>
+	</div>
+	Interpretations:
+	<dl>
+	  <dt>As an unsigned integer</dt>
+	  <dd id="abit_unsigned">0</dd>
+	  <dt>As truth</dt>
+	  <dd id="abit_truth">false</dd>
+	  <dt>As a switch</dt>
+	  <dd id="abit_switch">off</dd>
+	</dl>
+      </div>
+      <h5>How can switches be combined to represent information? </h5>
+      <p>
+	One switch can only represent a choice of two alternatives.
+	Combining several switches lets us represent more choices:
+	<table border="1">
+	  <tr> <td> Number of switches </td> <td> Number of Combinations </td> </tr>
+	  <tr> <td> 1 </td> <td> 2 </td> </tr>
+	  <tr> <td> 2 </td> <td> 4 </td> </tr>
+	  <tr> <td> 3 </td> <td> 8 </td> </tr>
+	  <tr> <td> 4 </td> <td> 16 </td> </tr>
+	  <tr> <td> 5 </td> <td> 32 </td> </tr>
+	  <tr> <td> 6 </td> <td> 64 </td> </tr>
+	  <tr> <td> 7 </td> <td> 128 </td> </tr>
+	  <tr> <td> 8 </td> <td> 256 </td> </tr>
+	</table>
+	Notice that each time we add another switch, the number of
+	combinations doubles, because we can have all the previous
+	combinations with the new switch OFF plus all the previous
+	combinations with the new switch ON.
+      </p>
+      <p>
+	Four switches gives us enough combinations to express the
+	decimal numbers 0 through 9, with six extra combinations left
+	over.  The extra combinations can be ignored or given the
+	names A through F.  Although you're free to assign
+	combinations any way you want, here's the usual way we do it:
+	<table border="1">
+	  <tr> <td colspan="4"> Switch Settings </td> <td> Bits </td> <td> Hexadecimal </td> </tr>
+	  <tr> <td> OFF </td> <td> OFF </td> <td> OFF </td> <td> OFF </td> <td> 0000 </td> <td> 0 </td> </tr>
+	  <tr> <td> OFF </td> <td> OFF </td> <td> OFF </td> <td> ON </td> <td> 0001 </td> <td> 1 </td> </tr>
+	  <tr> <td> OFF </td> <td> OFF </td> <td> ON </td> <td> OFF </td> <td> 0010 </td> <td> 2 </td> </tr>
+	  <tr> <td> OFF </td> <td> OFF </td> <td> ON </td> <td> ON </td> <td> 0011 </td> <td> 3 </td> </tr>
+	  <tr> <td> OFF </td> <td> ON </td> <td> OFF </td> <td> OFF </td> <td> 0100 </td> <td> 4 </td> </tr>
+	  <tr> <td> OFF </td> <td> ON </td> <td> OFF </td> <td> ON </td> <td> 0101 </td> <td> 5 </td> </tr>
+	  <tr> <td> OFF </td> <td> ON </td> <td> ON </td> <td> OFF </td> <td> 0110 </td> <td> 6 </td> </tr>
+	  <tr> <td> OFF </td> <td> ON </td> <td> ON </td> <td> ON </td> <td> 0000 </td> <td> 7 </td> </tr>
+	  <tr> <td> ON </td> <td> OFF </td> <td> OFF </td> <td> OFF </td> <td> 1000 </td> <td> 8 </td> </tr>
+	  <tr> <td> ON </td> <td> OFF </td> <td> OFF </td> <td> ON </td> <td> 1001 </td> <td> 9 </td> </tr>
+	  <tr> <td> ON </td> <td> OFF </td> <td> ON </td> <td>
+	  OFF </td> <td> 1010 </td> <td> a, decimal 10 </td> </tr>
+	  <tr> <td> ON </td> <td> OFF </td> <td> ON </td> <td>
+	  ON </td> <td> 0011 </td> <td> b, decimal 11 </td> </tr>
+	  <tr> <td> ON </td> <td> ON </td> <td> OFF </td> <td>
+	  OFF </td> <td> 1100 </td> <td> c, decimal 12 </td> </tr>
+	  <tr> <td> ON </td> <td> ON </td> <td> OFF </td> <td>
+	  ON </td> <td> 1101 </td> <td> d, decimal 13 </td> </tr>
+	  <tr> <td> ON </td> <td> ON </td> <td> ON </td> <td>
+	  OFF </td> <td> 1110 </td> <td> e, decimal 14 </td> </tr>
+	  <tr> <td> ON </td> <td> ON </td> <td> ON </td> <td>
+	  ON </td> <td> 1111 </td> <td> f, decimal 15 </td> </tr>
+	</table>
+	Four bits is sometimes called a nybble.  When a nybble is used
+	to represent a the ten decimal digit it is called Binary Coded
+	Decimal or BCD.  When the full set of values in a nybble is
+	expressed using the sixteen numerals 0-F it is called base-16
+	or hexadecimal.  By the way, it doesn't matter whether we use
+	upper-case or lower-case letters for hexadecimal.
+      </p>
+      <div id="interpreted_nybble">
+	Here's a nybble:
+	<div id="nybble1">
+	  <span class="abit" id="nybble01bit03">
+	    <img class="show" name="off" alt="off switch" src="../Icons/cropped-off-switch.png">
+	    <img class="hide" name="on" alt="on switch" src="../Icons/cropped-on-switch.png">
+	  </span>
+	  <span class="abit" id="nybble01bit02">
+	    <img class="show" name="off" alt="off switch" src="../Icons/cropped-off-switch.png">
+	    <img class="hide" name="on" alt="on switch" src="../Icons/cropped-on-switch.png">
+	  </span>
+	  <span class="abit" id="nybble01bit01">
+	    <img class="show" name="off" alt="off switch" src="../Icons/cropped-off-switch.png">
+	    <img class="hide" name="on" alt="on switch" src="../Icons/cropped-on-switch.png">
+	  </span>
+	  <span class="abit" id="nybble01bit00">
+	    <img class="show" name="off" alt="off switch" src="../Icons/cropped-off-switch.png">
+	    <img class="hide" name="on" alt="on switch" src="../Icons/cropped-on-switch.png">
+	  </span>
+	</div>
+	Interpretations:
+	<dl>
+	  <dt>As an unsigned decimal integer</dt>
+	  <dd id="anybble_unsigned">0</dd>
+	  <dt>As a color code</dt>
+	  <dd id="anybble_color">black</dd>
+	  <dt>As a hex digit</dt>
+	  <dd id="anybble_color">black</dd>
+	</dl>
+      </div>
+      <p>
+	Ganging together still more switches gives more patterns, some
+	of which have special names and uses:
+	<table border="1">
+	  <tr> <td> Switches </td> <td> Combinations </td> <td>
+	  Name(s) </td>  <td> Typical Use(s) </td> </tr>
+	  <tr> <td> 1 </td> <td> 2 </td> <td> bit </td> <td> Boolean true/false </tr>
+	  <tr> <td> 4 </td> <td> 16 </td> <td> nybble </td> <td> BCD,
+	  hexadecimal digit </tr>
+	  <tr> <td> 7 </td> <td> 128 </td> <td> char </td> <td> ASCII Character </tr>
+	  <tr> <td> 8 </td> <td> 256 </td> <td> byte </td> <td> Phonetic Alphabet, Input/Output </tr>
+	  <tr> <td> 10 </td> <td> 1024, 1 Ki </td> <td> K </td> <td>
+	  approximate 1000 </tr>
+	  <tr> <td> 16 </td> <td> 65536, 64 Ki </td> <td> 2 bytes,
+	  short word </td> <td> Arithmetic </tr>
+	  <tr> <td> 24 </td> <td> 16777216, 16 Mi </td> <td> 3-bytes
+	  </td> <td> Red/Green/Blue color pixel</tr>
+	  <tr> <td> 32 </td> <td> 4294967296, 4 Gi </td> <td> 4-bytes
+	  long word </td> <td> Unicode Character, Arithmetic, Memory address,
+	  IP address </tr>
+	  <tr> <td> 64 </td> <td> 18446744073709551616 </td> <td>
+	  8-bytes, long long </td> <td> Extended Arithmetic, Address, Cons-cell </tr>
+	</table>
+	Because a Ki (often pronounced "K") is close to 1000, it is
+	treated as being roughly 1000 or a metric "kilo".  Similary, a
+	Mi is close to a metric "mega" and a Gi is close to a metric
+	"giga".  The terms megabytes and gigabytes are really just
+	shorthands for Mi Bytes and Gi Bytes.  This discrepancy has
+	lead some memory vendors to sell their customers a bit less
+	memory than they were expecting, i.e. to sell an actual
+	megabyte or gigabyte instead of the expected Mi Byte or Gi
+	Byte.
+      </p>
+      <p>
+	Early microprocessor-based computers, such as the original IBM
+	PC were designed to work with 8 or 16 bits at a time.  Most
+	general purpose computers and more recent PCs are designed to
+	work with 32 bits at a time.  Scientific computers and the
+	most recent PCs are designed to work with 64 bits at a time.
+	The number of bits which a computer can work with in a single
+	operation is called its "word size".
+      </p>
+      <p>
+	A computer with a smaller word size can simulate a computer
+	with a larger word size by performing more operations, so for
+	some tasks it will be slower.  It is particularly inefficient
+	for a computer to work with more memory than it can address as
+	a single word - the meaning of this will be made clear in a
+	companion <Em>Simple
+	Note</Em> <a href="http://ngender.net/jgd/tech-notes/a-model-computer">A
+	Model Computer</a>.
+      </p>
+      <p>
+	Data is generally transferred between computers and between
+	computers and devices (mice, keyboards, disk drives, etc.) in
+	bytes, i.e. 8-bits at a time.  Bytes are the universal coinage
+	of Input/Output.  Thus computers with large word sizes must
+	break those words down into bytes to perform Output and
+	assemble received bytes into words when performing Input
+	operations.
+      </p>
+    </div>
+    <hr />
+    <address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
+    <!-- Created: Friday, 2 January 2009 -->
+    <!-- hhmts start -->
+    Last modified: Sat Jan  3 01:25:58 PST 2009
+    <!-- hhmts end -->
+  </body>
+</html>

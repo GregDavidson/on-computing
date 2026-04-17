@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>(jgd simple note) A Model Computer Instructions</title>
+    <link rel="stylesheet" type="text/css" href="/ngender.net/jgd/jgd.css">
+  </head>
+  <body>
+    <div class="Top">
+      <h1><a href="http://ngender.net/jgd">J. Greg Davidson</a></h1>
+      <h2><a href="http://ngender.net/jgd/tech-notes">Simple Notes on Computing</a></h2>
+      <h2><a href="http://ngender.net/jgd/a-model-computer">A Model Computer</a></h2>
+      <h3>A Model Computer, Instructions</h3>
+    </div>
+    <div>
+      <h4>Prerequisites</h4>
+      <p>
+	This <em>Simple Note</em> is part of the encompasing <em>Simple
+	Note</em> <a href="http://ngender.net/jgd/tech-notes/a-model-compuer">A
+	Model Computer</a>.  I have only intended this <em>Simple Note</em> to make sense
+	when read as a part of the encompassing one.
+	<br />
+	I have also assumed that the reader has earlier read and
+	digested the earlier <em>Simple
+	Note</em> <a href="http://ngender.net/jgd/tech-notes/what-computers-are">What
+	Computers Are</a>.
+      </p>
+    </div>
+    <div>
+      <h4>Preface</h4>
+      <p>
+	Every computer provides the means to store data and to operate
+	on data and attached devices.  The operations are implemented
+	with a fixed set of instructions.  One of the ways computers
+	can differ is in the details of their instruction set;
+	however, the fundamental instructions of most modern computers
+	are similar.
+      </p>
+      <p>
+	Our <em>Model Computer</em> is of the modern Reduced Instruction Set
+	Computer (RISC) variety rather than an old fashioned Complex
+	Instruction Set Computer (CISC).  RISC machines have a
+	relatively small set of instructions compared to CISC
+	machines, and all of the instructions are simple.  (Some of
+	the instructions of CISC machines can be very complex.)
+      </p>
+      <p>
+	Complex tasks require RISC machines to execute a longer
+	sequence of instructions than would be required of a CISC
+	machine.  However, the simplicity of RISC machines allows the
+	electronic circuits which execute the instructions to execute
+	them faster than the corresponding circuits achieve with CISC
+	machines.  The end result is that RISC machines tend to be
+	faster than CISC machines on most tasks.
+      </p>
+      <p>
+	For us there is an additional benefit of the simplicity of
+	RISC machines instructions: There is less to learn.  In fact,
+	I've reduced the complexity of the instruction set even a bit
+	more for our <em>Model Computer</em>.
+      </p>
+    </div>
+    <div>
+      <h4> Putting Fixed Data Into Registers </h4>
+      <table>
+	<tr> <td> OP CODE </td> <td> DESTINATION </td> <td> DATA </td> <td> NOTES </td> </tr>
+	<tr> <td> <b>SetHi</b> </td> <td> <em>register</em> </td> <td> <em>half-word value</em> </td> <td> Loads value into upper-half of specified register</td> </tr>
+	<tr> <td> <b>SetLo</b> </td> <td> <em>register</em> </td> <td> <em>half-word value</em> </td> <td> Clears and loads register with value </td> </tr>
+      </table>
+    </div>
+    <div>
+      <h4> Loading Registers From RAM </h4>
+    </div>
+    <div>
+      <h4> Storing Registers To RAM </h4>
+    </div>
+    <p>
+      To be continued...
+    </p>
+    <hr />
+    <address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
+    <!-- Created: Friday, 2 January 2009 -->
+    <!-- hhmts start -->
+    Last modified: Sat Jan  3 01:25:58 PST 2009
+    <!-- hhmts end -->
+  </body>
+</html>

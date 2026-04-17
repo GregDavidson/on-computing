@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>(jgd simple note) Advanced Representation</title>
+    <link rel="stylesheet" type="text/css" href="/jgd/jgd.css">
+  </head>
+
+  <body>
+    <div class="Top">
+      <h1><a href="http://ngender.net/jgd">J. Greg Davidson</a></h1>
+      <h2><a href="http://ngender.net/jgd/tech-notes/">Simple Notes on Computing</a></h2>
+      <h3>Advanced Representation</h3>
+      <h4>Preface</h4>
+      <p>
+	Fundamentally computers store and manipulate bits, bytes and
+	words.  Please read the <em>Simple Note</em>
+	<a href="http://ngender.net/jgd/tech-notes/what-computers-are">
+	  What	Computers Are
+	</a> to learn about such things.
+      </p>
+      <p>
+	How do we get computers to be represent and meaningfully
+	process the more abstract kinds of information which human
+	beings understand, such as money, melodies, haut cuisine, fair
+	allocation of resources, strategies for quitting smoking,
+	etc., etc., etc.?
+      </p>
+      <p>
+	Computer Scientists and hackers have devised ways to build
+	higher-level knowledge representations out of lower-level
+	representations, building a tower of abstractions.  Out of
+	bits, bytes and words we build simple objects and classes.
+	Out of objects and classes we build knowledge structures and
+	concepts.  Sometimes it gets a bit messy!
+      </p>
+      <p>
+	Currently this <em>Simple Note</em> is just a list of some of
+	these higher-level representations.  The only way to really
+	learn software abstraction is to write programs which use
+	abstraction to address interesting problems.
+      </p>
+      <h4> Atomic Data Structures</h4>
+      <dl>
+	<dt>Enumerations</dt>
+	<dd>
+	  An enumeration <em>type</em> is simply a list of named
+	  values, e.g.
+		<ul>
+			<li> enumeration eye_colors = {Black, Brown, Hazel, Green, Blue} </li>
+		</ul>
+			An
+	  enumeration <em>value</em> is simply a specific value of a
+	  particular type, e.g.
+		<ul>
+			<li> <em>eye_colors my_eye_color=hazel </li>
+		</ul>
+	</dd>.
+	<dt>Numbers</dt>
+	<dd>
+	  Computers only directly understand a few sizes of integers
+	  and floating point numbers.  Out of these basics we can
+	  create integers of unlimited size, rational numbers to
+	  represent fractions and floating point numbers of arbitrary
+	  range and precision.  Then we can go on to create complex
+	  numbers, quaternions, vectors, matrices, exact real numbers
+	  and other high-level kinds of numbers.  Some languages let us
+		directly specify our desired range and precision, e.g.
+		<ul>
+			<li> integer subrange month_days = 1..31 </li>
+		</ul>
+	</dd>
+      </dl>
+      <h4> Hierarchical and Linked Data Structures</h4>
+      <dl>
+	<dt>Arrays</dt>
+	<dd>
+	  An array is an aggregation (bunch) of values
+	  called <em>elements</em>.  The <em>elements</em> they must
+	  be of the same type.  They are placed next to each other in
+	  the computer's memory.  One can process all the items the
+	  same way, or select specific items for special attention by
+	  their index (position) in the array.  One can also rearrange
+	  the items.  More advanced array systems allow arrays to grow
+	  and shrink by adding or removing items.  Consider the handy
+	  arrays
+<ul>
+<li> Normal_Month_Lengths = {31,28,31,30,31,30,31,31,30,31,30,31}
+</li>
+	  <li>
+			Weekday_Names = {"Sunday", "Monday", "Tuesday",
+	  "Wednesday", "Thursday", "Friday", "Saturday"}.
+		</li>
+</ul>
+	</dd>
+	<dt>Records</dt>
+	<dd>
+	  Also called a <em>structure</em>, <em>tuple</em> (short
+	  for<em>multituple</em>) or <em>row</em> , a <em>Record</em> is an
+	  aggregation (bunch) of values called <em>fields</em> (or
+	  <em>slots</em> or <em>columns</em>).  Each field is given a name.
+	  Different fields do not need to be of the same type.  Fields are typically
+	  stored next to each other in the computer's memory, although
+	  sometimes with gaps to ensure that fields begin on word boundaries
+	  for efficiency.  One can select specific fields items by their
+	  names.
+<dl>
+	<dt>A Date Record </dt>
+	<dd>
+			<table>
+				<tr> <td>field names:</td> <td> <em> year </em> </td> <td> <em> month </em> </td> <td> <em> day </em> </td> </tr>
+				<tr> <td>field types:</td> <td> Integer </td> <td> Months </td> <td> Month_Days </td> </tr>
+				<tr> <td>Constraints:</td> <td> value != 0 </td> <td> </td> value >= 1 AND value <= Normal_Month_Lengths[month] </td> </tr>
+				<tr> <td>example value:</td> <td> 2001 </td> <td>  February </td> <td> 28 </td> </tr>
+			</table>
+	</dd>
+      </dl>
+      <h4>Graph Structures</h4>
+      <h5>Trees</h5>
+      <h5>General Graphs</h5>
+      <h4>Objects and Classes</h4>
+      <h4>Knowledge Structures</h4>
+      <h5>Semantic Networks</h5>
+      <h5>Frames </h5>
+      <h4>Very High-Level Abstractions</h4>
+      <h5>Propositional Logic</h5>
+      <h5>Probabilisitc Logic</h5>
+      <h5>Other Logics</h5>
+
+      <h3>Search</h3>
+			<p>
+				Every choice of representation implicitly defines a <em>search space</em>.  Computation
+				can be viewed as a search process which creates and examines specific <em>states</em> within a search space.  The choice of
+				representation and the manner in which one searches it determines the power and efficiency of the computation.
+			</p>
+
+</div>
+    <hr />
+    <address><a href="mailto:(jgd(at)ngender(dot)net)">J. Greg Davidson</a></address>
+    <!-- Created: Friday, 2 January 2009 -->
+    <!-- hhmts start -->
+    Last modified: Sat Jan  3 01:25:58 PST 2009
+    <!-- hhmts end -->
+  </body>
+</html>

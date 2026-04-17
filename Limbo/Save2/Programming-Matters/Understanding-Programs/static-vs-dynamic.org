@@ -1,0 +1,93 @@
+* Static vs. Dynamic Knowlege in Understanding Computing
+
+** What can you know before you run a program?
+
+- Can you say what it does?
+  - It's basic purpose?
+  - How it should be used?
+- Can you determine whether it might crash or otherwise misbehave?
+- Whether it always appropriately handles unexpected issues in
+  accessing external resources?
+    - If resources are not present?
+      - Maybe disappearing or changing while the program is running?
+    - If permission to access resources are denied?
+    - Network errors?
+    - Invalid input?
+- Can you tell if a colleague has modified the program since you last studied it?
+  - And what consequences those modifications might have?
+** What can you learn from the program while it's running?
+
+In a small simple programs we can explore all possible control paths.
+- We can answer all the above questions.
+- At least until someone changes it or changes how it's installed.
+
+Dijkstra famously told us that even if we trust our compilers,
+interpreters and hardware, even the most heroic *testing and debugging
+activity can never prove the absent of bugs!*
+
+The program might be behaving proerly right now, but it could crash or
+produce invalid output if given other input or if external resources
+change.
+
+** Examples of expensive errors
+
+Exposing private or confidential information
+
+A medical system
+- Administering drugs to the wrong patient
+- Failing to account for drug interactions
+
+A web front-end for retail
+- Making it difficult or impossible to find desired items.
+- Making it difficult or impossible to complete a purchase.
+
+An investment system
+- Buying or selling the wrong investments!
+
+A military system
+- Targeting civilians!
+- Friendly fire!
+
+Is it possible for good Software practices to ensure that these and
+other kinds of failures are virtually impossible?
+
+#+begin_src python
+  from datetime import datetime
+  current_year =  datetime.now().year
+  name = input("Please enter your name: ")
+  age = input("Please enter your age: ")
+  # what can we guarantee about the values we read?
+  # what if we read them from a file instead?
+  # what if we read them from a database?
+#+end_src
+
+Is this code more reliable than the previous code?
+- How can you tell?
+- What's missing?
+- What should be improved?
+
+#+begin_src python
+    from datetime import datetime
+    current_year =  datetime.now().year
+    name = input("Please enter your name: ")
+    while True:
+        try:
+            birth_year = int(input("Please enter your birth year: "))
+            if birth_year <= 0:
+                printf("Who are you trying to fool?  Please try again!")
+            approx_age = current_year - birth_year # depending on birthday
+            if birth_year < 1900:
+                print("I don't believe you're " + approx_age + "years old!")
+                print("Please try again with a 4-digit date!")
+            if birth_year > current_year:
+                print("You haven't been born yet?  Please try again!")
+            break
+        except ValueError:
+            print("I only understand 4-digit numbers for years. Please try again!")
+  if approx_age <= 10:
+      printf("You must be a prodigy " + name + "!")
+  elif approx_age > 80:
+      printf("I admire your extensive life experience " + name + "!")
+  else:
+      printf("Welcome " + name + ", I'm pleased to meet you!")
+#+end_src

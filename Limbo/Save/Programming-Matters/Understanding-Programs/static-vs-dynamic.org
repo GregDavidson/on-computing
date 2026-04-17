@@ -1,0 +1,183 @@
+* Static vs. Dynamic Type Checking
+
+** Type Correctness
+
+A program is /Type Correct/ if the program's instructions only apply
+(or can only apply) operations to the kind of data they expect.
+E.g. if an operation expecting a positive 1-word integer gets that
+rather than, e.g. a musical score, customer invoice, or other
+unexpected type of data.
+
+** What's A Type
+
+Programming Languages generally provide a set of
+- Primitive (General Building-Block) Datatypes, e.g.
+  - Numbers
+    - Of various kinds, e.g.
+      - Integers, Rationals, Floating-Point, Complex, etc.
+    - Of various precisions, e.g.
+      - 1 or multiple-word fixed size number formats
+      - dynamically allocated (/infinite precision/) number formats
+      - small formats, e.g. byte or bit field formats
+    - Available Number Types can vary greatly across languages!
+  - Characters
+    - Of various character sets, e.g. ASCII, LATIN-1, various Unicode
+      versions, etc.
+  - and many more
+    - Available Primitive Types can vary greatly across languages!
+- Composite Types
+  - Ways of combining multiple elements
+  - E.g. Arrays, Structures/Records, Dictionaries, Lists, Sets, Trees, etc.
+    - Of various element types
+    - Of various dimensions and shapes
+  - Available Composite Types can vary greatly across languages!
+
+Programmers creating Applications, Libraries and Frameworks are free
+to invent /High-Level/ usually /Domain-Specific/ Datatypes as they
+find useful, e.g.
+- Business Datatypes
+  - Customer and Personnel Records
+  - Purchase and Billing Records
+- Multimedia datatypes: 
+  - 2D and 3D Graphical (possibly Composite) Shapes, fixed or scalable
+  - Sound, Animation: fixed or interactive
+  - etc.
+- Document datatypes:
+  - PDFs and Word Processor Documents
+  - Spreadsheets
+  - etc.
+- System Datatypes
+  - Filesystem Paths
+  - I/O Streams and Datagram Types
+  - URLs, URIs, UUIDs, etc.
+- etc., etc.: infinite possibilities!
+
+** What Are Operations?
+
+Operations include
+- Primitive Operations, e.g.
+  - Arithmetic operations
+  - Internal Storage Operations
+    - Data transfers to and from various memory locations
+  - Operating-System Interactions
+    - Bytes sent to or received from Operating System Streams
+- Higher-Level Operations, e.g.
+  - Calling Procedures with Argument Values
+    - And receiving possible Return Values
+  - Invoking Methods of Type and Implementation Classes
+    - Possibly via abstract Interfaces
+
+
+
+** Dynamically-Typed Languages
+
+Most people learn programming using Dynamically-Typed Languages
+- JavaScript
+- Python
+- Most Lisp dialects
+- Smalltalk systems
+- etc.
+
+With Dynamically-Typed Languages it is generally /not possible/ to be sure about what a moderately large and complex program might in general do.
+- Tests can reveal the presence of bugs if you're lucky
+  - But only with the specific situation being tested!
+- Tests can never prove the absence of bugs if anything goes differently
+  - Because of different test data
+  - Because of different external conditions
+
+Runtime Contracts can be added to the code to constrain what it might do
+- A contract violation will stop the program
+- With an error message helping to find the problem
+
+Alas, runtime contracts are expensive
+- Programmers often turn most of them off once the code is put in production!
+
+Modern processors offer multiple CPU cores and threads for
+high-performance computing.  Logical threads can also be used to allow
+the program to perform useful work while waiting for the results of
+I/O or other computations to complete.
+
+When a multiple parts of a program are running concurrently, each
+specific overlap of their execution can be a separate scenario causing
+different behavior.  This can be a vast number of scenarios!
+
+Runtime testing is especially weak at finding problems with any
+programs which use concurrency!
+
+
+** What can you learn from the program while it's running?
+
+In a small simple programs we can explore all possible control paths.
+- We can answer all the above questions.
+- At least until someone changes it or changes how it's installed.
+
+Dijkstra famously told us that even if we trust our compilers,
+interpreters and hardware, even the most heroic *testing and debugging
+activity can never prove the absent of bugs!*
+
+The program might be behaving proerly right now, but it could crash or
+produce invalid output if given other input or if external resources
+change.
+
+** Examples of expensive errors
+
+Exposing private or confidential information
+
+A medical system
+- Administering drugs to the wrong patient
+- Failing to account for drug interactions
+
+A web front-end for retail
+- Making it difficult or impossible to find desired items.
+- Making it difficult or impossible to complete a purchase.
+
+An investment system
+- Buying or selling the wrong investments!
+
+A military system
+- Targeting civilians!
+- Friendly fire!
+
+Is it possible for good Software practices to ensure that these and
+other kinds of failures are virtually impossible?
+
+#+begin_src python
+  from datetime import datetime
+  current_year =  datetime.now().year
+  name = input("Please enter your name: ")
+  age = input("Please enter your age: ")
+  # what can we guarantee about the values we read?
+  # what if we read them from a file instead?
+  # what if we read them from a database?
+#+end_src
+
+Is this code more reliable than the previous code?
+- How can you tell?
+- What's missing?
+- What should be improved?
+
+#+begin_src python
+    from datetime import datetime
+    current_year =  datetime.now().year
+    name = input("Please enter your name: ")
+    while True:
+        try:
+            birth_year = int(input("Please enter your birth year: "))
+            if birth_year <= 0:
+                printf("Who are you trying to fool?  Please try again!")
+            approx_age = current_year - birth_year # depending on birthday
+            if birth_year < 1900:
+                print("I don't believe you're " + approx_age + "years old!")
+                print("Please try again with a 4-digit date!")
+            if birth_year > current_year:
+                print("You haven't been born yet?  Please try again!")
+            break
+        except ValueError:
+            print("I only understand 4-digit numbers for years. Please try again!")
+  if approx_age <= 10:
+      printf("You must be a prodigy " + name + "!")
+  elif approx_age > 80:
+      printf("I admire your extensive life experience " + name + "!")
+  else:
+      printf("Welcome " + name + ", I'm pleased to meet you!")
+#+end_src

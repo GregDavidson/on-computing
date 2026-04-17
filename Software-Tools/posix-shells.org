@@ -1,0 +1,64 @@
+* POSIX Shells
+
+** Key Terms
+
+- [[https://en.wikipedia.org/wiki/Shell_(computing)][Shell]] - operating-system user-interface
+      - Can be Graphical or Text based
+      - Graphical Shells are more casual
+      - Text-based Shells are more powerful
+- [[https://en.wikipedia.org/wiki/Command-line_interface]["Command-Line" Interface]] - text-based command interface
+      - Commands are often expressed as a single line of text
+      - Commands can also consist of multiple lines or be only part of a line!
+      - The term "Command-Line Interface" or CLI is really a misnomer!
+- [[https://en.wikipedia.org/wiki/POSIX][POSIX Operating System Standard]]
+
+** POSIX-Compatible Operating Systems
+
+- [[https://en.wikipedia.org/wiki/Unix][Unix Operating Systems]]
+- [[https://en.wikipedia.org/wiki/Linux][Linux-based Operating Systems]]
+      - [[https://www.gnu.org/gnu/linux-and-gnu.html][Gnu/Linux vs. GNU vs. Linux]]
+      - [[https://en.wikipedia.org/wiki/GNU][Gnu Software Components]]
+      - [[https://en.wikipedia.org/wiki/Linux_kernel][Linux Kernel]]
+- [[https://en.wikipedia.org/wiki/Berkeley_Software_Distribution][BSD Operating Systems]]
+
+Most modern Operating Systems other than for Microsoft Windows are largely POSIX
+compatible.
+
+[[https://en.wikipedia.org/wiki/MacOS][Apple's MacOS, iOS, etc.]] are largely based on BSD Operating System components
+and considered reasonably compatible with the POSIX standard.
+
+Microsoft and various third parties provide various optional POSIX-Compatibility
+accommodations for their Windows Operating System, including
+- [[https://en.wikipedia.org/wiki/Cygwin][Cygwin]] - from a non-Microsoft open-source project
+- [[https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux][Various "Windows Subsystems for Linux"]] - from Microsoft
+
+
+** POSIX-Compatible Shells
+
+*** sh - Bourne shell and Bourne Compatible Shells
+
+The [[https://en.wikipedia.org/wiki/Bourne_shell][Bourne shell]] written by Stephen Bourne appeared in /Unix Version 7/ in 1979,
+replacing the original Unix shell written written by Ken Thompson. Both shells
+were named ~sh~.
+
+POSIX systems require a System-Shell which is compatible with the Bourne Shell
+for essential operations, including logging into an interactive user account.
+
+Many later shells are compatible with the command-language of the Bourne Shell.
+
+** Shell Scripts
+
+- [[https://en.wikipedia.org/wiki/Shell_script][Shell Script]]
+
+** Miscellaneous References
+
+*** Terminal Interfaces
+Using a Shell Interactively rather than from a 
+https://en.wikipedia.org/wiki/POSIX_terminal_interface
+
+
+*** ksh
+
+
+- [[http://kornshell.com][Old ksh Website]]
+- [[https://github.com/ksh93/ksh][github: ksh]]

@@ -1,0 +1,19 @@
+* Computing Quotes
+
+We're wanting quotes which express elements of computing wisdom clearly and concisely.  And sometimes with a bit of humor to keep us playful.
+
+** Quotes by Edsger Dijkstra
+
+[[https://www.azquotes.com/author/3969-Edsger_Dijkstra][Edsger Dijkstra Quotes on AZ Quotes Website]]
+
+[[https://en.wikiquote.org/wiki/Edsger_W._Dijkstra][Edsger Dijkstra WikiQuotes]]
+
+[[https://duckduckgo.com/?t=lm&q=edsger+dikstra++quotes][DuckDuckGo search for Edsger Dijkstra quotes]]
+
+** Quotes by Alan Perlis
+
+[[https://www.cs.yale.edu/homes/perlis-alan/quotes.html][Epigrams In Programming by Alan Perlis]]
+
+[[https://en.wikiquote.org/wiki/Alan_Perlis][Alan Perlis WikiQuotes]]
+
+[[https://duckduckgo.com/?q=alan+perlis+quotes][DuckDuckGo search for Alan Perlis quotes]]
