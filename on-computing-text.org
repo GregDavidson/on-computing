@@ -1,0 +1,164 @@
+* On Computing Text
+
+Text is data representing information in one or more human languages.
+
+** The Usual Way To Deal WIth Text
+
+The main thing computer programs need to do with text is to display
+the appropriate piece of text at the appropriate time.  If a program
+has an unambiguous way of referencing the right piece of text to use,
+it can simply hand that reference to the operating system when it
+wants that piece of information to be displayed.  The program
+shouldn't need to know anything about the details of that piece of
+text - in fact, it's best if it can't know any such details!
+
+The possible asociations between a text reference in a program and one
+or more pieces of text should be the concern of whoever packages or
+installs the program, not of person(s) who wrote or who maintain a
+program.
+
+This document is about how to deal with this usual situation.
+
+** The Rare Case: Needing to Deal with Text Details
+
+
+A very small number of very specialized computer programs need to know
+about the internal encoding or structure of those pieces of text.  For
+example text editors, typesetting programs and those library
+procedures which deal with the text references handed to them by
+programmers and have the associated pieces of text displayed in a way
+that makes sense to users.
+
+This document is NOT about this kind of details!
+
+** Functional Text
+
+** Text vs. Bytes vs. Unicode
+
+Text was originally represented as a sequence of bytes where each byte
+wascode a character in a popular set of characters.  Today most computer languages represent text as [[https://en.wikipedia.org/wiki/UTF-8][UTF-8]] encoded [[https://en.wikipedia.org/wiki/Unicode][Unicode]] which is an attempt to fit text in "any of the world's writing systems" into a sequence of bytes.  There are multiple problems with Unicode
+- Unicode will never be able to represent all forms of text, because
+  human beings are free to invent new written symbols at any time.
+- New symbols are constantly being invented to represent distinctions
+  in technical fields.
+- Unicode assumes that text is always a 1-dimensional sequence.  Yet
+  this is not true in many writing systems, especially in Mathematics.
+- Unicode text can't be easily indexed.  Different Unicode
+  "characters" (called graphemes) can require different number of
+  bytes.Some of them can be represented multiple ways with a different
+  number of bytes.
+- Text often needs to be accompanied with information on typefaces,
+  structural and semantic markup, etc.  But Unicode neither
+  standardizes encodings for such information nor does it provide any
+  way to indicate which interleaved bytes are part of accompanying
+  information.
+- Unicode has no way to make displayed text accessible to people who
+  are unfamiliar with unfamiliar writing systems - indeed, it doesn't
+  even indicate what writing system is being used, changes of writing
+  systems in the middle of a piece of text, unconfusing entirely
+  different characters which look the same, etc.
+- Unicode doesn't co-exist well with with non-Unicode text encodings,
+  e.g. legacy encodings.
+- Text representing messages can be provided in multiple languages and
+  users can automatically be shown the appropriate version in their
+  language.
+  
+All of this can be overcome - primarily through abstraction!
+- Text can be represented as a sequence of pieces of text.
+- Pieces of text can be identified with which kind of representation
+  system represents them.
+- Associated data, e.g. typeface information, can be unambiguously
+  associated with the specific sections of text they are associated
+  with.  They can be identified as the kind of information that they
+  are.  The encodings of such additional data can be standardized to
+  whatever degree is appropriate.
+- An external index can provide convenient and efficient access to key
+  sections of text, e.g. specific important sequences of characters,
+  words, lines, paragraphs, etc. within text.
+
+A great thing known in the Relational Database world is that
+programmers rarely need to know what hunk of text is being displayed -
+they just need to have a way of referring to the pieces of text and
+sub-sequences of text that should be displayed for particular
+purposes.  Administrators who package and/or install programs can
+arrange for the correct pieces of text to be selected, along with
+appropriate accompanying indexes.
+
+** Formatted Text
+
+Strings (and other data structures) with slots that can be filled with
+values are generally treated as data, as the same datatype
+
+Let's start with a typical Lisp form
+- (format "~a: sum=~a, difference=~a\n" this x (+ foo bar) (- foo bar))
+
+The first argument in a (format) form is a "format string" which
+serves as a template to create a new string.  Special embedded "format
+codes" such as "~a" serve as "slots" to be filled by the rest of the
+(format) arguments.
+
+First, let's change the "format code" notation a bit to allow room for
+additional optional information"
+- (format "{}: sum={}, difference={}\n" this x (+ foo bar) (- foo bar))
+
+Either way, the "string in double quotes with fillable slots" is still
+just some data of type string.  The fillable slots don't change the
+type.
+
+But we could create a function, as follows:
+- (λ (x y z) (format "{}: sum={}, difference={}\n") x y z)
+
+And in a lisp with type contracts, we could write:
+- (λ ([x symbol?] [y numeric?] [z numeric])
+    (format "{}: sum={}, difference={}\n") x y z)
+
+This is fine, but
+- it's verbose
+- it's inefficient inflexible (it has to scan a string to find the slots)
+- it's inflexible (it only works with strings)
+- it requires unneeded elements, e.g. useless names for the slots
+
+Suppose that we treat
+- "{:symbol?}: sum={:numeric?}, difference={:numeric?}\n"
+as shorthand for something like
+- (λ ([x symbol?] [y numeric?] [z numeric])
+    (λ ([out text-sink])
+      (fprintf out "~a: sum=~a, difference=~a\n" x y z) ) )
+
+Which would mean that
+- "{:symbol}: sum={:numeric}, difference={:numeric}\n"
+  - creates a function which given three arguments of suitable types
+  - returns a new function
+- ("{:symbol}: sum={:numeric}, difference={:numeric}\n"
+    name (+ a b) (- a b) )
+  - creates a functoin 
+  - is a function which will print some text on a text output channel
+  - which could be
+    - a string buffer
+    - an output stream
+    - etc.
+
+
+
+  - creates a function which can print 
+    
+        this x (+ foo bar) (- foo bar))      (
+      (compose (display x out)
+               (display ": ")
+               (display ": sum=" out)
+	       (display y out)
+               (display ": difference=" out)
+	       (display z out)
+               (display "\n" out)
+
+  
+we treat
+-  "In ~a x=~a, y=~a\n"
+as a string, even though it is incomplete.
+
+Instead let's treat "In ~a x=~a, y=~a\n" as being of type
+- (<- string? symbol? printable? numeric?)
+  - A function returning a string when given 3 values
+    - a symbol, any printable value, a numeric value
+
+It would also 
