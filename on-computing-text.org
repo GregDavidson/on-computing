@@ -2,22 +2,22 @@
 
 Text is data representing information in one or more human languages.
 
+Text is primarily used to comunicate with users.
+
+Because of Accessibility and Internationalization concerns, programs and programmers have no business knowing what text a user might be shown.
+
+
 ** The Usual Way To Deal WIth Text
 
-The main thing computer programs need to do with text is to display
-the appropriate piece of text at the appropriate time.  If a program
-has an unambiguous way of referencing the right piece of text to use,
-it can simply hand that reference to the operating system when it
-wants that piece of information to be displayed.  The program
-shouldn't need to know anything about the details of that piece of
-text - in fact, it's best if it can't know any such details!
+Most programs need to do only two things with text
+1. Output the right piece of text in a given situation
+2. Format data by inserting it into specific fields of a text
+   templates with the right slots and the right content for this user.
 
-The possible asociations between a text reference in a program and one
-or more pieces of text should be the concern of whoever packages or
-installs the program, not of person(s) who wrote or who maintain a
-program.
+A common solution to Internationalization is the [[https://en.wikipedia.org/wiki/Gettext][gettext system]].
 
-This document is about how to deal with this usual situation.
+gettext provides a reasonable solution for Internationalization but not for accessibility.  The most popular version is GNU gettext.  Perhaps someone will add accessibility features at some point, allowing audio and tactile alternatives for those who need them.
+
 
 ** The Rare Case: Needing to Deal with Text Details
 
