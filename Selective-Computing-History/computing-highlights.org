@@ -1,0 +1,466 @@
+
+#+TITLE: On-Computing: Highlights Of History
+# +SUBTITLE:  Features Worth Noting Down
+# #+AUTHOR: _
+# #+DATE: _
+#+OPTIONS: toc:nil 
+#+OPTIONS: num:nil
+#+OPTIONS: date:nil 
+#+OPTIONS: author:nil 
+
+* Highlights Of Computing History Timeline
+
+These highlights have been chosen to
+- serve the needs of [[https://github.com/GregDavidson/loel/#readme][The League of Extraordinary Learners]]
+- identify *Low Hanging Fruit which YOU might harvest!*
+- focus on the most powerful technologies!
+  
+See the section [[*Meta][Meta]] below for more context.
+
+** A Computer is a Human Being
+
+- 1600s - 1970s :: A Computer is a Human Being who does (primarily
+  numerical) mathematical work by going through well-known effective
+  procedures: Sequences of operations which reliably produce the
+  correct results..  *Various devices are invented to assist human
+  computers*, e.g. abacuses, sliderules, early mechanical calculators
+  and eventually electromechanical calculators.
+
+Key Insights
+- Effective Procedures have been discovered which can be carried out
+  by human beings, optionally assisted by mechanical devices, to do
+  fundamental mathematical tasks.
+- Machines complementing Humans is still more powerful than either
+  machines or humans by themselves!
+  
+** Charles Babbage, Ada Lovelace and The Analytical Engine
+
+- 1820s :: The [[https://en.wikipedia.org/wiki/Polymath][Polymath]] [[https://en.wikipedia.org/wiki/Charles_Babbage][Charles Babbage]] invents [[https://en.wikipedia.org/wiki/Difference_engine][The Difference Engine]],
+  an enormously powerful mechanical calculator for its time.
+- 1837 :: [[https://en.wikipedia.org/wiki/Charles_Babbage][Charles Babbage]] describes and tries to create [[https://en.wikipedia.org/wiki/Analytical_engine][The Analytical
+  Engine]] which would be the first programmable digital computer.
+  Despite being heavily funded by the British Government, this effort
+  fails - its Base-10 mechanisms are too complex for the mechanical
+  arts of the time.
+- Late 1830s :: The mathemamatician [[https://en.wikipedia.org/wiki/Ada_Lovelace][Ada Lovelace]] (oh what a colorful
+  figure!) realized that Babbage's Analytical Engine could do more
+  than just calculate numbers: It could calculate with symbols, and
+  one of the things it could represent with symbols could be its own
+  programs!  She wrote the world's first computer program - before any
+  computers existed!
+
+Key Insights
+- We know how to design machines which can carry out Effective
+  Procedures automatically.
+- We know that those machines can be /programmed/ with /Lists Of
+  Instructions/.
+- We know that those machines can manipulate those /Lists Of
+  Instructions/ (Programs) as data!
+- It appeared that such machines were very hard to build!
+
+** Konrad Zuze and the First Computer
+  
+- mid-1930s :: The young [[https://en.wikipedia.org/wiki/Konrad_Zuse][Konrad Zuse]] successfully builds the Z1 based
+  on Babbage's Analytical Engine during World War II in his parent's
+  living room in Berlin as his city was being bombed!  Zuse simplifed
+  Babbage's design by using the Binary Number System instead of the
+  Decimal System used by Baggage.  Each component of Babbage's engine
+  representing a digit needed to maintain 10 distinct positions
+  through each operation and in each memory register.  With Binary,
+  those components only needed to distinguish two positions, greatly
+  simplifying the mechanism!  Binary was invented by the great German
+  [[https://en.wikipedia.org/wiki/Polymath][polymath]] [[https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz][Gottfried Leibniz]] who the English despised and dismissed
+  after the great English [[https://en.wikipedia.org/wiki/Polymath][polymath]] [[https://en.wikipedia.org/wiki/Isaac_Newton][Isaac Newton]] unfairly accused him
+  of plagiarizing Newton's Calculus.   (Today
+  everyone, even in England (finally) uses Leibniz' superior notation
+  for calculus!)
+
+- late 1930s - 1941 ::  [[https://en.wikipedia.org/wiki/Konrad_Zuse][Konrad Zuse]] invents the first programmable
+  digital computer, the [[https://en.wikipedia.org/wiki/Z3_(computer)][Z3]].  Zuze also invented the first high-level
+  programming language, [[https://en.wikipedia.org/wiki/Plankalk%C3%BCl][Plankalkül]], more than 20 years before FORTRAN.
+  Zuze created a successful computer company after the war and the
+  first commercial computer, the [[https://en.wikipedia.org/wiki/Z4_(computer)][Z4]].  Alas, his ideas and designs were
+  largely ignored by Britain and the US where computers were
+  reinvented.
+
+Key Insights
+- We've validated Babbages ideas and begun to validate Lovelace's ideas.
+- If the action hadn't passed to the UK and US German computing would
+  likely have begun the computer revolution!
+- If Babbage had been exposed to Leibniz he would have begun the
+  computer revolution a hundred years earlier!
+- With an open mind and the ability to see the underlying simplicity
+  *a single person or a small group can break through apparent
+  complexity and obstacles!* This is especially true in computing
+  because it is not based on gross material phenomena.  *Computers get
+  more advanced the smaller and more energy-frugal their components
+  can be made!*
+
+** The Lambda Calculus
+
+- 1936 :: The mathematician [[https://en.wikipedia.org/wiki/Alonzo_Church][Alonzo Church]] invents the [[https://en.wikipedia.org/wiki/Lambda_calculus][The Lambda
+  Calculus]] to describe the general idea of *Procedures: Sequences of
+  operations which transform inputs into desired outputs.* A procedure
+  is like a recipe, but working with abstract mathematical objects.
+  When a procedure can be mathematically proven to produce a desired
+  result, it is called [[https://en.wikipedia.org/wiki/Algorithm][an Algorthm - aka an Effective Procedure]].  A
+  special part of the Alonzo Church's Lambda Calculus was *Lambda: The
+  Procedure which Creates procedures!* The Lambda Calculus was
+  invented to be used by Mathematicans to prove theorems about
+  computability in the abstract, e.g. what can be carried out by human
+  computers in principle.  It was not designed to be understood by
+  machines!
+
+Key Insights:
+- The Lambda Calculus
+  - let's us think clearly about computation
+  - is very simple!
+  - will eventually have a huge influence in
+    - programming
+    - programming language design
+
+** Alan Turing and The Turing Machine
+
+- late-1930s :: Under World War II military secrecy, the English
+  mathematician (and more) [[https://en.wikipedia.org/wiki/Alan_Turing][Alan Turing]] helps invent the first
+  stored-program general-purpose computer.  That work remained secret
+  and instead of the British Government recognizing him as a hero and
+  a genius (and Britain owning the world's computing industry), Turing
+  was horribly persecuted for being homosexual.  Even though he'd
+  gotten his doctorate under Alonzo Church, Turing didn't use the
+  Lambda Calculus - it must have seemed too removed from real
+  computers.  Instead Turing inventing a mathematical system more
+  closely resembling a physical machine, now called a [[https://en.wikipedia.org/wiki/Turing_machine][Turing Machine.]]
+  Despite Turing's persecution and the secrecy he was required to
+  maintain about much of his practical work, Turing's mathematical
+  work was hugely influential and his Turing Machine influenced the
+  design of all modern computers.  Turing is now considered the
+  "Father of Computer Science."
+
+Key Insights:
+- Church and Turing proved both of their models of computation
+  - to be /Universal/!
+  - They cover /any/ form of computation doable by a machine!
+- The Turing Machine will be
+  - highly influential in the design of computers
+
+
+** The Birth of Electronic Computers
+
+- Mid-1940s :: Programmable electronic general-purpose electronic
+  (vacuum tube!) computers using the binary number systems are
+  develped in Britain and the United States.  It is difficult to
+  convey to people today how primitive they were, yet they gradually
+  developed into the computers we use today.  Many of the worst
+  features of today's computers were baked in in that early era!
+
+Key Insights
+- The first 40-50 years of computing machines were very primitive
+  - Memory was especially scarce
+  - Programmers used lots of complicated tricks to minimize and reuse memory.
+    - Memory to store data and memory to store the programs as well.
+  - All the tricks made programs
+    - hard to write
+    - hard to understand
+- Programmers became known for their big egos!
+      
+** Programmers vs. Coders and Assembly Language
+
+- Mid-1940s to early 1950s :: Programmers vs. Coders.  The programs of
+  early electronic computers were written in the low-level binary
+  language built in to their wiring.  Writing such programs was
+  extremely tedious, so organizations paid high-status computing
+  profesionals called "Programmers" to computer programs in ad hoc
+  [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode Notations]], mixtures of English, mathematical notation,
+  diagrams or whatever they felt made clear what they wanted the
+  computer to do.  These "Programmers" would then give their
+  pseudocode descriptions of what they wanted to lower-status and
+  lower-paid "Coders" to turn into binary programs.  Some of these
+  "coders" invented [[https://en.wikipedia.org/wiki/Assembly_language][Symbolic Assembly Languages]] and programs called
+  [[https://en.wikipedia.org/wiki/Assembly_language#Assembler][Assemblers]] which would automatically translate programs written in
+  these Assembly Language into a computer's built-in binary language.
+  Thus Ada Lovelace's prophetic dream was first achieved by "Coders"
+  (including many women) rather than "Programmers" (always men)!
+  Programming in Assembly Language was much easier than programming
+  directly in binary code, but it was still tedious.  And every model
+  of computer had a different binary machine language paired with its
+  own Assembly Languuage, so programs written for one model of
+  computer could not be transferred to a different model.
+
+Key Insights
+- Software developers were segregated into a hierarchy of roles.
+- This hierarchy inhibited improvements in the process
+  - "Programmers" weren't exposed to the drudgery of the "coders".
+  - "Coders" had to fix any problems with the "Programmers" pseudocode.
+  - "Coders" created most of the early Software Tools
+    - Programs which assisted coding and programming!
+    - Fulfilling the vision of Ada Lovelace!
+      
+** The Birth of "Mainstream" Languages
+
+- 1956 :: [[https://en.wikipedia.org/wiki/Fortran][FORTRAN]], the "Formula Translator" is invented and celebrated
+  as the first "compiled" computer programming language.  FORTRAN
+  could tranlate simple algebraic expressions to machine code.  It was
+  far from what we'd consider a [[https://en.wikipedia.org/wiki/High-level_programming_language][High-Level Programming Languag]]e now,
+  but it was at least somewhat portable.  Here's an example of a
+  simple [[file:heron-triangle.fortran][FORTRAN 1 Program to Compute The Area Of A Triangle]]
+
+*** Mainstream Language Characteristics
+
+Many characteristics of FORTRAN were copied by later languages.  Here
+we list a few of those characteristics.
+
+FORTRAN differentiates between
+- Expressions which return a value
+- Statements which do not have a value
+
+Control Statements control instruction sequencing
+- e.g. DO and IF statements
+
+Expressions use an "Algebraic" syntax consisting of
+- Literal constants
+- Operator Symbols
+- Parentheses for grouping
+Think "Highschool Algebra".
+
+Operator symbols correspond to machine primitives, e.g.
+- +, -, * / for addition, subtraction, multiplcation and division
+Each operator symbol has a relative precedence
+- A + B * C
+  - means A + (B * C)
+  - not (A + B) * C
+  - because * has higher precedence than +
+- Programmers must
+  - memorize all the operator symbols and their precedences
+  - use parenthese to clarify or change precedence as needed
+
+Programs can be subdivided into "Subroutines"
+- Subroutines are invoked with the CALL statement
+  - e.g. CALL ANALYZE(X, Y, Z)
+  - A subroutine CALL might invoke an arbitrarily large amount of
+    computation as a "subprogram".
+- Subroutines are not quite Lambda Calculus Procedures
+  - They can't be treated as "black boxes" for analysis.
+  - They can't be used as a value in an expression .
+
+FORTRAN has a complex syntax
+- Most Special Characters are /reserved/ for special purposes
+  - = : + - * / ( ) [ ] , . $ ' ! " % & ; < > ?
+  - Some represent arithmetic operators
+  - Others are used for grouping or other syntactic elements
+- Programmer-defined symbols
+  - Must begin with a letter
+  - Optionally followed by letters, digits or underscores (_)
+  - And many of these are also "reserved"
+    - e.g. IF, DO, etc.
+  - Programmers have to memorize all of the reserved symbols.
+
+Ever since FORTRAN, the majority of later computer programming
+languages have retained most of these characteristics, except
+eventually most later languages replaced Subroutine-like constructs
+with procedures (which can't return a value) and functions (which
+return a value and can be used in expressions).
+
+Here's a line from a Python expression creating a graphical object:
+- rect = Rectangle(Point(20, 10), pt)
+- Function calls are nested and use (parentheses, and, commas).
+
+** The Birth of Lisp
+
+- Mid 1950s ::  [[https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)][John McCarthy]], a prestigious computer scientist,
+  invented [[https://en.wikipedia.org/wiki/M-expression][M-Expressions]] based on the Lambda Calculus as a [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode
+  Notation]] for describing the procecdures composing Computer Programs.
+  It is unclear whether he initially imagined that computers could be
+  taught to understand it.
+
+- 1958 - 1960 :: [[https://en.wikipedia.org/wiki/Steve_Russell_(computer_scientist)][Steve Russell]] invents the first [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]].  McCarthy was
+  apparently in charge of the project and took most of the credit but
+  Russell seems to have been the one who figured out how to turn
+  Church's [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]] into the first General-Purpose (numeric AND
+  symbolic) High-Level Programming Language with first-class
+  Procedures, properly nested Control Structures and flexible Data
+  Structures with Automatic Memory Management (Garbage Collection).
+  The first LISP had some warts (some borrowed from FORTRAN) which
+  were removed later, but it was gloriously expressive compared to
+  FORTRAN!
+
+The original LISP would be considered a [[https://en.wikipedia.org/wiki/High-level_programming_language][High-Level Programming
+Language]] even today, comparable in expressiveness to any mainstream
+language, e.g. C, Java, JavaScript or Python.
+
+Some Lisp characteristics
+- Lisp uses the same syntax for Data as for Programs.
+- Lisp uses the same syntax for Control, Procedures, Functions, and Operators
+- The Semantics of Lisp is simply Procedure Application: Period!
+
+Mainstream languages typically have
+- a large, complex, irregular syntax
+- a large, complex, irregular semantics
+- Writing a Compiler or an Interpreter for a Mainstream Language is
+  considered a Heroic Programming Accomplishment
+
+Lisp family languages have
+- a small, simple, regular syntax
+- a small, simple, regular semantics
+- Writing a Compiler or an Interpreter for a Lisp is considered an
+  ordinary, approachable task.
+
+People who've never done any kind of programming before
+- usually find Lisp very easy to learn!
+  - Much easier than mainstream languages!
+- Originally most people were in this category!
+- Many top schools, e.g. MIT, started teaching programming with Lisp.
+
+People who've learned programming with mainstream languages
+- often find Lisp initially confusing and hard to learn!
+- Alas, most learners are now in this category!
+- MIT has switched to Python and dumbed everything down!
+
+For details check out this link:  [[https://github.com/GregDavidson/on-lisp/blob/main/Articles/2024/lisp-simplicity.org][Lisp Is Extremely Simple]]
+
+- Mainstream languages are generally "Syntax Heavy".
+- Lisp is "Syntax Light".
+So Lisp should be easy, right?
+- Look over these few examples.
+- If you've been exposed to Mainstream Languages it may take some work
+  to "get Lisp"
+
+Arithmetic
+- Algebraic :: 1 + 2 + 3
+- LISP :: (+ 1 2 3)
+- Algebraic :: (X + X) * (Y + Y)
+- LISP :: (* (+ X X) (+ Y Y))
+- Algebraic :: rect = Rectangle(Point(20, 10), pt)
+- LISP :: (define rect (rectangle (Point 20 10) pt))
+
+- Do the parentheses and lack of commas hurt your brain?
+- Do you believe Lisp programmers who tell you that with a bit of
+  exposure Lisp syntax will seem clear, easy and natural?
+
+Here are two simple example programs to compare:
+- [[file:heron-triangle.scm][LISP Program to Compute The Area Of A Triangle]] to compare
+- the earlier [[file:heron-triangle.fortran][FORTRAN 1 Program to Compute The Area Of A Triangle]]
+
+The Website [[https://rosettacode.org][RosettaCode]] has comparisons of programs solving the same
+problems in diverse programming languages.  It's a great place to get
+a sense of the relative complexity of different languages.
+
+One of the problems is [[https://rosettacode.org/wiki/Determine_if_two_triangles_overlap][Determine if two triangles overlap]]
+- Take a look at solution in any languages you know
+- Be sure and compare with [[https://rosettacode.org/wiki/Determine_if_two_triangles_overlap#Racket][the Racket Lisp solution]]
+
+Does speed matter to you?
+- Take a look at the chart in [[https://benchmarksgame-team.pages.debian.net/benchmarksgame/][The Computer Language Benchmarks Game]]
+- Note how two popular Lisps rank: SBCL and Racket
+- Note how the much more Python compares for speed?
+
+Python's dirty little secret:
+- Python would rank even lower except it's using libraries written in
+  C which you can't write in Python, e.g. numpy.
+- Many programmers consider this disgraceful because it gives the impression that Python can do things it can't.  In contrast, all of the Lisp libraries are written in Lisp allowing you to modify them and learn from them.
+
+
+Some additional things you might want to know about the solutions
+- Most of the programs require a human to visually check the results.
+- The Racket Lisp program is verified automatically by Racket tests
+- Racket is one of the compiled program so it 
+
+.  *Once you get used to
+LISP syntax you can use one of the most powerful programming
+techniques ever discovered:* [[https://en.wikipedia.org/wiki/Metaprogramming][Metaprogramming.]] You can write a LISP
+program to optimize another LISP program (or even itself).  You can
+write a LISP program which reads a specification (a description of a
+problem to be solved) and writes a program which can solve that
+problem!  And much more!  Instead of being translated to machine
+code like FORTRAN, LISP was executed by an intepreter program.
+Using an interpreter allowed for a much better developer experience,
+but at the cost of LISP running slower than an equivalent FORTRAN
+program.  [Put in a link to Interpreters vs. Compilers.]  LISP used
+procedures for everything
+
+  - Decision procedures:
+    - (IF <test expression> <success expression> <failure expression>)
+  - Operator procedures: (DEFINE X (* Y (+ Z 1)))
+  - Procedures are created with LAMBDA
+    - (LAMBDA (X Y) (+ (* X X) (* Y Y)))
+      - a procedure which returns a sum of squares
+    - Lambda is usually hidden behind DEFUN or DEFINE
+      	(DEFINE (SUM-OF-SQUARES X Y) (+ (* X X) (* Y Y)))
+    - Procedures defined with LAMBDA or DEFINE work just like
+      "built-in" operators
+      - (SUM-OF-SQUARES X (+ Y 1))
+  - Programs can be subdivided into Procedures which can be treated as
+    "black boxes" during analysis.
+
+** Efficient Modern High-Level Languages
+
+- 1966 :: [[Https://en.wikipedia.org/wiki/Maclisp][Maclisp]] was developed at MIT.  Maclisp provided an interpreter
+  AND a compiler so you could have a great developer experience and
+  also produce code which ran approximately as fast as FORTRAN code.
+  Many extraordinary breakthroughs in computing in the 1960s and 1970s
+  were written in Maclisp.
+
+- 1960 - 1975 :: Hundreds of computer programming languages were
+  developed over this time.  None of them were quite as powerful or as
+  flexible as Maclisp.  So why didn't everyone just use Maclisp?
+  1. Maclisp required a fairly powerful computer in that early era.
+     - Early PCs were not powerful enough!
+  2. Lisp can seem very strange to programmers used to more structured
+     but limited languages.  Lisp programmers do a lot of things which
+     seem like black magic to programmers not used to it!
+     - See Paul Graham'ss essay [[https://paulgraham.com/avg.html][Beating The Averages]].
+  3. Nested Parentheses look confusing at first!
+     - Many programmers got stuck HERE!
+     - They never discovered Metaprogramming!
+  4. Some of the alternative languages, while less expressive, provide
+     [[https://en.wikipedia.org/wiki/Type_system#Static_typing][compile-time type checking]], which help detect programming errors.
+
+- 1975 :: Scheme was invented at MIT.  Scheme got rid of most of the
+  limitations which had persisted from the original LISP.  The result
+  was one of the *simplest* general-purpose programming languages ever
+  defined which was also one of the *most expressive* and potentially
+  highly *efficient* - although it took awhile before highly efficient
+  Scheme compilers were developed.  Scheme influenced all later Lisps
+  and many of the best modern lisps are either modest extensions of
+  Scheme or closely related.  Although there are efficient
+  implementations of Scheme runs efficiently on
+
+** Very High-Level Languages
+
+- Refer them to the Paradigms!
+- Refer them to our survey!
+- Maybe fork a list of VHLLs from our survey!
+  
+** The Modern Language Zoo
+
+- Refer them to our survey!
+
+** Relational Databases
+
+Say only the very very basics!
+- Create an entry for the early RDBMSs.
+- Create an entry for the PostgreSQL.
+
+- Refer them to our RDBMS overview.
+- Refer them to our coverage of PostgreSQL.
+
+** Meta
+
+Much of this document should be replaced by customized multimedia
+presentations!
+
+*** Why Highlights When So Much More Is Available Free?
+
+Why create this when
+- There's an enormous amount of more comprehensive free material on-line
+- Wikipedia alone has a whole category on the [[https://en.wikipedia.org/wiki/History_of_computing][History Of Computing]]!
+
+Ah yes, but
+- The conventional material buries the important with the mundane.
+- Much of that pile is biased and full of deceptive errors and omissions!will !
+- We want to highlight what we see as important!
+- We will endeavour to make our biases and omissions explicit!
+
+*** AI
+
+Break this up into the key eras!
