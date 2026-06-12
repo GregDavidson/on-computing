@@ -1,0 +1,1207 @@
+500 $ git pull
+X11 forwarding request failed on channel 0
+remote: Enumerating objects: 5, done.        
+remote: Counting objects: 100% (5/5), done.        
+remote: Compressing objects: 100% (1/1), done.        
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0 (from 0)        
+Unpacking objects: 100% (3/3), 849 bytes | 849.00 KiB/s, done.
+From github.com:Eti-C/eti-flight-lander
+   95e6842..d3b3704  better-worlds -> origin/better-worlds
+Auto-merging flight-lander.rkt
+CONFLICT (content): Merge conflict in flight-lander.rkt
+Automatic merge failed; fix conflicts and then commit the result.
+501 $ ls Limbo
+ Better-Worlds/		 notes.org
+ Broken/		 Select-Code/
+ code-snippets.rkt	 select-code.rkt
+ flight-lander-old.rkt	'#sprites-client-framework.rkt#'
+ flight-lander.rkt	 sprites-client-framework.rkt
+ greg-mutation/		 sprites-framework.rkt
+ Main/			 sprites-game.rkt
+ Not-Better-Worlds/	 sprites-universe-server.rkt
+502 $ cp *.rkt Limbo/Better-Worlds/
+503 $ git log | head
+commit b08cd26e44cdac4791e7409d8d11f3b6e5d6625c
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Apr 16 15:01:04 2026 -0700
+
+    ready to change initial proxies to initial sprites
+
+commit 95e68423157a5709638033ea183f0c37fb563946
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Apr 9 14:55:54 2026 -0700
+
+504 $ git status
+On branch better-worlds
+Your branch and 'origin/better-worlds' have diverged,
+and have 1 and 1 different commits each, respectively.
+  (use "git pull" if you want to integrate the remote branch with yours)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   flight-lander.rkt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+505 $ git pull
+error: Pulling is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+506 $ grep === *.rkt
+flight-lander.rkt:=======
+507 $ grep send *.rkt
+flight-lander.rkt:;; can now send multiple actions in a message
+flight-lander.rkt:       '()	; nothing to send to server
+foo.rkt:;; can now send multiple actions in a message
+foo.rkt:       '()	; nothing to send to server
+game-framework.rkt:;; We need to be able to send sprites across worlds.
+game-server.rkt:;; - a list of mail to send
+game-server.rkt:    ;; TODO send a goodbye for that world to all the other worlds!!!
+game-server.rkt:;; (2) we were sending the disconnected world a goodbye message!
+sprites-framework.rkt:;; We need to be able to send sprites across worlds.
+sprites-framework.rkt:;;   - a serializable symbolic expression to send to the Server
+sprites-framework.rkt:;; send messages as "Mail" as long as our messages are serializable.
+sprites-framework.rkt:(define/contract (send-aworld-to aworld to
+sprites-framework.rkt:                                 #:this [this 'send-aworld-to] #:super [super '()] )
+sprites-framework.rkt:;; - '() or send-aworld-to a new world
+sprites-framework.rkt:        (send-aworld-to (universe-aworld universe our-world-id) world-id)
+508 $ grep -w actions? *.rkt
+flight-lander.rkt:;;   or do they have to be of type actions?
+flight-lander.rkt:      [ (actions? contents) ; updates just for us?
+flight-lander.rkt:          [ (actions? mail) ; updates sent to everyone
+foo.rkt:;;   or do they have to be of type actions?
+foo.rkt:      [ (actions? contents) ; updates just for us?
+foo.rkt:          [ (actions? mail) ; updates sent to everyone
+game-framework.rkt:          [actions? (-> any/c boolean?)] ))
+game-framework.rkt:  [make-actions (-> world_params? actions-updates? actions?)]
+game-framework.rkt:  [actions-updates (-> actions? actions-updates?)] ) )
+game-server.rkt:          actions? actions-update? actions-updates? make-actions actions-updates
+sprites-framework.rkt:          actions? actions-update? actions-updates? make-actions actions-updates
+sprites-framework.rkt:(provide make-actions actions? actions-updates)
+509 $ git pull
+X11 forwarding request failed on channel 0
+remote: Enumerating objects: 9, done.        
+remote: Counting objects: 100% (9/9), done.        
+remote: Compressing objects: 100% (1/1), done.        
+remote: Total 5 (delta 4), reused 5 (delta 4), pack-reused 0 (from 0)        
+Unpacking objects: 100% (5/5), 885 bytes | 221.00 KiB/s, done.
+From github.com:Eti-C/eti-flight-lander
+   879e45b..940fd64  better-worlds -> origin/better-worlds
+Updating 879e45b..940fd64
+Fast-forward
+ README.org            |  1 +
+ flight-lander.rkt     | 23 ++++++++++++++++-------
+ sprites-framework.rkt | 16 +++++++++++-----
+ 3 files changed, 28 insertions(+), 12 deletions(-)
+510 $ ls
+bin/		   foo-world0-crash.out  LICENSE	   README.org
+compiled/	   game-design.org	 Limbo/		   run-test*
+flight-lander.rkt  game-framework.rkt	 Makefile	   select-code.org
+foo.rkt		   game-server.rkt	 Makefile-windows  select-code.rkt
+foo.txt		   image@		 Old@		   sprites-framework.rkt
+511 $ pwd
+/home/greg/Gits/Learner-Gits/Eti/Flight-Lander
+512 $ cd ~/Gits/On-Computing/
+greg/Gits/On-Computing 513 $  ls
+2009/			       Dream-Machines/	       Programming-Paradigms/
+advanced-representation/       Etc/		       programming-paradigms-matter.org
+a-model-computer/	       Icons/		       README.org
+composites.org		       index.html	       Software-Tools/
+computing-architecture-2.org   LICENSE.org	       tech-notes.css
+computing-architecture.org     Limbo/		       what-computers-are/
+computing-data-structures.org  LINKS.org	       what-is-computing.org
+computing-efficiency.org       maths-tagged-sets.org   Writings/
+computing-glossary.org	       maths-vs-computing.org
+Computing-Resources/	       Programming-Matters/
+greg/Gits/On-Computing 514 $  grep -i '^\*\* notes' *
+grep -i '^\*\* notes' *
+  C-c C-c
+greg/Gits/On-Computing 515 $  grep -i '^\*\* notes' *.org
+greg/Gits/On-Computing 516 $  ls -a
+./			       Computing-Resources/    Programming-Matters/
+../			       Dream-Machines/	       Programming-Paradigms/
+2009/			       Etc/		       programming-paradigms-matter.org
+advanced-representation/       .git/		       README.org
+a-model-computer/	       Icons/		       Software-Tools/
+composites.org		       index.html	       tech-notes.css
+computing-architecture-2.org   LICENSE.org	       what-computers-are/
+computing-architecture.org     Limbo/		       what-is-computing.org
+computing-data-structures.org  LINKS.org	       Writings/
+computing-efficiency.org       maths-tagged-sets.org
+computing-glossary.org	       maths-vs-computing.org
+greg/Gits/On-Computing 517 $  mkdir Limbo
+mkdir: cannot create directory ‘Limbo’: File exists
+greg/Gits/On-Computing 518 $  ls Limbo
+Comparison_of_data-serialization_formats_1.csv	Comparison_of_data-serialization_formats_3.csv
+Comparison_of_data-serialization_formats_1.org	README.org
+Comparison_of_data-serialization_formats_2.csv
+greg/Gits/On-Computing 519 $  mv maths-vs-computing.org Limbo
+greg/Gits/On-Computing 520 $  git checkout !^
+git checkout maths-vs-computing.org
+Updated 1 path from the index
+greg/Gits/On-Computing 521 $  rm  maths-vs-computing.org
+greg/Gits/On-Computing 522 $  git log
+commit da7b0dbb077e79e201dfaa02b4be2a76c8628bed (HEAD -> main)
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Apr 17 13:51:28 2026 -0700
+
+    foxed tuple errors Bill noticed
+
+commit 6eff673ee9b017335523902b67b8edbd8dff090c
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Apr 12 09:58:36 2026 -0700
+
+    symbol smithing
+
+commit 876ff581e7973301f01fc51136a52e6a97c11022
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Apr 12 09:56:38 2026 -0700
+
+    word smithing
+
+commit a2f5e08cc6bdab7d5c93a1443bdfb406fce80698
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Apr 12 09:54:48 2026 -0700
+
+    typo
+
+commit b552354888c69d7d289a4c1155f85fe8c6cfcddf
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Apr 11 23:28:02 2026 -0700
+
+    first commit
+
+commit 239b3f364fd6fd67b32e850ffe7352f9c5b9d63b
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Mar 27 12:52:06 2026 -0700
+
+    added platform, virtual computer; improved several definitions
+
+commit 3348eb4b77a27d484b38a8df7c62c5bb202dea6e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Nov 15 14:45:44 2025 -0800
+
+    smoothing
+
+commit e58ec711bf1ade6383aa2d6ad6021c475a2c3d17
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Oct 29 23:37:29 2025 -0700
+
+    IKAI -> ImKAI, EKAI -> ExKAI, strengthen claims and promise
+
+commit 207c4308bb0e85864f858938c7d78a95ada8d42a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Sep 15 18:12:47 2025 -0700
+
+    word-smithing
+
+commit 55b35e5d3254ffc1b05c0922995b7e47ed611a1a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Sep 5 12:59:55 2025 -0700
+
+    going with new markup
+
+commit 29f262960e1221cf43e7446790344ffca667c8ea
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Sep 5 12:58:00 2025 -0700
+
+    markup changed to hopefully placate github bugs
+
+commit 486540a41f78958393434108786f7785b263587d
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 5 19:31:55 2025 -0700
+
+    getting to understanding
+
+commit a336171e83f037568c49da887f720e424afeba83
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 18:30:08 2025 -0700
+
+    clarification
+
+commit 8a60c022166d60ef202815e78d968590721a7a59
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 18:27:49 2025 -0700
+
+    caveats
+
+commit 7c4f2d5a530ad1a7f9e9d4c0f1bbe64123488fb5
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 18:07:51 2025 -0700
+
+    optimization
+
+commit dff99a31f4ae77b6dc1dca30a81350a27f100b2c
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:48:53 2025 -0700
+
+    clarifications
+
+commit 9ab6d87fe1e3a0f2527a6b8f5d492ad696fa5b0e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:39:18 2025 -0700
+
+    clarifications
+
+commit 1e37b106cd8ad0ac721f5684bfe0708c6ec58098
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:22:53 2025 -0700
+
+    typo
+
+commit e050d2e02bae80b1e88f0773f8d2c692de7f1a09
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:18:33 2025 -0700
+
+    typo
+
+commit 4bfa4dc9f1f57a72130b461206b52b8c5721a7d5
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:13:14 2025 -0700
+
+    clarifications
+
+commit c6266332180f5c6f29a3dcd55db4acd99f13e438
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 17:00:28 2025 -0700
+
+    exhortations
+
+commit 522d1c924274c312ba8996d81ebc90e8b64f837b
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 16:53:58 2025 -0700
+
+    earlier link to composites
+
+commit 6c7b41f421aea9e3342dcc04f950807e600bec06
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 16:44:11 2025 -0700
+
+    part 1
+
+commit a80267ff5b5c4d79d72ceb485fbe6dfb85ef667f
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Mon Mar 31 16:43:13 2025 -0700
+
+    functions, results
+
+commit 6e85168b5dd977e3ea9efcd0d5a19b47458b2139
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 8 15:59:53 2025 -0800
+
+    infelicities
+
+commit 707278efb1a0519d11edca8649f011a053c1e601
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 8 15:53:08 2025 -0800
+
+    infelicities
+
+commit 0bbc82af8250b8cc3bae79701a220242c39f1fd6
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 8 15:48:50 2025 -0800
+
+    typo
+
+commit c58b067d3fdd529ec87f6889f4fcb5025be66ba4
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Mar 2 00:44:32 2025 -0800
+
+    smoothing
+
+commit 97b2682db598ad6c802d26b5b37afe9478866d2e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Mar 2 00:26:03 2025 -0800
+
+    infelicities
+
+commit 1a122aac26d7ebf3d1ec05258905f278f71c7df2
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Mar 2 00:12:47 2025 -0800
+
+    clarifying links
+
+commit 0386c6d86d3491587b32703a49763affdbd41c6e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Mar 2 00:07:58 2025 -0800
+
+    indentation
+
+commit e98ae5f602700c75aeef0bbc44ccbb7de075737c
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 1 23:41:55 2025 -0800
+
+    infelicities
+
+commit a190a11f38eddc3dd1704cf369f05cb83d00f8ac
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 1 23:34:32 2025 -0800
+
+    xml infelicities
+
+commit 187503079b2f83c03b1f8ec48cb3a7a6dd6e124f
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 1 22:58:19 2025 -0800
+
+    extended and refactored
+
+commit 525ef6f0169f3324bb4195c3fb50e2664f97b4c5
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Feb 23 16:54:34 2025 -0800
+
+    first commit
+
+commit d09ce89cfb867ebcf91c30b3c38d1999049aa7b9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 15 17:24:24 2025 -0800
+
+    first commit
+
+commit a570ed92ffeea30d5a194de833d800b523f586b9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Oct 5 23:03:50 2024 -0700
+
+    word smithing
+
+commit b3f7c28818b48476d8d02e1b295f2f7b56bf7c8e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Oct 5 22:40:38 2024 -0700
+
+    first commit
+
+commit cc3dfdac336d7951834ca51eebdc47d1719d079d
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Jun 5 19:22:31 2024 -0700
+
+    first commit
+
+commit ccc99379ec1b63a8ef6d70bbd2125c14eeab1d2a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Feb 8 13:06:04 2024 -0800
+
+    first commit
+
+commit 54bd052ce53cc1b6175f1dabaf5991e9e5e1a372
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Sep 14 17:29:42 2023 -0700
+
+    Dynamic Type fragility, Serialization, RDBMS clarifications.
+
+commit 492c3e156ca0ad7ee2eff55cca8c735ac750ddd9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Sep 14 13:32:17 2023 -0700
+
+    Smoothing and meta
+
+commit 1f5831ca00134d492c287dec663ff4c64fcafb9a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Sep 10 18:20:05 2023 -0700
+
+    Testing examples
+
+commit 1aedee11b020245cb805d7994ecd2df03c35e4bd
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Sep 10 09:45:38 2023 -0700
+
+    title
+
+commit 70c59879e57ab99eb35ee7741ee640f8f66e497d
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Sep 10 09:42:45 2023 -0700
+
+    arrays in the overview
+
+commit 6186d47b09a41aabd8cf7ca801872e1453a6ece1
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 9 20:58:03 2023 -0700
+
+    structure
+
+commit f923e814476dfbf1aebc61da1186e47f00629e33
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 9 20:35:23 2023 -0700
+
+    clarity, structure
+
+commit 2a4e3f88108d91ac2a4d32d82be0b0e8d02f290a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 9 19:25:24 2023 -0700
+
+    increased
+
+commit 739f21f633e38174fba05ff4c4785c399ebe9b28
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 9 19:21:13 2023 -0700
+
+    Getting more realistic with the usage of the term process
+
+commit 29d1024cb4d3f95289a032be21432b039b613715
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 9 19:20:51 2023 -0700
+
+    sql literal quotes
+
+commit eee74ce655236d9251676d7c8f6e39237ee42df2
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Aug 10 13:17:18 2023 -0700
+
+    links added for some examples
+
+commit 9f6da06528219e3528c6ad27bae5dfa86411d905
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Thu Aug 10 13:05:15 2023 -0700
+
+    titles
+
+commit 7781d8cf934a33bd3ff4b3c2af6964a225c6ced9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 20:13:53 2023 -0700
+
+    Added how to use a Posix System to describe itself
+
+commit 6eb141208b359b46863ffca57cb9d873de59b738
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 00:47:34 2023 -0700
+
+    starting to smooth the new material
+
+commit fdd9e2fa78e97f8f7285930300933425118d6f1e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 00:32:13 2023 -0700
+
+    Smoothing of older parts
+
+commit 4b50a44f800b4b8335018f4d8dbcc349fb59f92c
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 00:21:16 2023 -0700
+
+    improved user space introductory spiel
+
+commit 06381079cabe9150340d7b0aab4f22f72468296e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 00:13:29 2023 -0700
+
+    rescued more changes after an editing catastrophe
+
+commit 40907200d46073fb529b0bc4ee59ee3365c94e53
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Tue Aug 8 00:06:02 2023 -0700
+
+    rescued changes after an editing catastrophe
+
+commit 6957e8799a94732cb675e472b26853d77814d853
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Aug 4 13:23:20 2023 -0700
+
+    spelling!
+
+commit d3fd81b86f85a8464fd8926afc80ebee25a7b41f
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 14:48:16 2023 -0700
+
+    Prefer Task and Thread as main terms
+
+commit 44c35b67d9ed80ef17da097c631406ed16b541a8
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 14:48:00 2023 -0700
+
+    various improvements
+
+commit 8b66f494d48b1ca4dd959df35ca38f47237fa226
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 13:36:45 2023 -0700
+
+    Flow and connections
+
+commit ea760a1d5072a59b704f9f57d1a60c05ca41288e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 11:16:44 2023 -0700
+
+    updated intro to positioning in new repo
+
+commit 1fb213bf95b90c9f54202e50da5885d94f4f90c0
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 11:01:56 2023 -0700
+
+    moved from computing magic
+
+commit 254ecb62f63dca69e7990052569ab31243d3d1d9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 01:34:48 2023 -0700
+
+    fixed broken link
+
+commit dac503f2041fda73c37e6d15fa317d80f3c0fbeb
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 01:31:46 2023 -0700
+
+    link to computing magic
+
+commit cad7d67fa196177549be12a1d789e4a26734cdd4
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 01:31:32 2023 -0700
+
+    link to computing architecture
+
+commit 45bd85a97353f4a46732d6eb4d19546f2a17994d
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Wed Aug 2 01:27:38 2023 -0700
+
+    first commit
+
+commit f9152eb62eb5afb9ae3dd72a8f7d17cc88d4c219
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Jul 23 19:45:02 2023 -0700
+
+    added what-is-computing
+
+commit 708116e3b476a8ff119b36e534f0ffad4030a22b
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Apr 28 13:30:19 2023 -0700
+
+    added #readme tags
+
+commit 6dcabda4e59ac10dd77afe2c5521f5454691b6c6
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Mar 4 09:13:23 2023 -0800
+
+    first draft
+
+commit 0f8f77584cf9d9bf511084e84f9c2f264da1c952
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Feb 27 16:57:30 2022 -0800
+
+    Fixed forward reference
+
+commit 15127a1a64a4c8c46415f1e8d315accb645c7b5d
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Feb 27 16:55:58 2022 -0800
+
+    clarity
+
+commit 5d98df24b624447b81f7c848c421725e1064229e
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sun Feb 27 16:46:18 2022 -0800
+
+    Clarified postponement of Object-Oriented Programming
+
+commit d9de47591b2785d4476c4c8a35417a15e80a3bed
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:26:04 2022 -0800
+
+    fixed typo in function name
+
+commit c03edd79074393c111b50a8ecd31a597fb405103
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:24:59 2022 -0800
+
+    clarification
+
+commit 5a6778bcfc2629a898d4033feb0ac63d94541178
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:22:09 2022 -0800
+
+    clarification
+
+commit dce02d342cd510f93660528c5a7570b52e6d1ceb
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:17:53 2022 -0800
+
+    Fixed that new link!
+
+commit efe86c4007739529d4b28a2ab8db8bb0541098a9
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:15:34 2022 -0800
+
+    Linked to the new composites.org document
+
+commit e2aedf6873efd9d565a024254fe2bbdd3325d991
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 18:12:41 2022 -0800
+
+    First version complete!
+
+commit f3e9e3889a47e7b733f53e666bfb28dbe0abe37a
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Feb 12 17:23:25 2022 -0800
+
+    clarifications and expansions
+
+commit e587252291ef731f547d3e1ea0d9f38b38804435
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Feb 11 20:58:36 2022 -0800
+
+    got it all except for hashes and indexed relations
+
+commit 0cad4e238678de0e544b848931faed502b7240e4
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Feb 11 17:17:19 2022 -0800
+
+    Beginning the story of composites!
+
+commit 3c06121d517f8c91d4453dbc5cad3b52876fbe46
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Fri Feb 4 11:48:53 2022 -0800
+
+    Added a request for feedback and improvements
+
+commit d382dba7795a94952e09ecb9a9f47801b8977a19
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 21:18:28 2021 -0700
+
+    Fixed broken links
+
+commit 8fcfdf2342fc1b2a8b3e5aedb28e3dae68321556
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 21:11:40 2021 -0700
+
+    better wording
+
+commit b6eefa07411d4b07134f294a498609232221a6c3
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 21:10:12 2021 -0700
+
+    Fixed an OrgMode typo
+
+commit 32831869a6de6303b897428b9a63426c05d44c36
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 21:08:30 2021 -0700
+
+    not pretty good!
+
+commit 4f7a930aa319d15af4efe59a737eebcb63f4c6af
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 21:06:55 2021 -0700
+
+    First Commit
+
+commit 8c13f91cdb9ff62562712c418f2753ed22cbe8f6
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 18:29:24 2021 -0700
+
+    fixed a typo
+
+commit 9c0a7d17f2310d71d0ea2d55c362ff03f462acb0
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 18:27:18 2021 -0700
+
+    added some key links
+
+commit 178977d32e48add48b9983e7b4d810199c502450
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 11:37:28 2021 -0700
+
+    improved discussion of data structures even more
+
+commit fd58a0e895ab7a6c699cd58af449694628696625
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 11:25:14 2021 -0700
+
+    improved discussion of data structures
+
+commit aa4c078063952843c3b2c8cdfa455c2ae8e2a3a1g
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 11:13:40 2021 -0700
+
+    Added "where to go from here" section
+
+commit fa15a13efbf151b801840362f47e960399485bbe
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 09:43:58 2021 -0700
+
+    first commit
+
+commit 49c806fb59ccc85cff6ea156dfd5f2d4b73485ce
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 09:41:18 2021 -0700
+
+    first commit
+
+commit 07ccb8e5835baba5f1f873b13cd29a21c7516ad4 (master, delete)
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 09:33:24 2021 -0700
+
+    first commit
+
+commit 8105886fdcde7421a90c9461e108ce6e556f0b41
+Author: GregDavidson <greg.davidson+git@gmail.com>
+Date:   Sat Sep 25 09:20:47 2021 -0700
+
+    first commit
+greg/Gits/On-Computing 523 $  git checkout aa4c078063952843c3b2c8cdfa455c2ae8e2a3a1g
+error: pathspec 'aa4c078063952843c3b2c8cdfa455c2ae8e2a3a1g' did not match any file(s) known to git
+greg/Gits/On-Computing 524 $  git checkout aa4c078063952843c3b2c
+error: Your local changes to the following files would be overwritten by checkout:
+	Programming-Matters/Understanding-Programs/README.org
+	Programming-Matters/Understanding-Programs/static-vs-dynamic.org
+	Programming-Matters/Understanding-Programs/types-contracts-testing.org
+	README.org
+Please commit your changes or stash them before you switch branches.
+Aborting
+greg/Gits/On-Computing 525 $  ls Limbo
+Comparison_of_data-serialization_formats_1.csv	Comparison_of_data-serialization_formats_3.csv
+Comparison_of_data-serialization_formats_1.org	maths-vs-computing.org
+Comparison_of_data-serialization_formats_2.csv	README.org
+greg/Gits/On-Computing 526 $  mkdir Limbo/Save
+greg/Gits/On-Computing 527 $  mv Limbo/maths-vs-computing.org !$
+mv Limbo/maths-vs-computing.org Limbo/Save
+greg/Gits/On-Computing 528 $  cp -a README.org Programming-Matters/ Limbo/Save/
+greg/Gits/On-Computing 529 $  rm  Programming-Matters/Understanding-Programs/*
+greg/Gits/On-Computing 530 $  git checkout aa4c078063952843c3b2c
+error: Your local changes to the following files would be overwritten by checkout:
+	README.org
+Please commit your changes or stash them before you switch branches.
+Aborting
+greg/Gits/On-Computing 531 $  diff README.org Limbo/Save/README.org
+greg/Gits/On-Computing 532 $  rm README.org
+greg/Gits/On-Computing 533 $  git checkout aa4c078063952843c3b2c
+Note: switching to 'aa4c078063952843c3b2c'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at aa4c078 Added "where to go from here" section
+greg/Gits/On-Computing 534 $  mkdir Limbo/Older
+greg/Gits/On-Computing 535 
+greg/Gits/On-Computing 535 $  cp -a README.org Programming-Matters/ Limbo/Older
+cp: cannot stat 'README.org': No such file or directory
+cp: cannot stat 'Programming-Matters/': No such file or directory
+greg/Gits/On-Computing 536 $  ls
+2009/			       Etc/		      Programming-Paradigms/
+advanced-representation/       Icons/		      Software-Tools/
+a-model-computer/	       index.html	      tech-notes.css
+computing-architecture-2.org   LICENSE.org	      what-computers-are/
+computing-data-structures.org  Limbo/		      Writings/
+Computing-Resources/	       LINKS.org
+Dream-Machines/		       maths-tagged-sets.org
+greg/Gits/On-Computing 537 $  ls Limbo/Older/
+greg/Gits/On-Computing 538 $  rmdir !$
+rmdir Limbo/Older/
+greg/Gits/On-Computing 539 $  git checkout maths-vs-computing.org
+error: pathspec 'maths-vs-computing.org' did not match any file(s) known to git
+greg/Gits/On-Computing 540 $  git switch -
+Previous HEAD position was aa4c078 Added "where to go from here" section
+Switched to branch 'main'
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+  (use "git pull" if you want to integrate the remote branch with yours)
+greg/Gits/On-Computing 541 $  git pull
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 542 $  git ff
+git: 'ff' is not a git command. See 'git --help'.
+
+The most similar command is
+	diff
+greg/Gits/On-Computing 543 $  git status
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+  (use "git pull" if you want to integrate the remote branch with yours)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	2009/
+	Computing-Resources/
+	Dream-Machines/#cheap-systems.org#
+	Dream-Machines/cheap-systems.org
+	Etc/
+	LINKS.org
+	Limbo/
+	Programming-Paradigms/
+	Software-Tools/
+	a-model-computer/
+	advanced-representation/
+	computing-architecture-2.org
+	computing-data-structures.org
+	index.html
+	maths-tagged-sets.org
+
+nothing added to commit but untracked files present (use "git add" to track)
+greg/Gits/On-Computing 544 $  git pull
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 545 $  ls
+2009/			       Dream-Machines/	       Programming-Paradigms/
+advanced-representation/       Etc/		       programming-paradigms-matter.org
+a-model-computer/	       Icons/		       README.org
+composites.org		       index.html	       Software-Tools/
+computing-architecture-2.org   LICENSE.org	       tech-notes.css
+computing-architecture.org     Limbo/		       what-computers-are/
+computing-data-structures.org  LINKS.org	       what-is-computing.org
+computing-efficiency.org       maths-tagged-sets.org   Writings/
+computing-glossary.org	       maths-vs-computing.org
+Computing-Resources/	       Programming-Matters/
+greg/Gits/On-Computing 546 $  diff README.org Limbo/Save/README.org
+26a27
+> - [[file:maths-vs-computing.org][Mathematics vs. Computing]]
+greg/Gits/On-Computing 547 $  mkdir Limbo/Save2
+greg/Gits/On-Computing 548 $  mv README.org Limbo/Save2
+greg/Gits/On-Computing 549 $  cp -a Programming-Matters !$
+cp -a Programming-Matters Limbo/Save2
+greg/Gits/On-Computing 550 $  rm Programming-Matters/*/*
+greg/Gits/On-Computing 551 $  git pull
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 552 $  git pull -ff
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 553 $  git pull --commit -ff
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 554 $  git status
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+  (use "git pull" if you want to integrate the remote branch with yours)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    Programming-Matters/Understanding-Programs/README.org
+	deleted:    Programming-Matters/Understanding-Programs/static-vs-dynamic.org
+	deleted:    Programming-Matters/Understanding-Programs/types-contracts-testing.org
+	deleted:    README.org
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	2009/
+	Computing-Resources/
+	Dream-Machines/#cheap-systems.org#
+	Dream-Machines/cheap-systems.org
+	Etc/
+	LINKS.org
+	Limbo/
+	Programming-Paradigms/
+	Software-Tools/
+	a-model-computer/
+	advanced-representation/
+	computing-architecture-2.org
+	computing-data-structures.org
+	index.html
+	maths-tagged-sets.org
+
+no changes added to commit (use "git add" and/or "git commit -a")
+greg/Gits/On-Computing 555 $  cp Limbo/Save2/README.org .
+greg/Gits/On-Computing 556 $  cp Limbo/Save2/Programming-Matters/Understanding-Programs/*  Programming-Matters/Understanding-Programs
+greg/Gits/On-Computing 557 $  git status
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+  (use "git pull" if you want to integrate the remote branch with yours)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	2009/
+	Computing-Resources/
+	Dream-Machines/#cheap-systems.org#
+	Dream-Machines/cheap-systems.org
+	Etc/
+	LINKS.org
+	Limbo/
+	Programming-Paradigms/
+	Software-Tools/
+	a-model-computer/
+	advanced-representation/
+	computing-architecture-2.org
+	computing-data-structures.org
+	index.html
+	maths-tagged-sets.org
+
+nothing added to commit but untracked files present (use "git add" to track)
+greg/Gits/On-Computing 558 $  git commit -m 'earlier work'
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	2009/
+	Computing-Resources/
+	Dream-Machines/#cheap-systems.org#
+	Dream-Machines/cheap-systems.org
+	Etc/
+	LINKS.org
+	Limbo/
+	Programming-Paradigms/
+	Software-Tools/
+	a-model-computer/
+	advanced-representation/
+	computing-architecture-2.org
+	computing-data-structures.org
+	index.html
+	maths-tagged-sets.org
+
+nothing added to commit but untracked files present (use "git add" to track)
+greg/Gits/On-Computing 559 $  git add .
+greg/Gits/On-Computing 560 $  git commit -m 'earlier work'
+[main a4ad43a] earlier work
+ 51 files changed, 6130 insertions(+)
+ create mode 100644 2009/ls
+ create mode 100644 2009/tech-notes/Icons/cropped-off-switch.png
+ create mode 100644 2009/tech-notes/Icons/cropped-on-switch.png
+ create mode 100644 2009/tech-notes/Icons/lumbricus_Light_switch_3_switches_(one_off).svg
+ create mode 100644 2009/tech-notes/Icons/lumbricus_Light_switch_3_switches_(two_off).svg
+ create mode 100644 2009/tech-notes/Icons/speciwoman_Light_switch_off.svg
+ create mode 100644 2009/tech-notes/a-model-computer/index.html
+ create mode 100644 2009/tech-notes/a-model-computer/instructions.html
+ create mode 100644 2009/tech-notes/advanced-representation/index.html
+ create mode 100644 2009/tech-notes/index.html
+ create mode 100644 2009/tech-notes/tech-notes.css
+ create mode 100644 2009/tech-notes/what-computers-are/index.html
+ create mode 100644 2009/tech-notes/what-computers-are/what-computers-are.css
+ create mode 100644 2009/tech-notes/what-computers-are/what-computers-are.js
+ create mode 100644 2009/what-computers-are/index.html
+ create mode 100644 2009/what-computers-are/what-computers-are.css
+ create mode 100644 2009/what-computers-are/what-computers-are.js
+ create mode 100644 Computing-Resources/computing-quotes.org
+ create mode 100644 Dream-Machines/#cheap-systems.org#
+ create mode 100644 Dream-Machines/cheap-systems.org
+ create mode 100644 Etc/tag-names.org
+ create mode 100644 LINKS.org
+ create mode 100644 Limbo/Comparison_of_data-serialization_formats_1.csv
+ create mode 100644 Limbo/Comparison_of_data-serialization_formats_1.org
+ create mode 100644 Limbo/Comparison_of_data-serialization_formats_2.csv
+ create mode 100644 Limbo/Comparison_of_data-serialization_formats_3.csv
+ create mode 100644 Limbo/README.org
+ create mode 100644 Limbo/Save/Programming-Matters/Understanding-Programs/README.org
+ create mode 100644 Limbo/Save/Programming-Matters/Understanding-Programs/static-vs-dynamic.org
+ create mode 100644 Limbo/Save/Programming-Matters/Understanding-Programs/types-contracts-testing.org
+ create mode 100644 Limbo/Save/README.org
+ create mode 100644 Limbo/Save/maths-vs-computing.org
+ create mode 100644 Limbo/Save2/Programming-Matters/Understanding-Programs/README.org
+ create mode 100644 Limbo/Save2/Programming-Matters/Understanding-Programs/static-vs-dynamic.org
+ create mode 100644 Limbo/Save2/Programming-Matters/Understanding-Programs/types-contracts-testing.org
+ create mode 100644 Limbo/Save2/README.org
+ create mode 100644 Programming-Paradigms/computing-paradigms.org
+ create mode 100644 Software-Tools/#command-shells.org#
+ create mode 120000 Software-Tools/.#command-shells.org
+ create mode 100644 Software-Tools/command-shells.org
+ create mode 100644 Software-Tools/graphical-shells.org
+ create mode 100644 Software-Tools/posix-shells.org
+ create mode 100644 a-model-computer/index.html
+ create mode 100644 a-model-computer/instructions.html
+ create mode 100644 advanced-representation/data-model.org
+ create mode 100644 advanced-representation/data-model.rkt
+ create mode 100644 advanced-representation/index.html
+ create mode 100644 computing-architecture-2.org
+ create mode 100644 computing-data-structures.org
+ create mode 100644 index.html
+ create mode 100644 maths-tagged-sets.org
+greg/Gits/On-Computing 561 $ git pull
+X11 forwarding request failed on channel 0
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+greg/Gits/On-Computing 562 $  git config pull.rebase false
+greg/Gits/On-Computing 563 $  git pull
+X11 forwarding request failed on channel 0
+Auto-merging maths-vs-computing.org
+CONFLICT (content): Merge conflict in maths-vs-computing.org
+Automatic merge failed; fix conflicts and then commit the result.
+greg/Gits/On-Computing 564 $  grep === *.org
+maths-vs-computing.org:=======
+maths-vs-computing.org:=======
+greg/Gits/On-Computing 565 $  cd ~/Notes
+greg/Notes 566 $  ls
+2019-burner-map.pdf	     LINKS.org
+2021-landmark-forum.org      llm-rhetoric-detector.org
+2025/			     Mars/
+2025-01-journal.org	     Media/
+Active/			     Meetings/
+active.org		     Mom-Equitable/
+Agenda-Links/		     Money-Matters/
+agenda.org		     NOT-DOING.org
+amazon-card-boilerplate.txt  notes-2020-02-02.org
+ascii-art.org		     NotesFor/
+Back-Burner/		     Old/
+Blogs/			     Opportunities/
+Bootstrapping/		     Orgs/
+brandon-seminar.org	     PLAN.org
+Browser-Tabs/		     Play/
+C0/			     Posix/
+C1/			     Projects/
+C2/			     Quotes/
+C3/			     Rationality-Notes/
+Causes/			     README-CURRENT-STUFF.org
+checklists.org		     README.org
+coaching.org		     README-TIME-SENSITIVE.org
+commitents.org		     resources.org
+computing-magic.org	     restaurants.org
+Constructive-Criticism/      Reviews/
+creditlink.org		     sdge.org
+Current/		     SELP/
+emacs-open.org		     selp-consulting.org
+Events/			     Shopping/
+F/			     shopping.org
+Folks/			     snippets.org
+foo.org			     status.org
+greek.org		     STEM/
+GTD/			     Studying/
+HAI@			     SysAdmin@
+Health/			     Tech@
+how-to-reach-me.org	     Tools@
+Ideas/			     transformation.org
+input-buffer.org	     underutilized-ideas.org
+irritations.org		     unicode.org
+irs-payments.org	     Verda/
+jgd-blog.org		     Vision/
+kas-chats.org		     web-links.org
+Langs@			     Writings/
+Licenses/		     Year/
+Limitless@
+greg/Notes 567 $  find * -type f -mtime -7
+Folks/otter.org
+Projects/Limitless/limitless.org
+greg/Notes 568 $  find * -type f -mtime -14
+Folks/Bill-Fraser/bill-fraser.org
+Folks/otter.org
+Projects/Limitless/limitless.org
+greg/Notes 569 $  find * -type f -mtime -30
+Folks/Bill-Fraser/bill-fraser.org
+Folks/otter.org
+Projects/Limitless/limitless.org
+greg/Notes 570 $  find * -type f -mtime -60
+Folks/rafa.org
+Folks/Bill-Fraser/bill-fraser.org
+Folks/otter.org
+Folks/circles.org
+GTD/ideas.org
+GTD/#inbox.org#
+Orgs/Landmark/2026-advanced-course.org
+Orgs/Landmark/2026/2026-Advanced-Course/ADV_Day-1_Handouts.pdf
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -.html
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/i18n.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/style-shared.min.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/style.min.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/css.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/hooks.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/frontend.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/AC-Banner-NB-NA.png
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/user-agent.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/unsemantic-grid-responsive-tablet.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/styles.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/embed.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/style-traditional.min.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/googlesitekit-events-provider-contact-form-7-83c32a029ed2cf5b.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/index_002.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/Violin-player-1200.jpg
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/jquery.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/jquery-migrate.min.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/index.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/latest.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/coblocks-animation.js
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/addfont.css
+Orgs/Landmark/2026/2026-Advanced-Course/NA-day1 -_files/style.min_002.css
+Projects/Limitless/limitless.org
+greg/Notes 571 $  find * -type f -mtime -60 | grep -v /Landmark/
+Folks/rafa.org
+Folks/Bill-Fraser/bill-fraser.org
+Folks/otter.org
+Folks/circles.org
+GTD/ideas.org
+GTD/#inbox.org#
+Projects/Limitless/limitless.org
+greg/Notes 572 $  find * -type f -mtime -60 | grep -v /Landmark/
+Folks/rafa.org
+Folks/Bill-Fraser/bill-fraser.org
+Folks/otter.org
+Folks/circles.org
+GTD/ideas.org
+GTD/inbox.org
+Projects/Limitless/limitless.org
+greg/Notes 573 $  cd ~/Gits/On-Computing/Selective-Computing-History/
+greg/Gits/On-Computing/Selective-Computing-History 574 $  ls
+ fortran-example.fortran  '#selective-computing-history.org#'
+ heron-triangle.scm	   selective-computing-history.org
+greg/Gits/On-Computing/Selective-Computing-History 575 $  mv fortran-example.fortran heron-triangle.fortran1
+greg/Gits/On-Computing/Selective-Computing-History 576 $  ls
+ heron-triangle.fortran1  '#selective-computing-history.org#'
+ heron-triangle.scm	   selective-computing-history.org
+greg/Gits/On-Computing/Selective-Computing-History 577 $  
